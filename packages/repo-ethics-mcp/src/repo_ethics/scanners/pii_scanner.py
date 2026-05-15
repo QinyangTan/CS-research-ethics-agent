@@ -20,7 +20,7 @@ PII_PATTERNS: list[tuple[str, re.Pattern[str], str]] = [
     ("ip_address", re.compile(r"\b(ip_?address|remote_addr|\d{1,3}(?:\.\d{1,3}){3})\b", re.I), "References IP addresses."),
     ("face", re.compile(r"\b(face|facial|face_?embedding)\b", re.I), "References facial data."),
     ("image", re.compile(r"\b(image|photo|picture|video frame)\b", re.I), "References images or media that may identify people."),
-    ("biometric", re.compile(r"\b(biometric|fingerprint|iris|voiceprint|gait)\b", re.I), "References biometric data."),
+    ("biometric", re.compile(r"\b(biometric|fingerprint|iris recognition|iris scan|iris biometric|voiceprint|gait)\b", re.I), "References biometric data."),
     ("medical", re.compile(r"\b(medical|health|diagnosis|patient|clinical)\b", re.I), "References health or medical data."),
     ("student_id", re.compile(r"\b(student_?id|school_?record|gradebook|education record)\b", re.I), "References student records or identifiers."),
     ("demographic", re.compile(r"\b(demographic|race|ethnicity|gender|religion|political|income)\b", re.I), "References demographic or sensitive attributes."),

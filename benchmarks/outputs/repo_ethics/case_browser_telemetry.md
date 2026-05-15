@@ -1,0 +1,139 @@
+# CS Research Ethics Pre-Review Report
+
+## Disclaimer
+
+This is a local, evidence-grounded CS research ethics pre-review. It does not make final ethical, legal, compliance, or IRB determinations. Findings should be discussed with an advisor or appropriate review body, especially where context is missing.
+
+## Project Summary
+
+- Project: `case_browser_telemetry`
+- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_browser_telemetry`
+- Languages: JavaScript, Markdown
+- Important files: README.md
+- Possible human data: True
+- Possible security-sensitive or dual-use material: False
+
+## Detected Research Activities
+
+- Activities: Not detected from repository text
+- Data sources: Not detected from repository text
+
+## Confirmed Findings
+
+No findings in this section based on available repository evidence.
+
+## Potential Risks
+
+### Possible privacy and consent risk from collected platform/user data
+- Risk ID: `risk_661f2d7c4c`
+- Category: `consent_reasonable_expectation`
+- Status: `potential`
+- Severity: `high`
+- Confidence: `high`
+- Why it matters: Evidence suggests collected data may involve people or communities where consent, notice, or reasonable expectations need review.
+- Evidence: src/extension.js:1, README.md:1, README.md:1, src/extension.js:1, src/extension.js:1
+- Missing context: Whether the data subjects reasonably expected this collection and analysis.; Whether platform terms, notices, or consent expectations were reviewed.
+
+### Web scraping governance and platform terms need review
+- Risk ID: `risk_719682d322`
+- Category: `web_scraping_platform_governance`
+- Status: `potential`
+- Severity: `medium`
+- Confidence: `high`
+- Why it matters: The project appears to collect data from websites, APIs, or platforms where terms, robots.txt, rate limits, and community expectations matter.
+- Evidence: src/extension.js:1, README/docs
+- Missing context: Platform terms, robots.txt handling, rate limits, and collection dates.
+
+## Unknowns and Required Clarifications
+
+### License or dataset redistribution terms are unclear
+- Risk ID: `risk_fc19ee1aa0`
+- Category: `license_dataset_terms`
+- Status: `unknown`
+- Severity: `low`
+- Confidence: `medium`
+- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
+- Evidence: .
+- Missing context: Code license, dataset source terms, and redistribution permissions.
+
+### Missing ethics, data handling, or release documentation
+- Risk ID: `risk_8877616584`
+- Category: `missing_ethics_documentation`
+- Status: `unknown`
+- Severity: `medium`
+- Confidence: `medium`
+- Why it matters: Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics.
+- Evidence: README/docs
+- Missing context: LICENSE; ethics/privacy/data handling documentation
+
+## Evidence Table
+
+| Finding | Evidence Type | Category | Evidence | Reason | Snippet |
+|---|---|---|---|---|---|
+| risk_661f2d7c4c | `risk_signal` | `web_scraping_platform_governance` | `src/extension.js:1` | Uses JavaScript fetch for HTTP collection. | fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})}) Matched: fetch( |
+| risk_661f2d7c4c | `risk_signal` | `privacy_identifiability` | `README.md:1` | References user identifiers. | Browser extension telemetry collects URL history, click timestamps, and user_id values. Matched: user_id |
+| risk_661f2d7c4c | `risk_signal` | `privacy_identifiability` | `README.md:1` | References exact timestamps. | Browser extension telemetry collects URL history, click timestamps, and user_id values. Matched: timestamps |
+| risk_661f2d7c4c | `risk_signal` | `privacy_identifiability` | `src/extension.js:1` | References user identifiers. | fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})}) Matched: user_id |
+| risk_661f2d7c4c | `risk_signal` | `privacy_identifiability` | `src/extension.js:1` | References exact timestamps. | fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})}) Matched: timestamp |
+| risk_719682d322 | `risk_signal` | `web_scraping_platform_governance` | `src/extension.js:1` | Uses JavaScript fetch for HTTP collection. | fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})}) Matched: fetch( |
+| risk_719682d322 | `missing_context` | `web_scraping_platform_governance` | `README/docs` | Scraping or API collection was detected, but README/docs do not positively document: platform terms, robots.txt, rate limits, data policy. |  |
+| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
+| risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, consent/reasonable expectation, data access controls, data retention/deletion, privacy. Missing context is not proof of wrongdoing. |  |
+
+## Positive Controls Detected
+
+No positive controls were detected from repository evidence.
+
+## Recommended Mitigations
+
+- Document the collection context, consent or notice assumptions, and reasonable-expectation analysis.
+- Avoid collecting private, access-controlled, or sensitive-community data without review.
+- Minimize retained raw content and identifiers.
+- Check platform terms.
+- Check robots.txt where applicable.
+- Add rate limiting.
+- Avoid collecting private or access-controlled data.
+- Avoid collecting sensitive communities without review.
+- Document collection method and dates.
+- Consider whether consent or notice is needed.
+- Add a clear code license.
+- Document dataset source terms and redistribution limits.
+- Avoid redistributing data unless terms permit it.
+- Track third-party license obligations.
+- Add an ethics, privacy, and data-handling section when relevant.
+- Document limitations, release boundaries, and misuse considerations.
+- Use a data card or model card for datasets or models.
+
+## Advisor / IRB Discussion Questions
+
+- Would the people represented reasonably expect this collection and analysis?
+- Was consent or notice provided?
+- Are private or sensitive communities involved?
+- Which platform terms, API policies, or robots.txt files apply?
+- What rate limits and collection dates were used?
+- Is any private or access-controlled data collected?
+- What license applies to the code?
+- What terms apply to collected or derived data?
+- Is redistribution permitted?
+- What data is collected and why?
+- What release limits apply?
+- What mitigations are already in place but not documented?
+- Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
+
+## Safe Release Checklist
+
+- [ ] Confirm the project purpose, affected populations, and deployment context are documented.
+- [ ] Review whether data collection aligns with reasonable expectations and platform terms.
+- [ ] Remove, aggregate, or protect direct identifiers and sensitive quasi-identifiers.
+- [ ] Define data retention, deletion, access control, and sharing limits.
+- [ ] Avoid public release of raw sensitive or identifiable records.
+- [ ] Document known limitations, misuse risks, and appropriate use boundaries.
+- [ ] Prepare responsible disclosure steps for security-sensitive work.
+- [ ] Rotate any exposed credentials and keep secrets out of reports and commits.
+
+## Appendix: Scanner Limitations
+
+- Static scanning can miss risks that depend on project intent, population, deployment setting, or data provenance.
+- Pattern matching can produce false positives and false negatives.
+- Repository text is treated as untrusted evidence, including README files and comments.
+- This report should support, not replace, advisor or appropriate review-body discussion.

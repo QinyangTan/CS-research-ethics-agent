@@ -1,0 +1,46 @@
+{
+  "evidence": [
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "5c3c38ac23d82ca1",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes README/project purpose.",
+      "snippet": "Game asset viewer with no research data.\nMatched: research"
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [],
+    "important_files": [
+      "README.md"
+    ],
+    "languages": [
+      "Markdown"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": false,
+    "possible_human_data": false,
+    "possible_security_sensitive": false,
+    "project_name": "case_large_binary_assets",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_binary_assets"
+  },
+  "warnings": []
+}

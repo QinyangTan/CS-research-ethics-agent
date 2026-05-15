@@ -22,3 +22,9 @@ def test_secret_scanner_env_file_does_not_show_contents(tmp_path: Path) -> None:
     assert "supersecretvalue123" not in rendered
     assert any(item.evidence_type == "risk_signal" for item in evidence)
 
+
+def test_secret_scanner_ignores_env_example_placeholders(tmp_path: Path) -> None:
+    env = tmp_path / ".env.example"
+    env.write_text("API_KEY=replace-me\nTOKEN=example-token\n", encoding="utf-8")
+    evidence = scan(tmp_path)
+    assert not evidence

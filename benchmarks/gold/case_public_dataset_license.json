@@ -1,0 +1,35 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_public_dataset_license",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "security_dual_use",
+    "biometrics"
+  ],
+  "expected_evidence_paths": [
+    "LICENSE",
+    "docs/data_terms.md"
+  ],
+  "expected_missing_context_categories": [],
+  "expected_positive_controls": [
+    "license_dataset_terms"
+  ],
+  "expected_risk_categories": [],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_public_dataset_license",
+  "input_type": "repo",
+  "must_mention": [
+    "license"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "dataset_docs"
+  ],
+  "title": "Public dataset clear license"
+}

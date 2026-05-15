@@ -31,9 +31,30 @@ def test_pii_scanner_ignores_tokens_and_negated_collection(tmp_path: Path) -> No
     assert "email" in rendered
 
 
+def test_pii_scanner_keeps_positive_contrastive_fields(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    readme.write_text(
+        "We do not collect usernames, but we store email addresses. "
+        "No emails are stored, but exact timestamps are retained.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    rendered = "\n".join(item.model_dump_json() for item in evidence)
+    assert "usernames" not in rendered
+    assert "email addresses" in rendered
+    assert "exact timestamps" in rendered
+
+
 def test_negated_docs_project_suppresses_username_but_keeps_timestamp() -> None:
     root = Path(__file__).resolve().parents[3]
     evidence = scan(root / "examples" / "negated_docs_project")
     rendered = "\n".join(item.model_dump_json() for item in evidence)
     assert "usernames" not in rendered
     assert "timestamp" in rendered
+
+
+def test_pii_scanner_does_not_treat_iris_flower_as_biometric(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    readme.write_text("Classifies iris flower measurements for a classroom ML demo.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    assert not evidence

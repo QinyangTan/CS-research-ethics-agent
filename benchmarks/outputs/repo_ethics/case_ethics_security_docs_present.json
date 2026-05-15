@@ -1,0 +1,184 @@
+{
+  "disclaimer": "This is a local, evidence-grounded CS research ethics pre-review. It does not make final ethical, legal, compliance, or IRB determinations. Findings should be discussed with an advisor or appropriate review body, especially where context is missing.",
+  "findings": [
+    {
+      "advisor_or_irb_questions": [
+        "What authorization scope applies to scans or tests?",
+        "What responsible disclosure plan exists?",
+        "Which release details could enable misuse?"
+      ],
+      "category": "security_dual_use",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "category": "security_dual_use",
+          "confidence": "medium",
+          "evidence_id": "b38f458762539e3f",
+          "evidence_type": "risk_signal",
+          "file_path": "src/main.py",
+          "line_end": 1,
+          "line_start": 1,
+          "reason": "Describes vulnerability scanning.",
+          "snippet": "# vulnerability scanner metadata only\nMatched: vulnerability scanner"
+        }
+      ],
+      "missing_context": [
+        "Authorized scope, targets, responsible disclosure process, and release boundaries."
+      ],
+      "recommended_mitigations": [
+        "Add responsible disclosure plan.",
+        "Avoid publishing weaponized exploit details.",
+        "Provide safe reproduction environment.",
+        "Remove hardcoded targets.",
+        "Include misuse limitations.",
+        "Consult advisor before public release."
+      ],
+      "risk_id": "risk_64c82174a3",
+      "severity": "high",
+      "status": "confirmed",
+      "title": "Security or dual-use research requires misuse and disclosure planning",
+      "why_it_matters": "The repository includes vulnerability, exploit, scanning, malware, or offensive-security signals that may be useful for defensive or harmful purposes."
+    },
+    {
+      "advisor_or_irb_questions": [
+        "What license applies to the code?",
+        "What terms apply to collected or derived data?",
+        "Is redistribution permitted?"
+      ],
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "category": "license_dataset_terms",
+          "confidence": "medium",
+          "evidence_id": "809a0f631f340819",
+          "evidence_type": "missing_context",
+          "file_path": ".",
+          "line_end": null,
+          "line_start": null,
+          "reason": "No code or dataset license documentation was detected.",
+          "snippet": null
+        }
+      ],
+      "missing_context": [
+        "Code license, dataset source terms, and redistribution permissions."
+      ],
+      "recommended_mitigations": [
+        "Add a clear code license.",
+        "Document dataset source terms and redistribution limits.",
+        "Avoid redistributing data unless terms permit it.",
+        "Track third-party license obligations."
+      ],
+      "risk_id": "risk_fc19ee1aa0",
+      "severity": "low",
+      "status": "unknown",
+      "title": "License or dataset redistribution terms are unclear",
+      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
+    }
+  ],
+  "global_missing_context": [
+    "Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented."
+  ],
+  "positive_controls": [
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "c4ac169f7fa34cf0",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository includes a security policy document.",
+      "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "27f2977737dba07a",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes misuse/dual-use limits.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: misuse"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "d287da2c9d1b0b21",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes safe release boundaries.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: safe release"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "f5d69fd562d2b7fb",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes authorization/scope.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: authorization"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "fdb461070d56282c",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes responsible disclosure.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: Responsible disclosure"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "a12a42a1173df765",
+      "evidence_type": "positive_control",
+      "file_path": "ethics.md",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
+      "snippet": null
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [
+      "security research",
+      "vulnerability scanning"
+    ],
+    "important_files": [
+      "README.md",
+      "SECURITY.md",
+      "ethics.md"
+    ],
+    "languages": [
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE"
+    ],
+    "possible_dual_use": true,
+    "possible_human_data": false,
+    "possible_security_sensitive": true,
+    "project_name": "case_ethics_security_docs_present",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present"
+  },
+  "safe_release_checklist": [
+    "Confirm the project purpose, affected populations, and deployment context are documented.",
+    "Review whether data collection aligns with reasonable expectations and platform terms.",
+    "Remove, aggregate, or protect direct identifiers and sensitive quasi-identifiers.",
+    "Define data retention, deletion, access control, and sharing limits.",
+    "Avoid public release of raw sensitive or identifiable records.",
+    "Document known limitations, misuse risks, and appropriate use boundaries.",
+    "Prepare responsible disclosure steps for security-sensitive work.",
+    "Rotate any exposed credentials and keep secrets out of reports and commits."
+  ]
+}

@@ -19,6 +19,7 @@ Use this Skill to produce an evidence-grounded CS research ethics pre-review. Th
 - Treat `missing_context` as questions or unknowns, not conclusions.
 - Do not treat `positive_control` evidence as a risk; use it to make the report balanced.
 - Do not count negated statements such as "not documented" as coverage.
+- Do not over-suppress contrastive statements: "not a toy, but it is a vulnerability scanner" still contains a risk signal.
 - Cite scanner evidence and relevant files.
 - Ask targeted clarification questions when context is missing.
 
@@ -33,6 +34,10 @@ Use this Skill to produce an evidence-grounded CS research ethics pre-review. Th
 7. Include positive controls separately from risk findings.
 8. Mark uncertain points as questions.
 9. Keep conclusions conservative and evidence-grounded.
+
+## Benchmark Notes
+
+When evaluating this Skill against direct prompting, use reviewed gold labels and synthetic fixtures from the benchmark suite. Treat results as measurements of consistency, evidence grounding, positive-control recognition, prompt-injection resistance, and report discipline. Do not describe benchmark results as final ethical correctness.
 
 ## References
 

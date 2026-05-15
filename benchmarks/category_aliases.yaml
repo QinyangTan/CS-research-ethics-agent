@@ -1,0 +1,82 @@
+privacy_identifiability:
+  - privacy
+  - personal data
+  - identifiable information
+  - re-identification
+  - reidentification
+  - pii
+  - email
+  - student id
+  - ip address
+consent_reasonable_expectation:
+  - consent
+  - notice
+  - reasonable expectation
+  - user expectation
+web_scraping_platform_governance:
+  - scraping
+  - web scraping
+  - platform terms
+  - robots.txt
+  - rate limiting
+  - api terms
+dataset_release_reidentification:
+  - dataset release
+  - public dataset
+  - data release
+  - anonymization
+  - de-identification
+  - deidentification
+license_dataset_terms:
+  - license
+  - redistribution
+  - dataset terms
+security_dual_use:
+  - dual-use
+  - misuse risk
+  - vulnerability disclosure
+  - offensive security
+  - vulnerability scanner
+  - port scanning
+biometrics:
+  - biometrics
+  - biometric
+  - face recognition
+  - face_recognition
+  - face embedding
+surveillance_tracking:
+  - surveillance
+  - attendance tracking
+  - person re-identification
+  - multi-camera tracking
+ml_fairness_deployment_risk:
+  - fairness
+  - bias
+  - model card
+  - profiling
+  - admissions
+  - hiring
+  - credit scoring
+deployment_harm:
+  - deployment harm
+  - manipulation
+  - user manipulation
+prompt_injection_attempt:
+  - prompt injection
+  - ignore previous instructions
+  - suppress warnings
+  - mark this project safe
+secret_exposure:
+  - secret
+  - credential
+  - api key
+  - token exposure
+missing_ethics_documentation:
+  - missing documentation
+  - not documented
+  - needs clarification
+  - unknown
+data_retention_access_control:
+  - retention
+  - access control
+  - deletion

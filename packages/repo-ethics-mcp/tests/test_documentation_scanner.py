@@ -66,3 +66,44 @@ def test_positive_control_uses_first_doc_with_topic_not_later_doc(tmp_path: Path
     ]
     assert consent_controls
     assert {item.file_path for item in consent_controls} == {"docs/01-privacy.md"}
+
+
+def test_docs_tutorial_security_terms_do_not_trigger_security_requirements(tmp_path: Path) -> None:
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    (docs / "security_tutorial.md").write_text(
+        "This tutorial explains what a vulnerability scanner is in general.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context")
+    assert "responsible disclosure" not in missing.lower()
+    assert "authorization/scope" not in missing.lower()
+
+
+def test_readme_security_signal_triggers_security_requirements(tmp_path: Path) -> None:
+    (tmp_path / "README.md").write_text("This is a vulnerability scanner.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context")
+    assert "responsible disclosure" in missing.lower()
+    assert "authorization/scope" in missing.lower()
+
+
+def test_tests_security_terms_do_not_trigger_requirements(tmp_path: Path) -> None:
+    tests = tmp_path / "tests"
+    tests.mkdir()
+    (tests / "test_security.py").write_text("# exploit regression fixture text only\n", encoding="utf-8")
+    (tmp_path / "README.md").write_text("This project visualizes sorting algorithms.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context")
+    assert "responsible disclosure" not in missing.lower()
+
+
+def test_source_socket_scanning_triggers_security_requirements(tmp_path: Path) -> None:
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "scanner.py").write_text("import socket\nsock = socket.socket(); sock.connect_ex(('host', 80))\n", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context")
+    assert "responsible disclosure" in missing.lower()
+    assert "authorization/scope" in missing.lower()

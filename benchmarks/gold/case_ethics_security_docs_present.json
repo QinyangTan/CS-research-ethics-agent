@@ -1,0 +1,40 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_ethics_security_docs_present",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "privacy_identifiability"
+  ],
+  "expected_evidence_paths": [
+    "SECURITY.md",
+    "ethics.md",
+    "src/main.py"
+  ],
+  "expected_missing_context_categories": [],
+  "expected_positive_controls": [
+    "missing_ethics_documentation",
+    "security_dual_use"
+  ],
+  "expected_risk_categories": [
+    "security_dual_use"
+  ],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_ethics_security_docs_present",
+  "input_type": "repo",
+  "must_mention": [
+    "Responsible disclosure",
+    "authorization scope"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "menlo",
+    "security_ethics"
+  ],
+  "title": "Security and ethics docs positive controls"
+}

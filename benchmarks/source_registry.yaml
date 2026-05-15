@@ -1,0 +1,101 @@
+benchmark_version: "0.1.0"
+sources:
+  - id: belmont
+    title: Belmont Report principle family
+    source_type: normative_framework
+    url_or_citation: "Belmont Report, 1979"
+    license_or_usage_notes: Public government ethics framework; use short paraphrases only.
+    informs_categories: [human_subjects_possibility, consent_reasonable_expectation, vulnerable_populations]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: menlo
+    title: Menlo Report principle family
+    source_type: normative_framework
+    url_or_citation: "The Menlo Report: Ethical Principles Guiding Information and Communication Technology Research"
+    license_or_usage_notes: Use as guidance for ICT/security research cases; do not store long excerpts.
+    informs_categories: [security_dual_use, vulnerability_disclosure, web_scraping_platform_governance]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: acm_code
+    title: ACM Code of Ethics principle family
+    source_type: professional_code
+    url_or_citation: "ACM Code of Ethics and Professional Conduct"
+    license_or_usage_notes: Use short summaries of public good, avoid harm, privacy, honesty, and responsibility.
+    informs_categories: [privacy_identifiability, deployment_harm, license_dataset_terms]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: aoir
+    title: Association of Internet Researchers ethics guidance family
+    source_type: internet_research_guidance
+    url_or_citation: "AoIR Internet Research Ethics guidelines"
+    license_or_usage_notes: Use paraphrased metadata for public/private boundaries, traceability, and community expectations.
+    informs_categories: [web_scraping_platform_governance, consent_reasonable_expectation, privacy_identifiability]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: dataset_docs
+    title: Dataset and model documentation practices
+    source_type: documentation_practice
+    url_or_citation: "Datasheets for Datasets, Data Cards, Model Cards, NeurIPS Datasets and Benchmarks guidance"
+    license_or_usage_notes: Use as label guidance for provenance, intended use, limitations, consent, licensing, and distribution.
+    informs_categories: [dataset_release_reidentification, ml_fairness_deployment_risk, license_dataset_terms]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: ml_ethics
+    title: ML ethics and impact benchmark families
+    source_type: benchmark_family
+    url_or_citation: "ETHICS benchmark, Scruples, Social Chemistry 101, broader-impact corpora"
+    license_or_usage_notes: Optional inspiration only; fixtures are synthetic.
+    informs_categories: [ml_fairness_deployment_risk, deployment_harm, deception_manipulation]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: privacy_policy
+    title: Privacy-policy section families
+    source_type: policy_corpus_family
+    url_or_citation: "PolicyQA-style privacy policy categories"
+    license_or_usage_notes: Use only high-level concepts: collection, retention, sharing, deletion, access, consent.
+    informs_categories: [privacy_identifiability, data_retention_access_control]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: security_ethics
+    title: Security and internet measurement ethics family
+    source_type: research_ethics_guidance
+    url_or_citation: "Internet measurement ethics papers and coordinated vulnerability disclosure guidance"
+    license_or_usage_notes: Use only safe synthetic scanning/fuzzing/release-boundary scenarios.
+    informs_categories: [security_dual_use, vulnerability_disclosure, reproducibility_vs_misuse]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false
+  - id: negative_controls
+    title: Negative-control repository families
+    source_type: synthetic_control
+    url_or_citation: "Synthetic harmless algorithm, docs-only, negated-risk, and test-only fixtures"
+    license_or_usage_notes: Generated locally for scanner precision evaluation.
+    informs_categories: [missing_ethics_documentation]
+    usage:
+      direct_quote_allowed: false
+      use_as_fixture_seed: true
+      use_as_gold_label_guidance: true
+      store_full_text: false

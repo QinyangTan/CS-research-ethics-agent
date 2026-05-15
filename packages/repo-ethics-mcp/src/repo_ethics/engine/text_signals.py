@@ -6,7 +6,7 @@ import re
 from collections.abc import Iterable
 
 
-NEGATION_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
+MISSING_CONTEXT_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
     re.compile(pattern, re.I)
     for pattern in [
         r"\bnot\s+yet\s+documented\b",
@@ -31,7 +31,6 @@ NEGATION_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
         r"\bmissing\b",
         r"\bunclear\b",
         r"\bunknown\b",
-        r"\bnot\s+(?:a|an|the)\b",
         r"\bnot\s+specified\b",
         r"\bnot\s+described\b",
         r"\bnot\s+stated\b",
@@ -42,6 +41,12 @@ NEGATION_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
         r"\blacks\b",
         r"\bto\s+be\s+determined\b",
         r"\bTBD\b",
+    ]
+)
+
+ABSENCE_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
+    re.compile(pattern, re.I)
+    for pattern in [
         r"\bdoes\s+not\s+collect\b",
         r"\bdoes\s+not\s+use\b",
         r"\bdoes\s+not\s+perform\b",
@@ -67,6 +72,32 @@ NEGATION_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
 
 CONTRASTIVE_SPLIT_RE = re.compile(r"\b(?:but|however|although|except|unless)\b", re.I)
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+|[\n;]+")
+TARGET_PREFIX_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
+    re.compile(pattern, re.I)
+    for pattern in [
+        r"\bnot\s+(?:a|an|the)\s+$",
+        r"\bnot\s+used\s+for\s+$",
+        r"\bnot\s+intended\s+for\s+$",
+        r"\bnot\s+designed\s+for\s+$",
+        r"\b(?:does|do)\s+not\s+(?:collect|use|perform|store|release|share)\s+$",
+        r"\b(?:doesn't|don't)\s+(?:collect|use|perform|store|release|share)\s+$",
+        r"\bnot\s+(?:collect|collecting|use|using|perform|performing|store|storing|release|releasing|share|sharing)\s+$",
+        r"\bwithout\s+(?:collecting|using|performing|storing|releasing|sharing)\s+$",
+    ]
+)
+TARGET_SUFFIX_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
+    re.compile(pattern, re.I)
+    for pattern in [
+        r"^\s+(?:is|are|was|were|will\s+be|would\s+be)?\s*not\s+(?:stored|collected|used|performed|released|shared|documented|specified|described|stated|addressed)\b",
+        r"^\s+(?:is|are|was|were)?\s*(?:missing|unclear|unknown|tbd|to\s+be\s+determined)\b",
+        r"^\s+(?:will\s+not|would\s+not)\s+be\s+(?:stored|collected|used|performed|released|shared)\b",
+    ]
+)
+NO_TARGET_SUFFIX_RE = re.compile(
+    r"^(?:[\w/_.-]+\s+){0,8}(?:is|are|was|were|will\s+be|would\s+be)?\s*"
+    r"(?:stored|collected|used|performed|released|shared|match|matches|risk|risks|finding|findings|signal|signals)\b",
+    re.I,
+)
 
 
 def _nonempty_span(text: str, start: int, end: int) -> tuple[int, int, str] | None:
@@ -118,7 +149,34 @@ def is_negated_sentence(sentence: str, keyword_start: int | None = None) -> bool
     """Return True when the relevant sentence/clause indicates absence or uncertainty."""
 
     clause = _clause_for_keyword(sentence, keyword_start)
-    return any(pattern.search(clause) for pattern in NEGATION_PATTERNS)
+    if keyword_start is not None:
+        local_start = keyword_start
+        for start, end, _ in _iter_clauses_with_offsets(sentence):
+            if start <= keyword_start < end:
+                local_start = keyword_start - start
+                break
+        return is_negated_for_match(clause, local_start)
+    return any(pattern.search(clause) for pattern in (*MISSING_CONTEXT_PATTERNS, *ABSENCE_PATTERNS))
+
+
+def is_negated_for_match(clause: str, match_start: int, match_end: int | None = None) -> bool:
+    """Return True when a negation targets the specific matched term."""
+
+    if match_end is None:
+        match_end = match_start
+    prefix = clause[max(0, match_start - 120) : match_start].lower()
+    suffix = clause[match_end : min(len(clause), match_end + 120)].lower().lstrip()
+    local = clause[max(0, match_start - 80) : min(len(clause), (match_end or match_start) + 80)]
+
+    if any(pattern.search(local) for pattern in MISSING_CONTEXT_PATTERNS):
+        return True
+    if any(pattern.search(prefix) for pattern in TARGET_PREFIX_PATTERNS):
+        return True
+    if any(pattern.search(clause[match_end : min(len(clause), match_end + 120)]) for pattern in TARGET_SUFFIX_PATTERNS):
+        return True
+    if re.search(r"\bno\s+$", prefix) and NO_TARGET_SUFFIX_RE.search(suffix):
+        return True
+    return False
 
 
 def strip_negated_sentences(text: str) -> str:
@@ -137,7 +195,7 @@ def _find_topic_mentions(
     for clause_start, _, clause in _iter_clauses_with_offsets(text):
         for pattern in patterns:
             for match in pattern.finditer(clause):
-                negated = is_negated_sentence(clause, match.start())
+                negated = is_negated_for_match(clause, match.start(), match.end())
                 if negated is want_negated:
                     start = clause_start + match.start()
                     end = clause_start + match.end()

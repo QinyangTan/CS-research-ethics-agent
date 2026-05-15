@@ -1,0 +1,117 @@
+{
+  "evidence": [
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "c4ac169f7fa34cf0",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository includes a security policy document.",
+      "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "27f2977737dba07a",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes misuse/dual-use limits.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: misuse"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "d287da2c9d1b0b21",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes safe release boundaries.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: safe release"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "f5d69fd562d2b7fb",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes authorization/scope.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: authorization"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "fdb461070d56282c",
+      "evidence_type": "positive_control",
+      "file_path": "SECURITY.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes responsible disclosure.",
+      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: Responsible disclosure"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "a12a42a1173df765",
+      "evidence_type": "positive_control",
+      "file_path": "ethics.md",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
+      "snippet": null
+    },
+    {
+      "category": "security_dual_use",
+      "confidence": "medium",
+      "evidence_id": "b38f458762539e3f",
+      "evidence_type": "risk_signal",
+      "file_path": "src/main.py",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Describes vulnerability scanning.",
+      "snippet": "# vulnerability scanner metadata only\nMatched: vulnerability scanner"
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [
+      "security research",
+      "vulnerability scanning"
+    ],
+    "important_files": [
+      "README.md",
+      "SECURITY.md",
+      "ethics.md"
+    ],
+    "languages": [
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE"
+    ],
+    "possible_dual_use": true,
+    "possible_human_data": false,
+    "possible_security_sensitive": true,
+    "project_name": "case_ethics_security_docs_present",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present"
+  },
+  "warnings": []
+}

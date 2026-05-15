@@ -1,0 +1,35 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_large_parquet_data",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "security_dual_use"
+  ],
+  "expected_evidence_paths": [
+    "data/large.parquet"
+  ],
+  "expected_missing_context_categories": [
+    "dataset_release_reidentification"
+  ],
+  "expected_positive_controls": [],
+  "expected_risk_categories": [
+    "dataset_release_reidentification"
+  ],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_large_parquet_data",
+  "input_type": "repo",
+  "must_mention": [
+    "large.parquet"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "dataset_docs"
+  ],
+  "title": "Large parquet metadata detection"
+}

@@ -1,0 +1,180 @@
+{
+  "evidence": [
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "1d756e3249d9b500",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: Platform terms"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "206b697480479860",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes robots.txt or rate limiting.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: robots.txt"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "93626c77a33be215",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes collection method/dates.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: collection dates"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "1885953c8c2c842a",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes rate limits guidance.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: rate limit"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "1ebf6a86bf4bc012",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes data policy guidance.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: data policy"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "2ec831f68d60a00d",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes robots.txt guidance.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: robots.txt"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "6e15c62efd04b42e",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms guidance.",
+      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: Platform terms"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "89dcf868f01f1b33",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository evidence suggests these documentation topics may need clarification: consent/reasonable expectation. Missing context is not proof of wrongdoing.",
+      "snippet": null
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "16a1c960b942b3fc",
+      "evidence_type": "positive_control",
+      "file_path": "docs/governance.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms guidance.",
+      "snippet": "Rate limits use backoff. Platform terms and robots.txt were reviewed.\nMatched: Platform terms"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "35094f9bb763ce7a",
+      "evidence_type": "positive_control",
+      "file_path": "docs/governance.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes robots.txt guidance.",
+      "snippet": "Rate limits use backoff. Platform terms and robots.txt were reviewed.\nMatched: robots.txt"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "46580370ea09a993",
+      "evidence_type": "positive_control",
+      "file_path": "docs/governance.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes rate limits guidance.",
+      "snippet": "Rate limits use backoff. Platform terms and robots.txt were reviewed.\nMatched: backoff"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "70d8dda528d0f175",
+      "evidence_type": "positive_control",
+      "file_path": "docs/governance.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes rate limits guidance.",
+      "snippet": "Rate limits use backoff. Platform terms and robots.txt were reviewed.\nMatched: Rate limit"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "high",
+      "evidence_id": "d6b301ad4acb28ef",
+      "evidence_type": "risk_signal",
+      "file_path": "src/main.py",
+      "line_end": 2,
+      "line_start": 2,
+      "reason": "Uses Python requests for HTTP collection.",
+      "snippet": "requests.get('https://example.test')\nMatched: requests.get("
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [],
+    "important_files": [
+      "README.md",
+      "docs/governance.md"
+    ],
+    "languages": [
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": false,
+    "possible_human_data": false,
+    "possible_security_sensitive": false,
+    "project_name": "case_scraping_positive_governance",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance"
+  },
+  "warnings": []
+}

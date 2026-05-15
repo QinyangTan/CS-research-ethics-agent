@@ -30,9 +30,19 @@ SECURITY_PATTERNS: list[tuple[re.Pattern[str], str, str]] = [
 ]
 
 
+def _is_low_signal_context(rel_path: str) -> bool:
+    rel = rel_path.lower()
+    parts = Path(rel).parts
+    if Path(rel).name in {"readme.md", "readme.rst", "readme.txt"}:
+        return False
+    return bool(parts and parts[0] in {"test", "tests", "docs", "eval", "benchmarks", "benchmark", "skills"})
+
+
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
     evidence: list[EvidenceItem] = []
     for scanned in iter_repo_files(root_path, max_file_size=max_file_size):
+        if _is_low_signal_context(scanned.rel_path):
+            continue
         text = read_text_file(scanned.path)
         for pattern, reason, confidence in SECURITY_PATTERNS:
             for start, end, _ in find_positive_topic_mentions(text, [pattern]):

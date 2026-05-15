@@ -1,0 +1,36 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_surveillance_tracking",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "security_dual_use"
+  ],
+  "expected_evidence_paths": [
+    "README.md",
+    "src/main.py"
+  ],
+  "expected_missing_context_categories": [
+    "missing_ethics_documentation"
+  ],
+  "expected_positive_controls": [],
+  "expected_risk_categories": [
+    "surveillance_tracking"
+  ],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_surveillance_tracking",
+  "input_type": "repo",
+  "must_mention": [
+    "multi-camera tracking"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "acm_code"
+  ],
+  "title": "Cross-camera tracking"
+}

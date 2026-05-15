@@ -1,0 +1,135 @@
+{
+  "disclaimer": "This is a local, evidence-grounded CS research ethics pre-review. It does not make final ethical, legal, compliance, or IRB determinations. Findings should be discussed with an advisor or appropriate review body, especially where context is missing.",
+  "findings": [
+    {
+      "advisor_or_irb_questions": [
+        "Who is affected by model outputs?",
+        "Were subgroup errors evaluated?",
+        "What deployment constraints and human review steps exist?"
+      ],
+      "category": "ml_fairness_deployment_risk",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "category": "ml_fairness_deployment_risk",
+          "confidence": "medium",
+          "evidence_id": "1e5b1eb72fac630f",
+          "evidence_type": "risk_signal",
+          "file_path": "README.md",
+          "line_end": 1,
+          "line_start": 1,
+          "reason": "References toxicity or emotion classification.",
+          "snippet": "Uses a toxicity detection model for user comments in moderation research.\nMatched: toxicity detection"
+        },
+        {
+          "category": "ml_fairness_deployment_risk",
+          "confidence": "medium",
+          "evidence_id": "46d409ac4f63c135",
+          "evidence_type": "risk_signal",
+          "file_path": "src/model.py",
+          "line_end": 1,
+          "line_start": 1,
+          "reason": "Uses machine learning libraries.",
+          "snippet": "import torch\nMatched: torch"
+        }
+      ],
+      "missing_context": [
+        "Intended deployment context, evaluation by subgroup, and whether outputs affect people."
+      ],
+      "recommended_mitigations": [
+        "Document intended use and non-use.",
+        "Evaluate subgroup performance where appropriate.",
+        "Document uncertainty and failure modes.",
+        "Avoid consequential deployment without review."
+      ],
+      "risk_id": "risk_3b31fd16ac",
+      "severity": "medium",
+      "status": "potential",
+      "title": "Fairness, profiling, or deployment harm risk",
+      "why_it_matters": "ML systems may classify, rank, profile, recommend to, or otherwise affect people."
+    },
+    {
+      "advisor_or_irb_questions": [
+        "What license applies to the code?",
+        "What terms apply to collected or derived data?",
+        "Is redistribution permitted?"
+      ],
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "category": "license_dataset_terms",
+          "confidence": "medium",
+          "evidence_id": "809a0f631f340819",
+          "evidence_type": "missing_context",
+          "file_path": ".",
+          "line_end": null,
+          "line_start": null,
+          "reason": "No code or dataset license documentation was detected.",
+          "snippet": null
+        }
+      ],
+      "missing_context": [
+        "Code license, dataset source terms, and redistribution permissions."
+      ],
+      "recommended_mitigations": [
+        "Add a clear code license.",
+        "Document dataset source terms and redistribution limits.",
+        "Avoid redistributing data unless terms permit it.",
+        "Track third-party license obligations."
+      ],
+      "risk_id": "risk_fc19ee1aa0",
+      "severity": "low",
+      "status": "unknown",
+      "title": "License or dataset redistribution terms are unclear",
+      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
+    }
+  ],
+  "global_missing_context": [
+    "Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented."
+  ],
+  "positive_controls": [
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "4cb93ccb2c0ded13",
+      "evidence_type": "positive_control",
+      "file_path": "docs/model_card.md",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
+      "snippet": null
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [],
+    "important_files": [
+      "README.md",
+      "docs/model_card.md"
+    ],
+    "languages": [
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": false,
+    "possible_human_data": true,
+    "possible_security_sensitive": false,
+    "project_name": "case_model_card_present",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_model_card_present"
+  },
+  "safe_release_checklist": [
+    "Confirm the project purpose, affected populations, and deployment context are documented.",
+    "Review whether data collection aligns with reasonable expectations and platform terms.",
+    "Remove, aggregate, or protect direct identifiers and sensitive quasi-identifiers.",
+    "Define data retention, deletion, access control, and sharing limits.",
+    "Avoid public release of raw sensitive or identifiable records.",
+    "Document known limitations, misuse risks, and appropriate use boundaries.",
+    "Prepare responsible disclosure steps for security-sensitive work.",
+    "Rotate any exposed credentials and keep secrets out of reports and commits."
+  ]
+}

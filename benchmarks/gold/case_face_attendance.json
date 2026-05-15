@@ -1,0 +1,40 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_face_attendance",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "security_dual_use"
+  ],
+  "expected_evidence_paths": [
+    "src/main.py",
+    "data/schema.json"
+  ],
+  "expected_missing_context_categories": [
+    "missing_ethics_documentation"
+  ],
+  "expected_positive_controls": [],
+  "expected_risk_categories": [
+    "biometrics",
+    "surveillance_tracking",
+    "privacy_identifiability"
+  ],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_face_attendance",
+  "input_type": "repo",
+  "must_mention": [
+    "face_embedding",
+    "attendance"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "belmont",
+    "acm_code"
+  ],
+  "title": "Face recognition attendance"
+}

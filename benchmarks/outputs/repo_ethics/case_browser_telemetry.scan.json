@@ -1,0 +1,113 @@
+{
+  "evidence": [
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "8d3f9e10d91272c4",
+      "evidence_type": "risk_signal",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References user identifiers.",
+      "snippet": "Browser extension telemetry collects URL history, click timestamps, and user_id values.\nMatched: user_id"
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "d718697981eae52b",
+      "evidence_type": "risk_signal",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References exact timestamps.",
+      "snippet": "Browser extension telemetry collects URL history, click timestamps, and user_id values.\nMatched: timestamps"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "89dcf868f01f1b33",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, consent/reasonable expectation, data access controls, data retention/deletion, privacy. Missing context is not proof of wrongdoing.",
+      "snippet": null
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "bfbeebb9d5f05d3e",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Scraping or API collection was detected, but README/docs do not positively document: platform terms, robots.txt, rate limits, data policy.",
+      "snippet": null
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "913521dc24377da3",
+      "evidence_type": "risk_signal",
+      "file_path": "src/extension.js",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References user identifiers.",
+      "snippet": "fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})})\nMatched: user_id"
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "b1b8ca850dd41d60",
+      "evidence_type": "risk_signal",
+      "file_path": "src/extension.js",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References exact timestamps.",
+      "snippet": "fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})})\nMatched: timestamp"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "high",
+      "evidence_id": "82dca447c381f1e0",
+      "evidence_type": "risk_signal",
+      "file_path": "src/extension.js",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Uses JavaScript fetch for HTTP collection.",
+      "snippet": "fetch('/collect', {method: 'POST', body: JSON.stringify({user_id, url, timestamp})})\nMatched: fetch("
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [],
+    "important_files": [
+      "README.md"
+    ],
+    "languages": [
+      "JavaScript",
+      "Markdown"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": false,
+    "possible_human_data": true,
+    "possible_security_sensitive": false,
+    "project_name": "case_browser_telemetry",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_browser_telemetry"
+  },
+  "warnings": []
+}

@@ -74,8 +74,21 @@ Controls:
 - Findings include confidence and evidence.
 - Evidence is typed as `risk_signal`, `missing_context`, or `positive_control`.
 - Clause-level negation handling prevents common "not documented" or "do not collect" statements from being counted as positive coverage or collection evidence.
+- Target-aware negation reduces over-suppression where unrelated negation appears before a true risk signal.
+- Documentation-gap inference uses likely project signal sources instead of tests, benchmark fixtures, Skill text, or tutorials.
 - Missing documentation alone stays low severity.
 - Reports use potential/unknown language when context is incomplete.
+
+### Benchmark Misinterpretation
+
+Threat: Benchmark results could be overstated as final ethical correctness or as proof that one reviewer is universally better.
+
+Controls:
+
+- The benchmark is synthetic and versioned.
+- Reviewed labels are separated from fixture generation.
+- Metrics report recall, groundedness, false positives, missing-context discipline, positive-control recognition, overclaiming, and secret leakage separately.
+- Documentation states that direct Codex comparison is optional and no hosted LLM call is made by default.
 
 ### Scanner False Negatives
 

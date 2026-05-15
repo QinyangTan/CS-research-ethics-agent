@@ -25,3 +25,27 @@ def test_negated_release_with_contrastive_clause() -> None:
     assert not find_positive_topic_mentions(text, release)
     assert find_positive_topic_mentions(text, aggregate)
 
+
+def test_target_aware_not_a_negation() -> None:
+    vulnerability = [re.compile(r"\bvulnerability scanner\b", re.I)]
+    assert not find_positive_topic_mentions("This is not a vulnerability scanner.", vulnerability)
+    assert find_positive_topic_mentions("This is not a toy and it is a vulnerability scanner.", vulnerability)
+    assert find_positive_topic_mentions("This is not a toy, but it is a vulnerability scanner.", vulnerability)
+
+
+def test_target_aware_not_used_for_negation() -> None:
+    port_scanning = [re.compile(r"\bport scanning\b", re.I)]
+    assert not find_positive_topic_mentions("This tool is not used for port scanning.", port_scanning)
+    assert find_positive_topic_mentions("This tool is not used for demos, but it performs port scanning.", port_scanning)
+
+
+def test_target_aware_use_and_perform_negation() -> None:
+    face = [re.compile(r"\bface_recognition\b", re.I)]
+    attendance = [re.compile(r"\battendance tracking\b", re.I)]
+    assert not find_positive_topic_mentions("We do not use face_recognition.", face)
+    assert find_positive_topic_mentions("We do not use images, but we use face_recognition.", face)
+    assert not find_positive_topic_mentions("This project does not perform attendance tracking.", attendance)
+    assert find_positive_topic_mentions(
+        "This project does not perform grading, but it performs attendance tracking.",
+        attendance,
+    )

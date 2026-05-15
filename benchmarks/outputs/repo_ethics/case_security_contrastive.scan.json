@@ -1,0 +1,71 @@
+{
+  "evidence": [
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "security_dual_use",
+      "confidence": "medium",
+      "evidence_id": "b1034260fec8ed56",
+      "evidence_type": "risk_signal",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Describes vulnerability scanning.",
+      "snippet": "This is not a toy and it is a vulnerability scanner for a closed lab.\nMatched: vulnerability scanner"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "89dcf868f01f1b33",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository evidence suggests these documentation topics may need clarification: authorization/scope, misuse/dual-use limits, responsible disclosure, safe release boundaries. Missing context is not proof of wrongdoing.",
+      "snippet": null
+    },
+    {
+      "category": "security_dual_use",
+      "confidence": "medium",
+      "evidence_id": "6dd35ece622b3988",
+      "evidence_type": "risk_signal",
+      "file_path": "src/main.py",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Mentions socket or port scanning.",
+      "snippet": "def scan_port(host, port): return False\nMatched: scan_port"
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [
+      "vulnerability scanning"
+    ],
+    "important_files": [
+      "README.md"
+    ],
+    "languages": [
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": true,
+    "possible_human_data": false,
+    "possible_security_sensitive": true,
+    "project_name": "case_security_contrastive",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_contrastive"
+  },
+  "warnings": []
+}

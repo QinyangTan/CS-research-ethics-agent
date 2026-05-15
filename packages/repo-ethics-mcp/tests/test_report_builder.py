@@ -37,7 +37,7 @@ def test_report_builder_includes_evidence_and_disclaimer() -> None:
 
 
 def test_golden_report_sections_and_forbidden_language() -> None:
-    for case in ["reddit_nlp_project", "face_recognition_attendance", "vulnerability_scanner", "harmless_sorting_visualizer"]:
+    for case in ["reddit_nlp_project", "face_recognition_attendance", "vulnerability_scanner", "harmless_sorting_visualizer", "negated_docs_project"]:
         markdown = report_to_markdown(build_report(run_scan(EXAMPLES / case)))
         for section in REQUIRED_SECTIONS:
             assert section in markdown
@@ -53,6 +53,34 @@ def test_harmless_sorting_visualizer_has_no_high_or_critical_findings() -> None:
     )
     assert "responsible disclosure" not in broad_missing.lower()
     assert "platform terms" not in broad_missing.lower()
+
+
+def test_example_reports_have_case_specific_grounding() -> None:
+    cases = {
+        "reddit_nlp_project": [
+            "web_scraping_platform_governance",
+            "privacy_identifiability",
+            "dataset_release_reidentification",
+            "platform terms",
+            "data retention",
+        ],
+        "vulnerability_scanner": ["security_dual_use", "responsible disclosure", "authorization"],
+        "face_recognition_attendance": ["biometrics", "attendance", "consent", "data retention", "data access"],
+    }
+    for case, phrases in cases.items():
+        markdown = report_to_markdown(build_report(run_scan(EXAMPLES / case)))
+        lower = markdown.lower()
+        for phrase in phrases:
+            assert phrase.lower() in lower
+
+
+def test_negated_docs_project_report_does_not_overread_negated_claims() -> None:
+    markdown = report_to_markdown(build_report(run_scan(EXAMPLES / "negated_docs_project")))
+    lower = markdown.lower()
+    assert "username" not in lower
+    assert "public dataset release risk" not in lower
+    assert "platform terms" in lower
+    assert "timestamp" in lower
 
 
 def test_schema_export_available() -> None:

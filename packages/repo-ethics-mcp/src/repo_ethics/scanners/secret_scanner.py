@@ -16,6 +16,8 @@ SECRET_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |)PRIVATE KEY-----"), "Possible private key block."),
     (re.compile(r"(?i)\b(api[_-]?key|secret[_-]?key|access[_-]?token|auth[_-]?token|password)\s*[:=]\s*['\"]?[^'\"\s]{12,}"), "Possible secret assignment."),
 ]
+ENV_TEMPLATE_NAMES = {".env.example", ".env.sample", ".env.template", ".env.dist"}
+PLACEHOLDER_TERMS = {"replace-me", "example", "placeholder", "dummy", "changeme", "not-a-real", "fake"}
 
 
 def mask_secret_snippet(snippet: str) -> str:
@@ -25,11 +27,17 @@ def mask_secret_snippet(snippet: str) -> str:
     return masked
 
 
+def _is_placeholder_match(value: str) -> bool:
+    lowered = value.lower()
+    return any(term in lowered for term in PLACEHOLDER_TERMS)
+
+
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
     evidence: list[EvidenceItem] = []
     for scanned in iter_repo_files(root_path, max_file_size=max_file_size):
         text = read_text_file(scanned.path)
-        if Path(scanned.rel_path).name.startswith(".env"):
+        env_name = Path(scanned.rel_path).name.lower()
+        if env_name.startswith(".env") and env_name not in ENV_TEMPLATE_NAMES:
             evidence.append(
                 make_evidence(
                     category="secret_exposure",
@@ -42,6 +50,8 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
             )
         for pattern, reason in SECRET_PATTERNS:
             for match in pattern.finditer(text):
+                if _is_placeholder_match(match.group(0)):
+                    continue
                 line_start, line_end, snippet = line_window_for_match(text, match.start(), match.end())
                 masked = mask_secret_snippet(snippet)
                 evidence.append(

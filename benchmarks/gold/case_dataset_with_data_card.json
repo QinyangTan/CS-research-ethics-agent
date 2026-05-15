@@ -1,0 +1,37 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_dataset_with_data_card",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "security_dual_use"
+  ],
+  "expected_evidence_paths": [
+    "docs/data_card.md",
+    "data/samples.csv"
+  ],
+  "expected_missing_context_categories": [],
+  "expected_positive_controls": [
+    "dataset_release_reidentification",
+    "missing_ethics_documentation"
+  ],
+  "expected_risk_categories": [
+    "dataset_release_reidentification"
+  ],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_dataset_with_data_card",
+  "input_type": "repo",
+  "must_mention": [
+    "Data card"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "dataset_docs"
+  ],
+  "title": "Dataset with data card"
+}

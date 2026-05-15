@@ -15,6 +15,7 @@ from repo_ethics.engine.evidence_engine import (
 )
 from repo_ethics.engine.text_signals import find_positive_topic_mentions, topic_is_covered
 from repo_ethics.schemas import EvidenceItem
+from repo_ethics.scanners.file_classifier import classify_file
 
 
 SIGNAL_PATTERNS: dict[str, list[re.Pattern[str]]] = {
@@ -28,7 +29,7 @@ SIGNAL_PATTERNS: dict[str, list[re.Pattern[str]]] = {
         re.compile(r"\bpublic dataset|release dataset|dataset release|publish dataset|data release|data directory\b", re.I)
     ],
     "security": [
-        re.compile(r"\bexploit|CVE|vulnerability scanner|nmap|socket scanning|fuzzing|malware|phishing|credential dumping\b", re.I)
+        re.compile(r"\bexploit|CVE|vulnerability scanner|nmap|socket scanning|port scanning|socket\.(?:socket|connect_ex|connect)|fuzzing|malware|phishing|credential dumping\b", re.I)
     ],
     "biometrics": [
         re.compile(r"\bface_recognition|cv2\.(?:CascadeClassifier|detectMultiScale)|deepface|face embedding|attendance tracking|surveillance\b", re.I)
@@ -65,6 +66,39 @@ TOPIC_PATTERNS: dict[str, list[re.Pattern[str]]] = {
 
 def _has_signal(text: str, patterns: list[re.Pattern[str]]) -> bool:
     return any(find_positive_topic_mentions(text, [pattern]) for pattern in patterns)
+
+
+def _is_excluded_signal_path(rel_path: str) -> bool:
+    parts = Path(rel_path.lower()).parts
+    return bool(parts and parts[0] in {"test", "tests", "eval", "benchmarks", "benchmark", "skills"})
+
+
+def _is_signal_source(rel_path: str) -> bool:
+    if _is_excluded_signal_path(rel_path):
+        return False
+    classification = classify_file(rel_path)
+    if classification in {"project_description", "source_code", "data_schema", "dependency_manifest", "notebook"}:
+        return True
+    name = Path(rel_path.lower()).name
+    if name in {"dockerfile", "compose.yaml", "docker-compose.yml"}:
+        return True
+    return False
+
+
+def _is_documentation_source(rel_path: str) -> bool:
+    classification = classify_file(rel_path)
+    if classification in {"project_description", "documentation", "ethics_documentation", "security_policy"}:
+        return True
+    suffix = Path(rel_path.lower()).suffix
+    return suffix in {".md", ".rst", ".txt"} or rel_path.lower().startswith("docs/")
+
+
+def _is_fallback_project_doc(rel_path: str) -> bool:
+    rel = rel_path.lower()
+    name = Path(rel).stem
+    if not rel.startswith("docs/"):
+        return False
+    return name in {"index", "overview", "project", "readme", "introduction"} or "overview" in name
 
 
 def _has_dataset_path(root_path: str | Path, max_file_size: int) -> bool:
@@ -126,20 +160,24 @@ def _required_topics(signals: dict[str, bool]) -> list[str]:
 
 
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
-    repo_text = ""
+    signal_text = ""
     docs_text = ""
     docs: list[tuple[str, str]] = []
+    fallback_docs: list[tuple[str, str]] = []
     docs_files: list[str] = []
     evidence: list[EvidenceItem] = []
 
     for scanned in iter_repo_files(root_path, max_file_size=max_file_size):
         text = read_text_file(scanned.path)
-        repo_text += "\n" + text
         rel = scanned.rel_path.lower()
-        if rel.endswith((".md", ".rst", ".txt")) or rel.startswith("docs/"):
+        if _is_signal_source(scanned.rel_path):
+            signal_text += "\n" + text
+        if _is_documentation_source(scanned.rel_path):
             docs_files.append(scanned.rel_path)
             docs.append((scanned.rel_path, text))
             docs_text += "\n" + text
+            if _is_fallback_project_doc(scanned.rel_path):
+                fallback_docs.append((scanned.rel_path, text))
             if "security.md" == Path(rel).name:
                 evidence.append(
                     make_evidence(
@@ -163,7 +201,10 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                     )
                 )
 
-    signals = {name: _has_signal(repo_text, patterns) for name, patterns in SIGNAL_PATTERNS.items()}
+    if not signal_text.strip() and fallback_docs:
+        signal_text = "\n".join(text for _, text in fallback_docs)
+
+    signals = {name: _has_signal(signal_text, patterns) for name, patterns in SIGNAL_PATTERNS.items()}
     signals["dataset"] = signals["dataset"] or _has_dataset_path(root_path, max_file_size)
     required = _required_topics(signals)
 

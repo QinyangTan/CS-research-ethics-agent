@@ -1,0 +1,38 @@
+{
+  "acceptable_synonyms": {},
+  "benchmark_version": "0.1.0",
+  "case_id": "case_model_card_present",
+  "case_version": "1.0.0",
+  "expected_absent_categories": [
+    "security_dual_use"
+  ],
+  "expected_evidence_paths": [
+    "docs/model_card.md",
+    "src/model.py"
+  ],
+  "expected_missing_context_categories": [],
+  "expected_positive_controls": [
+    "missing_ethics_documentation",
+    "ml_fairness_deployment_risk"
+  ],
+  "expected_risk_categories": [
+    "ml_fairness_deployment_risk"
+  ],
+  "expected_severity_by_category": {},
+  "expected_status_by_category": {},
+  "fixture_path": "benchmarks/fixtures/case_model_card_present",
+  "input_type": "repo",
+  "must_mention": [
+    "Model card"
+  ],
+  "must_not_mention": [],
+  "notes": "",
+  "rationale": "Synthetic fixture isolates one or more CS research ethics review signals.",
+  "review_status": "reviewed",
+  "secret_values_to_check": [],
+  "source_family": [
+    "dataset_docs",
+    "ml_ethics"
+  ],
+  "title": "Model card positive control"
+}

@@ -1,0 +1,175 @@
+{
+  "evidence": [
+    {
+      "category": "dataset_release_reidentification",
+      "confidence": "medium",
+      "evidence_id": "c459552842037eb8",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy.",
+      "snippet": null
+    },
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "dataset_release_reidentification",
+      "confidence": "medium",
+      "evidence_id": "acb6adffa645955d",
+      "evidence_type": "missing_context",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Dataset release or sharing is mentioned as absent, unclear, or not documented.",
+      "snippet": "Collects Reddit posts for NLP classification. Platform terms, consent assumptions, data retention, and dataset release limits are not documented.\nMatched: dataset release"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "69feb587c5373408",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms.",
+      "snippet": "Collects Reddit posts for NLP classification. Platform terms, consent assumptions, data retention, and dataset release limits are not documented.\nMatched: Platform terms"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "633a78ad570f3977",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms guidance.",
+      "snippet": "Collects Reddit posts for NLP classification. Platform terms, consent assumptions, data retention, and dataset release limits are not documented.\nMatched: Platform terms"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "89dcf868f01f1b33",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, collection method/dates, consent/reasonable expectation, data access controls, data card/datasheet, data retention/deletion, privacy, release policy, .... Missing context is not proof of wrongdoing.",
+      "snippet": null
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "bfbeebb9d5f05d3e",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Scraping or API collection was detected, but README/docs do not positively document: robots.txt, rate limits, data policy.",
+      "snippet": null
+    },
+    {
+      "category": "dataset_release_reidentification",
+      "confidence": "medium",
+      "evidence_id": "07a2548ff6f54f11",
+      "evidence_type": "risk_signal",
+      "file_path": "data/schema.json",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository contains a dataset-like file by extension; content was not read. Release, retention, and de-identification review may be needed if it contains research data.",
+      "snippet": null
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "332c0e53d196f21d",
+      "evidence_type": "risk_signal",
+      "file_path": "data/schema.json",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References usernames or handles.",
+      "snippet": "{\"username\": \"string\", \"timestamp\": \"datetime\", \"post_text\": \"string\"}\nMatched: username"
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "4a207e0e363fe200",
+      "evidence_type": "risk_signal",
+      "file_path": "data/schema.json",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References exact timestamps.",
+      "snippet": "{\"username\": \"string\", \"timestamp\": \"datetime\", \"post_text\": \"string\"}\nMatched: timestamp"
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "d84b630c2627618c",
+      "evidence_type": "risk_signal",
+      "file_path": "data/schema.json",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References exact timestamps.",
+      "snippet": "{\"username\": \"string\", \"timestamp\": \"datetime\", \"post_text\": \"string\"}\nMatched: datetime"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "high",
+      "evidence_id": "0d1bfa269ae407f2",
+      "evidence_type": "risk_signal",
+      "file_path": "src/main.py",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Uses PRAW for Reddit collection.",
+      "snippet": "import praw\nMatched: praw"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "high",
+      "evidence_id": "dc2e81e12250664d",
+      "evidence_type": "risk_signal",
+      "file_path": "src/main.py",
+      "line_end": 2,
+      "line_start": 2,
+      "reason": "Uses PRAW for Reddit collection.",
+      "snippet": "client = praw.Reddit(client_id='demo', client_secret='demo', user_agent='benchmark')\nMatched: praw"
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [
+      "Reddit"
+    ],
+    "detected_research_activities": [
+      "NLP",
+      "classification"
+    ],
+    "important_files": [
+      "README.md",
+      "data/schema.json"
+    ],
+    "languages": [
+      "JSON",
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": false,
+    "possible_human_data": true,
+    "possible_security_sensitive": false,
+    "project_name": "case_scraping_missing_controls",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls"
+  },
+  "warnings": []
+}

@@ -14,7 +14,11 @@
 
 ## Evidence Table
 
+Columns: Finding, Evidence Type, Category, Evidence, Reason, Snippet.
+
 ## Positive Controls Detected
+
+List positive controls separately. Do not use them as risk findings.
 
 ## Recommended Mitigations
 

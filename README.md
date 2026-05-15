@@ -7,6 +7,7 @@
 - A reusable Agent Skill that tells Codex, Claude Code, and other agents how to produce evidence-grounded ethics reports.
 - CS-specific taxonomy, severity rubrics, mitigation templates, examples, tests, and an eval harness.
 - Typed evidence that separates `risk_signal`, `missing_context`, and `positive_control`.
+- A synthetic benchmark suite for comparing repo-ethics reports with optional direct Codex-style reviews.
 
 The package does **not** call hosted LLM APIs. Your own coding agent supplies reasoning; this project supplies deterministic repo scanning, evidence extraction, schemas, report templates, and guardrails.
 
@@ -73,7 +74,20 @@ Expected risk areas include scraping/privacy for Reddit NLP, biometrics/surveill
 - Huge and binary files are skipped.
 - Secret-like values are masked before output.
 - Negated documentation such as "not documented" is treated as missing context, not coverage.
+- Target-aware negation avoids treating phrases such as "not a vulnerability scanner" or "do not use face_recognition" as risk signals while preserving contrastive true positives.
+- Documentation gaps are conditional on concrete project signals from README/source/schema/manifests rather than broad tutorial or test text.
 - Positive controls such as licenses, security policies, data cards, and documented rate limits are shown separately from risk findings.
+
+## Benchmarking
+
+The benchmark suite in `benchmarks/` uses tiny synthetic fixtures and reviewed gold labels:
+
+```bash
+make benchmark
+make benchmark-score
+```
+
+Direct Codex comparison is optional and manual by default. Use `benchmarks/prompts/direct_codex_prompt.md`, save outputs under `benchmarks/outputs/direct_codex/`, then rerun scoring. The benchmark reports category recall, groundedness, false positives, missing-context discipline, positive-control recognition, forbidden-language violations, unsupported conclusions, actionability, and secret leakage separately. It measures report quality and evidence grounding, not final ethical truth.
 
 ## Limitations
 

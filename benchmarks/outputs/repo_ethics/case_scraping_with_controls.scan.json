@@ -1,0 +1,158 @@
+{
+  "evidence": [
+    {
+      "category": "license_dataset_terms",
+      "confidence": "medium",
+      "evidence_id": "809a0f631f340819",
+      "evidence_type": "missing_context",
+      "file_path": ".",
+      "line_end": null,
+      "line_start": null,
+      "reason": "No code or dataset license documentation was detected.",
+      "snippet": null
+    },
+    {
+      "category": "dataset_release_reidentification",
+      "confidence": "medium",
+      "evidence_id": "82d53c4a6e048176",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes retention/deletion policy.",
+      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: retention"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "30603f38037c4aad",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes robots.txt or rate limiting.",
+      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: rate limit"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "de43f8199c2c9b8e",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms.",
+      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: platform terms"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "a47ddfb58eb225da",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes platform terms guidance.",
+      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: platform terms"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "a6129c7099000b6f",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes rate limits guidance.",
+      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: rate limit"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "e17bb53b64cc2192",
+      "evidence_type": "positive_control",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes robots.txt guidance.",
+      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: robots.txt"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "89dcf868f01f1b33",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Repository evidence suggests these documentation topics may need clarification: consent/reasonable expectation. Missing context is not proof of wrongdoing.",
+      "snippet": null
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "medium",
+      "evidence_id": "bfbeebb9d5f05d3e",
+      "evidence_type": "missing_context",
+      "file_path": "README/docs",
+      "line_end": null,
+      "line_start": null,
+      "reason": "Scraping or API collection was detected, but README/docs do not positively document: data policy.",
+      "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "75c13c7bcb371cc2",
+      "evidence_type": "positive_control",
+      "file_path": "docs/data_policy.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes collection method/dates.",
+      "snippet": "Collection dates are documented. Raw usernames are removed before analysis.\nMatched: Collection dates"
+    },
+    {
+      "category": "privacy_identifiability",
+      "confidence": "medium",
+      "evidence_id": "e3098ae916c92a47",
+      "evidence_type": "risk_signal",
+      "file_path": "docs/data_policy.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "References usernames or handles.",
+      "snippet": "Raw usernames are removed before analysis.\nMatched: usernames"
+    },
+    {
+      "category": "web_scraping_platform_governance",
+      "confidence": "high",
+      "evidence_id": "4f866c27028c341f",
+      "evidence_type": "risk_signal",
+      "file_path": "src/main.py",
+      "line_end": 2,
+      "line_start": 2,
+      "reason": "Uses Python requests for HTTP collection.",
+      "snippet": "response = requests.get('https://example.test/posts', timeout=5)\nMatched: requests.get("
+    }
+  ],
+  "project_profile": {
+    "detected_data_sources": [],
+    "detected_research_activities": [],
+    "important_files": [
+      "README.md",
+      "docs/data_policy.md"
+    ],
+    "languages": [
+      "Markdown",
+      "Python"
+    ],
+    "missing_docs": [
+      "LICENSE",
+      "ethics/privacy/data handling documentation"
+    ],
+    "possible_dual_use": false,
+    "possible_human_data": true,
+    "possible_security_sensitive": false,
+    "project_name": "case_scraping_with_controls",
+    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_with_controls"
+  },
+  "warnings": []
+}

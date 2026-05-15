@@ -24,3 +24,5 @@ Evidence type policy:
 - Treat `missing_context` as clarification questions.
 - Do not present `positive_control` evidence as a risk.
 - Do not count negated documentation as coverage.
+- Preserve target-aware nuance: unrelated negation should not hide a later true risk signal.
+- Benchmark summaries should say they measure report quality and evidence grounding, not final ethical truth.
