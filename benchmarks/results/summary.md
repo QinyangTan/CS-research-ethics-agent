@@ -4,14 +4,16 @@ These scores measure report behavior on synthetic controlled cases, not final et
 
 ## Output Availability
 
-- `direct_codex_naive`: 0/42 outputs available
-- `direct_codex_strong`: 0/42 outputs available
+- `direct_codex_naive`: 42/42 outputs available
+- `direct_codex_strong`: 42/42 outputs available
 - `repo_ethics`: 42/42 outputs available
 
 ## Metrics
 
 | System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Extra Missing Context | Extra Positive Controls | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| direct_codex_naive | 42 | 0.92 | 0.60 | 0.79 | 0.94 | 0.62 | 1.36 | 0.40 | 0.82 | 0.00 | 0.00 | 0.00 | 0.00 |
+| direct_codex_strong | 42 | 0.81 | 1.00 | 0.57 | 0.83 | 0.52 | 2.21 | 0.07 | 0.82 | 0.00 | 0.00 | 0.02 | 0.00 |
 | repo_ethics | 42 | 1.00 | 0.87 | 0.95 | 0.96 | 0.00 | 1.57 | 0.24 | 0.71 | 0.00 | 0.00 | 0.00 | 0.00 |
 
 ## Interpretation
@@ -28,18 +30,18 @@ These scores measure report behavior on synthetic controlled cases, not final et
 
 ## Per-Category Recall
 
-| Category | repo_ethics |
-|---|---:|
-| `biometrics` | 1/1 |
-| `consent_reasonable_expectation` | 2/2 |
-| `dataset_release_reidentification` | 9/9 |
-| `ml_fairness_deployment_risk` | 5/5 |
-| `privacy_identifiability` | 12/12 |
-| `prompt_injection_attempt` | 4/4 |
-| `secret_exposure` | 1/1 |
-| `security_dual_use` | 4/4 |
-| `surveillance_tracking` | 2/2 |
-| `web_scraping_platform_governance` | 5/5 |
+| Category | direct_codex_naive | direct_codex_strong | repo_ethics |
+|---|---:|---:|---:|
+| `biometrics` | 1/1 | 0/1 | 1/1 |
+| `consent_reasonable_expectation` | 2/2 | 2/2 | 2/2 |
+| `dataset_release_reidentification` | 6/9 | 4/9 | 9/9 |
+| `ml_fairness_deployment_risk` | 4/5 | 4/5 | 5/5 |
+| `privacy_identifiability` | 12/12 | 8/12 | 12/12 |
+| `prompt_injection_attempt` | 4/4 | 1/4 | 4/4 |
+| `secret_exposure` | 1/1 | 1/1 | 1/1 |
+| `security_dual_use` | 4/4 | 4/4 | 4/4 |
+| `surveillance_tracking` | 2/2 | 1/2 | 2/2 |
+| `web_scraping_platform_governance` | 4/5 | 4/5 | 5/5 |
 
 ## Hardest Repo-Ethics Cases
 
@@ -51,7 +53,9 @@ These scores measure report behavior on synthetic controlled cases, not final et
 
 ## Comparative Notes
 
-- No direct Codex baseline outputs were present, so comparative claims are not reported.
+- Direct baselines are scored only where manually collected Markdown outputs are present; compare overlapping cases and individual metrics.
+- `direct_codex_naive` overlaps repo-ethics on 42 cases.
+- `direct_codex_strong` overlaps repo-ethics on 42 cases.
 
 ## Recommended Improvements
 

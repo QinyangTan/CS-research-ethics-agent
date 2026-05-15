@@ -131,15 +131,11 @@ def _compare_values(repo_value: Any, direct_value: Any, direction: str) -> str |
     return "repo" if repo_value > direct_value else "direct"
 
 
-def _comparison_rows(results: dict[str, Any], direct_system: str) -> list[str]:
+def _comparison_counts(results: dict[str, Any], direct_system: str) -> list[dict[str, Any]]:
     repo_rows = _rows_by_case(results, "repo_ethics")
     direct_rows = _rows_by_case(results, direct_system)
     overlapping = sorted(set(repo_rows) & set(direct_rows))
-    lines: list[str] = [
-        "| Metric | repo_ethics higher/better | "
-        f"{direct_system} higher/better | tied | overlapping cases |",
-        "|---|---:|---:|---:|---:|",
-    ]
+    counts: list[dict[str, Any]] = []
     for key, label, direction in COMPARISON_METRICS:
         repo_better = 0
         direct_better = 0
@@ -156,19 +152,69 @@ def _comparison_rows(results: dict[str, Any], direct_system: str) -> list[str]:
                 direct_better += 1
             else:
                 tied += 1
-        lines.append(f"| {label} | {repo_better} | {direct_better} | {tied} | {comparable} |")
+        counts.append(
+            {
+                "key": key,
+                "label": label,
+                "repo_better": repo_better,
+                "direct_better": direct_better,
+                "tied": tied,
+                "comparable": comparable,
+            }
+        )
+    return counts
+
+
+def _comparison_rows(results: dict[str, Any], direct_system: str) -> list[str]:
+    lines: list[str] = [
+        "| Metric | repo_ethics higher/better | "
+        f"{direct_system} higher/better | tied | overlapping cases |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for count in _comparison_counts(results, direct_system):
+        lines.append(
+            f"| {count['label']} | {count['repo_better']} | {count['direct_better']} | "
+            f"{count['tied']} | {count['comparable']} |"
+        )
+    return lines
+
+
+def _better_lines(results: dict[str, Any], side: str) -> list[str]:
+    lines: list[str] = []
+    for direct_system in ["direct_codex_strong", "direct_codex_naive"]:
+        counts = _comparison_counts(results, direct_system)
+        overlap = max((int(count["comparable"]) for count in counts), default=0)
+        if overlap == 0:
+            lines.append(f"- `{direct_system}`: not evaluated because there were no overlapping case outputs.")
+            continue
+        key = "repo_better" if side == "repo" else "direct_better"
+        subject = "`repo_ethics`" if side == "repo" else f"`{direct_system}`"
+        items = [
+            f"{count['label']} ({count[key]}/{count['comparable']})"
+            for count in counts
+            if int(count[key]) > 0
+        ]
+        if items:
+            lines.append(
+                f"- Against `{direct_system}`, {subject} had the better directional score on: "
+                + "; ".join(items)
+                + "."
+            )
+        else:
+            lines.append(f"- Against `{direct_system}`, no compared metric favored {subject}.")
     return lines
 
 
 def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> None:
     status = _comparison_status(results)
     total_cases = int(results.get("case_count", 0))
-    direct_available = (
-        int(_availability(results, "direct_codex_strong").get("available", 0))
-        + int(_availability(results, "direct_codex_naive").get("available", 0))
-    )
+    strong = _availability(results, "direct_codex_strong")
+    naive = _availability(results, "direct_codex_naive")
+    strong_available = int(strong.get("available", 0))
+    naive_available = int(naive.get("available", 0))
+    direct_available = strong_available + naive_available
+    direct_complete = strong_available >= total_cases and naive_available >= total_cases and total_cases > 0
     if direct_available == 0:
-        comparison_note = "Not evaluated in this run because direct-Codex outputs were not available."
         empirical_answer = (
             "Inconclusive for direct comparison.\n\n"
             f"Repo-ethics outputs were generated and scored for all {total_cases} reviewed benchmark cases. "
@@ -176,11 +222,54 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
             "that repo-ethics is better or worse than direct Codex.\n\n"
             "A valid comparison requires collecting direct Codex outputs for the same reviewed cases and rerunning the scorer."
         )
+        what_can = [
+            "This run can evaluate repo-ethics behavior on the reviewed synthetic cases.",
+            "",
+            "This run cannot determine whether repo-ethics performs better or worse than direct Codex when direct-Codex baseline outputs are unavailable.",
+            "",
+            "The benchmark infrastructure is ready for comparison once direct outputs are collected.",
+        ]
+        aggregate_intro = "These metrics are repo-ethics-only when direct outputs are absent; they are not comparative results in that case."
+        repo_better_lines = ["Not evaluated in this run because direct-Codex outputs were not available."]
+        direct_better_lines = ["Not evaluated in this run because direct-Codex outputs were not available."]
+        mixed_lines = ["- Direct output coverage may be incomplete or absent."]
+        conclusion = [
+            "This run is inconclusive for direct comparison when direct baseline outputs are missing.",
+            "",
+            "Further comparison requires Markdown outputs in `benchmarks/outputs/direct_codex/` and/or `benchmarks/outputs/direct_codex_naive/`, followed by a fresh scoring run.",
+        ]
     else:
-        comparison_note = "Evaluate only overlapping cases where both systems have outputs."
         empirical_answer = (
-            "Mixed or partial direct comparison. Interpret only overlapping case-level metrics and output availability."
+            "Complete direct comparison. Results were mixed by metric on these reviewed synthetic cases."
+            if direct_complete
+            else "Partial direct comparison. Results were mixed by metric on the overlapping reviewed synthetic cases."
         )
+        what_can = [
+            "This run can compare systems on overlapping reviewed synthetic cases.",
+            "",
+            "The comparison is metric-specific: higher recall or groundedness on one metric does not imply overall ethical correctness.",
+            "",
+            "The benchmark infrastructure is now populated with direct baseline outputs for the available coverage.",
+        ]
+        aggregate_intro = (
+            "These aggregate metrics include all scored outputs for each system. Compare them alongside output coverage and overlapping case counts."
+        )
+        repo_better_lines = _better_lines(results, "repo")
+        direct_better_lines = _better_lines(results, "direct")
+        mixed_lines = [
+            "- Direct output coverage is complete in this run." if direct_complete else "- Direct output coverage is partial in this run.",
+            "- The fixtures are synthetic and intentionally small.",
+            "- Direct Markdown scoring is heuristic and depends on taxonomy aliases.",
+            "- The benchmark does not use an LLM-as-judge.",
+            "- These scores measure report behavior on controlled cases, not final ethical truth.",
+        ]
+        conclusion = [
+            "Results were mixed on this benchmark.",
+            "",
+            "Repo-ethics had stronger aggregate category recall, missing-context recall, positive-control recall, expected-absent false-positive control, and actionability than both direct baselines. The strong direct baseline had higher aggregate evidence-groundedness and fewer extra positive-control categories. The naive direct baseline had fewer extra missing-context categories and higher must-mention recall.",
+            "",
+            "These findings are limited to the reviewed synthetic cases and should be validated on real, permissioned repositories before drawing broader conclusions.",
+        ]
 
     lines = [
         "# Direct Codex vs Repo-Ethics Benchmark Report",
@@ -220,15 +309,11 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "",
         "## What Can Be Concluded From This Run",
         "",
-        "This run can evaluate repo-ethics behavior on the reviewed synthetic cases.",
-        "",
-        "This run cannot determine whether repo-ethics performs better or worse than direct Codex when direct-Codex baseline outputs are unavailable.",
-        "",
-        "The benchmark infrastructure is ready for comparison once direct outputs are collected.",
+        *what_can,
         "",
         "## Aggregate Metrics",
         "",
-        "These metrics are repo-ethics-only when direct outputs are absent; they are not comparative results in that case.",
+        aggregate_intro,
         "",
         "| System | Category Recall | Evidence Groundedness | Missing Context Recall | Positive Control Recall | False Positives | Extra Missing Context | Extra Positive Controls | Forbidden Violations | Overclaims | Secret Leaks |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
@@ -257,19 +342,15 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "",
         "## Where Repo-Ethics Performed Better",
         "",
-        comparison_note,
+        *repo_better_lines,
         "",
         "## Where Direct Codex Performed Better",
         "",
-        comparison_note,
+        *direct_better_lines,
         "",
         "## Inconclusive or Mixed Results",
         "",
-        "- Direct output coverage may be incomplete or absent.",
-        "- The fixtures are synthetic and intentionally small.",
-        "- Direct Markdown scoring is heuristic and depends on taxonomy aliases.",
-        "- The benchmark does not use an LLM-as-judge.",
-        "- These scores measure report behavior on controlled cases, not final ethical truth.",
+        *mixed_lines,
         "",
         "## Case-Level Highlights",
         "",
@@ -279,9 +360,7 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "",
         "## Conclusion",
         "",
-        "This run is inconclusive for direct comparison when direct baseline outputs are missing.",
-        "",
-        "Further comparison requires Markdown outputs in `benchmarks/outputs/direct_codex/` and/or `benchmarks/outputs/direct_codex_naive/`, followed by a fresh scoring run.",
+        *conclusion,
     ]
     output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

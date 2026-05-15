@@ -184,6 +184,8 @@ def test_benchmark_scoring_scripts_run_with_optional_direct_outputs(tmp_path: Pa
             str(output_dir),
             "--direct-output-dir",
             str(tmp_path / "missing_direct_outputs"),
+            "--direct-naive-output-dir",
+            str(tmp_path / "missing_naive_direct_outputs"),
             "--results-dir",
             str(results_dir),
         ],
