@@ -232,6 +232,8 @@ def test_benchmark_scoring_scripts_run_with_optional_direct_outputs(tmp_path: Pa
     assert "Inconclusive direct comparison" in comparison
     assert "Extra Missing Context" in comparison
     assert "Extra Positive Controls" in comparison
+    assert "## Overlapping Case Comparison" in comparison
+    assert "repo_ethics vs direct_codex_strong" in comparison
     assert "diagnostic" in comparison
     assert (results_dir / "direct_baseline_collection_needed.md").exists()
 

@@ -10,6 +10,21 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+COMPARISON_METRICS: list[tuple[str, str, str]] = [
+    ("category_recall", "Category Recall", "higher"),
+    ("evidence_groundedness", "Evidence Groundedness", "higher"),
+    ("missing_context_recall", "Missing Context Recall", "higher"),
+    ("positive_control_recall", "Positive Control Recall", "higher"),
+    ("false_positive_count", "False Positives", "lower"),
+    ("unexpected_missing_context_count", "Extra Missing Context", "lower"),
+    ("unexpected_positive_control_count", "Extra Positive Controls", "lower"),
+    ("forbidden_language_violations", "Forbidden Violations", "lower"),
+    ("unsupported_conclusion_count", "Overclaims", "lower"),
+    ("secret_leakage_count", "Secret Leaks", "lower"),
+    ("must_mention_recall", "Must Mention Recall", "higher"),
+    ("must_not_mention_violations", "Must-not Violations", "lower"),
+    ("actionability", "Actionability", "higher"),
+]
 
 
 def _metric(metrics: dict[str, Any], key: str) -> str:
@@ -102,6 +117,49 @@ def _case_highlights(results: dict[str, Any]) -> list[str]:
     return lines
 
 
+def _rows_by_case(results: dict[str, Any], system: str) -> dict[str, dict[str, Any]]:
+    return {row["case_id"]: row for row in results.get("cases", []) if row.get("system") == system}
+
+
+def _compare_values(repo_value: Any, direct_value: Any, direction: str) -> str | None:
+    if not isinstance(repo_value, int | float) or not isinstance(direct_value, int | float):
+        return None
+    if abs(float(repo_value) - float(direct_value)) < 1e-9:
+        return "tie"
+    if direction == "lower":
+        return "repo" if repo_value < direct_value else "direct"
+    return "repo" if repo_value > direct_value else "direct"
+
+
+def _comparison_rows(results: dict[str, Any], direct_system: str) -> list[str]:
+    repo_rows = _rows_by_case(results, "repo_ethics")
+    direct_rows = _rows_by_case(results, direct_system)
+    overlapping = sorted(set(repo_rows) & set(direct_rows))
+    lines: list[str] = [
+        "| Metric | repo_ethics higher/better | "
+        f"{direct_system} higher/better | tied | overlapping cases |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for key, label, direction in COMPARISON_METRICS:
+        repo_better = 0
+        direct_better = 0
+        tied = 0
+        comparable = 0
+        for case_id in overlapping:
+            outcome = _compare_values(repo_rows[case_id].get(key), direct_rows[case_id].get(key), direction)
+            if outcome is None:
+                continue
+            comparable += 1
+            if outcome == "repo":
+                repo_better += 1
+            elif outcome == "direct":
+                direct_better += 1
+            else:
+                tied += 1
+        lines.append(f"| {label} | {repo_better} | {direct_better} | {tied} | {comparable} |")
+    return lines
+
+
 def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> None:
     status = _comparison_status(results)
     total_cases = int(results.get("case_count", 0))
@@ -184,6 +242,18 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "- False positives refer to expected-absent risk categories only.",
         "- Extra missing-context and positive-control categories are diagnostic. They are not counted as risk false positives, but high values may indicate over-cautious or noisy reporting.",
         "- Forbidden-language violations, unsupported conclusions, and secret leakage are report-discipline checks.",
+        "",
+        "## Overlapping Case Comparison",
+        "",
+        "Higher is better for recall, groundedness, must-mention recall, and actionability. Lower is better for false positives, extra missing context, extra positive controls, forbidden violations, overclaims, secret leaks, and must-not violations.",
+        "",
+        "### repo_ethics vs direct_codex_strong",
+        "",
+        *_comparison_rows(results, "direct_codex_strong"),
+        "",
+        "### repo_ethics vs direct_codex_naive",
+        "",
+        *_comparison_rows(results, "direct_codex_naive"),
         "",
         "## Where Repo-Ethics Performed Better",
         "",

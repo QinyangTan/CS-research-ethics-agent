@@ -6,7 +6,7 @@
 ## Setup
 
 - Repository: `QinyangTan/CS-research-ethics-agent`
-- Benchmark run timestamp: 2026-05-16 04:53:28
+- Benchmark run timestamp: 2026-05-16 05:09:02
 - Benchmark version: `0.1.0`
 - Reviewed synthetic cases: 42
 - Systems requested: `repo_ethics`, `direct_codex_strong`, `direct_codex_naive`
@@ -65,6 +65,46 @@ These metrics are repo-ethics-only when direct outputs are absent; they are not 
 - False positives refer to expected-absent risk categories only.
 - Extra missing-context and positive-control categories are diagnostic. They are not counted as risk false positives, but high values may indicate over-cautious or noisy reporting.
 - Forbidden-language violations, unsupported conclusions, and secret leakage are report-discipline checks.
+
+## Overlapping Case Comparison
+
+Higher is better for recall, groundedness, must-mention recall, and actionability. Lower is better for false positives, extra missing context, extra positive controls, forbidden violations, overclaims, secret leaks, and must-not violations.
+
+### repo_ethics vs direct_codex_strong
+
+| Metric | repo_ethics higher/better | direct_codex_strong higher/better | tied | overlapping cases |
+|---|---:|---:|---:|---:|
+| Category Recall | 0 | 0 | 0 | 0 |
+| Evidence Groundedness | 0 | 0 | 0 | 0 |
+| Missing Context Recall | 0 | 0 | 0 | 0 |
+| Positive Control Recall | 0 | 0 | 0 | 0 |
+| False Positives | 0 | 0 | 0 | 0 |
+| Extra Missing Context | 0 | 0 | 0 | 0 |
+| Extra Positive Controls | 0 | 0 | 0 | 0 |
+| Forbidden Violations | 0 | 0 | 0 | 0 |
+| Overclaims | 0 | 0 | 0 | 0 |
+| Secret Leaks | 0 | 0 | 0 | 0 |
+| Must Mention Recall | 0 | 0 | 0 | 0 |
+| Must-not Violations | 0 | 0 | 0 | 0 |
+| Actionability | 0 | 0 | 0 | 0 |
+
+### repo_ethics vs direct_codex_naive
+
+| Metric | repo_ethics higher/better | direct_codex_naive higher/better | tied | overlapping cases |
+|---|---:|---:|---:|---:|
+| Category Recall | 0 | 0 | 0 | 0 |
+| Evidence Groundedness | 0 | 0 | 0 | 0 |
+| Missing Context Recall | 0 | 0 | 0 | 0 |
+| Positive Control Recall | 0 | 0 | 0 | 0 |
+| False Positives | 0 | 0 | 0 | 0 |
+| Extra Missing Context | 0 | 0 | 0 | 0 |
+| Extra Positive Controls | 0 | 0 | 0 | 0 |
+| Forbidden Violations | 0 | 0 | 0 | 0 |
+| Overclaims | 0 | 0 | 0 | 0 |
+| Secret Leaks | 0 | 0 | 0 | 0 |
+| Must Mention Recall | 0 | 0 | 0 | 0 |
+| Must-not Violations | 0 | 0 | 0 | 0 |
+| Actionability | 0 | 0 | 0 | 0 |
 
 ## Where Repo-Ethics Performed Better
 
