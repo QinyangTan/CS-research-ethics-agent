@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {"name": "student_id", "type": "string"},
+    {"name": "face_embedding", "type": "array<float>"},
+    {"name": "classroom_location", "type": "string"},
+    {"name": "exact_timestamp", "type": "datetime"}
+  ]
+}
+

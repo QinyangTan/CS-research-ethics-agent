@@ -1,0 +1,10 @@
+{
+  "fields": [
+    {"name": "username", "type": "string"},
+    {"name": "subreddit", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+    {"name": "post_text", "type": "string"},
+    {"name": "profile_url", "type": "string"}
+  ]
+}
+

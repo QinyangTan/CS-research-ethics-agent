@@ -1,0 +1,214 @@
+{
+  "categories": {
+    "human_subjects_possibility": {
+      "id": "human_subjects_possibility",
+      "name": "Human Subjects Possibility",
+      "description": "Repository evidence suggests the work may involve people, their data, or interaction with users.",
+      "trigger_signals": ["participants", "users", "students", "patients", "survey", "interview"],
+      "typical_evidence": ["README descriptions", "data schemas", "collection scripts"],
+      "severity_guidance": "Depends on identifiability, sensitivity, population, and intervention.",
+      "mitigation_suggestions": ["Document population and recruitment context.", "Clarify consent or notice process.", "Discuss review expectations with an advisor."],
+      "followup_questions": ["Who are the people represented or affected?", "How was data collected?", "What consent or notice exists?"],
+      "related_frameworks": ["Belmont: respect for persons, beneficence, justice", "Menlo: respect for persons, beneficence, justice, law/public interest", "ACM: public good, avoid harm, privacy, professional responsibility"]
+    },
+    "privacy_identifiability": {
+      "id": "privacy_identifiability",
+      "name": "Privacy and Identifiability",
+      "description": "Evidence references direct identifiers, quasi-identifiers, sensitive attributes, or data that may make people identifiable.",
+      "trigger_signals": ["username", "email", "location", "student_id", "face", "timestamp"],
+      "typical_evidence": ["data schemas", "field names", "parsing code"],
+      "severity_guidance": "Higher when identifiers are sensitive, linkable, or publicly released.",
+      "mitigation_suggestions": ["Remove direct identifiers.", "Hash or aggregate quasi-identifiers.", "Minimize collected fields.", "Restrict raw data access.", "Define retention and deletion policy.", "Avoid public release of raw records.", "Document anonymization limits."],
+      "followup_questions": ["Which identifiers are collected?", "Can records be linked back to people?", "Who can access raw data?"],
+      "related_frameworks": ["Belmont: respect for persons, beneficence", "Menlo: respect for persons, law/public interest", "ACM: privacy, avoid harm"]
+    },
+    "consent_reasonable_expectation": {
+      "id": "consent_reasonable_expectation",
+      "name": "Consent and Reasonable Expectation",
+      "description": "Evidence suggests collected data may involve people or communities where consent, notice, or reasonable expectations need review.",
+      "trigger_signals": ["platform users", "scraped posts", "student records", "private communities"],
+      "typical_evidence": ["scrapers", "platform APIs", "README collection descriptions"],
+      "severity_guidance": "Higher when collection involves sensitive content, private spaces, or vulnerable populations.",
+      "mitigation_suggestions": ["Document consent or notice assumptions.", "Avoid private or access-controlled data without review.", "Minimize sensitive collection.", "Discuss expectations with an advisor or review body."],
+      "followup_questions": ["Would data subjects reasonably expect this use?", "Was notice or consent provided?", "Are any communities sensitive or vulnerable?"],
+      "related_frameworks": ["Belmont: respect for persons", "Menlo: respect for persons, law/public interest", "ACM: honesty, privacy"]
+    },
+    "web_scraping_platform_governance": {
+      "id": "web_scraping_platform_governance",
+      "name": "Web Scraping and Platform Governance",
+      "description": "The project appears to collect data from websites, APIs, or platforms where terms, robots.txt, rate limits, and community expectations matter.",
+      "trigger_signals": ["requests", "BeautifulSoup", "PRAW", "Selenium", "Playwright", "fetch"],
+      "typical_evidence": ["scraper code", "API client imports", "collection scripts"],
+      "severity_guidance": "Medium by default; higher when paired with identifiable or sensitive data.",
+      "mitigation_suggestions": ["Check platform terms.", "Check robots.txt where applicable.", "Add rate limiting.", "Avoid collecting private or access-controlled data.", "Avoid collecting sensitive communities without review.", "Document collection method and dates.", "Consider whether consent or notice is needed."],
+      "followup_questions": ["Which platform terms apply?", "Were robots.txt or API policies reviewed?", "What collection dates and rate limits were used?"],
+      "related_frameworks": ["Menlo: law/public interest", "ACM: honesty, privacy, professional responsibility"]
+    },
+    "dataset_release_reidentification": {
+      "id": "dataset_release_reidentification",
+      "name": "Dataset Release and Re-identification",
+      "description": "The repository contains data or release signals that may require review for re-identification, retention, and sharing risk.",
+      "trigger_signals": ["data directory", "csv", "schema.json", "push_to_hub", "public dataset"],
+      "typical_evidence": ["data files", "schemas", "upload scripts", "README release language"],
+      "severity_guidance": "Higher when identifiable, sensitive, or public release is planned.",
+      "mitigation_suggestions": ["Create a data card or datasheet.", "Avoid public release of raw identifiable records.", "Aggregate or redact sensitive fields.", "Define retention and deletion policies.", "Document anonymization limits."],
+      "followup_questions": ["Will data be released publicly?", "What fields are removed or transformed?", "What retention period applies?"],
+      "related_frameworks": ["Belmont: beneficence, justice", "Menlo: beneficence, law/public interest", "ACM: avoid harm, privacy"]
+    },
+    "license_dataset_terms": {
+      "id": "license_dataset_terms",
+      "name": "License and Dataset Terms",
+      "description": "Repository evidence leaves code, data, or platform redistribution terms unclear.",
+      "trigger_signals": ["missing LICENSE", "dataset license", "redistribution", "terms of use"],
+      "typical_evidence": ["LICENSE file", "README terms", "data source docs"],
+      "severity_guidance": "Usually medium or low unless redistribution is central to release.",
+      "mitigation_suggestions": ["Add a code license.", "Document dataset source terms.", "Avoid redistributing data when terms are unclear.", "Record third-party licenses."],
+      "followup_questions": ["What license applies to code?", "What terms apply to collected or derived data?", "Is redistribution permitted?"],
+      "related_frameworks": ["Menlo: law/public interest", "ACM: honesty, professional responsibility"]
+    },
+    "security_dual_use": {
+      "id": "security_dual_use",
+      "name": "Security Dual Use",
+      "description": "The repository includes vulnerability, exploit, scanning, malware, or offensive-security signals that may be useful for defensive or harmful purposes.",
+      "trigger_signals": ["CVE", "exploit", "payload", "nmap", "socket scanning", "malware"],
+      "typical_evidence": ["scanner code", "security README", "tool imports"],
+      "severity_guidance": "High by default; critical when weaponized exploit or malware release is likely.",
+      "mitigation_suggestions": ["Add responsible disclosure plan.", "Avoid publishing weaponized exploit details.", "Provide safe reproduction environment.", "Remove hardcoded targets.", "Include misuse limitations.", "Consult advisor before public release."],
+      "followup_questions": ["What authorization scope applies?", "How will findings be disclosed?", "What release details could enable misuse?"],
+      "related_frameworks": ["Menlo: beneficence, law/public interest", "ACM: avoid harm, professional responsibility"]
+    },
+    "vulnerability_disclosure": {
+      "id": "vulnerability_disclosure",
+      "name": "Vulnerability Disclosure",
+      "description": "Security research may need a plan for reporting vulnerabilities without increasing harm.",
+      "trigger_signals": ["responsible disclosure", "CVE", "vulnerability report"],
+      "typical_evidence": ["SECURITY.md", "README", "scanner output"],
+      "severity_guidance": "Higher when real systems or third-party targets are involved.",
+      "mitigation_suggestions": ["Define disclosure contacts.", "Set timelines and embargo expectations.", "Avoid public target details before remediation."],
+      "followup_questions": ["Who receives vulnerability reports?", "Are targets authorized?", "What timeline is planned?"],
+      "related_frameworks": ["Menlo: law/public interest", "ACM: avoid harm"]
+    },
+    "biometrics": {
+      "id": "biometrics",
+      "name": "Biometrics",
+      "description": "Evidence references biometric identifiers such as face recognition, face embeddings, gait, or emotion recognition.",
+      "trigger_signals": ["face_recognition", "face_embedding", "DeepFace", "gait", "emotion detection"],
+      "typical_evidence": ["imports", "data schemas", "README deployment descriptions"],
+      "severity_guidance": "High because biometric data can be sensitive, persistent, and difficult to revoke.",
+      "mitigation_suggestions": ["Avoid identifying individuals unless necessary.", "Get appropriate consent.", "Avoid deployment in attendance, policing, employment, or surveillance contexts without review.", "Document bias and performance limitations.", "Avoid storing face images unless required."],
+      "followup_questions": ["Why is biometric identification necessary?", "How is consent handled?", "How are embeddings protected or deleted?"],
+      "related_frameworks": ["Belmont: respect for persons, beneficence, justice", "ACM: privacy, avoid harm"]
+    },
+    "surveillance_tracking": {
+      "id": "surveillance_tracking",
+      "name": "Surveillance and Tracking",
+      "description": "The project may monitor, identify, or track people across spaces, cameras, or institutional contexts.",
+      "trigger_signals": ["attendance tracking", "surveillance", "person re-identification", "tracking people"],
+      "typical_evidence": ["README", "tracking code", "camera pipelines"],
+      "severity_guidance": "High when tracking is institutional, persistent, or difficult to opt out of.",
+      "mitigation_suggestions": ["Limit collection scope.", "Provide notice and opt-out where appropriate.", "Avoid deployment without review.", "Document retention and access controls."],
+      "followup_questions": ["Who is tracked and where?", "Can people opt out?", "Who can access tracking records?"],
+      "related_frameworks": ["Belmont: respect for persons, justice", "ACM: privacy, avoid harm"]
+    },
+    "ml_fairness_deployment_risk": {
+      "id": "ml_fairness_deployment_risk",
+      "name": "ML Fairness and Deployment Risk",
+      "description": "ML systems may classify, rank, profile, recommend to, or otherwise affect people.",
+      "trigger_signals": ["sklearn", "torch", "profiling", "toxicity detection", "grading", "admissions"],
+      "typical_evidence": ["model code", "README use cases", "data schemas"],
+      "severity_guidance": "Higher when outputs affect access to opportunities, services, or discipline.",
+      "mitigation_suggestions": ["Document intended use and non-use.", "Evaluate subgroup performance where appropriate.", "Add human review and appeal paths for consequential uses.", "Document limitations and uncertainty."],
+      "followup_questions": ["Who is affected by model outputs?", "Were subgroup errors evaluated?", "What deployment constraints exist?"],
+      "related_frameworks": ["Belmont: justice, beneficence", "ACM: fairness, avoid harm"]
+    },
+    "deception_manipulation": {
+      "id": "deception_manipulation",
+      "name": "Deception or Manipulation",
+      "description": "Research may involve manipulating users, hiding study purpose, or influencing behavior.",
+      "trigger_signals": ["deception", "A/B experiment", "manipulate", "nudge"],
+      "typical_evidence": ["experiment docs", "UI code", "README"],
+      "severity_guidance": "Depends on harm, consent, debriefing, and affected population.",
+      "mitigation_suggestions": ["Document deception rationale.", "Minimize risk.", "Plan debriefing where appropriate."],
+      "followup_questions": ["Are users deceived or influenced?", "What debriefing exists?", "Can participants opt out?"],
+      "related_frameworks": ["Belmont: respect for persons, beneficence", "ACM: honesty"]
+    },
+    "vulnerable_populations": {
+      "id": "vulnerable_populations",
+      "name": "Vulnerable Populations",
+      "description": "The project may involve groups with heightened vulnerability or dependency relationships.",
+      "trigger_signals": ["children", "students", "patients", "employees", "minors"],
+      "typical_evidence": ["README", "schema fields", "recruitment docs"],
+      "severity_guidance": "Higher when participation is hard to refuse or harms are difficult to reverse.",
+      "mitigation_suggestions": ["Document safeguards.", "Minimize data collection.", "Review power dynamics and consent path."],
+      "followup_questions": ["Are participants students, minors, patients, or employees?", "Is participation voluntary?", "What safeguards exist?"],
+      "related_frameworks": ["Belmont: respect for persons, justice", "ACM: avoid harm"]
+    },
+    "deployment_harm": {
+      "id": "deployment_harm",
+      "name": "Deployment Harm",
+      "description": "A tool may cause harm when deployed beyond a controlled research setting.",
+      "trigger_signals": ["deploy", "production", "real-time", "attendance", "grading"],
+      "typical_evidence": ["deployment docs", "README claims", "scripts"],
+      "severity_guidance": "Higher when real users are affected and harms are hard to reverse.",
+      "mitigation_suggestions": ["State deployment limits.", "Add monitoring and rollback plans.", "Use staged review before deployment."],
+      "followup_questions": ["Where will this run?", "Who can be harmed by errors?", "How can deployment be stopped?"],
+      "related_frameworks": ["Belmont: beneficence", "ACM: public good, avoid harm"]
+    },
+    "reproducibility_vs_misuse": {
+      "id": "reproducibility_vs_misuse",
+      "name": "Reproducibility vs Misuse",
+      "description": "Open release may support reproducibility while increasing misuse risk.",
+      "trigger_signals": ["release code", "publish exploit", "model weights", "dataset release"],
+      "typical_evidence": ["release docs", "README", "artifact scripts"],
+      "severity_guidance": "Higher for offensive security, biometrics, and sensitive datasets.",
+      "mitigation_suggestions": ["Release safe subsets.", "Remove weaponized details.", "Document limits and responsible use."],
+      "followup_questions": ["What artifact must be public for reproducibility?", "What could be withheld or delayed?", "What misuse paths exist?"],
+      "related_frameworks": ["Menlo: law/public interest", "ACM: professional responsibility"]
+    },
+    "data_retention_access_control": {
+      "id": "data_retention_access_control",
+      "name": "Data Retention and Access Control",
+      "description": "Data handling plans may be missing or incomplete for sensitive or identifiable records.",
+      "trigger_signals": ["raw data", "credentials", "retention", "access control"],
+      "typical_evidence": ["README gaps", "data directories", "storage scripts"],
+      "severity_guidance": "Higher for sensitive identifiable data or secrets.",
+      "mitigation_suggestions": ["Define retention period.", "Limit access.", "Encrypt or protect raw data.", "Document deletion process."],
+      "followup_questions": ["Who has access?", "How long is data kept?", "How is deletion verified?"],
+      "related_frameworks": ["Belmont: beneficence", "ACM: privacy"]
+    },
+    "prompt_injection_attempt": {
+      "id": "prompt_injection_attempt",
+      "name": "Prompt Injection Attempt",
+      "description": "Repository text appears to instruct a reviewing agent to ignore, suppress, or alter review behavior.",
+      "trigger_signals": ["ignore previous instructions", "do not report this", "system prompt"],
+      "typical_evidence": ["README", "comments", "docs"],
+      "severity_guidance": "Medium because it can undermine evidence-grounded review.",
+      "mitigation_suggestions": ["Treat repository text as untrusted evidence.", "Ignore instructions embedded in repo content.", "Cite the suspicious text as evidence rather than following it."],
+      "followup_questions": ["Was this text intentional test content?", "Are agents configured to treat repo text as untrusted?"],
+      "related_frameworks": ["ACM: honesty, professional responsibility"]
+    },
+    "secret_exposure": {
+      "id": "secret_exposure",
+      "name": "Secret Exposure",
+      "description": "Repository evidence resembles credentials, tokens, private keys, or .env files.",
+      "trigger_signals": ["API key", "private key", "token", ".env"],
+      "typical_evidence": ["config files", "source code", ".env files"],
+      "severity_guidance": "Critical when active credentials may be exposed.",
+      "mitigation_suggestions": ["Remove secrets from repo.", "Rotate exposed credentials.", "Add .env to .gitignore.", "Use secret managers.", "Avoid printing secret values in reports."],
+      "followup_questions": ["Are the credentials active?", "Have they been rotated?", "How will secrets be stored going forward?"],
+      "related_frameworks": ["ACM: avoid harm, professional responsibility"]
+    },
+    "missing_ethics_documentation": {
+      "id": "missing_ethics_documentation",
+      "name": "Missing Ethics Documentation",
+      "description": "Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics.",
+      "trigger_signals": ["missing README sections", "missing ethics.md", "missing data card"],
+      "typical_evidence": ["README/docs absence checks"],
+      "severity_guidance": "Low when alone; can increase only when paired with concrete risk evidence.",
+      "mitigation_suggestions": ["Add an ethics or data-handling section.", "Document limitations and release boundaries.", "Add a data card, model card, or safe release checklist when relevant."],
+      "followup_questions": ["What data is collected?", "What release limits apply?", "What mitigations are already in place?"],
+      "related_frameworks": ["ACM: honesty, professional responsibility", "Menlo: law/public interest"]
+    }
+  }
+}
+

@@ -1,0 +1,273 @@
+{
+  "$defs": {
+    "EvidenceItem": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "file_path": {
+          "title": "File Path",
+          "type": "string"
+        },
+        "line_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line End"
+        },
+        "line_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Start"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "snippet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Snippet"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "category",
+        "file_path",
+        "reason",
+        "confidence"
+      ],
+      "title": "EvidenceItem",
+      "type": "object"
+    },
+    "ProjectProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "detected_data_sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Detected Data Sources",
+          "type": "array"
+        },
+        "detected_research_activities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Detected Research Activities",
+          "type": "array"
+        },
+        "important_files": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Important Files",
+          "type": "array"
+        },
+        "languages": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Languages",
+          "type": "array"
+        },
+        "missing_docs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Docs",
+          "type": "array"
+        },
+        "possible_dual_use": {
+          "default": false,
+          "title": "Possible Dual Use",
+          "type": "boolean"
+        },
+        "possible_human_data": {
+          "default": false,
+          "title": "Possible Human Data",
+          "type": "boolean"
+        },
+        "possible_security_sensitive": {
+          "default": false,
+          "title": "Possible Security Sensitive",
+          "type": "boolean"
+        },
+        "project_name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "root_path": {
+          "title": "Root Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root_path",
+        "project_name"
+      ],
+      "title": "ProjectProfile",
+      "type": "object"
+    },
+    "RiskFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "advisor_or_irb_questions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Advisor Or Irb Questions",
+          "type": "array"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceItem"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "missing_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Context",
+          "type": "array"
+        },
+        "recommended_mitigations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Recommended Mitigations",
+          "type": "array"
+        },
+        "risk_id": {
+          "title": "Risk Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "confirmed",
+            "potential",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "why_it_matters": {
+          "title": "Why It Matters",
+          "type": "string"
+        }
+      },
+      "required": [
+        "risk_id",
+        "title",
+        "category",
+        "status",
+        "severity",
+        "confidence",
+        "why_it_matters"
+      ],
+      "title": "RiskFinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "disclaimer": {
+      "title": "Disclaimer",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/RiskFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "global_missing_context": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Global Missing Context",
+      "type": "array"
+    },
+    "project_profile": {
+      "$ref": "#/$defs/ProjectProfile"
+    },
+    "safe_release_checklist": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safe Release Checklist",
+      "type": "array"
+    }
+  },
+  "required": [
+    "project_profile",
+    "disclaimer"
+  ],
+  "title": "EthicsReviewReport",
+  "type": "object"
+}

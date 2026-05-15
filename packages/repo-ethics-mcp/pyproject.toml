@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repo-ethics-mcp"
+version = "0.1.0"
+description = "Local-first CS research ethics review scanner, report builder, and MCP server."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "cs-ethics-agent contributors" }]
+dependencies = [
+  "typer>=0.12,<1.0",
+  "rich>=13,<15",
+  "pydantic>=2,<3",
+  "mcp>=1.0,<2.0",
+  "pathspec>=0.12,<1.0",
+  "pyyaml>=6,<7",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<9"]
+
+[project.scripts]
+repo-ethics = "repo_ethics.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+repo_ethics = ["kb/*.json", "kb/ethics_frameworks/*.md", "templates/*.md"]
+

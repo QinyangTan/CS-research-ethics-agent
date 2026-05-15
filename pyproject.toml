@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+pythonpath = ["packages/repo-ethics-mcp/src"]
+testpaths = ["packages/repo-ethics-mcp/tests"]
+addopts = "-q"
+

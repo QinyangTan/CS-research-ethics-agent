@@ -1,0 +1,28 @@
+{
+  "factors": [
+    "data sensitivity",
+    "identifiability",
+    "affected population",
+    "vulnerable groups",
+    "dual-use potential",
+    "deployment context",
+    "reversibility of harm",
+    "public release risk",
+    "missing consent",
+    "missing documentation",
+    "confidence level"
+  ],
+  "levels": {
+    "critical": "Likely severe harm, highly sensitive data, exploit or malware release, exposed secrets, vulnerable population at scale, or public release of identifiable sensitive data.",
+    "high": "Identifiable personal data, biometrics, surveillance, security dual-use, unclear consent, or public dataset release.",
+    "medium": "Public user data, moderate identifiability, scraping without documentation, unclear license, or missing retention policy.",
+    "low": "Documentation gaps or speculative risks with limited evidence."
+  },
+  "policy": [
+    "Do not overstate severity.",
+    "If context is missing, prefer potential status and medium confidence.",
+    "Missing documentation alone cannot produce a high-severity finding.",
+    "Missing documentation increases severity only when paired with concrete risk evidence."
+  ]
+}
+
