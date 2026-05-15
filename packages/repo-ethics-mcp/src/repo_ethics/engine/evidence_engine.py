@@ -16,7 +16,7 @@ from pathspec import PathSpec
 from pathspec.patterns import GitWildMatchPattern
 
 from repo_ethics.constants import BINARY_EXTENSIONS, DEFAULT_MAX_FILE_SIZE, SKIP_DIRS, SNIPPET_MAX_CHARS
-from repo_ethics.schemas import Confidence, EvidenceItem
+from repo_ethics.schemas import Confidence, EvidenceItem, EvidenceType
 
 
 @dataclass(frozen=True)
@@ -82,7 +82,14 @@ def is_likely_binary(path: Path) -> bool:
     return b"\x00" in chunk
 
 
-def iter_repo_files(root_path: str | Path, max_file_size: int = DEFAULT_MAX_FILE_SIZE) -> Iterable[ScannedFile]:
+def iter_repo_file_paths(
+    root_path: str | Path,
+    *,
+    include_binary: bool = False,
+    max_file_size: int | None = DEFAULT_MAX_FILE_SIZE,
+) -> Iterable[ScannedFile]:
+    """Yield safe repository file paths without opening file contents."""
+
     root = resolve_root(root_path)
     spec = load_gitignore(root)
     for current, dirnames, filenames in os.walk(root, followlinks=False):
@@ -109,17 +116,25 @@ def iter_repo_files(root_path: str | Path, max_file_size: int = DEFAULT_MAX_FILE
             rel_path = resolved.relative_to(root).as_posix()
             if spec is not None and spec.match_file(rel_path):
                 continue
-            if is_binary_path(resolved):
+            if not include_binary and is_binary_path(resolved):
                 continue
             try:
                 size = resolved.stat().st_size
             except OSError:
                 continue
-            if size > max_file_size:
-                continue
-            if is_likely_binary(resolved):
+            if max_file_size is not None and size > max_file_size:
                 continue
             yield ScannedFile(path=resolved, rel_path=rel_path, size=size)
+
+
+def iter_repo_files(root_path: str | Path, max_file_size: int = DEFAULT_MAX_FILE_SIZE) -> Iterable[ScannedFile]:
+    for scanned in iter_repo_file_paths(root_path, include_binary=False, max_file_size=max_file_size):
+        resolved = scanned.path
+        if is_binary_path(resolved):
+            continue
+        if is_likely_binary(resolved):
+            continue
+        yield scanned
 
 
 def read_text_file(path: Path) -> str:
@@ -142,6 +157,7 @@ def cap_snippet(text: str | None, max_chars: int = SNIPPET_MAX_CHARS) -> str | N
 
 
 def stable_evidence_id(
+    evidence_type: EvidenceType,
     category: str,
     file_path: str,
     line_start: int | None,
@@ -150,6 +166,7 @@ def stable_evidence_id(
 ) -> str:
     source = "|".join(
         [
+            evidence_type,
             category,
             file_path,
             str(line_start or ""),
@@ -212,15 +229,17 @@ def make_evidence(
     file_path: str,
     reason: str,
     confidence: Confidence = "medium",
+    evidence_type: EvidenceType = "risk_signal",
     line_start: int | None = None,
     line_end: int | None = None,
     snippet: str | None = None,
     include_snippets: bool = True,
 ) -> EvidenceItem:
     shown_snippet = cap_snippet(snippet) if include_snippets else None
-    evidence_id = stable_evidence_id(category, file_path, line_start, line_end, shown_snippet)
+    evidence_id = stable_evidence_id(evidence_type, category, file_path, line_start, line_end, shown_snippet)
     return EvidenceItem(
         evidence_id=evidence_id,
+        evidence_type=evidence_type,
         category=category,
         file_path=file_path,
         line_start=line_start,
@@ -240,6 +259,7 @@ def make_match_evidence(
     end: int,
     reason: str,
     confidence: Confidence = "medium",
+    evidence_type: EvidenceType = "risk_signal",
     include_snippets: bool = True,
 ) -> EvidenceItem:
     line_start, line_end, snippet = line_window_for_match(text, start, end)
@@ -253,6 +273,7 @@ def make_match_evidence(
         file_path=file_path,
         reason=reason,
         confidence=confidence,
+        evidence_type=evidence_type,
         line_start=line_start,
         line_end=line_end,
         snippet=snippet,
@@ -268,4 +289,4 @@ def dedupe_evidence(items: Iterable[EvidenceItem]) -> list[EvidenceItem]:
             continue
         seen.add(item.evidence_id)
         result.append(item)
-    return sorted(result, key=lambda ev: (ev.file_path, ev.line_start or 0, ev.category, ev.evidence_id))
+    return sorted(result, key=lambda ev: (ev.file_path, ev.line_start or 0, ev.evidence_type, ev.category, ev.evidence_id))

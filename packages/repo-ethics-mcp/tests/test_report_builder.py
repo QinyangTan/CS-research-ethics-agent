@@ -17,6 +17,7 @@ REQUIRED_SECTIONS = [
     "## Potential Risks",
     "## Unknowns and Required Clarifications",
     "## Evidence Table",
+    "## Positive Controls Detected",
     "## Recommended Mitigations",
     "## Advisor / IRB Discussion Questions",
     "## Safe Release Checklist",
@@ -31,6 +32,8 @@ def test_report_builder_includes_evidence_and_disclaimer() -> None:
     assert "This is a local, evidence-grounded CS research ethics pre-review" in markdown
     assert "src/scraper.py" in markdown
     assert "Possible privacy and consent risk" in markdown
+    assert "Evidence Type" in markdown
+    assert "## Positive Controls Detected" in markdown
 
 
 def test_golden_report_sections_and_forbidden_language() -> None:
@@ -45,10 +48,23 @@ def test_golden_report_sections_and_forbidden_language() -> None:
 def test_harmless_sorting_visualizer_has_no_high_or_critical_findings() -> None:
     report = build_report(run_scan(EXAMPLES / "harmless_sorting_visualizer"))
     assert all(finding.severity not in {"high", "critical"} for finding in report.findings)
+    broad_missing = " ".join(
+        item.reason for finding in report.findings for item in finding.evidence if item.evidence_type == "missing_context"
+    )
+    assert "responsible disclosure" not in broad_missing.lower()
+    assert "platform terms" not in broad_missing.lower()
 
 
 def test_schema_export_available() -> None:
     schema = EthicsReviewReport.model_json_schema()
     assert schema["title"] == "EthicsReviewReport"
     assert "properties" in schema
+    assert "positive_controls" in schema["properties"]
 
+
+def test_report_does_not_include_full_secrets(tmp_path: Path) -> None:
+    secret = "sk-" + "b" * 28
+    (tmp_path / "config.py").write_text(f"API_KEY = '{secret}'\n", encoding="utf-8")
+    markdown = report_to_markdown(build_report(run_scan(tmp_path)))
+    assert secret not in markdown
+    assert "[REDACTED_SECRET_LIKE_VALUE]" in markdown

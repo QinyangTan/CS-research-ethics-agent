@@ -15,6 +15,7 @@ def build_report(scan_result: ScanResult, include_low_confidence: bool = True) -
     if not include_low_confidence:
         evidence = [item for item in evidence if item.confidence != "low"]
     findings = map_risks(scan_result.project_profile, evidence)
+    positive_controls = [item for item in evidence if item.evidence_type == "positive_control"]
     global_missing_context = [
         "Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented."
     ]
@@ -25,6 +26,7 @@ def build_report(scan_result: ScanResult, include_low_confidence: bool = True) -
     return EthicsReviewReport(
         project_profile=scan_result.project_profile,
         findings=findings,
+        positive_controls=positive_controls,
         global_missing_context=global_missing_context,
         safe_release_checklist=SAFE_RELEASE_CHECKLIST,
         disclaimer=DISCLAIMER,
@@ -72,17 +74,26 @@ def _section_for_findings(title: str, findings: list[RiskFinding]) -> str:
 
 
 def _evidence_table(findings: list[RiskFinding]) -> str:
-    rows: list[str] = ["| Finding | Category | Evidence | Reason | Snippet |", "|---|---|---|---|---|"]
+    rows: list[str] = ["| Finding | Evidence Type | Category | Evidence | Reason | Snippet |", "|---|---|---|---|---|---|"]
     for finding in findings:
         for item in finding.evidence:
             snippet = (item.snippet or "").replace("\n", " ").replace("|", "\\|")
             reason = item.reason.replace("|", "\\|")
             rows.append(
-                f"| {finding.risk_id} | `{item.category}` | `{_fmt_evidence_ref(item)}` | {reason} | {snippet} |"
+                f"| {finding.risk_id} | `{item.evidence_type}` | `{item.category}` | `{_fmt_evidence_ref(item)}` | {reason} | {snippet} |"
             )
     if len(rows) == 2:
-        rows.append("| None | none | none | No evidence rows were generated. | |")
+        rows.append("| None | none | none | none | No evidence rows were generated. | |")
     return "\n".join(rows)
+
+
+def _positive_controls_section(positive_controls: list[EvidenceItem]) -> str:
+    if not positive_controls:
+        return "## Positive Controls Detected\n\nNo positive controls were detected from repository evidence."
+    lines = ["## Positive Controls Detected", ""]
+    for item in positive_controls:
+        lines.append(f"- `{_fmt_evidence_ref(item)}`: `{item.category}` - {item.reason}")
+    return "\n".join(lines)
 
 
 def _unique_ordered(values: list[str]) -> list[str]:
@@ -140,6 +151,8 @@ def report_to_markdown(report: EthicsReviewReport) -> str:
         "## Evidence Table",
         "",
         _evidence_table(report.findings),
+        "",
+        _positive_controls_section(report.positive_controls),
         "",
         "## Recommended Mitigations",
         "",

@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 Confidence = Literal["low", "medium", "high"]
+EvidenceType = Literal["risk_signal", "missing_context", "positive_control"]
 FindingStatus = Literal["confirmed", "potential", "unknown"]
 Severity = Literal["low", "medium", "high", "critical"]
 
@@ -16,6 +17,7 @@ class EvidenceItem(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     evidence_id: str
+    evidence_type: EvidenceType = "risk_signal"
     category: str
     file_path: str
     line_start: int | None = None
@@ -61,6 +63,7 @@ class EthicsReviewReport(BaseModel):
 
     project_profile: ProjectProfile
     findings: list[RiskFinding] = Field(default_factory=list)
+    positive_controls: list[EvidenceItem] = Field(default_factory=list)
     global_missing_context: list[str] = Field(default_factory=list)
     safe_release_checklist: list[str] = Field(default_factory=list)
     disclaimer: str
@@ -72,4 +75,3 @@ class ScanResult(BaseModel):
     project_profile: ProjectProfile
     evidence: list[EvidenceItem] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
-

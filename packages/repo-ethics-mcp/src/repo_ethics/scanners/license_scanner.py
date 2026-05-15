@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 from repo_ethics.engine.evidence_engine import dedupe_evidence, iter_repo_files, make_evidence, make_match_evidence, read_text_file
+from repo_ethics.engine.text_signals import find_negated_topic_mentions, find_positive_topic_mentions
 from repo_ethics.schemas import EvidenceItem
 
 
@@ -30,21 +31,37 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                     file_path=scanned.rel_path,
                     reason="Repository includes a license file.",
                     confidence="high",
+                    evidence_type="positive_control",
                     include_snippets=include_snippets,
                 )
             )
         for pattern, reason in LICENSE_PATTERNS:
-            for match in pattern.finditer(text):
+            for start, end, _ in find_positive_topic_mentions(text, [pattern]):
                 saw_license_mention = True
                 evidence.append(
                     make_match_evidence(
                         category="license_dataset_terms",
                         file_path=scanned.rel_path,
                         text=text,
-                        start=match.start(),
-                        end=match.end(),
+                        start=start,
+                        end=end,
                         reason=reason,
                         confidence="medium",
+                        evidence_type="positive_control",
+                        include_snippets=include_snippets,
+                    )
+                )
+            for start, end, _ in find_negated_topic_mentions(text, [pattern]):
+                evidence.append(
+                    make_match_evidence(
+                        category="license_dataset_terms",
+                        file_path=scanned.rel_path,
+                        text=text,
+                        start=start,
+                        end=end,
+                        reason="License or dataset terms are mentioned as missing, unclear, or not documented.",
+                        confidence="medium",
+                        evidence_type="missing_context",
                         include_snippets=include_snippets,
                     )
                 )
@@ -56,6 +73,7 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                 file_path=".",
                 reason="No code or dataset license documentation was detected.",
                 confidence="medium",
+                evidence_type="missing_context",
                 include_snippets=include_snippets,
             )
         )

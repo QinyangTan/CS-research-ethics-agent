@@ -20,6 +20,16 @@
           "title": "Evidence Id",
           "type": "string"
         },
+        "evidence_type": {
+          "default": "risk_signal",
+          "enum": [
+            "risk_signal",
+            "missing_context",
+            "positive_control"
+          ],
+          "title": "Evidence Type",
+          "type": "string"
+        },
         "file_path": {
           "title": "File Path",
           "type": "string"
@@ -251,6 +261,13 @@
         "type": "string"
       },
       "title": "Global Missing Context",
+      "type": "array"
+    },
+    "positive_controls": {
+      "items": {
+        "$ref": "#/$defs/EvidenceItem"
+      },
+      "title": "Positive Controls",
       "type": "array"
     },
     "project_profile": {

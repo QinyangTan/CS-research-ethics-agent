@@ -17,3 +17,23 @@ def test_pii_scanner_detects_sensitive_fields(tmp_path: Path) -> None:
     assert "student" in reasons
     assert "facial" in reasons
 
+
+def test_pii_scanner_ignores_tokens_and_negated_collection(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    readme.write_text(
+        "access_token is used for API auth. We do not collect usernames, but we store email addresses.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    rendered = "\n".join(item.model_dump_json() for item in evidence)
+    assert "access_token" not in rendered
+    assert "usernames" not in rendered
+    assert "email" in rendered
+
+
+def test_negated_docs_project_suppresses_username_but_keeps_timestamp() -> None:
+    root = Path(__file__).resolve().parents[3]
+    evidence = scan(root / "examples" / "negated_docs_project")
+    rendered = "\n".join(item.model_dump_json() for item in evidence)
+    assert "usernames" not in rendered
+    assert "timestamp" in rendered

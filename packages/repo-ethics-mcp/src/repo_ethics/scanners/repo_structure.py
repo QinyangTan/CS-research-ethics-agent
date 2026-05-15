@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from pathlib import Path
-import re
 
 from repo_ethics.constants import LANGUAGE_BY_EXTENSION
 from repo_ethics.engine.evidence_engine import iter_repo_files, read_text_file, resolve_root
+from repo_ethics.engine.text_signals import strip_negated_sentences
 from repo_ethics.schemas import ProjectProfile
 from repo_ethics.scanners.file_classifier import classify_file
 
@@ -94,16 +94,12 @@ def _read_repo_text(root: Path, files: list[str], max_chars: int = 80_000) -> st
     return "\n".join(parts).lower()
 
 
-def _remove_negated_sentences(text: str) -> str:
-    return re.sub(r"\b(?:does not|do not|doesn't|don't|never|without)\b[^.\n]*", "", text, flags=re.I)
-
-
 def build_project_profile(root_path: str | Path, max_file_size: int = 524_288) -> ProjectProfile:
     root = resolve_root(root_path)
     scanned = list(iter_repo_files(root, max_file_size=max_file_size))
     paths = [item.rel_path for item in scanned]
     repo_text = _read_repo_text(root, paths)
-    signal_text = _remove_negated_sentences(repo_text)
+    signal_text = strip_negated_sentences(repo_text)
 
     detected_sources = sorted({label for keyword, label in DATA_SOURCE_KEYWORDS.items() if keyword in signal_text})
     detected_activities = sorted({label for keyword, label in ACTIVITY_KEYWORDS.items() if keyword in signal_text})

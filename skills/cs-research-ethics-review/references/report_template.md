@@ -14,6 +14,8 @@
 
 ## Evidence Table
 
+## Positive Controls Detected
+
 ## Recommended Mitigations
 
 ## Advisor / IRB Discussion Questions
@@ -21,4 +23,3 @@
 ## Safe Release Checklist
 
 ## Appendix: Scanner Limitations
-

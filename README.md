@@ -6,6 +6,7 @@
 - A stdio MCP server exposing repo-ethics tools to coding agents.
 - A reusable Agent Skill that tells Codex, Claude Code, and other agents how to produce evidence-grounded ethics reports.
 - CS-specific taxonomy, severity rubrics, mitigation templates, examples, tests, and an eval harness.
+- Typed evidence that separates `risk_signal`, `missing_context`, and `positive_control`.
 
 The package does **not** call hosted LLM APIs. Your own coding agent supplies reasoning; this project supplies deterministic repo scanning, evidence extraction, schemas, report templates, and guardrails.
 
@@ -71,8 +72,9 @@ Expected risk areas include scraping/privacy for Reddit NLP, biometrics/surveill
 - Symlinks outside the repo root are skipped.
 - Huge and binary files are skipped.
 - Secret-like values are masked before output.
+- Negated documentation such as "not documented" is treated as missing context, not coverage.
+- Positive controls such as licenses, security policies, data cards, and documented rate limits are shown separately from risk findings.
 
 ## Limitations
 
 Static scanning can miss risks that depend on intent, deployment context, consent, data provenance, or institutional policy. Pattern matching can also produce false positives. This tool supports advisor or appropriate review-body discussion; it does not replace that process.
-

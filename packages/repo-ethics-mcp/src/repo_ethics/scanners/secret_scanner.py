@@ -36,6 +36,7 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                     file_path=scanned.rel_path,
                     reason=".env-like file detected; these often contain credentials and should not be committed.",
                     confidence="medium",
+                    evidence_type="risk_signal",
                     include_snippets=False,
                 )
             )
@@ -52,8 +53,8 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                         snippet=masked,
                         reason=reason,
                         confidence="high",
+                        evidence_type="risk_signal",
                         include_snippets=include_snippets,
                     )
                 )
     return dedupe_evidence(evidence)
-

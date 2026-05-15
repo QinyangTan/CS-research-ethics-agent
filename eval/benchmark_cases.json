@@ -6,13 +6,17 @@
       "web_scraping_platform_governance",
       "privacy_identifiability",
       "dataset_release_reidentification",
-      "consent_reasonable_expectation",
-      "missing_ethics_documentation"
+      "consent_reasonable_expectation"
     ],
     "expected_absent_categories": [
       "security_dual_use",
       "biometrics",
       "secret_exposure"
+    ],
+    "expected_missing_context_categories": [
+      "web_scraping_platform_governance",
+      "dataset_release_reidentification",
+      "missing_ethics_documentation"
     ],
     "notes": "Reddit collection with user metadata and missing data governance docs."
   },
@@ -23,13 +27,16 @@
       "biometrics",
       "surveillance_tracking",
       "privacy_identifiability",
-      "dataset_release_reidentification",
-      "missing_ethics_documentation"
+      "dataset_release_reidentification"
     ],
     "expected_absent_categories": [
       "security_dual_use",
       "web_scraping_platform_governance",
       "secret_exposure"
+    ],
+    "expected_missing_context_categories": [
+      "dataset_release_reidentification",
+      "missing_ethics_documentation"
     ],
     "notes": "Biometric attendance with student identifiers and embeddings."
   },
@@ -37,22 +44,22 @@
     "case_id": "vulnerability_scanner",
     "path": "examples/vulnerability_scanner",
     "expected_categories": [
-      "security_dual_use",
-      "missing_ethics_documentation"
+      "security_dual_use"
     ],
     "expected_absent_categories": [
       "biometrics",
       "privacy_identifiability",
       "secret_exposure"
     ],
+    "expected_missing_context_categories": [
+      "missing_ethics_documentation"
+    ],
     "notes": "Socket/CVE vulnerability scanning with missing authorization/disclosure details."
   },
   {
     "case_id": "harmless_sorting_visualizer",
     "path": "examples/harmless_sorting_visualizer",
-    "expected_categories": [
-      "missing_ethics_documentation"
-    ],
+    "expected_categories": [],
     "expected_absent_categories": [
       "security_dual_use",
       "privacy_identifiability",
@@ -61,6 +68,24 @@
       "secret_exposure"
     ],
     "notes": "Teaching algorithm visualization should avoid high-risk false positives."
+  },
+  {
+    "case_id": "negated_docs_project",
+    "path": "examples/negated_docs_project",
+    "expected_categories": [
+      "web_scraping_platform_governance",
+      "privacy_identifiability"
+    ],
+    "expected_absent_categories": [
+      "dataset_release_reidentification",
+      "security_dual_use",
+      "biometrics",
+      "secret_exposure"
+    ],
+    "expected_missing_context_categories": [
+      "web_scraping_platform_governance",
+      "missing_ethics_documentation"
+    ],
+    "notes": "Negated documentation should not count as positive coverage or release risk; mixed PII clauses should keep timestamps only."
   }
 ]
-

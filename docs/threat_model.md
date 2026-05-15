@@ -72,6 +72,8 @@ Threat: Pattern matches may overstate risk.
 Controls:
 
 - Findings include confidence and evidence.
+- Evidence is typed as `risk_signal`, `missing_context`, or `positive_control`.
+- Clause-level negation handling prevents common "not documented" or "do not collect" statements from being counted as positive coverage or collection evidence.
 - Missing documentation alone stays low severity.
 - Reports use potential/unknown language when context is incomplete.
 
@@ -94,4 +96,3 @@ Controls:
 - Root is resolved once.
 - Candidate files are resolved and checked against root.
 - Out-of-root symlinks and unreadable files are skipped.
-

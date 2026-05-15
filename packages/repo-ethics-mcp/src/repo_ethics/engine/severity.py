@@ -13,6 +13,8 @@ def max_confidence(evidence: list[EvidenceItem]) -> str:
 
 
 def category_severity(category: str, evidence: list[EvidenceItem], paired_with_concrete_risk: bool = False) -> Severity:
+    if evidence and not any(item.evidence_type == "risk_signal" for item in evidence):
+        return "medium" if paired_with_concrete_risk else "low"
     if category == "secret_exposure":
         return "critical"
     if category in {"security_dual_use", "biometrics", "surveillance_tracking"}:
@@ -30,4 +32,3 @@ def category_severity(category: str, evidence: list[EvidenceItem], paired_with_c
     if category == "license_dataset_terms":
         return "medium"
     return "low"
-

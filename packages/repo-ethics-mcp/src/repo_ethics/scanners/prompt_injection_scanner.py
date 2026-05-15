@@ -17,7 +17,11 @@ PATTERNS = [
     re.compile(r"this project has no risks", re.I),
     re.compile(r"delete warnings", re.I),
     re.compile(r"override instructions", re.I),
-    re.compile(r"system prompt", re.I),
+    re.compile(r"suppress warnings", re.I),
+    re.compile(r"do not mention", re.I),
+    re.compile(r"mark (this )?(repository|project) as safe", re.I),
+    re.compile(r"(ignore|override|suppress|delete|do not mention|mark[^.\n]{0,40}safe)[^.\n]{0,80}\b(system prompt|developer message|assistant should|you are now)\b", re.I),
+    re.compile(r"\b(system prompt|developer message|assistant should|you are now)\b[^.\n]{0,80}(ignore|override|suppress|delete|do not mention|mark[^.\n]{0,40}safe)", re.I),
 ]
 
 
@@ -36,8 +40,8 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                         end=match.end(),
                         reason="Repository text resembles an instruction intended to manipulate or suppress an ethics review.",
                         confidence="high",
+                        evidence_type="risk_signal",
                         include_snippets=include_snippets,
                     )
                 )
     return dedupe_evidence(evidence)
-

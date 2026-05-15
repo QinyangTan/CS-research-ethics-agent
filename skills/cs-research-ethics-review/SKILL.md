@@ -15,6 +15,10 @@ Use this Skill to produce an evidence-grounded CS research ethics pre-review. Th
 - Never claim final approval or rejection.
 - Never state that a project is ethical, unethical, illegal, compliant, safe, or that review approval is mandatory.
 - Separate findings into confirmed, potential, and unknown.
+- Use `risk_signal` evidence for confirmed or potential findings.
+- Treat `missing_context` as questions or unknowns, not conclusions.
+- Do not treat `positive_control` evidence as a risk; use it to make the report balanced.
+- Do not count negated statements such as "not documented" as coverage.
 - Cite scanner evidence and relevant files.
 - Ask targeted clarification questions when context is missing.
 
@@ -26,8 +30,9 @@ Use this Skill to produce an evidence-grounded CS research ethics pre-review. Th
 4. Retrieve taxonomy and mitigations with `get_ethics_taxonomy` and `get_mitigation_suggestions`.
 5. Map evidence to CS ethics risks using confirmed, potential, and unknown statuses.
 6. Generate or adapt the report template.
-7. Mark uncertain points as questions.
-8. Keep conclusions conservative and evidence-grounded.
+7. Include positive controls separately from risk findings.
+8. Mark uncertain points as questions.
+9. Keep conclusions conservative and evidence-grounded.
 
 ## References
 
@@ -38,4 +43,3 @@ Use this Skill to produce an evidence-grounded CS research ethics pre-review. Th
 - `references/safe_release_checklist.md`
 - `references/prompt_injection_policy.md`
 - `references/report_language_policy.md`
-

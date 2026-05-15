@@ -19,9 +19,11 @@ def _risk_id(title: str, category: str) -> str:
     return "risk_" + hashlib.sha256(f"{category}|{title}".encode("utf-8")).hexdigest()[:10]
 
 
-def _by_category(evidence: list[EvidenceItem]) -> dict[str, list[EvidenceItem]]:
+def _by_category(evidence: list[EvidenceItem], evidence_types: set[str] | None = None) -> dict[str, list[EvidenceItem]]:
     grouped: dict[str, list[EvidenceItem]] = {}
     for item in evidence:
+        if evidence_types is not None and item.evidence_type not in evidence_types:
+            continue
         grouped.setdefault(item.category, []).append(item)
     return grouped
 
@@ -53,6 +55,8 @@ def _finding(
     missing_context: list[str],
     paired_with_concrete_risk: bool = False,
 ) -> RiskFinding:
+    if status in {"confirmed", "potential"} and not any(item.evidence_type == "risk_signal" for item in evidence):
+        raise ValueError(f"{status} finding requires at least one risk_signal evidence item: {title}")
     mitigations, questions, why = _rules_for(category)
     return RiskFinding(
         risk_id=_risk_id(title, category),
@@ -70,7 +74,8 @@ def _finding(
 
 
 def map_risks(project_profile: ProjectProfile, evidence: list[EvidenceItem]) -> list[RiskFinding]:
-    grouped = _by_category(evidence)
+    grouped = _by_category(evidence, {"risk_signal"})
+    missing_grouped = _by_category(evidence, {"missing_context"})
     findings: list[RiskFinding] = []
     has_concrete_risk = any(
         category in grouped
@@ -103,34 +108,38 @@ def map_risks(project_profile: ProjectProfile, evidence: list[EvidenceItem]) -> 
         )
 
     if grouped.get("web_scraping_platform_governance"):
+        web_evidence = grouped["web_scraping_platform_governance"] + missing_grouped.get("web_scraping_platform_governance", [])
         findings.append(
             _finding(
-                title="Web scraping governance and platform terms are not documented",
+                title="Web scraping governance and platform terms need review",
                 category="web_scraping_platform_governance",
                 status="potential",
-                evidence=grouped["web_scraping_platform_governance"],
+                evidence=web_evidence,
                 missing_context=["Platform terms, robots.txt handling, rate limits, and collection dates."],
             )
         )
 
     if grouped.get("privacy_identifiability") and grouped.get("dataset_release_reidentification"):
+        dataset_evidence = _category_evidence(grouped, "privacy_identifiability", "dataset_release_reidentification")
+        dataset_evidence += missing_grouped.get("dataset_release_reidentification", [])
         findings.append(
             _finding(
                 title="Possible re-identification risk if dataset is released",
                 category="dataset_release_reidentification",
                 status="potential",
-                evidence=_category_evidence(grouped, "privacy_identifiability", "dataset_release_reidentification"),
+                evidence=dataset_evidence,
                 missing_context=["Whether raw records will be shared, retained, aggregated, or de-identified."],
                 paired_with_concrete_risk=True,
             )
         )
     elif grouped.get("dataset_release_reidentification"):
+        dataset_evidence = grouped["dataset_release_reidentification"] + missing_grouped.get("dataset_release_reidentification", [])
         findings.append(
             _finding(
                 title="Dataset release and retention details need review",
                 category="dataset_release_reidentification",
                 status="potential",
-                evidence=grouped["dataset_release_reidentification"],
+                evidence=dataset_evidence,
                 missing_context=["Dataset sharing scope, retention period, and anonymization limits."],
             )
         )
@@ -190,26 +199,24 @@ def map_risks(project_profile: ProjectProfile, evidence: list[EvidenceItem]) -> 
             )
         )
 
-    if grouped.get("license_dataset_terms"):
-        missing_license_evidence = [item for item in grouped["license_dataset_terms"] if "No code or dataset license" in item.reason]
-        if missing_license_evidence:
-            findings.append(
-                _finding(
-                    title="License or dataset redistribution terms are unclear",
-                    category="license_dataset_terms",
-                    status="unknown",
-                    evidence=missing_license_evidence,
-                    missing_context=["Code license, dataset source terms, and redistribution permissions."],
-                )
+    if missing_grouped.get("license_dataset_terms"):
+        findings.append(
+            _finding(
+                title="License or dataset redistribution terms are unclear",
+                category="license_dataset_terms",
+                status="unknown",
+                evidence=missing_grouped["license_dataset_terms"],
+                missing_context=["Code license, dataset source terms, and redistribution permissions."],
             )
+        )
 
-    if grouped.get("missing_ethics_documentation"):
+    if missing_grouped.get("missing_ethics_documentation"):
         findings.append(
             _finding(
                 title="Missing ethics, data handling, or release documentation",
                 category="missing_ethics_documentation",
                 status="unknown",
-                evidence=grouped["missing_ethics_documentation"],
+                evidence=missing_grouped["missing_ethics_documentation"],
                 missing_context=project_profile.missing_docs or ["Project purpose, data handling, and release boundaries."],
                 paired_with_concrete_risk=has_concrete_risk,
             )
