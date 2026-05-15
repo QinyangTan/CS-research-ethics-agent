@@ -4,9 +4,9 @@ These scores measure report behavior on synthetic controlled cases, not final et
 
 ## Output Availability
 
-- `repo_ethics`: 42/42 outputs available
-- `direct_codex_strong`: 0/42 outputs available
 - `direct_codex_naive`: 0/42 outputs available
+- `direct_codex_strong`: 0/42 outputs available
+- `repo_ethics`: 42/42 outputs available
 
 ## Metrics
 
