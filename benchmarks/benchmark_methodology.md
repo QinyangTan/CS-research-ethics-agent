@@ -11,10 +11,14 @@ Metrics are reported separately:
 - evidence groundedness
 - missing-context recall and discipline
 - positive-control recognition
+- unexpected missing-context count
+- unexpected positive-control count
 - forbidden-language violations
 - unsupported conclusion count
 - secret leakage
 - actionability
+
+Unexpected missing-context and positive-control counts measure extra caution/noise beyond the reviewed labels. They are not counted as risk false positives. Reviewers should inspect them separately from category recall and expected-absent false positives because an extra unknown or safeguard category may be useful in one case and distracting in another.
 
 Direct Codex scoring uses `category_aliases.yaml` so natural wording can receive credit without requiring exact taxonomy IDs.
 

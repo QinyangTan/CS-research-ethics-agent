@@ -1,6 +1,6 @@
 # Direct Baseline Collection Needed
 
-Direct Codex baseline outputs were not collected in this run, so this run evaluates repo-ethics behavior only.
+Direct Codex baseline outputs were not collected for all reviewed cases in this run, so direct comparison is incomplete.
 
 A direct comparison requires Markdown outputs in:
 

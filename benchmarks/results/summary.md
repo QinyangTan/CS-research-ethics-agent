@@ -10,15 +10,18 @@ These scores measure report behavior on synthetic controlled cases, not final et
 
 ## Metrics
 
-| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| repo_ethics | 42 | 1.00 | 0.87 | 0.95 | 0.96 | 0.00 | 0.71 | 0.00 | 0.00 | 0.00 | 0.00 |
+| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Extra Missing Context | Extra Positive Controls | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| repo_ethics | 42 | 1.00 | 0.87 | 0.95 | 0.96 | 0.00 | 1.57 | 0.24 | 0.71 | 0.00 | 0.00 | 0.00 | 0.00 |
 
 ## Interpretation
 
 - Compare systems by separate metrics rather than a blended score.
 - Higher category recall on this synthetic benchmark means a report named more expected taxonomy categories; it is not a final ethics judgment.
 - Lower expected-absent false positives indicate fewer expected-absent categories were reported as risks for these controlled cases.
+- Extra missing context means the system surfaced missing-context categories beyond the gold labels.
+- Extra positive controls means the system surfaced safeguard/control categories beyond the gold labels.
+- Extra categories are not automatically errors, but they may indicate useful caution or noisy reporting and should be manually reviewed.
 - Higher evidence-groundedness means expected repository paths were cited more often.
 - Positive-control recognition is reported separately from risk recall so safeguards do not erase underlying risk signals.
 - Direct Codex output counts may cover only a subset of cases; check output availability before comparing aggregate metrics.
@@ -56,3 +59,4 @@ These scores measure report behavior on synthetic controlled cases, not final et
 - Expand reviewed labels with real, permissioned teaching repositories.
 - Add aliases when direct baseline reports identify correct issues with different wording.
 - Keep positive-control and missing-context metrics separate from category recall.
+- Review extra missing-context and positive-control categories to distinguish useful caution from noise.

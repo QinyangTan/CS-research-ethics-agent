@@ -462,6 +462,8 @@ def score_system(
     expected_positive = set(case.get("expected_positive_controls", []))
     expected_absent = set(case.get("expected_absent_categories", []))
     false_positive_categories = sorted((risk_found - expected_risk) & expected_absent)
+    unexpected_missing_context_categories = sorted(missing_found - expected_missing)
+    unexpected_positive_control_categories = sorted(positive_found - expected_positive)
     forbidden = count_patterns(text, FORBIDDEN_PATTERNS)
     overclaims = count_patterns(text, OVERCLAIM_PATTERNS)
     leaked = [value for value in case.get("secret_values_to_check", []) if value and value in text]
@@ -480,6 +482,10 @@ def score_system(
         "positive_control_recall": ratio(positive_found, expected_positive),
         "expected_absent_false_positives": false_positive_categories,
         "false_positive_count": len(false_positive_categories),
+        "unexpected_missing_context_categories": unexpected_missing_context_categories,
+        "unexpected_missing_context_count": len(unexpected_missing_context_categories),
+        "unexpected_positive_control_categories": unexpected_positive_control_categories,
+        "unexpected_positive_control_count": len(unexpected_positive_control_categories),
         "evidence_groundedness": groundedness(text, case.get("expected_evidence_paths", [])),
         "forbidden_language_violations": forbidden,
         "unsupported_conclusion_count": overclaims,
@@ -509,6 +515,8 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "missing_context_recall",
         "positive_control_recall",
         "false_positive_count",
+        "unexpected_missing_context_count",
+        "unexpected_positive_control_count",
         "evidence_groundedness",
         "forbidden_language_violations",
         "unsupported_conclusion_count",
@@ -562,8 +570,8 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
             "",
             "## Metrics",
             "",
-            "| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |",
-            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+            "| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Extra Missing Context | Extra Positive Controls | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
         ]
     )
     for system, metrics in systems.items():
@@ -571,6 +579,8 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
             f"| {system} | {metrics.get('case_count', 0)} | {_format_metric(metrics.get('category_recall'))} | "
             f"{_format_metric(metrics.get('evidence_groundedness'))} | {_format_metric(metrics.get('missing_context_recall'))} | "
             f"{_format_metric(metrics.get('positive_control_recall'))} | {_format_metric(metrics.get('false_positive_count'))} | "
+            f"{_format_metric(metrics.get('unexpected_missing_context_count'))} | "
+            f"{_format_metric(metrics.get('unexpected_positive_control_count'))} | "
             f"{_format_metric(metrics.get('must_mention_recall'))} | {_format_metric(metrics.get('must_not_mention_violations'))} | "
             f"{_format_metric(metrics.get('forbidden_language_violations'))} | {_format_metric(metrics.get('unsupported_conclusion_count'))} | "
             f"{_format_metric(metrics.get('secret_leakage_count'))} |"
@@ -583,6 +593,9 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
             "- Compare systems by separate metrics rather than a blended score.",
             "- Higher category recall on this synthetic benchmark means a report named more expected taxonomy categories; it is not a final ethics judgment.",
             "- Lower expected-absent false positives indicate fewer expected-absent categories were reported as risks for these controlled cases.",
+            "- Extra missing context means the system surfaced missing-context categories beyond the gold labels.",
+            "- Extra positive controls means the system surfaced safeguard/control categories beyond the gold labels.",
+            "- Extra categories are not automatically errors, but they may indicate useful caution or noisy reporting and should be manually reviewed.",
             "- Higher evidence-groundedness means expected repository paths were cited more often.",
             "- Positive-control recognition is reported separately from risk recall so safeguards do not erase underlying risk signals.",
             "- Direct Codex output counts may cover only a subset of cases; check output availability before comparing aggregate metrics.",
@@ -646,6 +659,7 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
                 "- Expand reviewed labels with real, permissioned teaching repositories.",
                 "- Add aliases when direct baseline reports identify correct issues with different wording.",
                 "- Keep positive-control and missing-context metrics separate from category recall.",
+                "- Review extra missing-context and positive-control categories to distinguish useful caution from noise.",
             ]
         )
     summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")

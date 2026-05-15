@@ -212,6 +212,28 @@ def test_benchmark_scoring_scripts_run_with_optional_direct_outputs(tmp_path: Pa
         text=True,
     )
     assert (results_dir / "summary2.md").exists()
+    subprocess.run(
+        [
+            "python3",
+            str(BENCH / "scripts" / "write_direct_comparison_report.py"),
+            "--results-json",
+            str(results_dir / "results.json"),
+            "--output",
+            str(results_dir / "direct_comparison_report.md"),
+            "--collection-needed-output",
+            str(results_dir / "direct_baseline_collection_needed.md"),
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    comparison = (results_dir / "direct_comparison_report.md").read_text(encoding="utf-8")
+    assert "Inconclusive direct comparison" in comparison
+    assert "Extra Missing Context" in comparison
+    assert "Extra Positive Controls" in comparison
+    assert "diagnostic" in comparison
+    assert (results_dir / "direct_baseline_collection_needed.md").exists()
 
 
 def test_unreviewed_gold_is_excluded_by_default(tmp_path: Path) -> None:
@@ -352,6 +374,70 @@ Responsible disclosure and authorization scope are not documented.
 """
     scored = _score_direct_markdown(tmp_path, markdown, row)
     assert "security_dual_use" in scored["missing_context_categories_found"]
+
+
+def test_unexpected_missing_context_category_is_counted(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_missing_context_categories"] = ["privacy_identifiability"]
+    markdown = """## Missing Context
+Privacy handling is unclear.
+Responsible disclosure is not documented.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "privacy_identifiability" in scored["missing_context_categories_found"]
+    assert {"security_dual_use", "vulnerability_disclosure"} & set(scored["missing_context_categories_found"])
+    assert scored["unexpected_missing_context_count"] >= 1
+    assert {"security_dual_use", "vulnerability_disclosure"} & set(scored["unexpected_missing_context_categories"])
+
+
+def test_expected_missing_context_category_is_not_unexpected(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_missing_context_categories"] = ["privacy_identifiability"]
+    markdown = """## Missing Context
+Privacy handling is unclear.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "privacy_identifiability" in scored["missing_context_categories_found"]
+    assert scored["unexpected_missing_context_count"] == 0
+    assert scored["unexpected_missing_context_categories"] == []
+
+
+def test_unexpected_positive_control_category_is_counted(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_positive_controls"] = ["privacy_identifiability"]
+    markdown = """## Existing Safeguards
+Privacy policy documents personal data handling.
+SECURITY.md documents responsible disclosure and authorization scope.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "privacy_identifiability" in scored["positive_controls_found"]
+    assert {"security_dual_use", "vulnerability_disclosure"} & set(scored["positive_controls_found"])
+    assert scored["unexpected_positive_control_count"] >= 1
+    assert {"security_dual_use", "vulnerability_disclosure"} & set(scored["unexpected_positive_control_categories"])
+
+
+def test_expected_positive_control_category_is_not_unexpected(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_positive_controls"] = ["privacy_identifiability"]
+    markdown = """## Existing Safeguards
+Privacy policy documents personal data handling.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "privacy_identifiability" in scored["positive_controls_found"]
+    assert scored["unexpected_positive_control_count"] == 0
+    assert scored["unexpected_positive_control_categories"] == []
+
+
+def test_extra_missing_context_does_not_become_risk_false_positive(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_absent_categories"] = ["security_dual_use"]
+    markdown = """## Missing Context
+Responsible disclosure is not documented.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "security_dual_use" not in scored["risk_categories_found"]
+    assert scored["false_positive_count"] == 0
+    assert scored["unexpected_missing_context_count"] >= 1
 
 
 def test_evidence_absence_does_not_count_security_risk(tmp_path: Path) -> None:
@@ -498,6 +584,10 @@ def test_scoring_includes_naive_direct_outputs_and_summary_availability(tmp_path
     assert results["output_availability"]["direct_codex_naive"]["available"] == 1
     assert "`direct_codex_naive`: 1/1 outputs available" in summary
     assert "These scores measure report behavior on synthetic controlled cases, not final ethical truth." in summary
+    assert "Extra Missing Context" in summary
+    assert "Extra Positive Controls" in summary
+    assert "not automatically errors" in summary
+    assert "useful caution from noise" in summary
     lowered = summary.lower()
     assert "guarantees" not in lowered
     assert "proves" not in lowered

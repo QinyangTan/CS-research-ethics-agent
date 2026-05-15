@@ -9,6 +9,8 @@ benchmark:
 
 benchmark-score:
 	python3 benchmarks/scripts/score_reports.py
+	python3 benchmarks/scripts/summarize_results.py
+	python3 benchmarks/scripts/write_direct_comparison_report.py
 
 check-no-llm:
 	python3 scripts/check_no_hosted_llm_calls.py

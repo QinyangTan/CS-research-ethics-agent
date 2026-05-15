@@ -30,6 +30,12 @@ If `--direct-codex-command` is supplied, that evaluator-provided command is exec
 
 Gold labels live in `benchmarks/gold/*.json`. Official scoring includes only labels with `review_status: "reviewed"` unless `--include-unreviewed` is passed.
 
+## Metrics
+
+Scores are reported as separate diagnostics, not as one blended grade. The benchmark tracks category recall, evidence groundedness, missing-context recall, positive-control recognition, expected-absent risk false positives, forbidden-language violations, unsupported conclusions, actionability, and secret leakage.
+
+It also reports `unexpected_missing_context_count` and `unexpected_positive_control_count`. These count missing-context or safeguard categories that a system surfaced beyond the gold labels. They are not treated as risk false positives; they help reviewers distinguish useful caution from noisy extra categories.
+
 ## Hypothesis
 
 Repo-ethics is designed to emphasize deterministic evidence grounding, forbidden-language avoidance, positive-control recognition, and prompt-injection resistance. Direct Codex may produce richer prose or identify unusual risks outside the scanner taxonomy. These scores measure report behavior on synthetic controlled cases, not final ethical truth.
