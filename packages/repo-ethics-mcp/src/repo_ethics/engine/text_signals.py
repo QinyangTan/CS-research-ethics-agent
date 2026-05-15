@@ -31,6 +31,7 @@ NEGATION_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
         r"\bmissing\b",
         r"\bunclear\b",
         r"\bunknown\b",
+        r"\bnot\s+a[n]?\b",
         r"\bnot\s+specified\b",
         r"\bnot\s+described\b",
         r"\bnot\s+stated\b",

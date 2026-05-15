@@ -68,7 +68,7 @@ def _has_signal(text: str, patterns: list[re.Pattern[str]]) -> bool:
 
 
 def _has_dataset_path(root_path: str | Path, max_file_size: int) -> bool:
-    for scanned in iter_repo_file_paths(root_path, include_binary=True, max_file_size=max_file_size):
+    for scanned in iter_repo_file_paths(root_path, include_binary=True, max_file_size=None):
         rel = scanned.rel_path.lower()
         suffix = Path(rel).suffix
         if (rel.startswith(("data/", "dataset/", "datasets/")) and suffix in {".csv", ".tsv", ".json", ".jsonl", ".parquet", ".sqlite", ".db", ".feather", ".arrow", ".pkl", ".pickle"}):
@@ -171,12 +171,12 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
         patterns = TOPIC_PATTERNS[topic]
         if topic_is_covered(docs_text, patterns):
             covered_topics.append(topic)
-            for start, end, _ in find_positive_topic_mentions(docs_text, patterns):
+            for start, end, _ in find_positive_topic_mentions(text, patterns):
                 evidence.append(
                     make_match_evidence(
                         category="missing_ethics_documentation",
-                        file_path="README/docs",
-                        text=docs_text,
+                        file_path=scanned.rel_path,
+                        text=text,
                         start=start,
                         end=end,
                         reason=f"Documentation includes {topic}.",
@@ -204,4 +204,3 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
             )
         )
     return dedupe_evidence(evidence)
-

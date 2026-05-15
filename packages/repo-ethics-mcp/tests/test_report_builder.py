@@ -68,3 +68,12 @@ def test_report_does_not_include_full_secrets(tmp_path: Path) -> None:
     markdown = report_to_markdown(build_report(run_scan(tmp_path)))
     assert secret not in markdown
     assert "[REDACTED_SECRET_LIKE_VALUE]" in markdown
+
+
+def test_standalone_dataset_missing_context_appears_in_report(tmp_path: Path) -> None:
+    (tmp_path / "README.md").write_text("Dataset release policy is not documented.", encoding="utf-8")
+    report = build_report(run_scan(tmp_path))
+    markdown = report_to_markdown(report)
+    assert "dataset_release_reidentification" in markdown
+    assert "Additional missing context for Dataset Release and Re-identification" in markdown
+    assert "Dataset release or sharing is mentioned as absent, unclear, or not documented." in markdown

@@ -32,3 +32,18 @@ def test_conditional_missing_docs_for_example_risks() -> None:
     assert "platform terms" in reddit_missing
     assert "data retention" in reddit_missing
 
+
+def test_positive_controls_preserve_exact_file_paths(tmp_path: Path) -> None:
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    policy = docs / "privacy.md"
+    policy.write_text(
+        "This privacy note documents consent, data retention, data access controls, and anonymization.",
+        encoding="utf-8",
+    )
+    readme = tmp_path / "README.md"
+    readme.write_text("This project stores email addresses.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    positive_paths = {item.file_path for item in evidence if item.evidence_type == "positive_control"}
+    assert "docs/privacy.md" in positive_paths
+

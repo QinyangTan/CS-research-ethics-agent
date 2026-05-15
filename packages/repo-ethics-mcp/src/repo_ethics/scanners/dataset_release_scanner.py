@@ -93,7 +93,7 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
     saw_release = False
     repo_text_parts: list[str] = []
 
-    for scanned in iter_repo_file_paths(root_path, include_binary=True, max_file_size=max_file_size):
+    for scanned in iter_repo_file_paths(root_path, include_binary=True, max_file_size=None):
         if _is_data_like_path(scanned.rel_path):
             saw_data = True
             evidence.append(

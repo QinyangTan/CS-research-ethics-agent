@@ -46,6 +46,11 @@ def _rules_for(category: str) -> tuple[list[str], list[str], str]:
     return list(mitigations), list(questions), str(why)
 
 
+def _category_name(category: str) -> str:
+    taxonomy = _load_json("taxonomy.json")
+    return str(taxonomy["categories"].get(category, {}).get("name", category.replace("_", " ").title()))
+
+
 def _finding(
     *,
     title: str,
@@ -200,27 +205,48 @@ def map_risks(project_profile: ProjectProfile, evidence: list[EvidenceItem]) -> 
         )
 
     if missing_grouped.get("license_dataset_terms"):
+        license_evidence = missing_grouped["license_dataset_terms"]
         findings.append(
             _finding(
                 title="License or dataset redistribution terms are unclear",
                 category="license_dataset_terms",
                 status="unknown",
-                evidence=missing_grouped["license_dataset_terms"],
+                evidence=license_evidence,
                 missing_context=["Code license, dataset source terms, and redistribution permissions."],
             )
         )
 
     if missing_grouped.get("missing_ethics_documentation"):
+        missing_docs_evidence = missing_grouped["missing_ethics_documentation"]
         findings.append(
             _finding(
                 title="Missing ethics, data handling, or release documentation",
                 category="missing_ethics_documentation",
                 status="unknown",
-                evidence=missing_grouped["missing_ethics_documentation"],
+                evidence=missing_docs_evidence,
                 missing_context=project_profile.missing_docs or ["Project purpose, data handling, and release boundaries."],
                 paired_with_concrete_risk=has_concrete_risk,
             )
         )
 
-    return findings
+    attached_missing_ids = {
+        item.evidence_id
+        for finding in findings
+        for item in finding.evidence
+        if item.evidence_type == "missing_context"
+    }
+    for category, items in sorted(missing_grouped.items()):
+        unattached = [item for item in items if item.evidence_id not in attached_missing_ids]
+        if not unattached:
+            continue
+        findings.append(
+            _finding(
+                title=f"Additional missing context for {_category_name(category)}",
+                category=category,
+                status="unknown",
+                evidence=unattached,
+                missing_context=[item.reason for item in unattached],
+            )
+        )
 
+    return findings

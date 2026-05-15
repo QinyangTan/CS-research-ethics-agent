@@ -15,3 +15,10 @@ def test_security_scanner_detects_cve_exploit_and_socket_scanning(tmp_path: Path
     assert "CVEs" in reasons
     assert "socket scanning" in reasons
 
+
+def test_security_scanner_ignores_negated_vulnerability_scanner(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    readme.write_text("This is not a vulnerability scanner.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    assert not [item for item in evidence if item.category == "security_dual_use"]
+
