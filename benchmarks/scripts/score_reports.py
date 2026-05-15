@@ -47,6 +47,33 @@ ACTION_TERMS = [
     "deployment boundaries",
 ]
 MISSING_CONTEXT_TERMS = ["unknown", "needs clarification", "not documented", "missing context", "may need", "unclear"]
+ABSENT_EVIDENCE_MARKERS = [
+    "no evidence",
+    "no repo evidence",
+    "no repository evidence",
+    "no file evidence",
+    "not found",
+    "not present",
+    "absent",
+    "not detected",
+    "no indication",
+    "no signs",
+    "does not appear",
+]
+RISK_EVIDENCE_MARKERS = [
+    "risk",
+    "concern",
+    "issue",
+    "finding",
+    "flag",
+    "detected",
+    "evidence of",
+    "suggests",
+    "indicates",
+    "appears to",
+    "contains",
+    "describes",
+]
 RISK_SECTION_KEYWORDS = [
     "risk",
     "risks",
@@ -102,6 +129,16 @@ POSITIVE_CONTROL_MARKERS = [
     "license present",
     "robots.txt present",
 ]
+# Some disclosure phrases can reasonably support both security_dual_use and
+# vulnerability_disclosure. Scoring intentionally allows that when labels expect it.
+FILE_REFERENCE_RE = re.compile(
+    r"(?ix)"
+    r"(?:\b(?:README|SECURITY|LICENSE|CONTRIBUTING|ethics|privacy|data_card|model_card|datasheet)\.md\b)"
+    r"|(?:\b(?:package\.json|pyproject\.toml|requirements\.txt|Dockerfile)\b)"
+    r"|(?:^|[\s`(])(?:\.env(?:\.[A-Za-z0-9_-]+)?)\b"
+    r"|(?:\b(?:docs|src|data|tests?|examples?|benchmarks?)/[^\s`'\"<>)]*"
+    r"\.(?:py|js|ts|tsx|jsx|java|go|rs|c|cc|cpp|h|rb|php|swift|kt|r|md|rst|txt|json|jsonl|csv|tsv|toml|yaml|yml|sqlite|db|parquet|pkl|pickle)\b)"
+)
 MarkdownSectionKind = Literal[
     "risk",
     "missing_context",
@@ -211,6 +248,55 @@ def category_near_markers(
     )
 
 
+def line_has_file_reference(line: str) -> bool:
+    """Detect obvious repo file references without treating dotted prose as paths."""
+
+    return bool(FILE_REFERENCE_RE.search(line))
+
+
+def category_near_absence_marker(
+    line: str,
+    category_terms: list[str],
+    window_chars: int = 160,
+) -> bool:
+    if category_near_markers(line, category_terms, ABSENT_EVIDENCE_MARKERS, window_chars=window_chars):
+        return True
+    lower = line.lower()
+    for term in category_terms:
+        term_lower = term.lower()
+        if not term_lower:
+            continue
+        for match in re.finditer(re.escape(term_lower), lower):
+            prefix = lower[max(0, match.start() - 50) : match.start()]
+            suffix = lower[match.end() : min(len(lower), match.end() + 120)]
+            if re.search(r"\bno\b", prefix) and re.search(
+                r"\b(?:evidence|repo evidence|repository evidence|file evidence|found|detected|present|indication|signs?)\b",
+                suffix,
+            ):
+                return True
+    return False
+
+
+def evidence_section_risk_categories(evidence_text: str, aliases: dict[str, list[str]]) -> set[str]:
+    """Infer risk categories from evidence lines without crediting absent-evidence statements."""
+
+    found: set[str] = set()
+    for raw_line in evidence_text.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        categories_in_line = mentioned_categories(line, aliases)
+        if not categories_in_line:
+            continue
+        for category in categories_in_line:
+            terms = category_terms(aliases)[category]
+            if category_near_absence_marker(line, terms):
+                continue
+            if category_near_markers(line, terms, RISK_EVIDENCE_MARKERS) or line_has_file_reference(line):
+                found.add(category)
+    return found
+
+
 def categories_from_repo_json(path: Path) -> tuple[set[str], set[str], set[str]]:
     report = json.loads(path.read_text(encoding="utf-8"))
     risk_categories: set[str] = set()
@@ -275,11 +361,12 @@ def categories_from_markdown_with_mode(path: Path, aliases: dict[str, list[str]]
     recognized = [kind for kind, bodies in typed_sections.items() if kind != "other" and bodies]
     terms_by_category = category_terms(aliases)
     if recognized:
-        risk_text = "\n\n".join(typed_sections["risk"] + typed_sections["evidence"])
+        risk_text = "\n\n".join(typed_sections["risk"])
+        evidence_text = "\n\n".join(typed_sections["evidence"])
         missing_text = "\n\n".join(typed_sections["missing_context"] + typed_sections["question"])
         positive_text = "\n\n".join(typed_sections["positive_control"])
         return (
-            mentioned_categories(risk_text, aliases),
+            mentioned_categories(risk_text, aliases) | evidence_section_risk_categories(evidence_text, aliases),
             mentioned_categories(missing_text, aliases),
             mentioned_categories(positive_text, aliases),
             "sectioned_markdown",

@@ -37,9 +37,28 @@ security_dual_use:
   - vulnerability disclosure
   - responsible disclosure
   - authorization scope
+  - authorized scope
+  - safe release boundaries
+  - release boundaries
+  - misuse limits
+  - safe lab
+  - authorized lab
+  - coordinated disclosure
+  - vulnerability disclosure plan
+  - disclosure plan
   - offensive security
   - vulnerability scanner
   - port scanning
+vulnerability_disclosure:
+  - vulnerability disclosure
+  - responsible disclosure
+  - coordinated disclosure
+  - vulnerability disclosure plan
+  - disclosure plan
+  - authorization scope
+  - authorized scope
+  - safe release boundaries
+  - release boundaries
 biometrics:
   - biometrics
   - biometric

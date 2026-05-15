@@ -18,6 +18,8 @@ Metrics are reported separately:
 
 Direct Codex scoring uses `category_aliases.yaml` so natural wording can receive credit without requiring exact taxonomy IDs.
 
+Some aliases intentionally overlap. For example, responsible-disclosure phrases may count toward both `security_dual_use` and `vulnerability_disclosure` when a reviewed gold label expects both. This reflects that disclosure planning can be both dual-use context and disclosure-specific evidence; scores should be interpreted per category rather than as mutually exclusive classes.
+
 Direct Markdown scoring is section-aware. Risk/evidence sections are used for risk category recall, missing-context/question sections are used for missing-context recall, and safeguard/control sections are used for positive-control recognition. If a direct report has no recognizable sections, fallback scoring is more conservative and records `markdown_scoring_mode: fallback_markdown`.
 
 Scoring reports output availability counts for each system. Direct baselines are manual and may cover fewer cases than repo-ethics, so aggregate metrics should be compared only with that coverage in mind.

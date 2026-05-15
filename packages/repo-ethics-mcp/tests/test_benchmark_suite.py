@@ -354,6 +354,69 @@ Responsible disclosure and authorization scope are not documented.
     assert "security_dual_use" in scored["missing_context_categories_found"]
 
 
+def test_evidence_absence_does_not_count_security_risk(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_absent_categories"] = ["security_dual_use"]
+    markdown = """## Evidence
+No security dual-use evidence was found.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "security_dual_use" not in scored["risk_categories_found"]
+    assert scored["false_positive_count"] == 0
+
+
+def test_evidence_absence_with_file_path_does_not_count_biometrics_risk(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_absent_categories"] = ["biometrics"]
+    markdown = """## File Evidence
+No biometrics evidence was detected in src/main.py.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "biometrics" not in scored["risk_categories_found"]
+    assert scored["false_positive_count"] == 0
+
+
+def test_evidence_with_file_path_and_risk_marker_counts_security_risk(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_risk_categories"] = ["security_dual_use"]
+    markdown = """## Evidence
+src/scanner.py contains socket scanning logic, suggesting security dual-use concerns.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "security_dual_use" in scored["risk_categories_found"]
+
+
+def test_evidence_with_file_reference_only_counts_security_risk(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_risk_categories"] = ["security_dual_use"]
+    markdown = """## Repository Evidence
+README.md describes a vulnerability scanner.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "security_dual_use" in scored["risk_categories_found"]
+
+
+def test_evidence_with_data_path_counts_privacy_risk(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_risk_categories"] = ["privacy_identifiability"]
+    markdown = """## Repository Evidence
+data/schema.json contains email and student_id fields.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "privacy_identifiability" in scored["risk_categories_found"]
+
+
+def test_absent_personal_data_with_file_path_does_not_count_privacy_risk(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_absent_categories"] = ["privacy_identifiability"]
+    markdown = """## Evidence
+No personal data was found in data/schema.json.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert "privacy_identifiability" not in scored["risk_categories_found"]
+    assert scored["false_positive_count"] == 0
+
+
 def test_markdown_fallback_missing_context_requires_local_window(tmp_path: Path) -> None:
     row = _base_scoring_row()
     row["expected_risk_categories"] = ["privacy_identifiability"]

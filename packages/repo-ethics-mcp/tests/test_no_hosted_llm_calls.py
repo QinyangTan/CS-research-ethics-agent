@@ -60,3 +60,57 @@ def test_checker_json_output_and_inline_allowlist(tmp_path: Path) -> None:
     )
     payload = json.loads(result.stdout)
     assert payload == {"ok": True, "violations": []}
+
+
+def test_checker_does_not_flag_provider_name_markdown_prose(tmp_path: Path) -> None:
+    doc = tmp_path / "notes.md"
+    doc.write_text("We compare Groq-style provider ecosystems conceptually.\n", encoding="utf-8")
+    result = subprocess.run(
+        ["python3", str(CHECKER), "--root", str(tmp_path), "--json"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    payload = json.loads(result.stdout)
+    assert payload == {"ok": True, "violations": []}
+
+
+def test_checker_catches_groq_import(tmp_path: Path) -> None:
+    bad = tmp_path / "bad.py"
+    bad.write_text("import " + "groq\n", encoding="utf-8")
+    result = subprocess.run(
+        ["python3", str(CHECKER), "--root", str(tmp_path), "--json"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 1
+    payload = json.loads(result.stdout)
+    assert payload["ok"] is False
+    assert payload["violations"][0]["pattern"] == "import " + "groq"
+
+
+def test_checker_catches_markdown_openai_import_unless_allowlisted(tmp_path: Path) -> None:
+    bad = tmp_path / "bad.md"
+    bad.write_text("```python\nimport " + "openai\n```\n", encoding="utf-8")
+    bad_result = subprocess.run(
+        ["python3", str(CHECKER), "--root", str(tmp_path), "--json"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert bad_result.returncode == 1
+
+    bad.write_text(
+        "```python\nimport " + "openai  # repo-ethics-allow-hosted-llm-pattern\n```\n",
+        encoding="utf-8",
+    )
+    allowed_result = subprocess.run(
+        ["python3", str(CHECKER), "--root", str(tmp_path), "--json"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert json.loads(allowed_result.stdout) == {"ok": True, "violations": []}
