@@ -7,3 +7,7 @@ Missing context should be framed as uncertainty or questions. Reports are penali
 Positive controls, such as rate limits, data cards, model cards, licenses, security policies, and ethics notes, should be recognized without erasing the underlying risk signal.
 
 Forbidden and overclaiming language is counted explicitly. Reports should not claim final ethical status, legal status, compliance, safety, or mandatory IRB approval.
+
+Direct Markdown baselines should use clear sections for risks, evidence, missing context, safeguards, mitigations, and questions. Section-aware scoring avoids crediting a missing-context or positive-control category merely because a marker appears elsewhere in the report.
+
+Must-mention and must-not-mention fields are auxiliary checks. They support regression analysis but are not blended into a final ethics score.

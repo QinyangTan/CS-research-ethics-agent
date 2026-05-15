@@ -17,3 +17,7 @@ Metrics are reported separately:
 - actionability
 
 Direct Codex scoring uses `category_aliases.yaml` so natural wording can receive credit without requiring exact taxonomy IDs.
+
+Direct Markdown scoring is section-aware. Risk/evidence sections are used for risk category recall, missing-context/question sections are used for missing-context recall, and safeguard/control sections are used for positive-control recognition. If a direct report has no recognizable sections, fallback scoring is more conservative and records `markdown_scoring_mode: fallback_markdown`.
+
+Scoring reports output availability counts for each system. Direct baselines are manual and may cover fewer cases than repo-ethics, so aggregate metrics should be compared only with that coverage in mind.

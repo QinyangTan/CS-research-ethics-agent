@@ -13,3 +13,4 @@ repo-ethics mcp
 
 This package does not call hosted LLM APIs. It provides deterministic tools and structured evidence for a user's own coding agent or reviewer.
 
+From the repository root, `python3 scripts/check_no_hosted_llm_calls.py` checks source files for hosted LLM import or API-call paths while allowing benchmark fixtures and documentation-only mentions.

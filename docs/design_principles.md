@@ -10,4 +10,5 @@
 - Secret minimization: never print full secret-like values.
 - Conservative semantics: target-aware negation suppresses specific negated matches while preserving contrastive true positives.
 - Conditional documentation gaps: broad docs/tests/tutorial text should not create requirements unless README/source/schema/manifests contain concrete project signals.
-- Benchmark honesty: compare repo-ethics and direct Codex-style reviews by separate metrics, not a blended claim of correctness.
+- Benchmark honesty: compare repo-ethics, strong direct Codex, and naive direct Codex reviews by separate metrics and output availability, not a blended claim of correctness.
+- Source safety: `scripts/check_no_hosted_llm_calls.py` guards against adding hosted LLM API imports or call paths while allowing synthetic benchmark fixtures and manual-baseline documentation.

@@ -14,8 +14,24 @@ python3 benchmarks/scripts/score_reports.py
 
 Direct Codex baseline outputs are optional. Use `benchmarks/prompts/direct_codex_prompt.md`, save outputs as `benchmarks/outputs/direct_codex/<case_id>.md`, then rerun scoring.
 
+Two manual direct baselines are supported:
+
+- Strong direct baseline: `benchmarks/prompts/direct_codex_prompt.md` -> `benchmarks/outputs/direct_codex/<case_id>.md`
+- Naive direct baseline: `benchmarks/prompts/direct_codex_naive_prompt.md` -> `benchmarks/outputs/direct_codex_naive/<case_id>.md`
+
+The helper prints collection instructions without running Codex by default:
+
+```bash
+python3 benchmarks/scripts/run_direct_codex_placeholder.py --baseline strong
+python3 benchmarks/scripts/run_direct_codex_placeholder.py --baseline naive
+```
+
+If `--direct-codex-command` is supplied, that evaluator-provided command is executed locally; review it carefully before use.
+
 Gold labels live in `benchmarks/gold/*.json`. Official scoring includes only labels with `review_status: "reviewed"` unless `--include-unreviewed` is passed.
 
 ## Hypothesis
 
-Repo-ethics should be strongest on deterministic evidence grounding, forbidden-language avoidance, positive-control recognition, and prompt-injection resistance. Direct Codex may produce richer prose or identify unusual risks outside the scanner taxonomy.
+Repo-ethics is designed to emphasize deterministic evidence grounding, forbidden-language avoidance, positive-control recognition, and prompt-injection resistance. Direct Codex may produce richer prose or identify unusual risks outside the scanner taxonomy. These scores measure report behavior on synthetic controlled cases, not final ethical truth.
+
+Direct Markdown scoring is section-aware. Reports with recognizable risk, evidence, missing-context, question, safeguard, or mitigation sections receive `sectioned_markdown`; unstructured Markdown uses conservative `fallback_markdown`. Repo-ethics JSON output uses `structured_json`.

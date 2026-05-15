@@ -7,7 +7,7 @@ import json
 import re
 from pathlib import Path
 from statistics import mean
-from typing import Any
+from typing import Any, Literal
 
 import yaml
 
@@ -47,6 +47,70 @@ ACTION_TERMS = [
     "deployment boundaries",
 ]
 MISSING_CONTEXT_TERMS = ["unknown", "needs clarification", "not documented", "missing context", "may need", "unclear"]
+RISK_SECTION_KEYWORDS = [
+    "risk",
+    "risks",
+    "finding",
+    "findings",
+    "concern",
+    "concerns",
+    "issue",
+    "issues",
+    "category",
+    "categories",
+]
+MISSING_SECTION_KEYWORDS = [
+    "missing context",
+    "unknown",
+    "unknowns",
+    "clarification",
+    "clarifications",
+    "questions",
+    "needs review",
+    "not documented",
+    "unclear",
+]
+POSITIVE_SECTION_KEYWORDS = [
+    "positive controls",
+    "safeguards",
+    "controls",
+    "documented controls",
+    "existing protections",
+    "mitigations already present",
+    "existing documentation",
+]
+EVIDENCE_SECTION_KEYWORDS = ["evidence", "file evidence", "repository evidence"]
+MITIGATION_SECTION_KEYWORDS = ["mitigation", "mitigations", "recommendations", "recommended actions", "fixes"]
+QUESTION_SECTION_KEYWORDS = ["advisor", "irb", "review body", "discussion questions", "follow-up questions"]
+POSITIVE_CONTROL_MARKERS = [
+    "positive control",
+    "positive controls",
+    "existing safeguard",
+    "existing safeguards",
+    "documented control",
+    "documented controls",
+    "existing protection",
+    "existing protections",
+    "mitigations already present",
+    "existing documentation",
+    "already documented",
+    "is documented",
+    "are documented",
+    "security.md documents",
+    "data card documents",
+    "model card documents",
+    "license present",
+    "robots.txt present",
+]
+MarkdownSectionKind = Literal[
+    "risk",
+    "missing_context",
+    "positive_control",
+    "evidence",
+    "mitigation",
+    "question",
+    "other",
+]
 
 
 def load_cases(cases_path: Path) -> list[dict[str, Any]]:
@@ -69,6 +133,82 @@ def mentioned_categories(text: str, aliases: dict[str, list[str]]) -> set[str]:
         if any(term.lower() in lower for term in terms):
             found.add(category)
     return found
+
+
+def normalize_heading(text: str) -> str:
+    """Normalize Markdown heading text for section classification."""
+    heading = re.sub(r"^\s{0,3}#{1,6}\s*", "", text.strip())
+    heading = re.sub(r"\s+#*\s*$", "", heading)
+    heading = re.sub(r"[^\w\s/-]", " ", heading.lower())
+    return re.sub(r"\s+", " ", heading).strip()
+
+
+def split_markdown_sections(markdown: str) -> dict[str, str]:
+    """Split Markdown into heading-keyed sections, combining duplicate headings."""
+    heading_re = re.compile(r"^\s{0,3}#{1,3}\s+(.+?)\s*#*\s*$", re.MULTILINE)
+    matches = list(heading_re.finditer(markdown))
+    if not matches:
+        return {}
+    sections: dict[str, list[str]] = {}
+    for index, match in enumerate(matches):
+        title = normalize_heading(match.group(1))
+        start = match.end()
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(markdown)
+        if not title:
+            continue
+        sections.setdefault(title, []).append(markdown[start:end].strip())
+    return {title: "\n\n".join(parts).strip() for title, parts in sections.items()}
+
+
+def _contains_keyword(title: str, keywords: list[str]) -> bool:
+    normalized = normalize_heading(title)
+    return any(keyword in normalized for keyword in keywords)
+
+
+def classify_section_title(title: str) -> MarkdownSectionKind:
+    normalized = normalize_heading(title)
+    if _contains_keyword(normalized, POSITIVE_SECTION_KEYWORDS):
+        return "positive_control"
+    if _contains_keyword(normalized, QUESTION_SECTION_KEYWORDS):
+        return "question"
+    if _contains_keyword(normalized, MISSING_SECTION_KEYWORDS):
+        return "missing_context"
+    if _contains_keyword(normalized, EVIDENCE_SECTION_KEYWORDS):
+        return "evidence"
+    if _contains_keyword(normalized, MITIGATION_SECTION_KEYWORDS):
+        return "mitigation"
+    if _contains_keyword(normalized, RISK_SECTION_KEYWORDS):
+        return "risk"
+    return "other"
+
+
+def category_near_markers(
+    text: str,
+    category_terms: list[str],
+    markers: list[str],
+    window_chars: int = 220,
+) -> bool:
+    lower = text.lower()
+    category_positions: list[tuple[int, int]] = []
+    marker_positions: list[tuple[int, int]] = []
+    for term in category_terms:
+        term_lower = term.lower()
+        if not term_lower:
+            continue
+        for match in re.finditer(re.escape(term_lower), lower):
+            category_positions.append((match.start(), match.end()))
+    for marker in markers:
+        marker_lower = marker.lower()
+        if not marker_lower:
+            continue
+        for match in re.finditer(re.escape(marker_lower), lower):
+            marker_positions.append((match.start(), match.end()))
+    return any(
+        abs(category_start - marker_start) <= window_chars
+        or abs(category_end - marker_end) <= window_chars
+        for category_start, category_end in category_positions
+        for marker_start, marker_end in marker_positions
+    )
 
 
 def categories_from_repo_json(path: Path) -> tuple[set[str], set[str], set[str]]:
@@ -106,20 +246,54 @@ def categories_from_repo_json(path: Path) -> tuple[set[str], set[str], set[str]]
 
 
 def categories_from_markdown(path: Path, aliases: dict[str, list[str]]) -> tuple[set[str], set[str], set[str]]:
+    risk, missing, positive, _ = categories_from_markdown_with_mode(path, aliases)
+    return risk, missing, positive
+
+
+def categories_from_markdown_sectioned(path: Path, aliases: dict[str, list[str]]) -> tuple[set[str], set[str], set[str]]:
+    risk, missing, positive, _ = categories_from_markdown_with_mode(path, aliases)
+    return risk, missing, positive
+
+
+def categories_from_markdown_with_mode(path: Path, aliases: dict[str, list[str]]) -> tuple[set[str], set[str], set[str], str]:
     if not path.exists():
-        return set(), set(), set()
+        return set(), set(), set(), "fallback_markdown"
     text = path.read_text(encoding="utf-8", errors="ignore")
-    found = mentioned_categories(text, aliases)
-    lower = text.lower()
-    missing = set()
-    positive = set()
-    for category in found:
-        terms = category_terms(aliases)[category]
-        if any(term.lower() in lower and any(marker in lower for marker in MISSING_CONTEXT_TERMS) for term in terms):
-            missing.add(category)
-        if any(marker in lower for marker in ["positive controls", "documented", "rate limit", "robots.txt", "license", "data card", "model card", "responsible disclosure"]):
-            positive.add(category)
-    return found, missing, positive
+    sections = split_markdown_sections(text)
+    typed_sections: dict[MarkdownSectionKind, list[str]] = {
+        "risk": [],
+        "missing_context": [],
+        "positive_control": [],
+        "evidence": [],
+        "mitigation": [],
+        "question": [],
+        "other": [],
+    }
+    for title, body in sections.items():
+        typed_sections[classify_section_title(title)].append(f"{title}\n{body}")
+
+    recognized = [kind for kind, bodies in typed_sections.items() if kind != "other" and bodies]
+    terms_by_category = category_terms(aliases)
+    if recognized:
+        risk_text = "\n\n".join(typed_sections["risk"] + typed_sections["evidence"])
+        missing_text = "\n\n".join(typed_sections["missing_context"] + typed_sections["question"])
+        positive_text = "\n\n".join(typed_sections["positive_control"])
+        return (
+            mentioned_categories(risk_text, aliases),
+            mentioned_categories(missing_text, aliases),
+            mentioned_categories(positive_text, aliases),
+            "sectioned_markdown",
+        )
+
+    risk_found = mentioned_categories(text, aliases)
+    missing_found: set[str] = set()
+    positive_found: set[str] = set()
+    for category, terms in terms_by_category.items():
+        if category_near_markers(text, terms, MISSING_CONTEXT_TERMS):
+            missing_found.add(category)
+        if category_near_markers(text, terms, POSITIVE_CONTROL_MARKERS):
+            positive_found.add(category)
+    return risk_found, missing_found, positive_found, "fallback_markdown"
 
 
 def ratio(found: set[str], expected: set[str]) -> float:
@@ -144,6 +318,34 @@ def actionability(text: str) -> float:
     return min(1.0, sum(1 for term in ACTION_TERMS if term in lower) / 4)
 
 
+def phrase_recall(text: str, phrases: list[str]) -> float:
+    if not phrases:
+        return 1.0
+    lower = text.lower()
+    return sum(1 for phrase in phrases if phrase.lower() in lower) / len(phrases)
+
+
+def phrase_violations(text: str, phrases: list[str]) -> list[str]:
+    lower = text.lower()
+    return sorted({phrase for phrase in phrases if phrase.lower() in lower})
+
+
+def category_attribute_match(json_path: Path, expected: dict[str, str], attribute: str) -> float | None:
+    if not expected or not json_path.exists():
+        return None
+    report = json.loads(json_path.read_text(encoding="utf-8"))
+    actual_by_category: dict[str, set[str]] = {}
+    for finding in report.get("findings", []):
+        category = finding.get("category")
+        value = finding.get(attribute)
+        if category and value:
+            actual_by_category.setdefault(str(category), set()).add(str(value))
+    if not actual_by_category:
+        return 0.0
+    hits = sum(1 for category, value in expected.items() if str(value) in actual_by_category.get(str(category), set()))
+    return hits / len(expected)
+
+
 def score_system(
     *,
     system_name: str,
@@ -162,10 +364,11 @@ def score_system(
     if json_path.exists():
         text += "\n" + json_path.read_text(encoding="utf-8", errors="ignore")
 
+    markdown_scoring_mode = "structured_json"
     if json_path.exists():
         risk_found, missing_found, positive_found = categories_from_repo_json(json_path)
     else:
-        risk_found, missing_found, positive_found = categories_from_markdown(md_path, aliases)
+        risk_found, missing_found, positive_found, markdown_scoring_mode = categories_from_markdown_with_mode(md_path, aliases)
 
     expected_risk = set(case.get("expected_risk_categories", []))
     expected_missing = set(case.get("expected_missing_context_categories", []))
@@ -176,10 +379,12 @@ def score_system(
     overclaims = count_patterns(text, OVERCLAIM_PATTERNS)
     leaked = [value for value in case.get("secret_values_to_check", []) if value and value in text]
     missing_discipline = 1.0 if not expected_missing or any(term in text.lower() for term in MISSING_CONTEXT_TERMS) else 0.0
+    must_not_mention_hits = phrase_violations(text, case.get("must_not_mention", []))
 
     return {
         "system": system_name,
         "case_id": case_id,
+        "markdown_scoring_mode": markdown_scoring_mode,
         "expected_risk_categories": sorted(expected_risk),
         "expected_missing_context_categories": sorted(expected_missing),
         "expected_positive_controls": sorted(expected_positive),
@@ -193,6 +398,15 @@ def score_system(
         "unsupported_conclusion_count": overclaims,
         "secret_leakage_count": len(leaked),
         "missing_context_discipline": missing_discipline,
+        "must_mention_recall": phrase_recall(text, case.get("must_mention", [])),
+        "must_not_mention_violations": len(must_not_mention_hits),
+        "must_not_mention_terms_found": must_not_mention_hits,
+        "severity_match": category_attribute_match(json_path, case.get("expected_severity_by_category", {}), "severity")
+        if json_path.exists()
+        else None,
+        "status_match": category_attribute_match(json_path, case.get("expected_status_by_category", {}), "status")
+        if json_path.exists()
+        else None,
         "actionability": actionability(text),
         "risk_categories_found": sorted(risk_found),
         "missing_context_categories_found": sorted(missing_found),
@@ -213,9 +427,29 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "unsupported_conclusion_count",
         "secret_leakage_count",
         "missing_context_discipline",
+        "must_mention_recall",
+        "must_not_mention_violations",
+        "severity_match",
+        "status_match",
         "actionability",
     ]
-    return {key: mean(float(row[key]) for row in rows) for key in numeric} | {"case_count": len(rows)}
+    aggregated: dict[str, Any] = {"case_count": len(rows)}
+    for key in numeric:
+        values = [float(row[key]) for row in rows if isinstance(row.get(key), int | float)]
+        aggregated[key] = mean(values) if values else None
+    return aggregated
+
+
+def _format_metric(value: Any) -> str:
+    if value is None:
+        return "n/a"
+    if isinstance(value, int | float):
+        return f"{value:.2f}"
+    return str(value)
+
+
+def output_available_for_case(output_dir: Path, case_id: str) -> bool:
+    return (output_dir / f"{case_id}.md").exists() or (output_dir / f"{case_id}.json").exists()
 
 
 def write_summary(results: dict[str, Any], summary_path: Path) -> None:
@@ -224,28 +458,47 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
     lines = [
         "# Benchmark Summary",
         "",
-        "This synthetic benchmark measures report quality and evidence grounding, not final ethical truth.",
+        "These scores measure report behavior on synthetic controlled cases, not final ethical truth.",
         "",
-        "| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Forbidden | Overclaims | Secret Leaks |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "## Output Availability",
+        "",
     ]
+    availability = results.get("output_availability", {})
+    if availability:
+        for system, counts in availability.items():
+            lines.append(f"- `{system}`: {counts.get('available', 0)}/{counts.get('total_cases', 0)} outputs available")
+    else:
+        for system, metrics in systems.items():
+            lines.append(f"- `{system}`: {metrics.get('case_count', 0)} outputs scored")
+    lines.extend(
+        [
+            "",
+            "## Metrics",
+            "",
+            "| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
     for system, metrics in systems.items():
         lines.append(
-            f"| {system} | {metrics.get('case_count', 0)} | {metrics.get('category_recall', 0):.2f} | "
-            f"{metrics.get('evidence_groundedness', 0):.2f} | {metrics.get('missing_context_recall', 0):.2f} | "
-            f"{metrics.get('positive_control_recall', 0):.2f} | {metrics.get('false_positive_count', 0):.2f} | "
-            f"{metrics.get('forbidden_language_violations', 0):.2f} | {metrics.get('unsupported_conclusion_count', 0):.2f} | "
-            f"{metrics.get('secret_leakage_count', 0):.2f} |"
+            f"| {system} | {metrics.get('case_count', 0)} | {_format_metric(metrics.get('category_recall'))} | "
+            f"{_format_metric(metrics.get('evidence_groundedness'))} | {_format_metric(metrics.get('missing_context_recall'))} | "
+            f"{_format_metric(metrics.get('positive_control_recall'))} | {_format_metric(metrics.get('false_positive_count'))} | "
+            f"{_format_metric(metrics.get('must_mention_recall'))} | {_format_metric(metrics.get('must_not_mention_violations'))} | "
+            f"{_format_metric(metrics.get('forbidden_language_violations'))} | {_format_metric(metrics.get('unsupported_conclusion_count'))} | "
+            f"{_format_metric(metrics.get('secret_leakage_count'))} |"
         )
     lines.extend(
         [
             "",
             "## Interpretation",
             "",
-            "- On this benchmark, compare systems by separate metrics rather than a blended score.",
-            "- Repo-ethics is expected to be strongest on deterministic evidence grounding, forbidden-language avoidance, positive-control recognition, and prompt-injection resistance.",
-            "- Direct Codex outputs may be richer on unusual risks outside the scanner taxonomy when human-collected baseline reports are available.",
-            "- The benchmark is synthetic and should be expanded with human-labeled real cases before drawing broad claims.",
+            "- Compare systems by separate metrics rather than a blended score.",
+            "- Higher category recall on this synthetic benchmark means a report named more expected taxonomy categories; it is not a final ethics judgment.",
+            "- Lower expected-absent false positives indicate fewer expected-absent categories were reported as risks for these controlled cases.",
+            "- Higher evidence-groundedness means expected repository paths were cited more often.",
+            "- Positive-control recognition is reported separately from risk recall so safeguards do not erase underlying risk signals.",
+            "- Direct Codex output counts may cover only a subset of cases; check output availability before comparing aggregate metrics.",
         ]
     )
 
@@ -284,17 +537,16 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
         else:
             lines.append("- No repo-ethics case outputs were available.")
 
-        direct_rows = {row["case_id"]: row for row in rows if row["system"] == "direct_codex"}
-        if direct_rows:
+        direct_systems = [system for system in systems if system.startswith("direct_codex")]
+        if direct_systems:
             lines.extend(["", "## Comparative Notes", ""])
-            for repo_row in repo_rows:
-                direct = direct_rows.get(repo_row["case_id"])
-                if not direct:
-                    continue
-                if direct["category_recall"] > repo_row["category_recall"]:
-                    lines.append(f"- Direct Codex did better on category recall for `{repo_row['case_id']}`.")
-                elif direct["category_recall"] < repo_row["category_recall"]:
-                    lines.append(f"- Repo-ethics did better on category recall for `{repo_row['case_id']}`.")
+            lines.append(
+                "- Direct baselines are scored only where manually collected Markdown outputs are present; compare overlapping cases and individual metrics."
+            )
+            repo_case_ids = {row["case_id"] for row in repo_rows}
+            for system in sorted(direct_systems):
+                overlap = len({row["case_id"] for row in rows if row["system"] == system} & repo_case_ids)
+                lines.append(f"- `{system}` overlaps repo-ethics on {overlap} cases.")
         else:
             lines.extend(["", "## Comparative Notes", "", "- No direct Codex baseline outputs were present, so comparative claims are not reported."])
 
@@ -319,6 +571,7 @@ def main() -> None:
     parser.add_argument("--aliases", type=Path, default=REPO_ROOT / "benchmarks" / "category_aliases.yaml")
     parser.add_argument("--repo-output-dir", type=Path, default=REPO_ROOT / "benchmarks" / "outputs" / "repo_ethics")
     parser.add_argument("--direct-output-dir", type=Path, default=REPO_ROOT / "benchmarks" / "outputs" / "direct_codex")
+    parser.add_argument("--direct-naive-output-dir", type=Path, default=REPO_ROOT / "benchmarks" / "outputs" / "direct_codex_naive")
     parser.add_argument("--results-dir", type=Path, default=REPO_ROOT / "benchmarks" / "results")
     parser.add_argument("--include-unreviewed", action="store_true")
     args = parser.parse_args()
@@ -335,20 +588,52 @@ def main() -> None:
         cases.append(gold)
 
     rows: list[dict[str, Any]] = []
+    output_dirs = {
+        "repo_ethics": args.repo_output_dir,
+        "direct_codex_strong": args.direct_output_dir,
+        "direct_codex_naive": args.direct_naive_output_dir,
+    }
+    output_availability = {
+        system: {
+            "available": sum(1 for case in cases if output_available_for_case(output_dir, case["case_id"])),
+            "total_cases": len(cases),
+            "output_dir": str(output_dir),
+        }
+        for system, output_dir in output_dirs.items()
+    }
     for case in cases:
         repo_score = score_system(system_name="repo_ethics", case=case, aliases=aliases, output_dir=args.repo_output_dir)
         if repo_score is not None:
             rows.append(repo_score)
-        direct_score = score_system(system_name="direct_codex", case=case, aliases=aliases, output_dir=args.direct_output_dir)
-        if direct_score is not None:
-            rows.append(direct_score)
+        direct_strong_score = score_system(
+            system_name="direct_codex_strong",
+            case=case,
+            aliases=aliases,
+            output_dir=args.direct_output_dir,
+        )
+        if direct_strong_score is not None:
+            rows.append(direct_strong_score)
+        direct_naive_score = score_system(
+            system_name="direct_codex_naive",
+            case=case,
+            aliases=aliases,
+            output_dir=args.direct_naive_output_dir,
+        )
+        if direct_naive_score is not None:
+            rows.append(direct_naive_score)
 
     systems: dict[str, dict[str, Any]] = {}
     for system in sorted({row["system"] for row in rows}):
         systems[system] = aggregate([row for row in rows if row["system"] == system])
 
     args.results_dir.mkdir(parents=True, exist_ok=True)
-    results = {"benchmark_version": "0.1.0", "case_count": len(cases), "systems": systems, "cases": rows}
+    results = {
+        "benchmark_version": "0.1.0",
+        "case_count": len(cases),
+        "systems": systems,
+        "output_availability": output_availability,
+        "cases": rows,
+    }
     (args.results_dir / "results.json").write_text(json.dumps(results, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     write_summary(results, args.results_dir / "summary.md")
     print(f"Scored {len(rows)} system-case outputs. Results written to {args.results_dir}")

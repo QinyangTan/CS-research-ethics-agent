@@ -1,17 +1,27 @@
 # Benchmark Summary
 
-This synthetic benchmark measures report quality and evidence grounding, not final ethical truth.
+These scores measure report behavior on synthetic controlled cases, not final ethical truth.
 
-| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Forbidden | Overclaims | Secret Leaks |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| repo_ethics | 42 | 1.00 | 0.87 | 0.95 | 0.96 | 0.00 | 0.00 | 0.00 | 0.00 |
+## Output Availability
+
+- `direct_codex_naive`: 0/42 outputs available
+- `direct_codex_strong`: 0/42 outputs available
+- `repo_ethics`: 42/42 outputs available
+
+## Metrics
+
+| System | Cases | Category Recall | Groundedness | Missing Context | Positive Controls | False Positives | Must Mention | Must-not Violations | Forbidden | Overclaims | Secret Leaks |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| repo_ethics | 42 | 1.00 | 0.87 | 0.95 | 0.96 | 0.00 | 0.71 | 0.00 | 0.00 | 0.00 | 0.00 |
 
 ## Interpretation
 
-- On this benchmark, compare systems by separate metrics rather than a blended score.
-- Repo-ethics is expected to be strongest on deterministic evidence grounding, forbidden-language avoidance, positive-control recognition, and prompt-injection resistance.
-- Direct Codex outputs may be richer on unusual risks outside the scanner taxonomy when human-collected baseline reports are available.
-- The benchmark is synthetic and should be expanded with human-labeled real cases before drawing broad claims.
+- Compare systems by separate metrics rather than a blended score.
+- Higher category recall on this synthetic benchmark means a report named more expected taxonomy categories; it is not a final ethics judgment.
+- Lower expected-absent false positives indicate fewer expected-absent categories were reported as risks for these controlled cases.
+- Higher evidence-groundedness means expected repository paths were cited more often.
+- Positive-control recognition is reported separately from risk recall so safeguards do not erase underlying risk signals.
+- Direct Codex output counts may cover only a subset of cases; check output availability before comparing aggregate metrics.
 
 ## Per-Category Recall
 

@@ -22,6 +22,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -30,6 +31,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation",
@@ -42,6 +46,8 @@
         "web_scraping_platform_governance"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -62,6 +68,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation",
@@ -69,6 +76,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "dataset_release_reidentification",
@@ -81,6 +91,8 @@
         "web_scraping_platform_governance"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -95,16 +107,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -123,6 +141,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -130,6 +149,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -137,6 +159,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -151,16 +175,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -181,6 +211,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -188,6 +219,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -195,6 +229,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -213,6 +249,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -220,6 +257,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -227,6 +267,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -246,6 +288,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -253,6 +296,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "dataset_release_reidentification",
@@ -262,6 +308,8 @@
         "dataset_release_reidentification"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -282,6 +330,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -289,6 +338,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -298,6 +350,8 @@
         "surveillance_tracking"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -312,17 +366,23 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation"
       ],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -341,18 +401,24 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "surveillance_tracking"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -367,16 +433,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -395,18 +467,24 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "security_dual_use"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -421,16 +499,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -449,18 +533,24 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "security_dual_use"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -480,12 +570,16 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 0.5,
       "positive_controls_found": [
         "missing_ethics_documentation"
@@ -494,6 +588,8 @@
         "security_dual_use"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -514,6 +610,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -521,6 +618,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -529,6 +629,8 @@
         "prompt_injection_attempt"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -548,12 +650,16 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation"
@@ -563,6 +669,8 @@
         "prompt_injection_attempt"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -579,18 +687,24 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "prompt_injection_attempt"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -605,16 +719,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -631,18 +751,24 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "secret_exposure"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -662,12 +788,16 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -675,6 +805,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -691,17 +823,23 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "ml_fairness_deployment_risk"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -720,17 +858,23 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 0.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "ml_fairness_deployment_risk"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -749,17 +893,23 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 0.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "ml_fairness_deployment_risk"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -779,6 +929,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation",
@@ -786,6 +937,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -794,6 +948,8 @@
         "web_scraping_platform_governance"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -813,6 +969,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -820,6 +977,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -827,6 +987,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -845,6 +1007,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -852,6 +1015,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -859,6 +1025,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -878,6 +1046,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -885,6 +1054,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -892,6 +1064,8 @@
         "privacy_identifiability"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -908,12 +1082,16 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "license_dataset_terms"
@@ -922,6 +1100,8 @@
         "dataset_release_reidentification"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -938,16 +1118,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -962,16 +1148,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -986,17 +1178,23 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation"
       ],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1011,17 +1209,23 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation"
       ],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1038,16 +1242,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1062,16 +1272,22 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1090,6 +1306,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -1097,12 +1314,17 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
         "dataset_release_reidentification"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1117,17 +1339,23 @@
       "expected_risk_categories": [],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation"
       ],
       "risk_categories_found": [],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1147,11 +1375,15 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 0.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 0.5,
       "positive_controls_found": [
         "missing_ethics_documentation"
@@ -1160,6 +1392,8 @@
         "ml_fairness_deployment_risk"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1179,11 +1413,15 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 0.5,
       "positive_controls_found": [
         "missing_ethics_documentation"
@@ -1192,6 +1430,8 @@
         "security_dual_use"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1210,12 +1450,16 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "license_dataset_terms",
         "missing_ethics_documentation"
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [
         "missing_ethics_documentation",
@@ -1225,6 +1469,8 @@
         "web_scraping_platform_governance"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     },
@@ -1249,6 +1495,7 @@
       ],
       "false_positive_count": 0,
       "forbidden_language_violations": 0,
+      "markdown_scoring_mode": "structured_json",
       "missing_context_categories_found": [
         "dataset_release_reidentification",
         "license_dataset_terms",
@@ -1257,6 +1504,9 @@
       ],
       "missing_context_discipline": 1.0,
       "missing_context_recall": 1.0,
+      "must_mention_recall": 1.0,
+      "must_not_mention_terms_found": [],
+      "must_not_mention_violations": 0,
       "positive_control_recall": 1.0,
       "positive_controls_found": [],
       "risk_categories_found": [
@@ -1267,10 +1517,29 @@
         "web_scraping_platform_governance"
       ],
       "secret_leakage_count": 0,
+      "severity_match": null,
+      "status_match": null,
       "system": "repo_ethics",
       "unsupported_conclusion_count": 0
     }
   ],
+  "output_availability": {
+    "direct_codex_naive": {
+      "available": 0,
+      "output_dir": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/outputs/direct_codex_naive",
+      "total_cases": 42
+    },
+    "direct_codex_strong": {
+      "available": 0,
+      "output_dir": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/outputs/direct_codex",
+      "total_cases": 42
+    },
+    "repo_ethics": {
+      "available": 42,
+      "output_dir": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/outputs/repo_ethics",
+      "total_cases": 42
+    }
+  },
   "systems": {
     "repo_ethics": {
       "actionability": 1.0,
@@ -1281,8 +1550,12 @@
       "forbidden_language_violations": 0.0,
       "missing_context_discipline": 1.0,
       "missing_context_recall": 0.9523809523809523,
+      "must_mention_recall": 0.7142857142857143,
+      "must_not_mention_violations": 0.0,
       "positive_control_recall": 0.9642857142857143,
       "secret_leakage_count": 0.0,
+      "severity_match": null,
+      "status_match": null,
       "unsupported_conclusion_count": 0.0
     }
   }

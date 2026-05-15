@@ -35,6 +35,8 @@ security_dual_use:
   - dual-use
   - misuse risk
   - vulnerability disclosure
+  - responsible disclosure
+  - authorization scope
   - offensive security
   - vulnerability scanner
   - port scanning

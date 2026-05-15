@@ -25,4 +25,5 @@ Evidence type policy:
 - Do not present `positive_control` evidence as a risk.
 - Do not count negated documentation as coverage.
 - Preserve target-aware nuance: unrelated negation should not hide a later true risk signal.
-- Benchmark summaries should say they measure report quality and evidence grounding, not final ethical truth.
+- Benchmark summaries should say they measure report behavior on synthetic controlled cases, not final ethical truth.
+- Benchmark comparisons should name the specific metric being compared and should note when direct-baseline output coverage is partial.

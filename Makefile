@@ -1,4 +1,4 @@
-.PHONY: test benchmark benchmark-score
+.PHONY: test benchmark benchmark-score check-no-llm
 
 test:
 	pytest
@@ -9,3 +9,6 @@ benchmark:
 
 benchmark-score:
 	python3 benchmarks/scripts/score_reports.py
+
+check-no-llm:
+	python3 scripts/check_no_hosted_llm_calls.py

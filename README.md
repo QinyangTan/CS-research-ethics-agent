@@ -85,9 +85,12 @@ The benchmark suite in `benchmarks/` uses tiny synthetic fixtures and reviewed g
 ```bash
 make benchmark
 make benchmark-score
+make check-no-llm
 ```
 
-Direct Codex comparison is optional and manual by default. Use `benchmarks/prompts/direct_codex_prompt.md`, save outputs under `benchmarks/outputs/direct_codex/`, then rerun scoring. The benchmark reports category recall, groundedness, false positives, missing-context discipline, positive-control recognition, forbidden-language violations, unsupported conclusions, actionability, and secret leakage separately. It measures report quality and evidence grounding, not final ethical truth.
+Direct Codex comparison is optional and manual by default. Use `benchmarks/prompts/direct_codex_prompt.md` for the strong direct baseline and `benchmarks/prompts/direct_codex_naive_prompt.md` for the naive direct baseline. Save strong outputs under `benchmarks/outputs/direct_codex/` and naive outputs under `benchmarks/outputs/direct_codex_naive/`, then rerun scoring. The benchmark reports category recall, groundedness, false positives, missing-context discipline, positive-control recognition, forbidden-language violations, unsupported conclusions, actionability, and secret leakage separately. It also reports output availability counts so partial direct baselines are not mistaken for full comparisons. These scores measure report behavior on synthetic controlled cases, not final ethical truth.
+
+`python3 scripts/check_no_hosted_llm_calls.py` verifies that source code does not add hosted LLM API imports or call paths. Benchmark fixture strings and manual direct-baseline documentation are allowed; implementation call paths are not.
 
 ## Limitations
 

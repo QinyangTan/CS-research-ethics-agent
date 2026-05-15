@@ -88,7 +88,10 @@ Controls:
 - The benchmark is synthetic and versioned.
 - Reviewed labels are separated from fixture generation.
 - Metrics report recall, groundedness, false positives, missing-context discipline, positive-control recognition, overclaiming, and secret leakage separately.
+- Direct baselines are split into naive and strong manual prompts, and output availability is reported per system.
+- Section-aware direct-output scoring reduces over-crediting when missing-context or positive-control markers appear in unrelated sections.
 - Documentation states that direct Codex comparison is optional and no hosted LLM call is made by default.
+- `scripts/check_no_hosted_llm_calls.py` scans source/config files for hosted LLM import or API-call paths while allowing benchmark fixtures and documentation disclaimers.
 
 ### Scanner False Negatives
 
