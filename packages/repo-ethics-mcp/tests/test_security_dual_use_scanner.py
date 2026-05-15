@@ -22,3 +22,9 @@ def test_security_scanner_ignores_negated_vulnerability_scanner(tmp_path: Path) 
     evidence = scan(tmp_path)
     assert not [item for item in evidence if item.category == "security_dual_use"]
 
+
+def test_security_scanner_ignores_not_used_for_port_scanning(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    readme.write_text("This tool is not used for port scanning.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    assert not [item for item in evidence if item.category == "security_dual_use"]

@@ -47,3 +47,22 @@ def test_positive_controls_preserve_exact_file_paths(tmp_path: Path) -> None:
     positive_paths = {item.file_path for item in evidence if item.evidence_type == "positive_control"}
     assert "docs/privacy.md" in positive_paths
 
+
+def test_positive_control_uses_first_doc_with_topic_not_later_doc(tmp_path: Path) -> None:
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    first = docs / "01-privacy.md"
+    first.write_text("This privacy note documents consent for email data collection.", encoding="utf-8")
+    later = docs / "99-unrelated.md"
+    later.write_text("This unrelated note discusses project setup only.", encoding="utf-8")
+    readme = tmp_path / "README.md"
+    readme.write_text("This project stores email addresses.", encoding="utf-8")
+
+    evidence = scan(tmp_path)
+    consent_controls = [
+        item
+        for item in evidence
+        if item.evidence_type == "positive_control" and "consent/reasonable expectation" in item.reason
+    ]
+    assert consent_controls
+    assert {item.file_path for item in consent_controls} == {"docs/01-privacy.md"}

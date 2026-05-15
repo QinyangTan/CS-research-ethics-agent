@@ -128,6 +128,7 @@ def _required_topics(signals: dict[str, bool]) -> list[str]:
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
     repo_text = ""
     docs_text = ""
+    docs: list[tuple[str, str]] = []
     docs_files: list[str] = []
     evidence: list[EvidenceItem] = []
 
@@ -137,6 +138,7 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
         rel = scanned.rel_path.lower()
         if rel.endswith((".md", ".rst", ".txt")) or rel.startswith("docs/"):
             docs_files.append(scanned.rel_path)
+            docs.append((scanned.rel_path, text))
             docs_text += "\n" + text
             if "security.md" == Path(rel).name:
                 evidence.append(
@@ -171,12 +173,16 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
         patterns = TOPIC_PATTERNS[topic]
         if topic_is_covered(docs_text, patterns):
             covered_topics.append(topic)
-            for start, end, _ in find_positive_topic_mentions(text, patterns):
+            for doc_path, doc_text in docs:
+                mentions = find_positive_topic_mentions(doc_text, patterns)
+                if not mentions:
+                    continue
+                start, end, _ = mentions[0]
                 evidence.append(
                     make_match_evidence(
                         category="missing_ethics_documentation",
-                        file_path=scanned.rel_path,
-                        text=text,
+                        file_path=doc_path,
+                        text=doc_text,
                         start=start,
                         end=end,
                         reason=f"Documentation includes {topic}.",
