@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_public_logs_ip`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_logs_ip`
+- Root path: `benchmarks/fixtures/case_public_logs_ip`
 - Languages: JSON, Markdown
 - Important files: README.md, data/schema.json
 - Possible human data: True
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `data/schema.json`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -76,6 +81,8 @@ No positive controls were detected from repository evidence.
 ## Recommended Mitigations
 
 - Create a data card or datasheet.
+- State whether raw records, derived features, or only aggregate statistics will be released.
+- Define a release policy for public, restricted, or no-release data.
 - Avoid public release of raw identifiable records.
 - Aggregate, redact, or perturb fields that could identify people.
 - Define retention and deletion policy.
@@ -93,6 +100,7 @@ No positive controls were detected from repository evidence.
 - Will raw data, derived data, or only aggregate statistics be released?
 - What fields could enable re-identification?
 - Is there a data card or datasheet?
+- What release, retention, deletion, and access-control policy applies?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

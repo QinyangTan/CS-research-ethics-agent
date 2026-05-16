@@ -1,6 +1,6 @@
 **Project Summary**
 
-This appears to be a minimal computer vision fixture for fruit image classification. The README explicitly states that the project does not use `face_recognition` and analyzes fruit images instead: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/README.md:1). The only source file defines fruit labels, `apple` and `banana`: [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/src%202/main.py:1).
+This appears to be a minimal computer vision fixture for fruit image classification. The README explicitly states that the project does not use `face_recognition` and analyzes fruit images instead: [README.md](benchmarks/fixtures/case_biometrics_negated/README.md:1). The only source file defines fruit labels, `apple` and `banana`: [src 2/main.py](benchmarks/fixtures/case_biometrics_negated/src%202/main.py:1).
 
 **Potential Ethics Issues**
 

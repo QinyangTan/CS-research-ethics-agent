@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-The repository appears to be a minimal image-labeling or image-analysis fixture. The only implementation evidence is `labels = ['apple', 'banana']` in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/src/main.py:1). The README states that the project does not use `face_recognition` and analyzes fruit images in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/README.md:1).
+The repository appears to be a minimal image-labeling or image-analysis fixture. The only implementation evidence is `labels = ['apple', 'banana']` in [src/main.py](benchmarks/fixtures/case_biometrics_negated/src/main.py:1). The README states that the project does not use `face_recognition` and analyzes fruit images in [README.md](benchmarks/fixtures/case_biometrics_negated/README.md:1).
 
 No dataset files, model code, training pipeline, inference code, deployment configuration, or data collection procedure are present.
 
@@ -11,8 +11,8 @@ No dataset files, model code, training pipeline, inference code, deployment conf
 ### Human Subjects And Biometric Processing
 
 Evidence found:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/README.md:1) says the project does not use `face_recognition`.
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/src/main.py:1) contains only fruit labels: `apple`, `banana`.
+- [README.md](benchmarks/fixtures/case_biometrics_negated/README.md:1) says the project does not use `face_recognition`.
+- [src/main.py](benchmarks/fixtures/case_biometrics_negated/src/main.py:1) contains only fruit labels: `apple`, `banana`.
 
 Pre-review assessment:
 - Direct evidence of biometric processing is absent.
@@ -41,7 +41,7 @@ Pre-review assessment:
 ### Misclassification, Bias, And Downstream Harm
 
 Evidence found:
-- The only classes shown are `apple` and `banana` in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/src/main.py:1).
+- The only classes shown are `apple` and `banana` in [src/main.py](benchmarks/fixtures/case_biometrics_negated/src/main.py:1).
 
 Pre-review assessment:
 - For fruit classification, likely harms are low compared with systems affecting people.
@@ -86,4 +86,4 @@ Pre-review assessment:
 
 ## Limitations Of This Review
 
-This review is based only on direct inspection of the visible repository files: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/README.md:1) and [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_biometrics_negated/src/main.py:1). I did not use repository ethics scanners or MCP outputs. The repository is too minimal to verify actual datasets, dependencies, runtime behavior, model behavior, or deployment context. This is a pre-review only and does not determine ethical approval, legal compliance, safety, or whether formal review is required.
+This review is based only on direct inspection of the visible repository files: [README.md](benchmarks/fixtures/case_biometrics_negated/README.md:1) and [src/main.py](benchmarks/fixtures/case_biometrics_negated/src/main.py:1). I did not use repository ethics scanners or MCP outputs. The repository is too minimal to verify actual datasets, dependencies, runtime behavior, model behavior, or deployment context. This is a pre-review only and does not determine ethical approval, legal compliance, safety, or whether formal review is required.

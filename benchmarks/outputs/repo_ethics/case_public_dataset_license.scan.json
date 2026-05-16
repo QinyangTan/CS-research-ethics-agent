@@ -109,7 +109,12 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_public_dataset_license",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license"
+    "reviewed_files": [
+      "README.md",
+      "docs/data_terms.md",
+      "LICENSE"
+    ],
+    "root_path": "benchmarks/fixtures/case_public_dataset_license"
   },
   "warnings": []
 }

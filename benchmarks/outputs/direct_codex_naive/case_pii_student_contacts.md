@@ -4,10 +4,10 @@ This repository appears to define a small dataset for a class project that store
 
 **Potential Ethics Issues**
 
-- **Student PII collection:** [data 2/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/data%202/schema.json:1) includes `student_id`, `email`, and `location`. These fields can identify or contact students directly.
+- **Student PII collection:** [data 2/schema.json](benchmarks/fixtures/case_pii_student_contacts/data%202/schema.json:1) includes `student_id`, `email`, and `location`. These fields can identify or contact students directly.
 - **Location privacy risk:** `location` can expose sensitive information about students’ residence, movements, or campus presence, depending on granularity.
-- **Missing privacy policy:** [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/README.md:1) states that privacy is not documented.
-- **Missing retention policy:** [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/README.md:1) also states retention is not documented, creating risk of indefinite storage.
+- **Missing privacy policy:** [README.md](benchmarks/fixtures/case_pii_student_contacts/README.md:1) states that privacy is not documented.
+- **Missing retention policy:** [README.md](benchmarks/fixtures/case_pii_student_contacts/README.md:1) also states retention is not documented, creating risk of indefinite storage.
 - **Consent and purpose limitation unclear:** The repo does not explain whether students consented, what the data is used for, who can access it, or whether participation affects grades or class standing.
 - **Security controls absent:** No access control, encryption, de-identification, deletion process, or breach response documentation is present.
 

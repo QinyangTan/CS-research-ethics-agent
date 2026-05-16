@@ -2,13 +2,13 @@
 
 **Project Summary**
 
-The repository appears to be a minimal classroom machine-learning demo. The only substantive project description says it “Classifies iris flower measurements for a classroom ML demo” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/README.md:1). The implementation currently contains only an `import sklearn` statement in [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/src/model.py:1), with no dataset loading, training code, evaluation, deployment path, or data collection logic present.
+The repository appears to be a minimal classroom machine-learning demo. The only substantive project description says it “Classifies iris flower measurements for a classroom ML demo” in [README.md](benchmarks/fixtures/case_ml_iris_harmless/README.md:1). The implementation currently contains only an `import sklearn` statement in [src/model.py](benchmarks/fixtures/case_ml_iris_harmless/src/model.py:1), with no dataset loading, training code, evaluation, deployment path, or data collection logic present.
 
 **Risk Categories And Evidence From Files**
 
 | Risk category | Assessment | Evidence |
 |---|---:|---|
-| Human-subjects or personal-data risk | Low based on visible files | README frames the project as iris flower measurement classification, not human data: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/README.md:1). |
+| Human-subjects or personal-data risk | Low based on visible files | README frames the project as iris flower measurement classification, not human data: [README.md](benchmarks/fixtures/case_ml_iris_harmless/README.md:1). |
 | Privacy and re-identification | No direct evidence of privacy risk | No files contain personal identifiers, user data handling, scraping, telemetry, or storage logic. |
 | Dataset provenance and licensing | Missing context | The README implies the Iris dataset but does not name the exact source, license, version, or whether data is bundled externally. |
 | Bias, fairness, and representational harm | Low for visible scope | Iris flower classification is not about people or protected attributes, based on the repository contents. |
@@ -45,4 +45,4 @@ The repository appears to be a minimal classroom machine-learning demo. The only
 
 **Limitations Of This Review**
 
-This review is based only on the visible repository files: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/README.md:1) and [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/src/model.py:1). The repository contains very little implementation detail, so the assessment is necessarily limited. I did not use repo-ethics MCP tools or scanner output. This is a preliminary ethics review, not a determination of approval, rejection, legal compliance, safety, or IRB requirements.
+This review is based only on the visible repository files: [README.md](benchmarks/fixtures/case_ml_iris_harmless/README.md:1) and [src/model.py](benchmarks/fixtures/case_ml_iris_harmless/src/model.py:1). The repository contains very little implementation detail, so the assessment is necessarily limited. I did not use repo-ethics MCP tools or scanner output. This is a preliminary ethics review, not a determination of approval, rejection, legal compliance, safety, or IRB requirements.

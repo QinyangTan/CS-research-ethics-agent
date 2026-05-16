@@ -2,23 +2,23 @@
 
 ## Project Summary
 
-The repository appears to describe a class-project data store for student contact records. The README states: “Stores student contact records for a class project” and notes that privacy and retention are undocumented ([README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/README.md:1)).
+The repository appears to describe a class-project data store for student contact records. The README states: “Stores student contact records for a class project” and notes that privacy and retention are undocumented ([README.md](benchmarks/fixtures/case_pii_student_contacts/README.md:1)).
 
-The only schema file defines three fields: `student_id`, `email`, and `location` ([data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/data/schema.json:1)).
+The only schema file defines three fields: `student_id`, `email`, and `location` ([data/schema.json](benchmarks/fixtures/case_pii_student_contacts/data/schema.json:1)).
 
 ## Risk Categories and Evidence
 
 - **Personally identifiable information**
   - The schema includes `student_id` and `email`, both of which can identify or link to individual students.
-  - Evidence: [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/data/schema.json:1)
+  - Evidence: [data/schema.json](benchmarks/fixtures/case_pii_student_contacts/data/schema.json:1)
 
 - **Location privacy**
   - The schema includes `location`, which may be sensitive depending on granularity, collection context, and whether it reflects home, classroom, device, or inferred location.
-  - Evidence: [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/data/schema.json:1)
+  - Evidence: [data/schema.json](benchmarks/fixtures/case_pii_student_contacts/data/schema.json:1)
 
 - **Missing privacy and retention controls**
   - The README explicitly says privacy and retention are not documented.
-  - Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts/README.md:1)
+  - Evidence: [README.md](benchmarks/fixtures/case_pii_student_contacts/README.md:1)
 
 - **Student-subject vulnerability and power dynamics**
   - Because the records are for students in a class project, there may be consent, voluntariness, grading-pressure, or instructor-student power-differential concerns. The repo does not document collection context or safeguards.

@@ -1,7 +1,7 @@
 No high-severity computer science research ethics risks found. This appears to be a harmless classroom ML demo for classifying iris flower measurements, with no human-subject data, personal data, sensitive attributes, deployment pathway, or real-world decision impact evident from the repository.
 
 **Project Summary**
-The repository describes a classroom machine learning demo that “classifies iris flower measurements” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/README.md:1). The only source code currently present is a bare `sklearn` import in [src 2/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless/src%202/model.py:1), so the actual model, dataset loading, training, evaluation, and outputs are not included.
+The repository describes a classroom machine learning demo that “classifies iris flower measurements” in [README.md](benchmarks/fixtures/case_ml_iris_harmless/README.md:1). The only source code currently present is a bare `sklearn` import in [src 2/model.py](benchmarks/fixtures/case_ml_iris_harmless/src%202/model.py:1), so the actual model, dataset loading, training, evaluation, and outputs are not included.
 
 **Potential Ethics Issues**
 - **Dataset provenance and licensing are undocumented.** The README implies the classic iris dataset, but does not say where the data comes from, what license applies, or whether it is bundled, downloaded, or sourced from scikit-learn. This is low risk but should be documented.

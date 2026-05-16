@@ -16,15 +16,15 @@ Based on direct inspection, the visible implementation does not perform scraping
 No direct evidence of personal data handling was found. There are no files showing collection, scraping, storage, inference, profiling, or analysis of identifiable individuals.
 
 Evidence:
-- [`src/main.py`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_negated_scraping/src/main.py:1) only prints a static string.
+- [`src/main.py`](benchmarks/fixtures/case_negated_scraping/src/main.py:1) only prints a static string.
 
 ### Web Scraping / Platform Terms Risk
 
 No scraping implementation is present in the inspected code. The README’s denial is not treated as authoritative, but the code itself also shows no HTTP requests, browser automation, parsers, crawlers, APIs, or data acquisition logic.
 
 Evidence:
-- [`README.md`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_negated_scraping/README.md:1)
-- [`src/main.py`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_negated_scraping/src/main.py:1)
+- [`README.md`](benchmarks/fixtures/case_negated_scraping/README.md:1)
+- [`src/main.py`](benchmarks/fixtures/case_negated_scraping/src/main.py:1)
 
 ### Security / Abuse Risk
 

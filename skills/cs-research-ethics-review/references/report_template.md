@@ -4,6 +4,10 @@
 
 ## Project Summary
 
+## Project Evidence Summary
+
+List a small, representative set of reviewed files. Do not imply that reviewed files prove the project is safe or risk-free.
+
 ## Detected Research Activities
 
 ## Confirmed Findings

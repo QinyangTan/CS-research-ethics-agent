@@ -2,9 +2,9 @@
 
 This appears to be a minimal benchmark fixture for a project that uses a public dataset with claimed redistribution permissions. The repository contains no source code or dataset files, only brief documentation and a placeholder license:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/README.md:1): says the project uses a public dataset with documented redistribution terms.
-- [docs 2/data_terms.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/docs%202/data_terms.md:1): says dataset license and redistribution permissions are documented.
-- [LICENSE](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/LICENSE:1): contains only an MIT placeholder.
+- [README.md](benchmarks/fixtures/case_public_dataset_license/README.md:1): says the project uses a public dataset with documented redistribution terms.
+- [docs 2/data_terms.md](benchmarks/fixtures/case_public_dataset_license/docs%202/data_terms.md:1): says dataset license and redistribution permissions are documented.
+- [LICENSE](benchmarks/fixtures/case_public_dataset_license/LICENSE:1): contains only an MIT placeholder.
 
 **Potential Ethics Issues**
 
@@ -15,7 +15,7 @@ This appears to be a minimal benchmark fixture for a project that uses a public 
    The top-level `LICENSE` is an MIT placeholder, but the dataset may have separate terms. A repo-level MIT license can mislead users into thinking all contents, including data, are MIT-licensed.
 
 3. **Redistribution claim is not auditable**
-   [docs 2/data_terms.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/docs%202/data_terms.md:1) states that redistribution permissions are documented, but does not include the actual license text, citation, restrictions, or proof of permission.
+   [docs 2/data_terms.md](benchmarks/fixtures/case_public_dataset_license/docs%202/data_terms.md:1) states that redistribution permissions are documented, but does not include the actual license text, citation, restrictions, or proof of permission.
 
 4. **Privacy and human-subjects risk unknown**
    If the public dataset contains people, communications, images, geolocation, health, education, employment, or behavioral data, “public” does not eliminate ethical obligations. The repo provides no data sensitivity assessment.

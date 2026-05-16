@@ -1,13 +1,13 @@
 **Project Summary**
 This repository appears to be a minimal fixture documenting environment-variable placeholders only. It contains:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_placeholder_safe/README.md:1): states that only placeholder environment documentation is used.
-- [.env.example](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_placeholder_safe/.env.example:1): contains placeholder values `API_KEY=replace-me` and `TOKEN=example-token`.
+- [README.md](benchmarks/fixtures/case_secret_placeholder_safe/README.md:1): states that only placeholder environment documentation is used.
+- [.env.example](benchmarks/fixtures/case_secret_placeholder_safe/.env.example:1): contains placeholder values `API_KEY=replace-me` and `TOKEN=example-token`.
 
 **Potential Ethics Issues**
 No substantive computer science research ethics risks are evident from the repository contents. There is no code, dataset, model, user study, scraping logic, deployment logic, or documentation suggesting human-subjects data, sensitive personal data, surveillance, behavioral manipulation, security exploitation, or dual-use capability.
 
-The only minor risk area is secret-handling hygiene: [.env.example](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_placeholder_safe/.env.example:1) documents credential-like fields. The current values are clearly placeholders, so this is not a leaked-secret issue, but real projects should ensure actual `.env` files are ignored and never committed.
+The only minor risk area is secret-handling hygiene: [.env.example](benchmarks/fixtures/case_secret_placeholder_safe/.env.example:1) documents credential-like fields. The current values are clearly placeholders, so this is not a leaked-secret issue, but real projects should ensure actual `.env` files are ignored and never committed.
 
 **Suggested Mitigations**
 Add or verify a `.gitignore` rule for real environment files such as `.env`, `.env.local`, and similar secret-bearing files.

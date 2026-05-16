@@ -60,7 +60,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_ml_iris_harmless",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_iris_harmless"
+    "reviewed_files": [
+      "README.md",
+      "src/model.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_ml_iris_harmless"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

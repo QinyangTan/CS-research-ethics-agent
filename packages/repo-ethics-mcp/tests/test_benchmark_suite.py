@@ -196,6 +196,7 @@ def test_benchmark_scoring_scripts_run_with_optional_direct_outputs(tmp_path: Pa
     )
     results = json.loads((results_dir / "results.json").read_text(encoding="utf-8"))
     assert "repo_ethics" in results["systems"]
+    assert results["systems"]["repo_ethics"]["scoring_mode_counts"]["structured_json"] == results["systems"]["repo_ethics"]["case_count"]
     assert "direct_codex_strong" not in results["systems"]
     assert results["output_availability"]["direct_codex_strong"]["available"] == 0
     assert (results_dir / "summary.md").exists()
@@ -234,6 +235,7 @@ def test_benchmark_scoring_scripts_run_with_optional_direct_outputs(tmp_path: Pa
     assert "Inconclusive direct comparison" in comparison
     assert "Extra Missing Context" in comparison
     assert "Extra Positive Controls" in comparison
+    assert "## Scoring Mode Counts" in comparison
     assert "## Overlapping Case Comparison" in comparison
     assert "repo_ethics vs direct_codex_strong" in comparison
     assert "diagnostic" in comparison
@@ -344,6 +346,51 @@ Add documentation where missing.
     assert "privacy_identifiability" in scored["risk_categories_found"]
     assert "privacy_identifiability" not in scored["missing_context_categories_found"]
     assert scored["markdown_scoring_mode"] == "sectioned_markdown"
+
+
+def test_bold_only_direct_output_scores_as_sectioned_markdown(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_risk_categories"] = ["privacy_identifiability"]
+    markdown = """**Project Summary**
+Small project.
+
+**Risk Categories And Evidence**
+README.md describes personal data collection.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert scored["markdown_scoring_mode"] == "sectioned_markdown"
+    assert "privacy_identifiability" in scored["risk_categories_found"]
+
+
+def test_bold_missing_context_and_safeguards_sections_count(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_missing_context_categories"] = ["privacy_identifiability"]
+    row["expected_positive_controls"] = ["security_dual_use"]
+    markdown = """**Missing Context And Clarification Questions**
+Privacy handling is unclear.
+
+**Existing Safeguards**
+SECURITY.md documents responsible disclosure and authorization scope.
+"""
+    scored = _score_direct_markdown(tmp_path, markdown, row)
+    assert scored["markdown_scoring_mode"] == "sectioned_markdown"
+    assert "privacy_identifiability" in scored["missing_context_categories_found"]
+    assert "security_dual_use" in scored["positive_controls_found"]
+
+
+def test_bold_text_inside_paragraph_or_bullet_is_not_heading(tmp_path: Path) -> None:
+    row = _base_scoring_row()
+    row["expected_risk_categories"] = ["privacy_identifiability"]
+    paragraph = "This paragraph has **Risk Categories And Evidence** inline with personal data."
+    bullet = "- **Privacy risk:** personal data appears in README.md."
+    paragraph_dir = tmp_path / "paragraph"
+    bullet_dir = tmp_path / "bullet"
+    paragraph_dir.mkdir()
+    bullet_dir.mkdir()
+    paragraph_scored = _score_direct_markdown(paragraph_dir, paragraph, row)
+    bullet_scored = _score_direct_markdown(bullet_dir, bullet, row)
+    assert paragraph_scored["markdown_scoring_mode"] == "fallback_markdown"
+    assert bullet_scored["markdown_scoring_mode"] == "fallback_markdown"
 
 
 def test_sectioned_markdown_positive_controls_not_overcounted_from_recommendations(tmp_path: Path) -> None:
@@ -586,7 +633,9 @@ def test_scoring_includes_naive_direct_outputs_and_summary_availability(tmp_path
     summary = (results_dir / "summary.md").read_text(encoding="utf-8")
     assert "direct_codex_naive" in results["systems"]
     assert results["output_availability"]["direct_codex_naive"]["available"] == 1
+    assert results["systems"]["direct_codex_naive"]["scoring_mode_counts"]["fallback_markdown"] == 1
     assert "`direct_codex_naive`: 1/1 outputs available" in summary
+    assert "## Scoring Mode Counts" in summary
     assert "These scores measure report behavior on synthetic controlled cases, not final ethical truth." in summary
     assert "Extra Missing Context" in summary
     assert "Extra Positive Controls" in summary
@@ -596,3 +645,76 @@ def test_scoring_includes_naive_direct_outputs_and_summary_availability(tmp_path
     assert "guarantees" not in lowered
     assert "proves" not in lowered
     assert "definitively" not in lowered
+
+
+def test_direct_output_provenance_document_exists() -> None:
+    provenance = BENCH / "results" / "direct_output_provenance.md"
+    text = provenance.read_text(encoding="utf-8")
+    assert "Path-only sanitization" in text
+    assert "repo_ethics outputs" in text
+    assert "MCP scanner outputs" in text
+    assert "gold labels" in text
+    assert "Synthetic benchmark results do not prove final ethical correctness" in text
+
+
+def test_underperformance_analysis_script_runs_on_small_results(tmp_path: Path) -> None:
+    results = {
+        "cases": [
+            {
+                "system": "repo_ethics",
+                "case_id": "case_a",
+                "category_recall": 0.5,
+                "evidence_groundedness": 1.0,
+                "missing_context_recall": 1.0,
+                "positive_control_recall": 1.0,
+                "false_positive_count": 0,
+                "unexpected_missing_context_count": 1,
+                "unexpected_positive_control_count": 0,
+                "must_mention_recall": 0.0,
+                "actionability": 1.0,
+                "expected_risk_categories": ["privacy_identifiability"],
+                "risk_categories_found": [],
+                "expected_absent_false_positives": [],
+            },
+            {
+                "system": "direct_codex_strong",
+                "case_id": "case_a",
+                "category_recall": 1.0,
+                "evidence_groundedness": 0.0,
+                "missing_context_recall": 0.0,
+                "positive_control_recall": 0.0,
+                "false_positive_count": 1,
+                "unexpected_missing_context_count": 0,
+                "unexpected_positive_control_count": 0,
+                "must_mention_recall": 1.0,
+                "actionability": 0.0,
+                "expected_risk_categories": ["privacy_identifiability"],
+                "risk_categories_found": ["privacy_identifiability"],
+                "expected_absent_false_positives": ["security_dual_use"],
+            },
+        ]
+    }
+    results_json = tmp_path / "results.json"
+    output_json = tmp_path / "underperformance.json"
+    output_md = tmp_path / "underperformance.md"
+    results_json.write_text(json.dumps(results), encoding="utf-8")
+    subprocess.run(
+        [
+            "python3",
+            str(BENCH / "scripts" / "analyze_underperformance.py"),
+            "--results-json",
+            str(results_json),
+            "--output-json",
+            str(output_json),
+            "--output-md",
+            str(output_md),
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    payload = json.loads(output_json.read_text(encoding="utf-8"))
+    assert payload["comparisons"]["direct_codex_strong"]["metrics"]["category_recall"]["repo_ethics_worse"]
+    assert payload["comparisons"]["direct_codex_strong"]["metrics"]["false_positive_count"]["repo_ethics_better"]
+    assert "diagnostic" in output_md.read_text(encoding="utf-8").lower()

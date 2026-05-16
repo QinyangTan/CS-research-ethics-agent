@@ -7,7 +7,7 @@ from pathlib import Path
 
 from repo_ethics.constants import DISCLAIMER, FORBIDDEN_REPORT_PHRASES, SAFE_RELEASE_CHECKLIST
 from repo_ethics.engine.risk_mapper import map_risks
-from repo_ethics.schemas import EthicsReviewReport, EvidenceItem, RiskFinding, ScanResult
+from repo_ethics.schemas import EthicsReviewReport, EvidenceItem, ProjectProfile, RiskFinding, ScanResult
 
 
 def build_report(scan_result: ScanResult, include_low_confidence: bool = True) -> EthicsReviewReport:
@@ -96,6 +96,50 @@ def _positive_controls_section(positive_controls: list[EvidenceItem]) -> str:
     return "\n".join(lines)
 
 
+def _prioritized_reviewed_files(files: list[str], limit: int = 12) -> tuple[list[str], int]:
+    priority_names = {
+        "README.md",
+        "README.rst",
+        "README.txt",
+        "SECURITY.md",
+        "ethics.md",
+        "privacy.md",
+        "data_card.md",
+        "datasheet.md",
+        "model_card.md",
+        "package.json",
+        "pyproject.toml",
+        "requirements.txt",
+    }
+
+    def sort_key(path: str) -> tuple[int, str]:
+        name = Path(path).name
+        if name in priority_names or path.startswith(("src/", "data/", "dataset/", "datasets/", "docs/")):
+            return (0, path)
+        return (1, path)
+
+    ordered = sorted(dict.fromkeys(files), key=sort_key)
+    shown = ordered[:limit]
+    return shown, max(0, len(ordered) - len(shown))
+
+
+def _project_evidence_summary(profile: ProjectProfile) -> str:
+    reviewed_files = profile.reviewed_files or profile.important_files
+    shown, remaining = _prioritized_reviewed_files(reviewed_files)
+    lines = ["## Project Evidence Summary", ""]
+    if shown:
+        files = ", ".join(f"`{path}`" for path in shown)
+        if remaining:
+            files += f", and {remaining} other reviewed files"
+        lines.append(f"- Reviewed files included {files}.")
+    else:
+        lines.append("- No readable repository files were identified by the static scanners.")
+    if "README.md" in profile.missing_docs:
+        lines.append("- README/project-purpose documentation was not found at the repository root.")
+    lines.append("- Absence of detected high-risk categories is not a final ethics or safety determination.")
+    return "\n".join(lines)
+
+
 def _unique_ordered(values: list[str]) -> list[str]:
     seen: set[str] = set()
     result: list[str] = []
@@ -136,6 +180,8 @@ def report_to_markdown(report: EthicsReviewReport) -> str:
         f"- Important files: {', '.join(profile.important_files[:20]) if profile.important_files else 'Not detected'}",
         f"- Possible human data: {profile.possible_human_data}",
         f"- Possible security-sensitive or dual-use material: {profile.possible_security_sensitive or profile.possible_dual_use}",
+        "",
+        _project_evidence_summary(profile),
         "",
         "## Detected Research Activities",
         "",

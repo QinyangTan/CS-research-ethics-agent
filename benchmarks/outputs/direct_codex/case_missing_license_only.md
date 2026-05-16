@@ -6,8 +6,8 @@ This repository appears to contain a minimal command-line helper. The only sourc
 
 Repository files inspected directly:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_missing_license_only/README.md)
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_missing_license_only/src/main.py)
+- [README.md](benchmarks/fixtures/case_missing_license_only/README.md)
+- [src/main.py](benchmarks/fixtures/case_missing_license_only/src/main.py)
 
 No license, citation, security, governance, contribution, or ethics review files were found within the inspected tree.
 

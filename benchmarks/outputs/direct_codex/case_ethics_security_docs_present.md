@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-The repository appears to describe an authorized security-scanner project limited to lab hosts. The available implementation evidence is minimal: [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1) contains only a metadata comment, not executable scanner logic.
+The repository appears to describe an authorized security-scanner project limited to lab hosts. The available implementation evidence is minimal: [src/main.py](benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1) contains only a metadata comment, not executable scanner logic.
 
 Documentation claims that the project includes ethics review questions, release limits, responsible disclosure, authorization scope, misuse limits, and safe release boundaries.
 
@@ -11,8 +11,8 @@ Documentation claims that the project includes ethics review questions, release 
 ### Dual-Use Security Risk
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/README.md:1) describes an “authorized security scanner.”
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1) references “vulnerability scanner metadata.”
+- [README.md](benchmarks/fixtures/case_ethics_security_docs_present/README.md:1) describes an “authorized security scanner.”
+- [src/main.py](benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1) references “vulnerability scanner metadata.”
 
 Ethics relevance:
 - Vulnerability scanning tools can be beneficial for defensive research, but can also be misused against unauthorized systems.
@@ -21,8 +21,8 @@ Ethics relevance:
 ### Authorization and Scope Control
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/README.md:1) says use is for “lab hosts only.”
-- [SECURITY.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) says authorization scope is documented.
+- [README.md](benchmarks/fixtures/case_ethics_security_docs_present/README.md:1) says use is for “lab hosts only.”
+- [SECURITY.md](benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) says authorization scope is documented.
 
 Ethics relevance:
 - This is a positive signal, but the repository does not show concrete allowlists, environment checks, test-only defaults, rate limits, or technical controls preventing broader use.
@@ -30,8 +30,8 @@ Ethics relevance:
 ### Disclosure and Release Risk
 
 Evidence:
-- [SECURITY.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) mentions responsible disclosure and safe release boundaries.
-- [ethics.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/ethics.md:1) mentions release limits.
+- [SECURITY.md](benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) mentions responsible disclosure and safe release boundaries.
+- [ethics.md](benchmarks/fixtures/case_ethics_security_docs_present/ethics.md:1) mentions release limits.
 
 Ethics relevance:
 - The presence of disclosure and release-boundary documentation is useful, but the details are absent from the inspected files. It is unclear what vulnerability classes, exploit details, scan outputs, or target information would be withheld or redacted.
@@ -53,7 +53,7 @@ Ethics relevance:
 - What data does the scanner collect, log, store, or transmit?
 - Are scan results retained, encrypted, redacted, or access-controlled?
 - Does the tool include exploit payloads, proof-of-concept checks, or only passive metadata checks?
-- What are the release limits referenced in [ethics.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/ethics.md:1)?
+- What are the release limits referenced in [ethics.md](benchmarks/fixtures/case_ethics_security_docs_present/ethics.md:1)?
 - Who receives vulnerability reports, and what is the disclosure timeline?
 - Are there rate limits or safeguards to prevent service disruption?
 - Are there instructions for safely reproducing results in an isolated environment?
@@ -82,6 +82,6 @@ Ethics relevance:
 
 ## Limitations of This Review
 
-This review is based only on direct inspection of four repository files. The repository contains high-level statements about authorization, ethics, disclosure, and release limits, but it does not include detailed implementation or policy text. Because [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1) is metadata-only, I could not assess actual scanner behavior, safeguards, data flows, or misuse resistance.
+This review is based only on direct inspection of four repository files. The repository contains high-level statements about authorization, ethics, disclosure, and release limits, but it does not include detailed implementation or policy text. Because [src/main.py](benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1) is metadata-only, I could not assess actual scanner behavior, safeguards, data flows, or misuse resistance.
 
 This is a preliminary ethics review, not a final determination of approval, rejection, legality, compliance, safety, or IRB requirements.

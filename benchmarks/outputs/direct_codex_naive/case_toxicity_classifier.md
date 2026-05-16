@@ -4,14 +4,14 @@ This repository appears to be a minimal toxicity-classification project for user
 
 Relevant files:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_toxicity_classifier/README.md:1)
-- [src 2/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_toxicity_classifier/src%202/model.py:1)
+- [README.md](benchmarks/fixtures/case_toxicity_classifier/README.md:1)
+- [src 2/model.py](benchmarks/fixtures/case_toxicity_classifier/src%202/model.py:1)
 
 **Potential Ethics Issues**
 
 1. **Missing model card and bias evaluation**
 
-   The README explicitly says: “Model card and bias evaluation are not documented” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_toxicity_classifier/README.md:1). For toxicity detection, this is a major research ethics gap because these systems often perform unevenly across dialects, identity terms, reclaimed language, multilingual comments, and minority communities.
+   The README explicitly says: “Model card and bias evaluation are not documented” in [README.md](benchmarks/fixtures/case_toxicity_classifier/README.md:1). For toxicity detection, this is a major research ethics gap because these systems often perform unevenly across dialects, identity terms, reclaimed language, multilingual comments, and minority communities.
 
 2. **Risk of discriminatory moderation outcomes**
 
@@ -27,7 +27,7 @@ Relevant files:
 
 5. **No documentation of model choice or pretrained model risks**
 
-   [src 2/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_toxicity_classifier/src%202/model.py:1) imports `AutoModel`, suggesting use of a pretrained transformer. The repo does not specify which model, license, training provenance, known biases, or whether the model is suitable for toxicity classification.
+   [src 2/model.py](benchmarks/fixtures/case_toxicity_classifier/src%202/model.py:1) imports `AutoModel`, suggesting use of a pretrained transformer. The repo does not specify which model, license, training provenance, known biases, or whether the model is suitable for toxicity classification.
 
 6. **No evaluation methodology**
 

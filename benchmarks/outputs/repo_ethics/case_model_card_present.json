@@ -5,7 +5,8 @@
       "advisor_or_irb_questions": [
         "Who is affected by model outputs?",
         "Were subgroup errors evaluated?",
-        "What deployment constraints and human review steps exist?"
+        "What deployment constraints and human review steps exist?",
+        "Is there a model card documenting intended use, limitations, and fairness/bias evaluation?"
       ],
       "category": "ml_fairness_deployment_risk",
       "confidence": "medium",
@@ -38,9 +39,11 @@
       ],
       "recommended_mitigations": [
         "Document intended use and non-use.",
+        "Create or update a model card.",
         "Evaluate subgroup performance where appropriate.",
+        "Document fairness and bias evaluation methods.",
         "Document uncertainty and failure modes.",
-        "Avoid consequential deployment without review."
+        "Set deployment boundaries and human-review expectations."
       ],
       "risk_id": "risk_3b31fd16ac",
       "severity": "medium",
@@ -120,7 +123,12 @@
     "possible_human_data": true,
     "possible_security_sensitive": false,
     "project_name": "case_model_card_present",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_model_card_present"
+    "reviewed_files": [
+      "README.md",
+      "docs/model_card.md",
+      "src/model.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_model_card_present"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

@@ -1,11 +1,11 @@
 **Project Summary**
 
-This repository appears to be a public dataset release fixture for reproducibility. The README states that the dataset will be released publicly, but that “anonymization and retention are not documented” ([README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_public_release/README.md:1)). The dataset contains a user record with `user_id`, `email`, and `post` fields ([users.jsonl](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_public_release/data%202/users.jsonl:1)).
+This repository appears to be a public dataset release fixture for reproducibility. The README states that the dataset will be released publicly, but that “anonymization and retention are not documented” ([README.md](benchmarks/fixtures/case_dataset_public_release/README.md:1)). The dataset contains a user record with `user_id`, `email`, and `post` fields ([users.jsonl](benchmarks/fixtures/case_dataset_public_release/data%202/users.jsonl:1)).
 
 **Potential Ethics Issues**
 
-- **Direct personal data in public release:** The dataset includes an email address field, which is personally identifiable information even if the sample uses `.test` ([users.jsonl](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_public_release/data%202/users.jsonl:1)).
-- **Insufficient anonymization documentation:** The README explicitly says anonymization is not documented, which is a major issue for public data release ([README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_public_release/README.md:1)).
+- **Direct personal data in public release:** The dataset includes an email address field, which is personally identifiable information even if the sample uses `.test` ([users.jsonl](benchmarks/fixtures/case_dataset_public_release/data%202/users.jsonl:1)).
+- **Insufficient anonymization documentation:** The README explicitly says anonymization is not documented, which is a major issue for public data release ([README.md](benchmarks/fixtures/case_dataset_public_release/README.md:1)).
 - **Retention and deletion unclear:** There is no stated retention period, deletion process, or withdrawal mechanism for subjects whose data may be included.
 - **Consent/legal basis unclear:** The repository does not document whether users consented to public release, whether data was collected under IRB/ethics review, or whether reuse is permitted.
 - **Re-identification risk:** Even if emails were removed, combinations like `user_id` plus post text can still enable linkage or re-identification depending on the real dataset.

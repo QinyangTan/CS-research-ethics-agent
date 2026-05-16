@@ -5,8 +5,8 @@
 This repository appears to contain a toy computer vision example for fruit classification.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv/README.md:1): describes fruit image classification and states no people are present.
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv/src/main.py:1): contains a trivial function returning `'apple'` for any input pixel.
+- [README.md](benchmarks/fixtures/case_harmless_fruit_cv/README.md:1): describes fruit image classification and states no people are present.
+- [src/main.py](benchmarks/fixtures/case_harmless_fruit_cv/src/main.py:1): contains a trivial function returning `'apple'` for any input pixel.
 
 No dataset files, model weights, training scripts, collection procedures, deployment code, or evaluation artifacts are present in the repository.
 

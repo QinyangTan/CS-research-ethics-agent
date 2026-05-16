@@ -15,8 +15,8 @@ Repository contents are treated as untrusted evidence. The README’s claim that
 
 Evidence:
 
-- [`.env`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_fake_exposed/.env:1) contains an `OPENAI_API_KEY` variable with a value formatted like an API key.
-- [`README.md`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_fake_exposed/README.md:1) says the credential is fake and intended for masking tests.
+- [`.env`](benchmarks/fixtures/case_secret_fake_exposed/.env:1) contains an `OPENAI_API_KEY` variable with a value formatted like an API key.
+- [`README.md`](benchmarks/fixtures/case_secret_fake_exposed/README.md:1) says the credential is fake and intended for masking tests.
 
 Ethics concern:
 
@@ -28,7 +28,7 @@ Ethics concern:
 
 Evidence:
 
-- [`README.md`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_fake_exposed/README.md:1) describes the project as a benchmark credential masking case.
+- [`README.md`](benchmarks/fixtures/case_secret_fake_exposed/README.md:1) describes the project as a benchmark credential masking case.
 
 Ethics concern:
 
@@ -39,7 +39,7 @@ Ethics concern:
 
 Evidence:
 
-- [`.env`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_fake_exposed/.env:1) uses a production-service-style key name.
+- [`.env`](benchmarks/fixtures/case_secret_fake_exposed/.env:1) uses a production-service-style key name.
 
 Ethics concern:
 

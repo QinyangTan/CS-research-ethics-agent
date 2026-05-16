@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository appears to be a minimal fixture, not an active research data-collection project. The README states that it “does not scrape websites” and only visualizes a built-in sample string: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_negated_scraping/README.md:1). The only source file prints a static sample message: [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_negated_scraping/src%202/main.py:1).
+This repository appears to be a minimal fixture, not an active research data-collection project. The README states that it “does not scrape websites” and only visualizes a built-in sample string: [README.md](benchmarks/fixtures/case_negated_scraping/README.md:1). The only source file prints a static sample message: [src 2/main.py](benchmarks/fixtures/case_negated_scraping/src%202/main.py:1).
 
 **Potential Ethics Issues**
 

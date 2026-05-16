@@ -142,6 +142,13 @@
           "title": "Project Name",
           "type": "string"
         },
+        "reviewed_files": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reviewed Files",
+          "type": "array"
+        },
         "root_path": {
           "title": "Root Path",
           "type": "string"

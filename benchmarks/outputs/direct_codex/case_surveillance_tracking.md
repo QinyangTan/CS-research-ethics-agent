@@ -2,25 +2,25 @@
 
 ## Project Summary
 
-The repository appears to describe a minimal multi-camera person-tracking demo. The README states that it “tracks people across cameras” and explicitly notes that “consent and deployment limits are not documented” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/README.md:1). The implementation is only a stub: [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/src/main.py:1) defines `track_people_across_cameras(frames)` and returns an empty list.
+The repository appears to describe a minimal multi-camera person-tracking demo. The README states that it “tracks people across cameras” and explicitly notes that “consent and deployment limits are not documented” in [README.md](benchmarks/fixtures/case_surveillance_tracking/README.md:1). The implementation is only a stub: [src/main.py](benchmarks/fixtures/case_surveillance_tracking/src/main.py:1) defines `track_people_across_cameras(frames)` and returns an empty list.
 
 ## Risk Categories And Evidence
 
 **Surveillance and persistent tracking risk**
 
-The stated purpose is cross-camera people tracking, which can enable persistent identification or movement reconstruction across physical spaces. Evidence: [README.md:1](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/README.md:1).
+The stated purpose is cross-camera people tracking, which can enable persistent identification or movement reconstruction across physical spaces. Evidence: [README.md:1](benchmarks/fixtures/case_surveillance_tracking/README.md:1).
 
 **Consent and autonomy risk**
 
-The repository itself says consent is not documented. That is a major missing safeguard for any system observing or tracking people in camera footage. Evidence: [README.md:1](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/README.md:1).
+The repository itself says consent is not documented. That is a major missing safeguard for any system observing or tracking people in camera footage. Evidence: [README.md:1](benchmarks/fixtures/case_surveillance_tracking/README.md:1).
 
 **Deployment-boundary risk**
 
-The README says deployment limits are not documented. Without scope limits, the same demo could be used in sensitive contexts such as workplaces, campuses, public spaces, protests, hospitals, or shelters. Evidence: [README.md:1](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/README.md:1).
+The README says deployment limits are not documented. Without scope limits, the same demo could be used in sensitive contexts such as workplaces, campuses, public spaces, protests, hospitals, or shelters. Evidence: [README.md:1](benchmarks/fixtures/case_surveillance_tracking/README.md:1).
 
 **Privacy and re-identification risk**
 
-Even though the code is a stub, the intended function name `track_people_across_cameras` implies linking observations of people across multiple video feeds. That can create sensitive behavioral data, including location, route, association, and time-pattern information. Evidence: [src/main.py:1](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/src/main.py:1).
+Even though the code is a stub, the intended function name `track_people_across_cameras` implies linking observations of people across multiple video feeds. That can create sensitive behavioral data, including location, route, association, and time-pattern information. Evidence: [src/main.py:1](benchmarks/fixtures/case_surveillance_tracking/src/main.py:1).
 
 **Missing data governance**
 

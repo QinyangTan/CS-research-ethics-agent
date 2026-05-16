@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository appears to be a minimal toy computer-vision project for classifying fruit images. The README states that it uses a toy dataset and that no people are present: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv/README.md:1). The only implementation found is a placeholder classifier that always returns `"apple"`: [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv/src%202/main.py:1).
+This repository appears to be a minimal toy computer-vision project for classifying fruit images. The README states that it uses a toy dataset and that no people are present: [README.md](benchmarks/fixtures/case_harmless_fruit_cv/README.md:1). The only implementation found is a placeholder classifier that always returns `"apple"`: [src 2/main.py](benchmarks/fixtures/case_harmless_fruit_cv/src%202/main.py:1).
 
 **Ethics Risk Assessment**
 
@@ -8,9 +8,9 @@ Low apparent ethics risk. The project does not appear to involve people, biometr
 
 Potential issues:
 
-- **Data provenance is undocumented:** The README says “toy dataset,” but does not identify where fruit images come from, their license, or whether they are synthetic, self-created, or externally sourced. See [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv/README.md:1).
+- **Data provenance is undocumented:** The README says “toy dataset,” but does not identify where fruit images come from, their license, or whether they are synthetic, self-created, or externally sourced. See [README.md](benchmarks/fixtures/case_harmless_fruit_cv/README.md:1).
 - **No dataset or model documentation:** Even for harmless image datasets, basic documentation should clarify intended use, limitations, collection process, and licensing.
-- **Misleading performance risk:** The classifier always returns `"apple"`, so any claimed fruit classification capability would be inaccurate unless clearly framed as a stub or teaching example. See [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv/src%202/main.py:1).
+- **Misleading performance risk:** The classifier always returns `"apple"`, so any claimed fruit classification capability would be inaccurate unless clearly framed as a stub or teaching example. See [src 2/main.py](benchmarks/fixtures/case_harmless_fruit_cv/src%202/main.py:1).
 - **Repository reproducibility issue:** The active code appears under `src 2/`, while Git status reports `src/main.py` as deleted and `src 2/` as untracked. That may be fixture noise, but it makes the project state ambiguous.
 
 **Suggested Mitigations**

@@ -2,9 +2,9 @@
 
 ## Project Summary
 
-This repository appears to be a minimal public dataset release fixture. The README states that the project “will release the dataset publicly for reproducibility” and that anonymization and retention are not documented: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_public_release/README.md:1).
+This repository appears to be a minimal public dataset release fixture. The README states that the project “will release the dataset publicly for reproducibility” and that anonymization and retention are not documented: [README.md](benchmarks/fixtures/case_dataset_public_release/README.md:1).
 
-The dataset contains one JSONL record with a user identifier, an email field, and post text: [data/users.jsonl](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_public_release/data/users.jsonl:1).
+The dataset contains one JSONL record with a user identifier, an email field, and post text: [data/users.jsonl](benchmarks/fixtures/case_dataset_public_release/data/users.jsonl:1).
 
 ## Risk Categories and Evidence
 

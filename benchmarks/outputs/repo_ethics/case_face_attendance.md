@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_face_attendance`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance`
+- Root path: `benchmarks/fixtures/case_face_attendance`
 - Languages: JSON, Markdown, Python
 - Important files: README.md, data/schema.json
 - Possible human data: True
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `data/schema.json`, `src/main.py`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -87,12 +92,16 @@ No positive controls were detected from repository evidence.
 ## Recommended Mitigations
 
 - Create a data card or datasheet.
+- State whether raw records, derived features, or only aggregate statistics will be released.
+- Define a release policy for public, restricted, or no-release data.
 - Avoid public release of raw identifiable records.
 - Aggregate, redact, or perturb fields that could identify people.
 - Define retention and deletion policy.
 - Document anonymization limits.
 - Avoid identifying individuals unless necessary.
-- Get appropriate consent.
+- Document consent or notice for biometric collection and use.
+- Protect face embeddings, templates, and images with access controls.
+- Define retention and deletion for biometric data.
 - Avoid deployment in attendance, policing, employment, or surveillance contexts without review.
 - Document bias and performance limitations.
 - Avoid storing face images unless required.
@@ -109,9 +118,11 @@ No positive controls were detected from repository evidence.
 - Will raw data, derived data, or only aggregate statistics be released?
 - What fields could enable re-identification?
 - Is there a data card or datasheet?
+- What release, retention, deletion, and access-control policy applies?
 - Why is biometric identification necessary?
 - How is consent handled?
-- How are embeddings, images, and identifiers protected or deleted?
+- How are face embeddings, images, and identifiers protected or deleted?
+- What deployment settings or populations are out of scope?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

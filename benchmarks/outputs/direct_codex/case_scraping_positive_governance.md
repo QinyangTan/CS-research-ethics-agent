@@ -2,25 +2,25 @@
 
 ## Project Summary
 
-This repository appears to be a minimal web-scraping research fixture. The code performs an HTTP GET request to `https://example.test` using `requests.get` in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/src/main.py:1). The README states that pages are collected for research and that platform terms, `robots.txt`, rate limits, data policy, and collection dates are documented in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/README.md:1). A governance note says rate limits use backoff and that platform terms and `robots.txt` were reviewed in [docs/governance.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/docs/governance.md:1).
+This repository appears to be a minimal web-scraping research fixture. The code performs an HTTP GET request to `https://example.test` using `requests.get` in [src/main.py](benchmarks/fixtures/case_scraping_positive_governance/src/main.py:1). The README states that pages are collected for research and that platform terms, `robots.txt`, rate limits, data policy, and collection dates are documented in [README.md](benchmarks/fixtures/case_scraping_positive_governance/README.md:1). A governance note says rate limits use backoff and that platform terms and `robots.txt` were reviewed in [docs/governance.md](benchmarks/fixtures/case_scraping_positive_governance/docs/governance.md:1).
 
 ## Risk Categories And Evidence From Files
 
 **Web scraping and platform governance risk**
 
-Evidence: [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/src/main.py:2) performs a direct `requests.get(...)`. The README and governance document claim review of platform terms and `robots.txt`, but the repository does not include the reviewed terms, `robots.txt` snapshots, target-specific policy notes, or collection timestamps.
+Evidence: [src/main.py](benchmarks/fixtures/case_scraping_positive_governance/src/main.py:2) performs a direct `requests.get(...)`. The README and governance document claim review of platform terms and `robots.txt`, but the repository does not include the reviewed terms, `robots.txt` snapshots, target-specific policy notes, or collection timestamps.
 
 Risk: Without concrete documentation, it is difficult to evaluate whether scraping aligns with site expectations, rate limits, or research norms.
 
 **Rate limiting and service impact risk**
 
-Evidence: [docs/governance.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/docs/governance.md:1) says backoff is used, but [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/src/main.py:2) shows only a bare request call.
+Evidence: [docs/governance.md](benchmarks/fixtures/case_scraping_positive_governance/docs/governance.md:1) says backoff is used, but [src/main.py](benchmarks/fixtures/case_scraping_positive_governance/src/main.py:2) shows only a bare request call.
 
 Risk: The implemented code does not demonstrate timeout handling, retry limits, backoff, user-agent identification, request pacing, or error handling. If scaled beyond the fixture, it could unintentionally burden a service.
 
 **Data protection and privacy risk**
 
-Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance/README.md:1) mentions a data policy, but no policy file or data schema is present.
+Evidence: [README.md](benchmarks/fixtures/case_scraping_positive_governance/README.md:1) mentions a data policy, but no policy file or data schema is present.
 
 Risk: The repository does not show what data is collected, whether personal data may be captured, how data is minimized, retained, secured, or deleted, or whether sensitive pages are excluded.
 

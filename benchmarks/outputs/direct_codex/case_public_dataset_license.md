@@ -4,9 +4,9 @@
 
 The repository appears to be a minimal benchmark fixture concerning use of a public dataset and license documentation. It contains only:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/README.md:1): states that the project uses “a public dataset with documented redistribution terms.”
-- [LICENSE](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/LICENSE:1): says “MIT License placeholder for benchmark fixture.”
-- [docs/data_terms.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/docs/data_terms.md:1): states that dataset license and redistribution permissions are documented.
+- [README.md](benchmarks/fixtures/case_public_dataset_license/README.md:1): states that the project uses “a public dataset with documented redistribution terms.”
+- [LICENSE](benchmarks/fixtures/case_public_dataset_license/LICENSE:1): says “MIT License placeholder for benchmark fixture.”
+- [docs/data_terms.md](benchmarks/fixtures/case_public_dataset_license/docs/data_terms.md:1): states that dataset license and redistribution permissions are documented.
 
 No actual dataset files, source code, collection scripts, analysis scripts, model artifacts, consent materials, data dictionary, or full license terms are present.
 
@@ -14,13 +14,13 @@ No actual dataset files, source code, collection scripts, analysis scripts, mode
 
 ### Dataset Licensing and Redistribution
 
-Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/README.md:1) claims the dataset is public and has documented redistribution terms. [docs/data_terms.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/docs/data_terms.md:1) similarly claims dataset license and redistribution permissions are documented.
+Evidence: [README.md](benchmarks/fixtures/case_public_dataset_license/README.md:1) claims the dataset is public and has documented redistribution terms. [docs/data_terms.md](benchmarks/fixtures/case_public_dataset_license/docs/data_terms.md:1) similarly claims dataset license and redistribution permissions are documented.
 
 Risk: The repository does not include the actual license text, dataset source, citation, terms URL, version, or redistribution conditions. The claims cannot be independently assessed from the included files.
 
 ### Repository License Ambiguity
 
-Evidence: [LICENSE](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_dataset_license/LICENSE:1) contains only “MIT License placeholder for benchmark fixture.”
+Evidence: [LICENSE](benchmarks/fixtures/case_public_dataset_license/LICENSE:1) contains only “MIT License placeholder for benchmark fixture.”
 
 Risk: A placeholder license is not a complete legal or ethical basis for reuse. It is also unclear whether the MIT placeholder applies only to repository code/documentation or whether it is intended to cover dataset contents, which would be inappropriate unless the dataset rights allow that.
 

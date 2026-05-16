@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository appears to be a minimal multi-camera person-tracking demo. The README states that it “tracks people across cameras,” while explicitly noting that consent and deployment limits are not documented: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/README.md:1). The implementation is currently only a stub function, `track_people_across_cameras(frames)`, returning an empty list: [main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking/src%202/main.py:1).
+This repository appears to be a minimal multi-camera person-tracking demo. The README states that it “tracks people across cameras,” while explicitly noting that consent and deployment limits are not documented: [README.md](benchmarks/fixtures/case_surveillance_tracking/README.md:1). The implementation is currently only a stub function, `track_people_across_cameras(frames)`, returning an empty list: [main.py](benchmarks/fixtures/case_surveillance_tracking/src%202/main.py:1).
 
 **Potential Ethics Issues**
 

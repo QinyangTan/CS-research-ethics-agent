@@ -71,7 +71,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_large_binary_assets",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_binary_assets"
+    "reviewed_files": [
+      "README.md",
+      "assets/sprite.bin"
+    ],
+    "root_path": "benchmarks/fixtures/case_large_binary_assets"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

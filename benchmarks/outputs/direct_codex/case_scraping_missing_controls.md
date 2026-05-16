@@ -2,17 +2,17 @@
 
 **Project Summary**
 
-The repository appears to describe a project that collects Reddit posts for NLP classification. The implementation is minimal: it initializes a PRAW Reddit client in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/src/main.py:1), and the dataset schema includes `username`, `timestamp`, and `post_text` in [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/data/schema.json:1).
+The repository appears to describe a project that collects Reddit posts for NLP classification. The implementation is minimal: it initializes a PRAW Reddit client in [src/main.py](benchmarks/fixtures/case_scraping_missing_controls/src/main.py:1), and the dataset schema includes `username`, `timestamp`, and `post_text` in [data/schema.json](benchmarks/fixtures/case_scraping_missing_controls/data/schema.json:1).
 
-The README explicitly states that platform terms, consent assumptions, data retention, and dataset release limits are not documented in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
+The README explicitly states that platform terms, consent assumptions, data retention, and dataset release limits are not documented in [README.md](benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
 
 **Risk Categories And Evidence**
 
-- **Human-subjects and consent uncertainty:** The project collects Reddit posts, but no consent model or public/private boundary analysis is documented. Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
-- **Privacy and identifiability risk:** The schema stores `username`, `timestamp`, and `post_text`, which can directly or indirectly identify users, especially when combined. Evidence: [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/data/schema.json:1).
-- **Platform governance risk:** The project uses PRAW to access Reddit but does not document Reddit API/platform terms, rate limits, redistribution limits, deletion handling, or user-content policy obligations. Evidence: [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/src/main.py:1), [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
-- **Data retention and release risk:** The README states retention and dataset release limits are not documented. Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
-- **Security and credential handling risk:** The code contains placeholder credentials directly in source. Even though they are `demo` values, the pattern suggests no documented secret-management practice. Evidence: [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/src/main.py:2).
+- **Human-subjects and consent uncertainty:** The project collects Reddit posts, but no consent model or public/private boundary analysis is documented. Evidence: [README.md](benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
+- **Privacy and identifiability risk:** The schema stores `username`, `timestamp`, and `post_text`, which can directly or indirectly identify users, especially when combined. Evidence: [data/schema.json](benchmarks/fixtures/case_scraping_missing_controls/data/schema.json:1).
+- **Platform governance risk:** The project uses PRAW to access Reddit but does not document Reddit API/platform terms, rate limits, redistribution limits, deletion handling, or user-content policy obligations. Evidence: [src/main.py](benchmarks/fixtures/case_scraping_missing_controls/src/main.py:1), [README.md](benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
+- **Data retention and release risk:** The README states retention and dataset release limits are not documented. Evidence: [README.md](benchmarks/fixtures/case_scraping_missing_controls/README.md:1).
+- **Security and credential handling risk:** The code contains placeholder credentials directly in source. Even though they are `demo` values, the pattern suggests no documented secret-management practice. Evidence: [src/main.py](benchmarks/fixtures/case_scraping_missing_controls/src/main.py:2).
 - **Downstream misuse and harm risk:** NLP classification of Reddit posts could infer sensitive attributes, stigmatize communities, or enable profiling depending on labels and use case. The repository does not describe the classification task, target communities, labeling policy, or deployment boundary.
 
 **Missing Context And Clarification Questions**

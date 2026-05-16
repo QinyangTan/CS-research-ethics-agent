@@ -111,7 +111,13 @@
     "possible_human_data": false,
     "possible_security_sensitive": true,
     "project_name": "case_ethics_security_docs_present",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present"
+    "reviewed_files": [
+      "README.md",
+      "SECURITY.md",
+      "ethics.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_ethics_security_docs_present"
   },
   "warnings": []
 }

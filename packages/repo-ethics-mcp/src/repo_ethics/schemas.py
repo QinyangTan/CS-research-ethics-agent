@@ -34,6 +34,7 @@ class ProjectProfile(BaseModel):
     project_name: str
     languages: list[str] = Field(default_factory=list)
     important_files: list[str] = Field(default_factory=list)
+    reviewed_files: list[str] = Field(default_factory=list)
     detected_research_activities: list[str] = Field(default_factory=list)
     detected_data_sources: list[str] = Field(default_factory=list)
     possible_human_data: bool = False

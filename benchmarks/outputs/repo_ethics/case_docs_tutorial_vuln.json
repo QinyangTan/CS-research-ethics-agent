@@ -75,7 +75,12 @@
     "possible_human_data": false,
     "possible_security_sensitive": true,
     "project_name": "case_docs_tutorial_vuln",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_docs_tutorial_vuln"
+    "reviewed_files": [
+      "README.md",
+      "docs/security_tutorial.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_docs_tutorial_vuln"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

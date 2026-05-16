@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_security_contrastive`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_contrastive`
+- Root path: `benchmarks/fixtures/case_security_contrastive`
 - Languages: Markdown, Python
 - Important files: README.md
 - Possible human data: False
 - Possible security-sensitive or dual-use material: True
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `src/main.py`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -71,11 +76,12 @@ No positive controls were detected from repository evidence.
 
 ## Recommended Mitigations
 
-- Add responsible disclosure plan.
+- Add an authorization scope for systems, hosts, and accounts in scope.
+- Add a responsible disclosure plan.
 - Avoid publishing weaponized exploit details.
 - Provide safe reproduction environment.
 - Remove hardcoded targets.
-- Include misuse limitations.
+- Include misuse limitations and safe release boundaries.
 - Consult advisor before public release.
 - Add a clear code license.
 - Document dataset source terms and redistribution limits.
@@ -90,6 +96,7 @@ No positive controls were detected from repository evidence.
 - What authorization scope applies to scans or tests?
 - What responsible disclosure plan exists?
 - Which release details could enable misuse?
+- What misuse limits and safe release boundaries are documented?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

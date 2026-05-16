@@ -49,7 +49,8 @@
     "detected_data_sources": [],
     "detected_research_activities": [],
     "important_files": [
-      "README.md"
+      "README.md",
+      "data/large.parquet"
     ],
     "languages": [
       "Markdown"
@@ -62,7 +63,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_large_parquet_data",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_parquet_data"
+    "reviewed_files": [
+      "README.md",
+      "data/large.parquet"
+    ],
+    "root_path": "benchmarks/fixtures/case_large_parquet_data"
   },
   "warnings": []
 }

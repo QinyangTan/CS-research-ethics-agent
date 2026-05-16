@@ -2,8 +2,8 @@
 This is a minimal command-line helper. The repository contains a README stating there is no data collection and that the license is undocumented, plus a single Python file that prints `helper`.
 
 Relevant files:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_missing_license_only/README.md:1)
-- [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_missing_license_only/src%202/main.py:1)
+- [README.md](benchmarks/fixtures/case_missing_license_only/README.md:1)
+- [src 2/main.py](benchmarks/fixtures/case_missing_license_only/src%202/main.py:1)
 
 **Potential Ethics Issues**
 - **Missing license / unclear reuse rights:** The README explicitly says the license is not documented. This creates ambiguity for downstream users, collaborators, reviewers, and dataset/package consumers about whether they may use, modify, redistribute, or build on the code.

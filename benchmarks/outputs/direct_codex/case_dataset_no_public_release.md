@@ -4,8 +4,8 @@
 
 The repository appears to describe a local-use dataset workflow. The only substantive files found are:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/README.md:1): states that data files are used locally, no public dataset will be released, and aggregate statistics will be shared.
-- [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/data/schema.json:1): defines fields `timestamp: datetime` and `count: integer`.
+- [README.md](benchmarks/fixtures/case_dataset_no_public_release/README.md:1): states that data files are used locally, no public dataset will be released, and aggregate statistics will be shared.
+- [data/schema.json](benchmarks/fixtures/case_dataset_no_public_release/data/schema.json:1): defines fields `timestamp: datetime` and `count: integer`.
 
 No source code, dataset records, analysis scripts, consent materials, data provenance notes, release plan, or security controls were present in the accessible repository contents.
 
@@ -13,13 +13,13 @@ No source code, dataset records, analysis scripts, consent materials, data prove
 
 ### Data Privacy and Reidentification
 
-Evidence: [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/data/schema.json:1) contains `timestamp` and `count`.
+Evidence: [data/schema.json](benchmarks/fixtures/case_dataset_no_public_release/data/schema.json:1) contains `timestamp` and `count`.
 
 Even aggregate counts can create privacy risk when timestamps are fine-grained, when counts are small, or when external knowledge can connect an event to a person, group, location, organization, or sensitive activity. The README says only aggregate statistics will be shared, but does not define aggregation granularity, minimum cell size, suppression rules, or whether timestamps are rounded.
 
 ### Data Governance and Access Control
 
-Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/README.md:1) says data files are used locally and no public dataset will be released.
+Evidence: [README.md](benchmarks/fixtures/case_dataset_no_public_release/README.md:1) says data files are used locally and no public dataset will be released.
 
 Local-only use reduces distribution risk, but the repository does not document who can access the local data, how it is stored, retention/deletion timelines, audit practices, encryption, or incident response. A non-public dataset can still pose risk through local misuse, accidental sharing, backups, logs, or derived outputs.
 
@@ -31,7 +31,7 @@ The absence of provenance context makes it difficult to evaluate whether local u
 
 ### Public Reporting and Statistical Disclosure
 
-Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/README.md:1) says aggregate statistics will be shared.
+Evidence: [README.md](benchmarks/fixtures/case_dataset_no_public_release/README.md:1) says aggregate statistics will be shared.
 
 The repository does not specify what aggregate statistics will be shared. If aggregate outputs include small counts, exact timestamps, rare events, outliers, subgroup breakdowns, or repeated releases over time, they may reveal sensitive information even without releasing raw data.
 

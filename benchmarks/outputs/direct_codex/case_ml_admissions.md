@@ -5,8 +5,8 @@
 This repository appears to describe an ML project for predicting admissions decisions from student profiles. The available implementation is minimal: `src/model.py` imports `sklearn` and includes a comment describing an “admissions grading model over student_id and demographic features.”
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1): states the project predicts admissions decisions from student profiles.
-- [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src/model.py:2): references `student_id` and demographic features.
+- [README.md](benchmarks/fixtures/case_ml_admissions/README.md:1): states the project predicts admissions decisions from student profiles.
+- [src/model.py](benchmarks/fixtures/case_ml_admissions/src/model.py:2): references `student_id` and demographic features.
 
 ## Risk Categories And Evidence
 
@@ -15,37 +15,37 @@ Evidence:
 Admissions prediction or grading can affect educational access, opportunity, and institutional outcomes. Even if used only as research, the domain is high impact.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1) says the system predicts admissions decisions.
-- [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src/model.py:2) describes an admissions grading model.
+- [README.md](benchmarks/fixtures/case_ml_admissions/README.md:1) says the system predicts admissions decisions.
+- [src/model.py](benchmarks/fixtures/case_ml_admissions/src/model.py:2) describes an admissions grading model.
 
 ### Bias And Discrimination Risk
 
 The code comment explicitly references demographic features. In admissions, demographic variables may be protected or sensitive attributes depending on context, and may also proxy for socioeconomic status, race, ethnicity, gender, disability, geography, or other legally and ethically sensitive categories.
 
 Evidence:
-- [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src/model.py:2) references “demographic features.”
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1) says fairness and bias evaluation are not documented.
+- [src/model.py](benchmarks/fixtures/case_ml_admissions/src/model.py:2) references “demographic features.”
+- [README.md](benchmarks/fixtures/case_ml_admissions/README.md:1) says fairness and bias evaluation are not documented.
 
 ### Privacy And Re-Identification Risk
 
 The reference to `student_id` suggests the project may use directly identifying or linkable student-level records. Even if names are absent, student IDs can enable re-identification or linkage to institutional records.
 
 Evidence:
-- [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src/model.py:2) references `student_id`.
+- [src/model.py](benchmarks/fixtures/case_ml_admissions/src/model.py:2) references `student_id`.
 
 ### Lack Of Deployment Boundaries
 
 The README explicitly says deployment boundaries are not documented. For an admissions model, unclear boundaries create risks of inappropriate operational use, automation bias, overreliance, and use outside the validated population.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1).
+- [README.md](benchmarks/fixtures/case_ml_admissions/README.md:1).
 
 ### Insufficient Transparency And Reproducibility
 
 The repository does not include dataset documentation, feature definitions, model training logic, evaluation metrics, intended use, exclusion criteria, governance process, or human review policy.
 
 Evidence:
-- Only two visible project files were found: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1) and [src/model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src/model.py:1).
+- Only two visible project files were found: [README.md](benchmarks/fixtures/case_ml_admissions/README.md:1) and [src/model.py](benchmarks/fixtures/case_ml_admissions/src/model.py:1).
 - The source file contains only an import and a comment.
 
 ## Missing Context And Clarification Questions

@@ -4,40 +4,40 @@
 
 The repository appears to describe a classroom attendance system that identifies students using facial recognition. Evidence is minimal but direct:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1) states that the project “identifies students for classroom attendance” and notes that consent, retention, and access controls are undocumented.
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/src/main.py:1) imports `face_recognition`.
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/src/main.py:2) comments that it computes face embeddings for attendance tracking.
-- [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/data/schema.json:1) defines records containing `student_id` and `face_embedding`.
+- [README.md](benchmarks/fixtures/case_face_attendance/README.md:1) states that the project “identifies students for classroom attendance” and notes that consent, retention, and access controls are undocumented.
+- [src/main.py](benchmarks/fixtures/case_face_attendance/src/main.py:1) imports `face_recognition`.
+- [src/main.py](benchmarks/fixtures/case_face_attendance/src/main.py:2) comments that it computes face embeddings for attendance tracking.
+- [data/schema.json](benchmarks/fixtures/case_face_attendance/data/schema.json:1) defines records containing `student_id` and `face_embedding`.
 
 ## Risk Categories And Evidence
 
 ### Biometric Data Collection
 
-The project involves facial embeddings, which are biometric identifiers or biometric-derived data. The schema stores `face_embedding` alongside `student_id` in [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/data/schema.json:1). This creates risk of persistent identification, re-identification, and misuse beyond attendance.
+The project involves facial embeddings, which are biometric identifiers or biometric-derived data. The schema stores `face_embedding` alongside `student_id` in [data/schema.json](benchmarks/fixtures/case_face_attendance/data/schema.json:1). This creates risk of persistent identification, re-identification, and misuse beyond attendance.
 
 ### Student Privacy And Educational Context
 
-The system targets students in a classroom attendance setting, according to [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1). Student populations can include minors or people in dependent relationships with instructors or institutions, raising concerns about voluntariness, coercion, and power imbalance.
+The system targets students in a classroom attendance setting, according to [README.md](benchmarks/fixtures/case_face_attendance/README.md:1). Student populations can include minors or people in dependent relationships with instructors or institutions, raising concerns about voluntariness, coercion, and power imbalance.
 
 ### Consent And Notice Gaps
 
-The README explicitly says consent is not documented in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1). There is no visible consent workflow, opt-out mechanism, alternative attendance pathway, or notice text in the inspected files.
+The README explicitly says consent is not documented in [README.md](benchmarks/fixtures/case_face_attendance/README.md:1). There is no visible consent workflow, opt-out mechanism, alternative attendance pathway, or notice text in the inspected files.
 
 ### Data Retention And Deletion Gaps
 
-The README states retention is not documented in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1). There is no evidence of deletion schedules, purpose limitation, data minimization, or lifecycle handling for face embeddings.
+The README states retention is not documented in [README.md](benchmarks/fixtures/case_face_attendance/README.md:1). There is no evidence of deletion schedules, purpose limitation, data minimization, or lifecycle handling for face embeddings.
 
 ### Access Control And Security Gaps
 
-The README states access controls are not documented in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1). The repository does not show authentication, authorization, audit logging, encryption, secure storage, or key management around the biometric data.
+The README states access controls are not documented in [README.md](benchmarks/fixtures/case_face_attendance/README.md:1). The repository does not show authentication, authorization, audit logging, encryption, secure storage, or key management around the biometric data.
 
 ### Accuracy, Bias, And Misidentification
 
-Use of `face_recognition` in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/src/main.py:1) suggests automated face matching or embedding generation. The repository does not document accuracy evaluation, demographic performance, false positive/false negative handling, appeal procedures, or human review for attendance disputes.
+Use of `face_recognition` in [src/main.py](benchmarks/fixtures/case_face_attendance/src/main.py:1) suggests automated face matching or embedding generation. The repository does not document accuracy evaluation, demographic performance, false positive/false negative handling, appeal procedures, or human review for attendance disputes.
 
 ### Function Creep
 
-Because student identifiers are linked with biometric embeddings in [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/data/schema.json:1), the data could potentially be reused for monitoring, discipline, access control, surveillance, or other purposes beyond attendance unless constrained by governance and technical controls.
+Because student identifiers are linked with biometric embeddings in [data/schema.json](benchmarks/fixtures/case_face_attendance/data/schema.json:1), the data could potentially be reused for monitoring, discipline, access control, surveillance, or other purposes beyond attendance unless constrained by governance and technical controls.
 
 ## Missing Context And Clarification Questions
 

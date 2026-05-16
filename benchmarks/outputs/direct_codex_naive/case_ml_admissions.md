@@ -1,16 +1,16 @@
 **Project Summary**
 
-This appears to be an ML admissions decision project. The README says it “predicts admissions decisions from student profiles,” while the model file indicates use of `sklearn` and an “admissions grading model over student_id and demographic features” ([README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1), [model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src%202/model.py:2)).
+This appears to be an ML admissions decision project. The README says it “predicts admissions decisions from student profiles,” while the model file indicates use of `sklearn` and an “admissions grading model over student_id and demographic features” ([README.md](benchmarks/fixtures/case_ml_admissions/README.md:1), [model.py](benchmarks/fixtures/case_ml_admissions/src%202/model.py:2)).
 
 **Ethics Risks**
 
-- **High-stakes automated decision-making:** Admissions decisions affect educational access and life opportunities. The repo does not define whether predictions are advisory, triage-only, or used directly in decisions ([README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1)).
+- **High-stakes automated decision-making:** Admissions decisions affect educational access and life opportunities. The repo does not define whether predictions are advisory, triage-only, or used directly in decisions ([README.md](benchmarks/fixtures/case_ml_admissions/README.md:1)).
 
-- **Demographic feature use and discrimination risk:** The model comment explicitly references “demographic features,” which can encode protected characteristics or proxies. Without fairness evaluation, this creates risk of disparate impact across race, gender, disability, socioeconomic status, nationality, or other protected groups ([model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src%202/model.py:2)).
+- **Demographic feature use and discrimination risk:** The model comment explicitly references “demographic features,” which can encode protected characteristics or proxies. Without fairness evaluation, this creates risk of disparate impact across race, gender, disability, socioeconomic status, nationality, or other protected groups ([model.py](benchmarks/fixtures/case_ml_admissions/src%202/model.py:2)).
 
-- **Use of `student_id`:** `student_id` is likely personally identifying or linkable to student records. It may also let the model memorize historical outcomes rather than learn legitimate admissions-relevant signals ([model.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/src%202/model.py:2)).
+- **Use of `student_id`:** `student_id` is likely personally identifying or linkable to student records. It may also let the model memorize historical outcomes rather than learn legitimate admissions-relevant signals ([model.py](benchmarks/fixtures/case_ml_admissions/src%202/model.py:2)).
 
-- **Missing bias and validity documentation:** The README explicitly states that fairness, bias evaluation, and deployment boundaries are not documented. For an admissions model, that is a major governance gap ([README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ml_admissions/README.md:1)).
+- **Missing bias and validity documentation:** The README explicitly states that fairness, bias evaluation, and deployment boundaries are not documented. For an admissions model, that is a major governance gap ([README.md](benchmarks/fixtures/case_ml_admissions/README.md:1)).
 
 - **Privacy and consent uncertainty:** The repo does not describe data provenance, consent, retention, de-identification, access controls, or compliance obligations such as FERPA in the U.S.
 

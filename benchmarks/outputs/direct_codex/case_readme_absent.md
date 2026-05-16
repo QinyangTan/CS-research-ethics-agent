@@ -4,7 +4,7 @@
 
 The repository contains only one source file:
 
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_readme_absent/src/main.py:1): `def add(a, b): return a + b`
+- [src/main.py](benchmarks/fixtures/case_readme_absent/src/main.py:1): `def add(a, b): return a + b`
 
 There is no README or project documentation in the inspected directory. I also observed an empty directory named `src 4`.
 

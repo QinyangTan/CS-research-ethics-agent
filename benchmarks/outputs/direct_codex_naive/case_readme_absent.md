@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository contains a single Python function, [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_readme_absent/src%202/main.py:1), defining `add(a, b)` as a basic arithmetic helper. There is no README, experiment description, dataset, model code, user-facing system, data collection pipeline, or deployment logic visible in the repository.
+This repository contains a single Python function, [src 2/main.py](benchmarks/fixtures/case_readme_absent/src%202/main.py:1), defining `add(a, b)` as a basic arithmetic helper. There is no README, experiment description, dataset, model code, user-facing system, data collection pipeline, or deployment logic visible in the repository.
 
 **Potential Ethics Issues**
 

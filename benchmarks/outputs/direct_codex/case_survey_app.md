@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-The repository appears to describe a survey application collecting participant responses with demographic fields. Evidence is limited to [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_survey_app/README.md:1) and [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_survey_app/data/schema.json:1).
+The repository appears to describe a survey application collecting participant responses with demographic fields. Evidence is limited to [README.md](benchmarks/fixtures/case_survey_app/README.md:1) and [data/schema.json](benchmarks/fixtures/case_survey_app/data/schema.json:1).
 
 The documented schema includes:
 
@@ -16,13 +16,13 @@ The README states that consent and data access controls are not documented.
 
 ### Human Subjects / Participant Data Risk
 
-The project involves survey participants and demographic data. The README explicitly says “Participants submit survey responses with demographic fields” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_survey_app/README.md:1).
+The project involves survey participants and demographic data. The README explicitly says “Participants submit survey responses with demographic fields” in [README.md](benchmarks/fixtures/case_survey_app/README.md:1).
 
 This suggests the project may involve people as data subjects, but the repo does not provide enough context to determine recruitment methods, study purpose, participant expectations, or review status.
 
 ### Privacy and Re-Identification Risk
 
-The schema contains `participant_id`, `gender`, and `income` in [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_survey_app/data/schema.json:1).
+The schema contains `participant_id`, `gender`, and `income` in [data/schema.json](benchmarks/fixtures/case_survey_app/data/schema.json:1).
 
 Even if names are not collected, demographic attributes combined with a participant identifier can increase re-identification risk, especially for small populations or narrowly sampled communities.
 
@@ -32,7 +32,7 @@ The schema collects `gender` and `income`, both of which can be sensitive depend
 
 ### Consent and Transparency Gaps
 
-The README states that “Consent and data access controls are not documented” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_survey_app/README.md:1).
+The README states that “Consent and data access controls are not documented” in [README.md](benchmarks/fixtures/case_survey_app/README.md:1).
 
 There is no visible consent language, participant information sheet, withdrawal process, data use statement, or explanation of whether responses are anonymous, pseudonymous, or identifiable.
 

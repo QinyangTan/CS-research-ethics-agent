@@ -5,8 +5,8 @@
 This repository appears to describe a browser extension telemetry project that collects browsing-related data. The stated data includes URL history, click timestamps, and `user_id` values. The implementation evidence is minimal: one JavaScript file sends `user_id`, `url`, and `timestamp` to a `/collect` endpoint.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_browser_telemetry/README.md:1): says the extension collects URL history, click timestamps, and `user_id` values, with unclear retention and access controls.
-- [src/extension.js](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_browser_telemetry/src/extension.js:1): posts `{user_id, url, timestamp}` to `/collect`.
+- [README.md](benchmarks/fixtures/case_browser_telemetry/README.md:1): says the extension collects URL history, click timestamps, and `user_id` values, with unclear retention and access controls.
+- [src/extension.js](benchmarks/fixtures/case_browser_telemetry/src/extension.js:1): posts `{user_id, url, timestamp}` to `/collect`.
 
 ## Risk Categories And Evidence
 

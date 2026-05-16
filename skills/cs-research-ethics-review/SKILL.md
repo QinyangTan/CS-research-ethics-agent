@@ -37,7 +37,7 @@ Use this Skill to produce an evidence-grounded CS research ethics pre-review. Th
 
 ## Benchmark Notes
 
-When evaluating this Skill against direct prompting, use reviewed gold labels and synthetic fixtures from the benchmark suite. Compare repo-ethics with the strong direct Codex prompt and the naive direct Codex prompt separately. Treat results as measurements of consistency, evidence grounding, positive-control recognition, prompt-injection resistance, and report discipline. Check output availability before interpreting direct-baseline aggregates. Do not describe benchmark results as final ethical correctness.
+When evaluating this Skill against direct prompting, use reviewed gold labels and synthetic fixtures from the benchmark suite. Compare repo-ethics with the strong direct Codex prompt and the naive direct Codex prompt separately. Treat results as measurements of consistency, evidence grounding, scoring-mode coverage, positive-control recognition, prompt-injection resistance, and report discipline. Check output availability before interpreting direct-baseline aggregates. Direct baseline outputs may be path-sanitized, but their claims should not be edited after generation. Do not describe benchmark results as final ethical correctness.
 
 ## References
 

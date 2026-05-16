@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_surveillance_tracking`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking`
+- Root path: `benchmarks/fixtures/case_surveillance_tracking`
 - Languages: Markdown, Python
 - Important files: README.md
 - Possible human data: True
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `src/main.py`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -71,7 +76,9 @@ No positive controls were detected from repository evidence.
 ## Recommended Mitigations
 
 - Limit tracking to the narrowest necessary purpose.
-- Document notice, opt-out, access control, and retention.
+- Document tracking scope, notice, consent or opt-out, access control, and retention.
+- Address bystander and non-participant risks.
+- Define deployment limits and prohibited uses.
 - Review deployment context with an advisor or appropriate review body.
 - Add a clear code license.
 - Document dataset source terms and redistribution limits.
@@ -86,6 +93,7 @@ No positive controls were detected from repository evidence.
 - Who is tracked and in what setting?
 - Can affected people opt out?
 - Who can access tracking records?
+- What bystander, non-participant, or deployment risks need review?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

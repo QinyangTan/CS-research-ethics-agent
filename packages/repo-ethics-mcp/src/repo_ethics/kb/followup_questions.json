@@ -2,7 +2,8 @@
   "privacy_identifiability": [
     "Which fields directly identify people or make records linkable?",
     "Who can access raw data?",
-    "What deletion or retention policy applies?"
+    "What deletion or retention policy applies?",
+    "What minimization, anonymization, or de-identification steps are documented?"
   ],
   "consent_reasonable_expectation": [
     "Would the people represented reasonably expect this collection and analysis?",
@@ -12,12 +13,15 @@
   "web_scraping_platform_governance": [
     "Which platform terms, API policies, or robots.txt files apply?",
     "What rate limits and collection dates were used?",
-    "Is any private or access-controlled data collected?"
+    "Is any private or access-controlled data collected?",
+    "How are deleted, edited, or restricted platform records handled?",
+    "Can collected platform content or metadata be redistributed?"
   ],
   "dataset_release_reidentification": [
     "Will raw data, derived data, or only aggregate statistics be released?",
     "What fields could enable re-identification?",
-    "Is there a data card or datasheet?"
+    "Is there a data card or datasheet?",
+    "What release, retention, deletion, and access-control policy applies?"
   ],
   "license_dataset_terms": [
     "What license applies to the code?",
@@ -27,22 +31,31 @@
   "security_dual_use": [
     "What authorization scope applies to scans or tests?",
     "What responsible disclosure plan exists?",
-    "Which release details could enable misuse?"
+    "Which release details could enable misuse?",
+    "What misuse limits and safe release boundaries are documented?"
+  ],
+  "vulnerability_disclosure": [
+    "Who receives coordinated disclosure notices?",
+    "What disclosure timeline, embargo, and affected-party process applies?",
+    "Which technical details are delayed, redacted, or withheld before public release?"
   ],
   "biometrics": [
     "Why is biometric identification necessary?",
     "How is consent handled?",
-    "How are embeddings, images, and identifiers protected or deleted?"
+    "How are face embeddings, images, and identifiers protected or deleted?",
+    "What deployment settings or populations are out of scope?"
   ],
   "surveillance_tracking": [
     "Who is tracked and in what setting?",
     "Can affected people opt out?",
-    "Who can access tracking records?"
+    "Who can access tracking records?",
+    "What bystander, non-participant, or deployment risks need review?"
   ],
   "ml_fairness_deployment_risk": [
     "Who is affected by model outputs?",
     "Were subgroup errors evaluated?",
-    "What deployment constraints and human review steps exist?"
+    "What deployment constraints and human review steps exist?",
+    "Is there a model card documenting intended use, limitations, and fairness/bias evaluation?"
   ],
   "prompt_injection_attempt": [
     "Was this suspicious text intentional test content?",
@@ -51,7 +64,8 @@
   "secret_exposure": [
     "Are the credentials active?",
     "Have they been rotated?",
-    "How will secrets be stored going forward?"
+    "How will secrets be stored going forward?",
+    "Should committed values be replaced with `.env.example` placeholders?"
   ],
   "missing_ethics_documentation": [
     "What data is collected and why?",
@@ -59,4 +73,3 @@
     "What mitigations are already in place but not documented?"
   ]
 }
-

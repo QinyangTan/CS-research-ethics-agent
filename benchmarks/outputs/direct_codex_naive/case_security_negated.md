@@ -1,6 +1,6 @@
 **Project Summary**
 
-This appears to be a minimal license-reporting project, not a security tool. The README explicitly states: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_negated/README.md:1) says, “This is not a vulnerability scanner. It lists open-source licenses.” The only code prints a static report label in [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_negated/src%202/main.py:1).
+This appears to be a minimal license-reporting project, not a security tool. The README explicitly states: [README.md](benchmarks/fixtures/case_security_negated/README.md:1) says, “This is not a vulnerability scanner. It lists open-source licenses.” The only code prints a static report label in [src 2/main.py](benchmarks/fixtures/case_security_negated/src%202/main.py:1).
 
 **Potential Ethics Issues**
 

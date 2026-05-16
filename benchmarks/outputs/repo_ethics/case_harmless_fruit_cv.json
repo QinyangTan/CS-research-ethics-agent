@@ -98,7 +98,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_harmless_fruit_cv",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_harmless_fruit_cv"
+    "reviewed_files": [
+      "README.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_harmless_fruit_cv"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

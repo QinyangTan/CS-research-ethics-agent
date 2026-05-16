@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository appears to document a local-only dataset workflow. The README states that no public dataset will be released, but aggregate statistics will be shared: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/README.md:1). The only schema defines two fields, `timestamp` and `count`: [schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_no_public_release/data%202/schema.json:1).
+This repository appears to document a local-only dataset workflow. The README states that no public dataset will be released, but aggregate statistics will be shared: [README.md](benchmarks/fixtures/case_dataset_no_public_release/README.md:1). The only schema defines two fields, `timestamp` and `count`: [schema.json](benchmarks/fixtures/case_dataset_no_public_release/data%202/schema.json:1).
 
 **Potential Ethics Issues**
 

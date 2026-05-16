@@ -79,6 +79,17 @@ def _system_rows(results: dict[str, Any]) -> list[str]:
     return rows
 
 
+def _scoring_mode_rows(results: dict[str, Any]) -> list[str]:
+    rows: list[str] = []
+    for system in ["repo_ethics", "direct_codex_strong", "direct_codex_naive"]:
+        counts = results.get("systems", {}).get(system, {}).get("scoring_mode_counts", {}) or {}
+        rows.append(
+            f"| `{system}` | {counts.get('structured_json', 0)} | "
+            f"{counts.get('sectioned_markdown', 0)} | {counts.get('fallback_markdown', 0)} |"
+        )
+    return rows
+
+
 def _availability_rows(results: dict[str, Any]) -> list[str]:
     rows = []
     total_default = int(results.get("case_count", 0))
@@ -205,7 +216,32 @@ def _better_lines(results: dict[str, Any], side: str) -> list[str]:
     return lines
 
 
-def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> None:
+def _load_underperformance(results_path: Path) -> dict[str, Any] | None:
+    analysis_path = results_path.with_name("underperformance_analysis.json")
+    if not analysis_path.exists():
+        return None
+    return json.loads(analysis_path.read_text(encoding="utf-8"))
+
+
+def _improvement_lines(analysis: dict[str, Any] | None, key: str) -> list[str]:
+    if not analysis:
+        return ["- Underperformance analysis was not available for this report run."]
+    items = analysis.get(key, [])[:5]
+    if not items:
+        return ["- No cases were identified for this diagnostic list under the current scoring rubric."]
+    lines: list[str] = []
+    for item in items:
+        compared = item.get("compared_to") or item.get("system")
+        direct_value = item.get(str(compared))
+        lines.append(
+            f"- `{item.get('case_id')}` on `{item.get('metric')}` against `{compared}` "
+            f"(repo_ethics={_metric({'value': item.get('repo_ethics')}, 'value')}, "
+            f"direct={_metric({'value': direct_value}, 'value')})."
+        )
+    return lines
+
+
+def write_report(results: dict[str, Any], output_path: Path, timestamp: str, analysis: dict[str, Any] | None = None) -> None:
     status = _comparison_status(results)
     total_cases = int(results.get("case_count", 0))
     strong = _availability(results, "direct_codex_strong")
@@ -266,7 +302,7 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         conclusion = [
             "Results were mixed on this benchmark.",
             "",
-            "Repo-ethics had stronger aggregate category recall, missing-context recall, positive-control recall, expected-absent false-positive control, and actionability than both direct baselines. The strong direct baseline had higher aggregate evidence-groundedness and fewer extra positive-control categories. The naive direct baseline had fewer extra missing-context categories and higher must-mention recall.",
+            "Use the aggregate metrics and overlapping case comparison tables above to identify which system was higher or lower on each metric in this run.",
             "",
             "These findings are limited to the reviewed synthetic cases and should be validated on real, permissioned repositories before drawing broader conclusions.",
         ]
@@ -293,8 +329,10 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "  - `python3 scripts/check_no_hosted_llm_calls.py`",
         "  - `python3 benchmarks/scripts/generate_fixtures.py`",
         "  - `python3 benchmarks/scripts/run_repo_ethics_benchmark.py`",
+        "  - `python3 benchmarks/scripts/sanitize_benchmark_outputs.py --check`",
         "  - `python3 benchmarks/scripts/score_reports.py`",
         "  - `python3 benchmarks/scripts/summarize_results.py`",
+        "  - `python3 benchmarks/scripts/analyze_underperformance.py`",
         "  - `python3 benchmarks/scripts/write_direct_comparison_report.py`",
         "",
         "## Output Availability",
@@ -318,6 +356,12 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "| System | Category Recall | Evidence Groundedness | Missing Context Recall | Positive Control Recall | False Positives | Extra Missing Context | Extra Positive Controls | Forbidden Violations | Overclaims | Secret Leaks |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
         *_system_rows(results),
+        "",
+        "## Scoring Mode Counts",
+        "",
+        "| System | structured_json | sectioned_markdown | fallback_markdown |",
+        "|---|---:|---:|---:|",
+        *_scoring_mode_rows(results),
         "",
         "## Metric-by-Metric Interpretation",
         "",
@@ -357,6 +401,18 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str) -> 
         "| Case ID | repo_ethics recall | strong direct recall | naive direct recall | notes |",
         "|---|---:|---:|---:|---|",
         *_case_highlights(results),
+        "",
+        "## Improvement Opportunities",
+        "",
+        "These lists are diagnostic under this scoring rubric and require manual review before changing scanner logic.",
+        "",
+        "### Repo-Ethics Improvement Opportunities",
+        "",
+        *_improvement_lines(analysis, "top_repo_ethics_improvement_opportunities"),
+        "",
+        "### Direct Baseline Weaknesses",
+        "",
+        *_improvement_lines(analysis, "top_direct_baseline_weaknesses"),
         "",
         "## Conclusion",
         "",
@@ -414,7 +470,7 @@ def main() -> None:
     parser.add_argument("--timestamp", default=datetime.now().strftime("%Y-%m-%d %H:%M:%S %Z").strip())
     args = parser.parse_args()
     results = json.loads(args.results_json.read_text(encoding="utf-8"))
-    write_report(results, args.output, args.timestamp)
+    write_report(results, args.output, args.timestamp, _load_underperformance(args.results_json))
     write_collection_needed(results, args.collection_needed_output)
     print(f"Wrote {args.output}")
 

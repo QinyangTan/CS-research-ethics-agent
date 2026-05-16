@@ -5,6 +5,9 @@
 - `results.json` stores per-case rows and aggregate metrics for each available system.
 - `summary.md` is a human-readable rendering of the same metrics.
 - `output_availability` shows how many reviewed cases have outputs for each system.
+- `scoring_mode_counts` shows how many outputs were scored as `structured_json`, `sectioned_markdown`, or `fallback_markdown`.
+- `underperformance_analysis.md` and `underperformance_analysis.json`, when generated, identify metric-specific improvement opportunities.
+- `direct_output_provenance.md` documents prompt usage, path-only sanitization, and direct-baseline handling rules.
 
 Metrics are intentionally separate rather than blended. Category recall, expected-absent false positives, evidence-groundedness, missing-context recall, positive-control recognition, extra missing-context categories, extra positive-control categories, language discipline, actionability, and secret leakage describe different report behaviors.
 
@@ -28,3 +31,5 @@ python3 benchmarks/scripts/write_direct_comparison_report.py
 ```
 
 Compare `repo_ethics`, `direct_codex_strong`, and `direct_codex_naive` by individual metrics and output availability. Avoid broad claims from partial direct-output coverage.
+
+Path-only sanitization is allowed for benchmark output artifacts to remove local absolute repository prefixes. Do not edit direct baseline risk claims, evidence descriptions, mitigations, or conclusions after generation.

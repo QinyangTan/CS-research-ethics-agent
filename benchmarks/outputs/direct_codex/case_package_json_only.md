@@ -4,7 +4,7 @@
 
 The repository fixture contains a single file: `package.json`.
 
-Evidence: [package.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_package_json_only/package.json:1)
+Evidence: [package.json](benchmarks/fixtures/case_package_json_only/package.json:1)
 
 ```json
 {"name": "package-only", "scripts": {"test": "echo ok"}}

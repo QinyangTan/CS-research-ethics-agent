@@ -1,20 +1,20 @@
 **Project Summary**
 
-This repository appears to be a minimal recommender-system fixture. The stated goal is to rank content to maximize engagement, but the repository does not document deployment context, user population, data sources, intervention boundaries, or manipulation safeguards. The implementation is currently a stub: `rank(user_profile, items)` simply returns the input items unchanged in [`src 2/recommend.py`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/src%202/recommend.py:1).
+This repository appears to be a minimal recommender-system fixture. The stated goal is to rank content to maximize engagement, but the repository does not document deployment context, user population, data sources, intervention boundaries, or manipulation safeguards. The implementation is currently a stub: `rank(user_profile, items)` simply returns the input items unchanged in [`src 2/recommend.py`](benchmarks/fixtures/case_recommender_manipulation/src%202/recommend.py:1).
 
 **Potential Ethics Issues**
 
 1. **Manipulation and autonomy risk**  
-   The README explicitly says the recommender ranks content to “maximize engagement” while noting that “manipulation risks are not documented” in [`README.md`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/README.md:1). Engagement optimization can incentivize addictive, polarizing, emotionally provocative, or otherwise manipulative content ranking.
+   The README explicitly says the recommender ranks content to “maximize engagement” while noting that “manipulation risks are not documented” in [`README.md`](benchmarks/fixtures/case_recommender_manipulation/README.md:1). Engagement optimization can incentivize addictive, polarizing, emotionally provocative, or otherwise manipulative content ranking.
 
 2. **Undefined deployment boundaries**  
-   The README says deployment boundaries are not documented in [`README.md`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/README.md:1). Without boundaries, it is unclear whether this is for a lab simulation, A/B test, production platform, minors, political content, health content, education, or other sensitive contexts.
+   The README says deployment boundaries are not documented in [`README.md`](benchmarks/fixtures/case_recommender_manipulation/README.md:1). Without boundaries, it is unclear whether this is for a lab simulation, A/B test, production platform, minors, political content, health content, education, or other sensitive contexts.
 
 3. **Lack of user welfare metrics**  
    The only stated objective is engagement maximization. There is no mention of user satisfaction, informed choice, long-term wellbeing, diversity of exposure, misinformation reduction, or opt-out controls.
 
 4. **No fairness or disparate-impact assessment**  
-   The `rank(user_profile, items)` API suggests user profiling may be involved in future ranking behavior, but there is no documentation about protected attributes, proxy variables, demographic evaluation, or group-level harms in [`src 2/recommend.py`](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/src%202/recommend.py:1).
+   The `rank(user_profile, items)` API suggests user profiling may be involved in future ranking behavior, but there is no documentation about protected attributes, proxy variables, demographic evaluation, or group-level harms in [`src 2/recommend.py`](benchmarks/fixtures/case_recommender_manipulation/src%202/recommend.py:1).
 
 5. **Transparency and consent gaps**  
    The repository does not explain what data is collected, whether users know ranking is personalized, whether users can inspect or influence recommendations, or whether ranking experiments require consent.

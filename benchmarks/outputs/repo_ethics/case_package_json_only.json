@@ -97,7 +97,10 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_package_json_only",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_package_json_only"
+    "reviewed_files": [
+      "package.json"
+    ],
+    "root_path": "benchmarks/fixtures/case_package_json_only"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

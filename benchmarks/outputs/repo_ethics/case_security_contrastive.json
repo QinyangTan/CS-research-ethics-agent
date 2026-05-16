@@ -5,7 +5,8 @@
       "advisor_or_irb_questions": [
         "What authorization scope applies to scans or tests?",
         "What responsible disclosure plan exists?",
-        "Which release details could enable misuse?"
+        "Which release details could enable misuse?",
+        "What misuse limits and safe release boundaries are documented?"
       ],
       "category": "security_dual_use",
       "confidence": "medium",
@@ -37,11 +38,12 @@
         "Authorized scope, targets, responsible disclosure process, and release boundaries."
       ],
       "recommended_mitigations": [
-        "Add responsible disclosure plan.",
+        "Add an authorization scope for systems, hosts, and accounts in scope.",
+        "Add a responsible disclosure plan.",
         "Avoid publishing weaponized exploit details.",
         "Provide safe reproduction environment.",
         "Remove hardcoded targets.",
-        "Include misuse limitations.",
+        "Include misuse limitations and safe release boundaries.",
         "Consult advisor before public release."
       ],
       "risk_id": "risk_64c82174a3",
@@ -147,7 +149,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": true,
     "project_name": "case_security_contrastive",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_contrastive"
+    "reviewed_files": [
+      "README.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_security_contrastive"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

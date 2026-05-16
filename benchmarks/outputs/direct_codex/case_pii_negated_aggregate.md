@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-The repository appears to be a minimal project that stores or represents daily aggregate counts. The README states: “We do not collect usernames, but we store aggregate counts for each day” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/README.md:1). The only code evidence is a static count-like dictionary in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1):
+The repository appears to be a minimal project that stores or represents daily aggregate counts. The README states: “We do not collect usernames, but we store aggregate counts for each day” in [README.md](benchmarks/fixtures/case_pii_negated_aggregate/README.md:1). The only code evidence is a static count-like dictionary in [src/main.py](benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1):
 
 ```python
 counts = {'day': 1, 'total': 12}
@@ -17,8 +17,8 @@ Based on the inspected files, the project does not show direct collection of use
 Evidence suggests the project stores daily aggregate counts, not raw usernames or obvious PII.
 
 Relevant evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/README.md:1) says usernames are not collected.
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1) contains only `day` and `total` fields.
+- [README.md](benchmarks/fixtures/case_pii_negated_aggregate/README.md:1) says usernames are not collected.
+- [src/main.py](benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1) contains only `day` and `total` fields.
 
 Residual risk remains because aggregate counts can sometimes become identifying when groups are small, rare events are counted, or aggregates are sliced by date, location, condition, cohort, or other quasi-identifiers. This repository does not provide enough context to determine whether `total: 12` represents people, events, user actions, survey responses, clinical data, classroom activity, or another sensitive population.
 
@@ -27,7 +27,7 @@ Residual risk remains because aggregate counts can sometimes become identifying 
 The visible implementation appears minimal. It stores only a day index and total count.
 
 Evidence:
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1) contains no user-level records, names, IDs, contact details, tokens, logs, or raw event traces.
+- [src/main.py](benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1) contains no user-level records, names, IDs, contact details, tokens, logs, or raw event traces.
 
 However, the repository does not document the upstream collection process, source data, retention period, or whether raw data exists elsewhere before aggregation.
 
@@ -43,7 +43,7 @@ Evidence gap:
 No security-relevant implementation is present. There is no evidence of authentication, storage controls, encryption, access logs, or deployment configuration.
 
 Evidence gap:
-- Only [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/README.md:1) and [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1) are present.
+- Only [README.md](benchmarks/fixtures/case_pii_negated_aggregate/README.md:1) and [src/main.py](benchmarks/fixtures/case_pii_negated_aggregate/src/main.py:1) are present.
 
 ### Misinterpretation Or Overclaiming Risk
 

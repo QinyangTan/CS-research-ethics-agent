@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository appears to describe a vulnerability scanner intended for use in a closed lab environment. The implementation is currently minimal: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_contrastive/README.md:1) states that it is “a vulnerability scanner for a closed lab,” while [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_contrastive/src%202/main.py:1) contains only a stubbed `scan_port(host, port)` function returning `False`.
+This repository appears to describe a vulnerability scanner intended for use in a closed lab environment. The implementation is currently minimal: [README.md](benchmarks/fixtures/case_security_contrastive/README.md:1) states that it is “a vulnerability scanner for a closed lab,” while [src 2/main.py](benchmarks/fixtures/case_security_contrastive/src%202/main.py:1) contains only a stubbed `scan_port(host, port)` function returning `False`.
 
 **Potential Ethics Issues**
 

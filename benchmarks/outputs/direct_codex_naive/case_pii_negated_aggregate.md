@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository appears to model or document a minimal analytics/data-collection project. It states that usernames are not collected and that only daily aggregate counts are stored: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/README.md:1). The code contains a single aggregate record with a day and total count: [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_negated_aggregate/src%202/main.py:1).
+This repository appears to model or document a minimal analytics/data-collection project. It states that usernames are not collected and that only daily aggregate counts are stored: [README.md](benchmarks/fixtures/case_pii_negated_aggregate/README.md:1). The code contains a single aggregate record with a day and total count: [src 2/main.py](benchmarks/fixtures/case_pii_negated_aggregate/src%202/main.py:1).
 
 **Potential Ethics Issues**
 

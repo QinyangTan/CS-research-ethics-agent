@@ -5,9 +5,9 @@
 This repository appears to be a minimal scraper for public forum posts. The stated project controls include rate limits, review of `robots.txt` where applicable, platform terms review, exclusion of private groups, 30-day retention, documented collection dates, and removal of raw usernames before analysis.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_with_controls/README.md:1)
-- [docs/data_policy.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_with_controls/docs/data_policy.md:1)
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_with_controls/src/main.py:1)
+- [README.md](benchmarks/fixtures/case_scraping_with_controls/README.md:1)
+- [docs/data_policy.md](benchmarks/fixtures/case_scraping_with_controls/docs/data_policy.md:1)
+- [src/main.py](benchmarks/fixtures/case_scraping_with_controls/src/main.py:1)
 
 **Risk Categories And Evidence**
 

@@ -12,6 +12,7 @@ REQUIRED_SECTIONS = [
     "# CS Research Ethics Pre-Review Report",
     "## Disclaimer",
     "## Project Summary",
+    "## Project Evidence Summary",
     "## Detected Research Activities",
     "## Confirmed Findings",
     "## Potential Risks",
@@ -53,6 +54,11 @@ def test_harmless_sorting_visualizer_has_no_high_or_critical_findings() -> None:
     )
     assert "responsible disclosure" not in broad_missing.lower()
     assert "platform terms" not in broad_missing.lower()
+    markdown = report_to_markdown(report)
+    assert "Reviewed files included" in markdown
+    assert "README.md" in markdown
+    assert "src/sort.py" in markdown
+    assert "is safe" not in markdown.lower()
 
 
 def test_example_reports_have_case_specific_grounding() -> None:
@@ -105,3 +111,30 @@ def test_standalone_dataset_missing_context_appears_in_report(tmp_path: Path) ->
     assert "dataset_release_reidentification" in markdown
     assert "Additional missing context for Dataset Release and Re-identification" in markdown
     assert "Dataset release or sharing is mentioned as absent, unclear, or not documented." in markdown
+
+
+def test_missing_readme_report_mentions_repository_root_context(tmp_path: Path) -> None:
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "main.py").write_text("def add(a: int, b: int) -> int:\n    return a + b\n", encoding="utf-8")
+    markdown = report_to_markdown(build_report(run_scan(tmp_path)))
+    assert "README/project-purpose documentation was not found at the repository root." in markdown
+    assert "| risk_" in markdown or "Additional missing context" in markdown
+    assert "| . |" in markdown or "Evidence: ." in markdown
+
+
+def test_large_binary_metadata_path_is_cited(tmp_path: Path) -> None:
+    data = tmp_path / "data"
+    data.mkdir()
+    (tmp_path / "README.md").write_text("Contains a local research data artifact.", encoding="utf-8")
+    (data / "large.parquet").write_bytes(b"PAR1" + b"0" * 600_000)
+    markdown = report_to_markdown(build_report(run_scan(tmp_path, max_file_size=128)))
+    assert "data/large.parquet" in markdown
+
+
+def test_positive_controls_section_cites_file_paths(tmp_path: Path) -> None:
+    (tmp_path / "README.md").write_text("Project purpose is documented.", encoding="utf-8")
+    (tmp_path / "SECURITY.md").write_text("Responsible disclosure and authorization scope are documented.", encoding="utf-8")
+    markdown = report_to_markdown(build_report(run_scan(tmp_path)))
+    assert "## Positive Controls Detected" in markdown
+    assert "SECURITY.md" in markdown

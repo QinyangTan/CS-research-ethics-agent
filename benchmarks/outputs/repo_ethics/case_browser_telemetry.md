@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_browser_telemetry`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_browser_telemetry`
+- Root path: `benchmarks/fixtures/case_browser_telemetry`
 - Languages: JavaScript, Markdown
 - Important files: README.md
 - Possible human data: True
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `src/extension.js`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -92,6 +97,8 @@ No positive controls were detected from repository evidence.
 - Check platform terms.
 - Check robots.txt where applicable.
 - Add rate limiting.
+- Document deletion or edit handling for collected platform content.
+- Document redistribution limits for raw posts, comments, or metadata.
 - Avoid collecting private or access-controlled data.
 - Avoid collecting sensitive communities without review.
 - Document collection method and dates.
@@ -112,6 +119,8 @@ No positive controls were detected from repository evidence.
 - Which platform terms, API policies, or robots.txt files apply?
 - What rate limits and collection dates were used?
 - Is any private or access-controlled data collected?
+- How are deleted, edited, or restricted platform records handled?
+- Can collected platform content or metadata be redistributed?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

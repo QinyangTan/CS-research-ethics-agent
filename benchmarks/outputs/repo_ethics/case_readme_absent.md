@@ -7,11 +7,17 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_readme_absent`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_readme_absent`
+- Root path: `benchmarks/fixtures/case_readme_absent`
 - Languages: Python
 - Important files: Not detected
 - Possible human data: False
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `src/main.py`.
+- README/project-purpose documentation was not found at the repository root.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 

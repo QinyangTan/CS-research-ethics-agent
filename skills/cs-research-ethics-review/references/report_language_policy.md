@@ -27,3 +27,4 @@ Evidence type policy:
 - Preserve target-aware nuance: unrelated negation should not hide a later true risk signal.
 - Benchmark summaries should say they measure report behavior on synthetic controlled cases, not final ethical truth.
 - Benchmark comparisons should name the specific metric being compared and should note when direct-baseline output coverage is partial.
+- Path-only sanitization of direct baseline outputs is allowed; changing risk claims, evidence descriptions, mitigations, or conclusions after generation is not.

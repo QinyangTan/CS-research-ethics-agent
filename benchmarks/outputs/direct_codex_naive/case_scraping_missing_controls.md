@@ -1,6 +1,6 @@
 **Project Summary**
 
-This appears to be a minimal Reddit scraping project for NLP classification. The README states that it collects Reddit posts, while also noting that platform terms, consent assumptions, retention, and release limits are not documented: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/README.md:1). The code initializes a PRAW Reddit client with demo credentials and a generic user agent: [src 2/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/src%202/main.py:1). The data schema stores `username`, `timestamp`, and `post_text`: [data 2/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_missing_controls/data%202/schema.json:1).
+This appears to be a minimal Reddit scraping project for NLP classification. The README states that it collects Reddit posts, while also noting that platform terms, consent assumptions, retention, and release limits are not documented: [README.md](benchmarks/fixtures/case_scraping_missing_controls/README.md:1). The code initializes a PRAW Reddit client with demo credentials and a generic user agent: [src 2/main.py](benchmarks/fixtures/case_scraping_missing_controls/src%202/main.py:1). The data schema stores `username`, `timestamp`, and `post_text`: [data 2/schema.json](benchmarks/fixtures/case_scraping_missing_controls/data%202/schema.json:1).
 
 **Potential Ethics Issues**
 

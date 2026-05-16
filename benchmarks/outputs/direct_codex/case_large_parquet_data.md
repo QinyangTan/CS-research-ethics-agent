@@ -4,8 +4,8 @@
 
 The repository contains a minimal local research data artifact:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_parquet_data/README.md:1) states: “Contains a local research data artifact. Release and retention policy are not documented.”
-- [data/large.parquet](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_parquet_data/data/large.parquet) is a 530,004-byte file labeled by `file` as Apache Parquet.
+- [README.md](benchmarks/fixtures/case_large_parquet_data/README.md:1) states: “Contains a local research data artifact. Release and retention policy are not documented.”
+- [data/large.parquet](benchmarks/fixtures/case_large_parquet_data/data/large.parquet) is a 530,004-byte file labeled by `file` as Apache Parquet.
 - Local inspection with PyArrow failed: `Parquet magic bytes not found in footer`, suggesting the artifact may be corrupt, truncated, malformed, synthetic, or intentionally shaped to look like Parquet.
 - A directory named `data 4` exists but is empty.
 
@@ -14,7 +14,7 @@ The repository contains a minimal local research data artifact:
 ### Data Governance And Provenance Risk
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_parquet_data/README.md:1) explicitly says release and retention policy are not documented.
+- [README.md](benchmarks/fixtures/case_large_parquet_data/README.md:1) explicitly says release and retention policy are not documented.
 - No license, data dictionary, collection protocol, consent language, data source description, or access policy is present.
 - The repository includes a data artifact under `data/large.parquet` without explanation of origin or permitted uses.
 
@@ -47,7 +47,7 @@ Risk:
 ### Release, Retention, And Access-Control Risk
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_parquet_data/README.md:1) directly says release and retention policy are not documented.
+- [README.md](benchmarks/fixtures/case_large_parquet_data/README.md:1) directly says release and retention policy are not documented.
 - The data file is committed directly into the repository.
 
 Risk:

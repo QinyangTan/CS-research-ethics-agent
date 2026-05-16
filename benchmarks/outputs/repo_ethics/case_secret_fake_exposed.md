@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_secret_fake_exposed`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_secret_fake_exposed`
+- Root path: `benchmarks/fixtures/case_secret_fake_exposed`
 - Languages: Markdown
 - Important files: README.md
 - Possible human data: False
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `.env`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -73,6 +78,7 @@ No positive controls were detected from repository evidence.
 - Remove secrets from repo.
 - Rotate exposed credentials.
 - Add `.env` to `.gitignore`.
+- Commit only `.env.example` placeholders.
 - Use secret managers.
 - Avoid printing secret values in reports.
 - Add a clear code license.
@@ -88,6 +94,7 @@ No positive controls were detected from repository evidence.
 - Are the credentials active?
 - Have they been rotated?
 - How will secrets be stored going forward?
+- Should committed values be replaced with `.env.example` placeholders?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

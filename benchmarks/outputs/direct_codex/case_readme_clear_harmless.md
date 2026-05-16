@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-The repository appears to be a minimal educational sorting project. The README states that the purpose is to “visualize sorting algorithms for teaching” and claims no personal data or network collection in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_readme_clear_harmless/README.md:1). The only code file defines `bubble(values)` as a wrapper around Python’s built-in `sorted(values)` in [sort.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_readme_clear_harmless/src%202/sort.py:1).
+The repository appears to be a minimal educational sorting project. The README states that the purpose is to “visualize sorting algorithms for teaching” and claims no personal data or network collection in [README.md](benchmarks/fixtures/case_readme_clear_harmless/README.md:1). The only code file defines `bubble(values)` as a wrapper around Python’s built-in `sorted(values)` in [sort.py](benchmarks/fixtures/case_readme_clear_harmless/src%202/sort.py:1).
 
 ## Risk Categories and Evidence
 

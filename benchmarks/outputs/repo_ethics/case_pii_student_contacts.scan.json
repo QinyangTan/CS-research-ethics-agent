@@ -97,7 +97,11 @@
     "possible_human_data": true,
     "possible_security_sensitive": false,
     "project_name": "case_pii_student_contacts",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_pii_student_contacts"
+    "reviewed_files": [
+      "README.md",
+      "data/schema.json"
+    ],
+    "root_path": "benchmarks/fixtures/case_pii_student_contacts"
   },
   "warnings": []
 }

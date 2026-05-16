@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-This repository appears to be a minimal fixture for a recommender-system project. The README states that the system “ranks content to maximize engagement” and explicitly notes that “deployment boundaries and manipulation risks are not documented” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/README.md:1).
+This repository appears to be a minimal fixture for a recommender-system project. The README states that the system “ranks content to maximize engagement” and explicitly notes that “deployment boundaries and manipulation risks are not documented” in [README.md](benchmarks/fixtures/case_recommender_manipulation/README.md:1).
 
 The only source file defines a placeholder ranking function:
 
@@ -10,7 +10,7 @@ The only source file defines a placeholder ranking function:
 def rank(user_profile, items): return items
 ```
 
-See [src/recommend.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/src/recommend.py:1).
+See [src/recommend.py](benchmarks/fixtures/case_recommender_manipulation/src/recommend.py:1).
 
 No dataset, evaluation code, deployment configuration, user-interface behavior, logging policy, or governance documentation is present.
 
@@ -21,7 +21,7 @@ No dataset, evaluation code, deployment configuration, user-interface behavior, 
 The README says the recommender ranks content to “maximize engagement” without documenting manipulation risks. Engagement maximization can incentivize ranking content that captures attention rather than content that serves user welfare, informed choice, or stated user preferences.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/README.md:1): engagement maximization is the stated objective.
+- [README.md](benchmarks/fixtures/case_recommender_manipulation/README.md:1): engagement maximization is the stated objective.
 - The same line says manipulation risks are undocumented.
 
 ### Deployment and Scope Risk
@@ -29,7 +29,7 @@ Evidence:
 The repository does not define where, for whom, or under what constraints the recommender would be deployed. Missing deployment boundaries make it difficult to assess foreseeable harms, affected populations, consent expectations, or whether the system could be used in sensitive contexts such as politics, health, education, employment, finance, or youth-facing platforms.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/README.md:1): deployment boundaries are not documented.
+- [README.md](benchmarks/fixtures/case_recommender_manipulation/README.md:1): deployment boundaries are not documented.
 - No additional files describe deployment assumptions or prohibited use cases.
 
 ### Privacy and Profiling Risk
@@ -37,7 +37,7 @@ Evidence:
 The function signature accepts `user_profile`, implying user-level personalization or profiling, but there is no documentation of what profile data contains, how it is collected, whether users consent, whether sensitive attributes are used, or whether data minimization applies.
 
 Evidence:
-- [src/recommend.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/src/recommend.py:1): `rank(user_profile, items)` accepts user profile data.
+- [src/recommend.py](benchmarks/fixtures/case_recommender_manipulation/src/recommend.py:1): `rank(user_profile, items)` accepts user profile data.
 - No privacy, retention, consent, or data-governance documentation is present.
 
 ### Fairness and Disparate Impact Risk
@@ -45,7 +45,7 @@ Evidence:
 A recommender optimized for engagement may systematically favor sensational, polarizing, addictive, or majority-preference content. There is no evidence of fairness evaluation across user groups, content creators, or content categories.
 
 Evidence:
-- Engagement maximization is stated in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/README.md:1).
+- Engagement maximization is stated in [README.md](benchmarks/fixtures/case_recommender_manipulation/README.md:1).
 - No tests, metrics, model cards, datasheets, or evaluation reports are included.
 
 ### Transparency and Contestability Risk
@@ -54,7 +54,7 @@ The repository does not describe what users are told about ranking, whether they
 
 Evidence:
 - No user-facing explanation or control documentation exists.
-- The only ranking implementation is a placeholder in [src/recommend.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_recommender_manipulation/src/recommend.py:1).
+- The only ranking implementation is a placeholder in [src/recommend.py](benchmarks/fixtures/case_recommender_manipulation/src/recommend.py:1).
 
 ## Missing Context and Clarification Questions
 

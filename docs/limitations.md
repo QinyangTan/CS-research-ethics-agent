@@ -8,6 +8,8 @@
 - The benchmark is synthetic and intentionally tiny. It supports regression testing and comparison of report discipline, but it does not prove final ethical correctness.
 - Direct-Codex baseline outputs are manually collected and may cover only a subset of benchmark cases. Use output availability and per-metric results before interpreting comparisons.
 - Section-aware Markdown scoring is a heuristic for direct outputs. `fallback_markdown` rows should be interpreted more cautiously than `sectioned_markdown` rows.
+- Scoring mode counts and underperformance analysis are benchmark diagnostics, not proof of final ethical correctness.
+- Path sanitization removes local absolute prefixes from direct outputs, but does not validate the substantive content of those outputs.
 - The tool cannot determine consent, institutional policy, or deployment facts from code alone.
 - The tool does not execute code, inspect remote services, or call external APIs.
 - Reports should be reviewed with an advisor or appropriate review body when the project affects people, sensitive data, public release, security research, biometrics, or deployment.

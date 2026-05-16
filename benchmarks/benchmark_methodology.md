@@ -27,3 +27,19 @@ Some aliases intentionally overlap. For example, responsible-disclosure phrases 
 Direct Markdown scoring is section-aware. Risk/evidence sections are used for risk category recall, missing-context/question sections are used for missing-context recall, and safeguard/control sections are used for positive-control recognition. If a direct report has no recognizable sections, fallback scoring is more conservative and records `markdown_scoring_mode: fallback_markdown`.
 
 Scoring reports output availability counts for each system. Direct baselines are manual and may cover fewer cases than repo-ethics, so aggregate metrics should be compared only with that coverage in mind.
+
+## Direct Output Provenance
+
+Direct baseline outputs should be generated from the fixture repository and the selected direct prompt only. Do not use repo_ethics outputs, MCP scanner outputs, gold labels, or previous scoring results while generating direct baselines.
+
+Path-only sanitization may be applied after generation to remove local absolute repository prefixes from benchmark artifacts. This sanitization must not change risk claims, evidence descriptions, mitigations, or conclusions.
+
+## Scoring Modes And Diagnostics
+
+The scorer records `scoring_mode_counts` for each system:
+
+- `structured_json`: repo_ethics JSON output.
+- `sectioned_markdown`: Markdown with recognizable headings or standalone bold section labels.
+- `fallback_markdown`: unstructured Markdown scored with conservative local-window heuristics.
+
+Underperformance analysis is diagnostic. It should guide general scanner/report improvements, not case-specific rules.

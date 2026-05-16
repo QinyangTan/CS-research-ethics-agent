@@ -7,11 +7,16 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 ## Project Summary
 
 - Project: `case_model_card_present`
-- Root path: `/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_model_card_present`
+- Root path: `benchmarks/fixtures/case_model_card_present`
 - Languages: Markdown, Python
 - Important files: README.md, docs/model_card.md
 - Possible human data: True
 - Possible security-sensitive or dual-use material: False
+
+## Project Evidence Summary
+
+- Reviewed files included `README.md`, `docs/model_card.md`, `src/model.py`.
+- Absence of detected high-risk categories is not a final ethics or safety determination.
 
 ## Detected Research Activities
 
@@ -61,9 +66,11 @@ No findings in this section based on available repository evidence.
 ## Recommended Mitigations
 
 - Document intended use and non-use.
+- Create or update a model card.
 - Evaluate subgroup performance where appropriate.
+- Document fairness and bias evaluation methods.
 - Document uncertainty and failure modes.
-- Avoid consequential deployment without review.
+- Set deployment boundaries and human-review expectations.
 - Add a clear code license.
 - Document dataset source terms and redistribution limits.
 - Avoid redistributing data unless terms permit it.
@@ -74,6 +81,7 @@ No findings in this section based on available repository evidence.
 - Who is affected by model outputs?
 - Were subgroup errors evaluated?
 - What deployment constraints and human review steps exist?
+- Is there a model card documenting intended use, limitations, and fairness/bias evaluation?
 - What license applies to the code?
 - What terms apply to collected or derived data?
 - Is redistribution permitted?

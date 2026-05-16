@@ -1,20 +1,20 @@
 **Project Summary**
 
-This appears to be a minimal fixture for an authorized security-scanning research project. The repository states that it is an “Authorized security scanner for lab hosts only” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/README.md:1). The only source file, [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1), contains only scanner metadata, not executable scanning logic.
+This appears to be a minimal fixture for an authorized security-scanning research project. The repository states that it is an “Authorized security scanner for lab hosts only” in [README.md](benchmarks/fixtures/case_ethics_security_docs_present/README.md:1). The only source file, [src/main.py](benchmarks/fixtures/case_ethics_security_docs_present/src/main.py:1), contains only scanner metadata, not executable scanning logic.
 
 **Potential Ethics Issues**
 
 1. **Dual-use security risk**  
-   The project concerns vulnerability scanning, which can support legitimate defensive research but can also be misused against systems without consent. The README limits use to “lab hosts only” [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/README.md:1), and [SECURITY.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) mentions authorization scope, misuse limits, and safe release boundaries. However, those controls are only described at a high level.
+   The project concerns vulnerability scanning, which can support legitimate defensive research but can also be misused against systems without consent. The README limits use to “lab hosts only” [README.md](benchmarks/fixtures/case_ethics_security_docs_present/README.md:1), and [SECURITY.md](benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) mentions authorization scope, misuse limits, and safe release boundaries. However, those controls are only described at a high level.
 
 2. **Authorization and scope ambiguity**  
    The repository says scanning is authorized and lab-only, but it does not define how lab hosts are identified, how authorization is verified, or what prevents accidental scanning of public IPs.
 
 3. **Responsible disclosure process is underspecified**  
-   [SECURITY.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) references responsible disclosure, but there is no visible detail on contact process, timelines, severity handling, affected-party notification, or publication criteria.
+   [SECURITY.md](benchmarks/fixtures/case_ethics_security_docs_present/SECURITY.md:1) references responsible disclosure, but there is no visible detail on contact process, timelines, severity handling, affected-party notification, or publication criteria.
 
 4. **Release-risk controls are not concrete**  
-   [ethics.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_ethics_security_docs_present/ethics.md:1) says review questions and release limits are documented, but the file does not actually list them. For a security tool, release boundaries should be explicit enough for reviewers and maintainers to evaluate.
+   [ethics.md](benchmarks/fixtures/case_ethics_security_docs_present/ethics.md:1) says review questions and release limits are documented, but the file does not actually list them. For a security tool, release boundaries should be explicit enough for reviewers and maintainers to evaluate.
 
 5. **Potential data handling risk**  
    Even authorized scanners can collect sensitive host banners, service metadata, vulnerabilities, logs, or credentials accidentally exposed by systems. The current repo does not describe what data is collected, retained, redacted, encrypted, or deleted.

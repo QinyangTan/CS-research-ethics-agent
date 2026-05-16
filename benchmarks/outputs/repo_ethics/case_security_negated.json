@@ -98,7 +98,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": true,
     "project_name": "case_security_negated",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_security_negated"
+    "reviewed_files": [
+      "README.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_security_negated"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

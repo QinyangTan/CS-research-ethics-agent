@@ -174,7 +174,12 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_scraping_positive_governance",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_scraping_positive_governance"
+    "reviewed_files": [
+      "README.md",
+      "docs/governance.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_scraping_positive_governance"
   },
   "warnings": []
 }

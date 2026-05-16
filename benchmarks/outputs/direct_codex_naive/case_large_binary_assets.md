@@ -2,18 +2,18 @@
 
 This repository appears to be a minimal game asset viewer fixture. It contains only:
 
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_binary_assets/README.md:1): “Game asset viewer with no research data.”
-- [assets 2/sprite.bin](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_binary_assets/assets%202/sprite.bin): a 530,005-byte ASCII asset-like file starting with `ASSET` followed by repeated `1` characters.
+- [README.md](benchmarks/fixtures/case_large_binary_assets/README.md:1): “Game asset viewer with no research data.”
+- [assets 2/sprite.bin](benchmarks/fixtures/case_large_binary_assets/assets%202/sprite.bin): a 530,005-byte ASCII asset-like file starting with `ASSET` followed by repeated `1` characters.
 
 I found no source code, no dataset files, no telemetry logic, and no apparent human-subjects data.
 
 **Potential Ethics Issues**
 
 1. **Low evidence of human-subjects or privacy risk**
-   The README explicitly says there is “no research data” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_binary_assets/README.md:1). Targeted scans of the asset did not find obvious emails, URLs, credentials, biometrics, location terms, user identifiers, cookies, or session-like strings.
+   The README explicitly says there is “no research data” in [README.md](benchmarks/fixtures/case_large_binary_assets/README.md:1). Targeted scans of the asset did not find obvious emails, URLs, credentials, biometrics, location terms, user identifiers, cookies, or session-like strings.
 
 2. **Opaque binary / asset provenance risk**
-   [sprite.bin](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_binary_assets/assets%202/sprite.bin) is large relative to the repo and has no documented provenance, license, generation process, or expected format. Even if this instance looks synthetic, binary assets can hide copyrighted material, personal data, malware-like payloads, or undisclosed third-party content.
+   [sprite.bin](benchmarks/fixtures/case_large_binary_assets/assets%202/sprite.bin) is large relative to the repo and has no documented provenance, license, generation process, or expected format. Even if this instance looks synthetic, binary assets can hide copyrighted material, personal data, malware-like payloads, or undisclosed third-party content.
 
 3. **Reproducibility and auditability gap**
    There is no manifest, checksum file, asset schema, or explanation of how `sprite.bin` was created. I computed SHA-256 locally as `be95d4c15c219a164a2621fc6cf4a65351a1b191cdfa9aabb0128f252365a2ed`, but that is not recorded in the repo.

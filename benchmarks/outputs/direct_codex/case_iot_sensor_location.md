@@ -9,8 +9,8 @@ The repository appears to describe a citizen-science IoT sensor project. The ava
 - `device_id`: string
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1)
-- [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/data/schema.json:1)
+- [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1)
+- [data/schema.json](benchmarks/fixtures/case_iot_sensor_location/data/schema.json:1)
 
 ## Risk Categories and Evidence
 
@@ -18,31 +18,31 @@ Evidence:
 
 The schema includes precise GPS coordinates. Fine-grained location data can reveal home, workplace, travel routines, visits to sensitive places, and participation patterns.
 
-Evidence: `gps: latlon` in [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/data/schema.json:1)
+Evidence: `gps: latlon` in [data/schema.json](benchmarks/fixtures/case_iot_sensor_location/data/schema.json:1)
 
 ### Temporal Tracking
 
 Exact timestamps combined with GPS enable movement reconstruction and behavioral profiling over time.
 
-Evidence: README says uploads include “exact timestamps” in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1)
+Evidence: README says uploads include “exact timestamps” in [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1)
 
 ### Persistent Device Linkability
 
 The `device_id` field may allow repeated observations from the same sensor or participant to be linked. Even if no name is stored, persistent identifiers can support re-identification when combined with location and time.
 
-Evidence: `device_id: string` in [data/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/data/schema.json:1)
+Evidence: `device_id: string` in [data/schema.json](benchmarks/fixtures/case_iot_sensor_location/data/schema.json:1)
 
 ### Consent and Participant Expectations
 
 The README explicitly says consent is not specified. For citizen-science sensing, contributors may not understand the sensitivity of precise location traces or downstream reuse.
 
-Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1)
+Evidence: [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1)
 
 ### Data Retention and Secondary Use
 
 Retention is not specified. Lack of retention limits increases risk from breach, future misuse, and analysis beyond the original project purpose.
 
-Evidence: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1)
+Evidence: [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1)
 
 ### Data Security
 

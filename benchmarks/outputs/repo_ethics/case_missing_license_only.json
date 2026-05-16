@@ -96,7 +96,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_missing_license_only",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_missing_license_only"
+    "reviewed_files": [
+      "README.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_missing_license_only"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

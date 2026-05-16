@@ -4,10 +4,10 @@ This appears to be a citizen-science IoT sensor project where devices upload GPS
 
 **Potential Ethics Issues**
 
-- **Location privacy risk:** The project collects precise GPS coordinates, which can reveal home, work, routines, sensitive visits, and community participation patterns. See [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1) and [schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/data%202/schema.json:1).
-- **Re-identification risk:** `device_id` combined with exact `gps` and `timestamp` can make participants traceable even without names. See [schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/data%202/schema.json:1).
-- **Consent gap:** The README explicitly says consent is not specified. That is a major human-subjects concern for citizen science data collection. See [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1).
-- **Retention gap:** Retention is also unspecified, creating risk of indefinite storage of sensitive mobility data. See [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_iot_sensor_location/README.md:1).
+- **Location privacy risk:** The project collects precise GPS coordinates, which can reveal home, work, routines, sensitive visits, and community participation patterns. See [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1) and [schema.json](benchmarks/fixtures/case_iot_sensor_location/data%202/schema.json:1).
+- **Re-identification risk:** `device_id` combined with exact `gps` and `timestamp` can make participants traceable even without names. See [schema.json](benchmarks/fixtures/case_iot_sensor_location/data%202/schema.json:1).
+- **Consent gap:** The README explicitly says consent is not specified. That is a major human-subjects concern for citizen science data collection. See [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1).
+- **Retention gap:** Retention is also unspecified, creating risk of indefinite storage of sensitive mobility data. See [README.md](benchmarks/fixtures/case_iot_sensor_location/README.md:1).
 - **Secondary use risk:** No policy is visible for who can access data, whether it may be shared publicly, or whether future analyses require renewed consent.
 - **Security risk:** No encryption, access control, upload authentication, or data minimization practice is documented.
 

@@ -131,6 +131,32 @@ POSITIVE_CONTROL_MARKERS = [
 ]
 # Some disclosure phrases can reasonably support both security_dual_use and
 # vulnerability_disclosure. Scoring intentionally allows that when labels expect it.
+KNOWN_BOLD_SECTION_KEYWORDS = [
+    "project summary",
+    "risk",
+    "risks",
+    "risk categories",
+    "risk categories and evidence",
+    "confirmed findings",
+    "potential risks",
+    "missing context",
+    "missing context and clarification questions",
+    "unknowns",
+    "clarification questions",
+    "evidence",
+    "file evidence",
+    "repository evidence",
+    "existing safeguards",
+    "safeguards",
+    "positive controls",
+    "mitigations",
+    "recommendations",
+    "recommended actions",
+    "advisor questions",
+    "discussion questions",
+    "safe release checklist",
+    "limitations",
+]
 FILE_REFERENCE_RE = re.compile(
     r"(?ix)"
     r"(?:\b(?:README|SECURITY|LICENSE|CONTRIBUTING|ethics|privacy|data_card|model_card|datasheet)\.md\b)"
@@ -182,15 +208,37 @@ def normalize_heading(text: str) -> str:
 
 def split_markdown_sections(markdown: str) -> dict[str, str]:
     """Split Markdown into heading-keyed sections, combining duplicate headings."""
-    heading_re = re.compile(r"^\s{0,3}#{1,3}\s+(.+?)\s*#*\s*$", re.MULTILINE)
-    matches = list(heading_re.finditer(markdown))
-    if not matches:
+    normal_heading_re = re.compile(r"^\s{0,3}#{1,3}\s+(.+?)\s*#*\s*$")
+    bold_heading_re = re.compile(r"^\s{0,3}\*\*(.+?)\*\*\s*:?\s*$")
+    markers: list[tuple[int, int, str]] = []
+    offset = 0
+    for line in markdown.splitlines(keepends=True):
+        raw = line.rstrip("\r\n")
+        stripped = raw.strip()
+        normal = normal_heading_re.match(raw)
+        title: str | None = None
+        if normal:
+            title = normal.group(1)
+        elif stripped and not raw.startswith(("    ", "\t")) and not stripped.startswith(("-", "* ", "1.", ">")):
+            bold = bold_heading_re.match(raw)
+            if bold and len(bold.group(1).strip()) <= 120:
+                candidate = bold.group(1).strip()
+                normalized_candidate = normalize_heading(candidate)
+                sentence_like = candidate.endswith(".")
+                known = any(keyword in normalized_candidate for keyword in KNOWN_BOLD_SECTION_KEYWORDS)
+                if known or not sentence_like:
+                    title = candidate
+        if title:
+            markers.append((offset, offset + len(line), title))
+        offset += len(line)
+
+    if not markers:
         return {}
     sections: dict[str, list[str]] = {}
-    for index, match in enumerate(matches):
-        title = normalize_heading(match.group(1))
-        start = match.end()
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(markdown)
+    for index, (_, marker_end, raw_title) in enumerate(markers):
+        title = normalize_heading(raw_title)
+        start = marker_end
+        end = markers[index + 1][0] if index + 1 < len(markers) else len(markdown)
         if not title:
             continue
         sections.setdefault(title, []).append(markdown[start:end].strip())
@@ -532,6 +580,10 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     for key in numeric:
         values = [float(row[key]) for row in rows if isinstance(row.get(key), int | float)]
         aggregated[key] = mean(values) if values else None
+    aggregated["scoring_mode_counts"] = {
+        mode: sum(1 for row in rows if row.get("markdown_scoring_mode") == mode)
+        for mode in ["structured_json", "sectioned_markdown", "fallback_markdown"]
+    }
     return aggregated
 
 
@@ -545,6 +597,13 @@ def _format_metric(value: Any) -> str:
 
 def output_available_for_case(output_dir: Path, case_id: str) -> bool:
     return (output_dir / f"{case_id}.md").exists() or (output_dir / f"{case_id}.json").exists()
+
+
+def _display_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def write_summary(results: dict[str, Any], summary_path: Path) -> None:
@@ -584,6 +643,21 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
             f"{_format_metric(metrics.get('must_mention_recall'))} | {_format_metric(metrics.get('must_not_mention_violations'))} | "
             f"{_format_metric(metrics.get('forbidden_language_violations'))} | {_format_metric(metrics.get('unsupported_conclusion_count'))} | "
             f"{_format_metric(metrics.get('secret_leakage_count'))} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Scoring Mode Counts",
+            "",
+            "| System | structured_json | sectioned_markdown | fallback_markdown |",
+            "|---|---:|---:|---:|",
+        ]
+    )
+    for system, metrics in systems.items():
+        counts = metrics.get("scoring_mode_counts", {}) or {}
+        lines.append(
+            f"| {system} | {counts.get('structured_json', 0)} | "
+            f"{counts.get('sectioned_markdown', 0)} | {counts.get('fallback_markdown', 0)} |"
         )
     lines.extend(
         [
@@ -698,7 +772,7 @@ def main() -> None:
         system: {
             "available": sum(1 for case in cases if output_available_for_case(output_dir, case["case_id"])),
             "total_cases": len(cases),
-            "output_dir": str(output_dir),
+            "output_dir": _display_path(output_dir),
         }
         for system, output_dir in output_dirs.items()
     }

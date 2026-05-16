@@ -1,6 +1,6 @@
 **Project Summary**
 
-This repository contains only a minimal Node package manifest: [package.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_package_json_only/package.json:1). It declares the project name `package-only` and a placeholder test script, `echo ok`. There is no source code, README, data, dependency list, license, research description, model card, data card, or ethics/governance documentation.
+This repository contains only a minimal Node package manifest: [package.json](benchmarks/fixtures/case_package_json_only/package.json:1). It declares the project name `package-only` and a placeholder test script, `echo ok`. There is no source code, README, data, dependency list, license, research description, model card, data card, or ethics/governance documentation.
 
 **Potential Ethics Issues**
 
@@ -8,7 +8,7 @@ This repository contains only a minimal Node package manifest: [package.json](/U
 - **No data governance evidence:** There are no files describing whether data is collected, scraped, generated, anonymized, licensed, retained, or shared.
 - **No human-subjects or consent documentation:** If this project involves people, user behavior, surveys, telemetry, biometrics, education, employment, health, or other sensitive domains, the repository currently provides no consent, IRB, or review information.
 - **No security or misuse documentation:** There is no indication of threat modeling, access controls, abuse prevention, or responsible release practices.
-- **Placeholder testing only:** The test script only prints `ok`, so it does not provide evidence of validation, safety checks, bias testing, privacy tests, or reproducibility checks. See [package.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_package_json_only/package.json:1).
+- **Placeholder testing only:** The test script only prints `ok`, so it does not provide evidence of validation, safety checks, bias testing, privacy tests, or reproducibility checks. See [package.json](benchmarks/fixtures/case_package_json_only/package.json:1).
 
 **Suggested Mitigations**
 

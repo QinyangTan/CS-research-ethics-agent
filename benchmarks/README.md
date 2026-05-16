@@ -28,6 +28,8 @@ python3 benchmarks/scripts/run_direct_codex_placeholder.py --baseline naive
 
 If `--direct-codex-command` is supplied, that evaluator-provided command is executed locally; review it carefully before use.
 
+Direct baseline provenance is documented in `benchmarks/results/direct_output_provenance.md`. Benchmark outputs may be path-sanitized to remove local absolute repository prefixes, but risk claims, evidence descriptions, mitigations, and conclusions should not be edited after generation.
+
 Gold labels live in `benchmarks/gold/*.json`. Official scoring includes only labels with `review_status: "reviewed"` unless `--include-unreviewed` is passed.
 
 ## Metrics
@@ -41,3 +43,7 @@ It also reports `unexpected_missing_context_count` and `unexpected_positive_cont
 Repo-ethics is designed to emphasize deterministic evidence grounding, forbidden-language avoidance, positive-control recognition, and prompt-injection resistance. Direct Codex may produce richer prose or identify unusual risks outside the scanner taxonomy. These scores measure report behavior on synthetic controlled cases, not final ethical truth.
 
 Direct Markdown scoring is section-aware. Reports with recognizable risk, evidence, missing-context, question, safeguard, or mitigation sections receive `sectioned_markdown`; unstructured Markdown uses conservative `fallback_markdown`. Repo-ethics JSON output uses `structured_json`.
+
+Scoring output includes `scoring_mode_counts` for each system so reviewers can see how many reports were scored as structured JSON, sectioned Markdown, or fallback Markdown.
+
+Use `python3 benchmarks/scripts/analyze_underperformance.py` to generate diagnostic underperformance files. The analysis should guide general scanner/report improvements, not case-specific benchmark rules.

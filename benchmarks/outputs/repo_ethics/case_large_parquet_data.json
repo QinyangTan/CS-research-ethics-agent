@@ -5,7 +5,8 @@
       "advisor_or_irb_questions": [
         "Will raw data, derived data, or only aggregate statistics be released?",
         "What fields could enable re-identification?",
-        "Is there a data card or datasheet?"
+        "Is there a data card or datasheet?",
+        "What release, retention, deletion, and access-control policy applies?"
       ],
       "category": "dataset_release_reidentification",
       "confidence": "medium",
@@ -38,6 +39,8 @@
       ],
       "recommended_mitigations": [
         "Create a data card or datasheet.",
+        "State whether raw records, derived features, or only aggregate statistics will be released.",
+        "Define a release policy for public, restricted, or no-release data.",
         "Avoid public release of raw identifiable records.",
         "Aggregate, redact, or perturb fields that could identify people.",
         "Define retention and deletion policy.",
@@ -130,7 +133,8 @@
     "detected_data_sources": [],
     "detected_research_activities": [],
     "important_files": [
-      "README.md"
+      "README.md",
+      "data/large.parquet"
     ],
     "languages": [
       "Markdown"
@@ -143,7 +147,11 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_large_parquet_data",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_large_parquet_data"
+    "reviewed_files": [
+      "README.md",
+      "data/large.parquet"
+    ],
+    "root_path": "benchmarks/fixtures/case_large_parquet_data"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",

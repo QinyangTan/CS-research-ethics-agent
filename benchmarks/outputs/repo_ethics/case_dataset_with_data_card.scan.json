@@ -129,7 +129,12 @@
     "possible_human_data": false,
     "possible_security_sensitive": false,
     "project_name": "case_dataset_with_data_card",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_dataset_with_data_card"
+    "reviewed_files": [
+      "README.md",
+      "data/samples.csv",
+      "docs/data_card.md"
+    ],
+    "root_path": "benchmarks/fixtures/case_dataset_with_data_card"
   },
   "warnings": []
 }

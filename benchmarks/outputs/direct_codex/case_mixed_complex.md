@@ -5,9 +5,9 @@
 This appears to be a Reddit NLP project. The repository evidence indicates collection of Reddit-related data including usernames, timestamps, and post text, with an intent to publicly release the dataset.
 
 Evidence:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/README.md:1) says the project “collects usernames and post timestamps,” does not document platform terms or retention, and plans public dataset release.
-- [data/posts.jsonl](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/data/posts.jsonl:1) contains `username`, `timestamp`, and `post_text` fields.
-- [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/src/main.py:1) imports `praw`, suggesting Reddit API access.
+- [README.md](benchmarks/fixtures/case_mixed_complex/README.md:1) says the project “collects usernames and post timestamps,” does not document platform terms or retention, and plans public dataset release.
+- [data/posts.jsonl](benchmarks/fixtures/case_mixed_complex/data/posts.jsonl:1) contains `username`, `timestamp`, and `post_text` fields.
+- [src/main.py](benchmarks/fixtures/case_mixed_complex/src/main.py:1) imports `praw`, suggesting Reddit API access.
 
 ## Risk Categories And Evidence
 
@@ -16,15 +16,15 @@ Evidence:
 The dataset includes usernames, timestamps, and post text. Even if Reddit posts are public, this combination can be identifying or re-identifying, especially if exact text or timestamps are released.
 
 Evidence:
-- `username`, `timestamp`, and `post_text` appear together in [data/posts.jsonl](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/data/posts.jsonl:1).
-- README states usernames and timestamps are collected and the dataset will be publicly released: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/README.md:1).
+- `username`, `timestamp`, and `post_text` appear together in [data/posts.jsonl](benchmarks/fixtures/case_mixed_complex/data/posts.jsonl:1).
+- README states usernames and timestamps are collected and the dataset will be publicly released: [README.md](benchmarks/fixtures/case_mixed_complex/README.md:1).
 
 **Consent and reasonable expectations risk**
 
 The repository does not document whether users consented, whether data comes from public or restricted communities, whether deleted/edited posts are respected, or whether users can opt out.
 
 Evidence:
-- README explicitly says platform terms and retention are not documented: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/README.md:1).
+- README explicitly says platform terms and retention are not documented: [README.md](benchmarks/fixtures/case_mixed_complex/README.md:1).
 - No consent, notice, opt-out, or deletion policy was found in the inspected files.
 
 **Platform governance and terms risk**
@@ -32,23 +32,23 @@ Evidence:
 Use of `praw` implies Reddit API interaction, but the repository lacks documentation of API terms, redistribution permissions, data retention constraints, or rate/collection limits.
 
 Evidence:
-- `import praw` in [src/main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/src/main.py:1).
-- README says platform terms are not documented: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/README.md:1).
+- `import praw` in [src/main.py](benchmarks/fixtures/case_mixed_complex/src/main.py:1).
+- README says platform terms are not documented: [README.md](benchmarks/fixtures/case_mixed_complex/README.md:1).
 
 **Public release and downstream misuse risk**
 
 Publishing raw usernames, timestamps, and text could enable profiling, harassment, deanonymization, or unwanted aggregation across contexts.
 
 Evidence:
-- README states the dataset will be released publicly: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/README.md:1).
-- Dataset schema includes direct or quasi-identifiers: [data/posts.jsonl](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/data/posts.jsonl:1).
+- README states the dataset will be released publicly: [README.md](benchmarks/fixtures/case_mixed_complex/README.md:1).
+- Dataset schema includes direct or quasi-identifiers: [data/posts.jsonl](benchmarks/fixtures/case_mixed_complex/data/posts.jsonl:1).
 
 **Data minimization and retention risk**
 
 The repository does not explain why usernames and exact timestamps are necessary, how long raw data will be kept, or whether public release can use less identifying fields.
 
 Evidence:
-- README says retention is not documented: [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_mixed_complex/README.md:1).
+- README says retention is not documented: [README.md](benchmarks/fixtures/case_mixed_complex/README.md:1).
 
 ## Missing Context And Clarification Questions
 

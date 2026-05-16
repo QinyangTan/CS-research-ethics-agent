@@ -1,12 +1,12 @@
 **Project Summary**
 
-This repository appears to describe a classroom attendance system that identifies students using facial recognition. The implementation imports `face_recognition` and indicates that it computes face embeddings for attendance tracking in [main.py](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/src%202/main.py:1). The data schema stores a `student_id` linked to a `face_embedding` in [schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/data%202/schema.json:1). The README explicitly states that consent, retention, and access controls are not documented in [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1).
+This repository appears to describe a classroom attendance system that identifies students using facial recognition. The implementation imports `face_recognition` and indicates that it computes face embeddings for attendance tracking in [main.py](benchmarks/fixtures/case_face_attendance/src%202/main.py:1). The data schema stores a `student_id` linked to a `face_embedding` in [schema.json](benchmarks/fixtures/case_face_attendance/data%202/schema.json:1). The README explicitly states that consent, retention, and access controls are not documented in [README.md](benchmarks/fixtures/case_face_attendance/README.md:1).
 
 **Potential Ethics Issues**
 
-- **Biometric privacy risk:** Face embeddings are biometric identifiers. Even if they are not raw images, they can still be sensitive and difficult or impossible for students to change if compromised. See [schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/data%202/schema.json:1).
+- **Biometric privacy risk:** Face embeddings are biometric identifiers. Even if they are not raw images, they can still be sensitive and difficult or impossible for students to change if compromised. See [schema.json](benchmarks/fixtures/case_face_attendance/data%202/schema.json:1).
 
-- **Student surveillance and coercion:** Attendance tracking in a classroom creates an institutional monitoring context where students may not feel free to refuse participation. This is especially sensitive if students are minors or if attendance affects grades, discipline, funding, or immigration/visa status. See [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_face_attendance/README.md:1).
+- **Student surveillance and coercion:** Attendance tracking in a classroom creates an institutional monitoring context where students may not feel free to refuse participation. This is especially sensitive if students are minors or if attendance affects grades, discipline, funding, or immigration/visa status. See [README.md](benchmarks/fixtures/case_face_attendance/README.md:1).
 
 - **Missing consent process:** The README directly notes that consent is not documented. For biometric processing, this is a major governance gap. Consent should be informed, specific, revocable, and paired with a non-biometric alternative.
 

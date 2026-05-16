@@ -3,8 +3,8 @@
 This repository appears to describe a research project that analyzes public server logs. The available files are minimal: the README states that the logs contain IP addresses and exact timestamps, with unclear retention, and the schema defines records with `ip_address`, `timestamp`, and `path`.
 
 Relevant files:
-- [README.md](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_logs_ip/README.md:1)
-- [data 2/schema.json](/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_public_logs_ip/data%202/schema.json:1)
+- [README.md](benchmarks/fixtures/case_public_logs_ip/README.md:1)
+- [data 2/schema.json](benchmarks/fixtures/case_public_logs_ip/data%202/schema.json:1)
 
 **Potential Ethics Issues**
 

@@ -5,7 +5,8 @@
       "advisor_or_irb_questions": [
         "Who is tracked and in what setting?",
         "Can affected people opt out?",
-        "Who can access tracking records?"
+        "Who can access tracking records?",
+        "What bystander, non-participant, or deployment risks need review?"
       ],
       "category": "surveillance_tracking",
       "confidence": "high",
@@ -27,7 +28,9 @@
       ],
       "recommended_mitigations": [
         "Limit tracking to the narrowest necessary purpose.",
-        "Document notice, opt-out, access control, and retention.",
+        "Document tracking scope, notice, consent or opt-out, access control, and retention.",
+        "Address bystander and non-participant risks.",
+        "Define deployment limits and prohibited uses.",
         "Review deployment context with an advisor or appropriate review body."
       ],
       "risk_id": "risk_e1fc61af82",
@@ -131,7 +134,11 @@
     "possible_human_data": true,
     "possible_security_sensitive": false,
     "project_name": "case_surveillance_tracking",
-    "root_path": "/Users/tanqinyang/Desktop/cs-ethics-agent/benchmarks/fixtures/case_surveillance_tracking"
+    "reviewed_files": [
+      "README.md",
+      "src/main.py"
+    ],
+    "root_path": "benchmarks/fixtures/case_surveillance_tracking"
   },
   "safe_release_checklist": [
     "Confirm the project purpose, affected populations, and deployment context are documented.",
