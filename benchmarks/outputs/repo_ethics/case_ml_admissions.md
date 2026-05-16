@@ -41,16 +41,6 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
-
 ### Missing ethics, data handling, or release documentation
 - Risk ID: `risk_8877616584`
 - Category: `missing_ethics_documentation`
@@ -71,12 +61,16 @@ No findings in this section based on available repository evidence.
 | risk_3b31fd16ac | `risk_signal` | `ml_fairness_deployment_risk` | `src/model.py:2` | References high-impact decision contexts. | # admissions grading model over student_id and demographic features Matched: admissions |
 | risk_3b31fd16ac | `risk_signal` | `privacy_identifiability` | `src/model.py:2` | References student records or identifiers. | # admissions grading model over student_id and demographic features Matched: student_id |
 | risk_3b31fd16ac | `risk_signal` | `privacy_identifiability` | `src/model.py:2` | References demographic or sensitive attributes. | # admissions grading model over student_id and demographic features Matched: demographic |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
 | risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, consent/reasonable expectation, data access controls, data retention/deletion, deployment boundaries, fairness/bias evaluation, model card or limitations, privacy. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
 
 No positive controls were detected from repository evidence.
+
+## Category-Specific Review Focus
+
+- `ml_fairness_deployment_risk`: confirm model card coverage, intended use, limitations, bias/fairness evaluation, affected groups, and deployment monitoring.
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
 
 ## Recommended Mitigations
 
@@ -86,10 +80,6 @@ No positive controls were detected from repository evidence.
 - Document fairness and bias evaluation methods.
 - Document uncertainty and failure modes.
 - Set deployment boundaries and human-review expectations.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
 - Add an ethics, privacy, and data-handling section when relevant.
 - Document limitations, release boundaries, and misuse considerations.
 - Use a data card or model card for datasets or models.
@@ -100,9 +90,6 @@ No positive controls were detected from repository evidence.
 - Were subgroup errors evaluated?
 - What deployment constraints and human review steps exist?
 - Is there a model card documenting intended use, limitations, and fairness/bias evaluation?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - What data is collected and why?
 - What release limits apply?
 - What mitigations are already in place but not documented?

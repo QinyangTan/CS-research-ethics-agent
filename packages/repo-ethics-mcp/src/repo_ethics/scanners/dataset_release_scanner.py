@@ -26,14 +26,19 @@ RELEASE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"\bpush_to_hub\b|\bhuggingface\b.*\bdataset\b", re.I | re.S), "References Hugging Face dataset upload or release."),
     (re.compile(r"\bkaggle\b.*\bupload\b", re.I | re.S), "References Kaggle dataset upload."),
     (re.compile(r"\bs3\.(upload_file|download_file)|aws s3 cp\b", re.I), "References S3 data upload/download."),
-    (re.compile(r"\bpublic dataset|release dataset|dataset release|publish dataset|data release\b", re.I), "Mentions public dataset release."),
+    (re.compile(r"\b(?:release|publish|share)\s+(?:the\s+)?dataset\b|\bdataset release\b|\bdata release\b|\bwill release the dataset publicly\b", re.I), "Mentions public dataset release."),
 ]
 
 POLICY_PATTERNS: dict[str, list[re.Pattern[str]]] = {
     "data card/datasheet": [re.compile(r"\bdata card|datacard|datasheet\b", re.I)],
     "retention/deletion policy": [re.compile(r"\bretention|deletion policy|delete data|deletion\b", re.I)],
     "anonymization/de-identification policy": [re.compile(r"\banonymi[sz]ation|de-identification|deidentified\b", re.I)],
+    "provenance/access policy": [re.compile(r"\bprovenance|data source|access control|restricted access|controlled access\b", re.I)],
 }
+DATA_CARD_CONTROL_PATTERNS = [
+    re.compile(r"\bdata card|datacard|datasheet\b", re.I),
+    re.compile(r"\bsource|provenance|intended use|retention|deletion|license|release limits?|access\b", re.I),
+]
 
 
 def _is_missing_context_clause(clause: str) -> bool:
@@ -87,10 +92,17 @@ def _dataset_file_confidence(rel_path: str) -> str:
     return "medium"
 
 
+def _has_concrete_data_card(text: str) -> bool:
+    return all(find_positive_topic_mentions(text, [pattern]) for pattern in DATA_CARD_CONTROL_PATTERNS[:1]) and sum(
+        1 for pattern in DATA_CARD_CONTROL_PATTERNS[1:] if find_positive_topic_mentions(text, [pattern])
+    ) >= 1
+
+
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
     evidence: list[EvidenceItem] = []
     saw_data = False
     saw_release = False
+    has_data_card_control = False
     repo_text_parts: list[str] = []
 
     for scanned in iter_repo_file_paths(root_path, include_binary=True, max_file_size=None):
@@ -110,6 +122,8 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
     for scanned in iter_repo_files(root_path, max_file_size=max_file_size):
         text = read_text_file(scanned.path)
         repo_text_parts.append(text[:4000])
+        if _has_concrete_data_card(text):
+            has_data_card_control = True
 
         for pattern, reason in RELEASE_PATTERNS:
             for start, end, _ in find_positive_topic_mentions(text, [pattern]):
@@ -162,12 +176,20 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
 
     repo_text = "\n".join(repo_text_parts)
     missing_policy_topics = [topic for topic, patterns in POLICY_PATTERNS.items() if not topic_is_covered(repo_text, patterns)]
+    if has_data_card_control and saw_data and not saw_release:
+        missing_policy_topics = []
+    if saw_data and not saw_release:
+        missing_policy_topics = [
+            topic
+            for topic in missing_policy_topics
+            if topic not in {"data card/datasheet", "anonymization/de-identification policy"}
+        ]
     if (saw_data or saw_release) and missing_policy_topics:
         evidence.append(
             make_evidence(
                 category="dataset_release_reidentification",
                 file_path=".",
-                reason="Dataset files or release language were detected, but the following context may need clarification: "
+                reason="Dataset files or release language were detected, but the following data-governance context may need clarification: "
                 + ", ".join(missing_policy_topics)
                 + ".",
                 confidence="medium",

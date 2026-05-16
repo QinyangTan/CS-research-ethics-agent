@@ -50,15 +50,19 @@ ABSENCE_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
         r"\bdoes\s+not\s+collect\b",
         r"\bdoes\s+not\s+use\b",
         r"\bdoes\s+not\s+perform\b",
+        r"\bdoes\s+not\s+(?:scrape|crawl|scan|track)\b",
         r"\bdo\s+not\s+collect\b",
         r"\bdo\s+not\s+use\b",
         r"\bdo\s+not\s+perform\b",
+        r"\bdo\s+not\s+(?:scrape|crawl|scan|track)\b",
         r"\bdoesn't\s+collect\b",
         r"\bdoesn't\s+use\b",
         r"\bdoesn't\s+perform\b",
+        r"\bdoesn't\s+(?:scrape|crawl|scan|track)\b",
         r"\bdon't\s+collect\b",
         r"\bdon't\s+use\b",
         r"\bdon't\s+perform\b",
+        r"\bdon't\s+(?:scrape|crawl|scan|track)\b",
         r"\bnot\s+collect(?:ed)?\b",
         r"\bnot\s+used\s+for\b",
         r"\bnot\s+perform\b",
@@ -76,21 +80,24 @@ TARGET_PREFIX_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
     re.compile(pattern, re.I)
     for pattern in [
         r"\bnot\s+(?:a|an|the)\s+$",
+        r"\b(?:does|do)\s+not\s+$",
+        r"\b(?:doesn't|don't)\s+$",
+        r"\bnot\s+$",
         r"\bnot\s+used\s+for\s+$",
         r"\bnot\s+intended\s+for\s+$",
         r"\bnot\s+designed\s+for\s+$",
-        r"\b(?:does|do)\s+not\s+(?:collect|use|perform|store|release|share)\s+$",
-        r"\b(?:doesn't|don't)\s+(?:collect|use|perform|store|release|share)\s+$",
-        r"\bnot\s+(?:collect|collecting|use|using|perform|performing|store|storing|release|releasing|share|sharing)\s+$",
-        r"\bwithout\s+(?:collecting|using|performing|storing|releasing|sharing)\s+$",
+        r"\b(?:does|do)\s+not\s+(?:collect|use|perform|store|release|share|scrape|crawl|scan|track)\s+$",
+        r"\b(?:doesn't|don't)\s+(?:collect|use|perform|store|release|share|scrape|crawl|scan|track)\s+$",
+        r"\bnot\s+(?:collect|collecting|use|using|perform|performing|store|storing|release|releasing|share|sharing|scrape|scraping|crawl|crawling|scan|scanning|track|tracking)\s+$",
+        r"\bwithout\s+(?:collecting|using|performing|storing|releasing|sharing|scraping|crawling|scanning|tracking)\s+$",
     ]
 )
 TARGET_SUFFIX_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
     re.compile(pattern, re.I)
     for pattern in [
-        r"^\s+(?:is|are|was|were|will\s+be|would\s+be)?\s*not\s+(?:stored|collected|used|performed|released|shared|documented|specified|described|stated|addressed)\b",
+        r"^\s+(?:is|are|was|were|will\s+be|would\s+be)?\s*not\s+(?:stored|collected|used|performed|released|shared|scraped|crawled|scanned|tracked|documented|specified|described|stated|addressed)\b",
         r"^\s+(?:is|are|was|were)?\s*(?:missing|unclear|unknown|tbd|to\s+be\s+determined)\b",
-        r"^\s+(?:will\s+not|would\s+not)\s+be\s+(?:stored|collected|used|performed|released|shared)\b",
+        r"^\s+(?:will\s+not|would\s+not)\s+be\s+(?:stored|collected|used|performed|released|shared|scraped|crawled|scanned|tracked)\b",
     ]
 )
 NO_TARGET_SUFFIX_RE = re.compile(
@@ -169,6 +176,8 @@ def is_negated_for_match(clause: str, match_start: int, match_end: int | None = 
     local = clause[max(0, match_start - 80) : min(len(clause), (match_end or match_start) + 80)]
 
     if any(pattern.search(local) for pattern in MISSING_CONTEXT_PATTERNS):
+        return True
+    if any(pattern.search(suffix) for pattern in MISSING_CONTEXT_PATTERNS):
         return True
     if any(pattern.search(prefix) for pattern in TARGET_PREFIX_PATTERNS):
         return True

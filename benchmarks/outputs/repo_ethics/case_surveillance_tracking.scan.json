@@ -1,17 +1,6 @@
 {
   "evidence": [
     {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
-    },
-    {
       "category": "surveillance_tracking",
       "confidence": "high",
       "evidence_id": "e255e5c317ebac31",
@@ -30,7 +19,7 @@
       "file_path": "README/docs",
       "line_end": null,
       "line_start": null,
-      "reason": "Repository evidence suggests these documentation topics may need clarification: README/project purpose. Missing context is not proof of wrongdoing.",
+      "reason": "Repository evidence suggests these documentation topics may need clarification: bias/performance limitations, consent/reasonable expectation, data access controls, data retention/deletion, deployment limitations, privacy. Missing context is not proof of wrongdoing.",
       "snippet": null
     }
   ],

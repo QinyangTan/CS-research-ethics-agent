@@ -122,7 +122,7 @@
           "file_path": "README/docs",
           "line_end": null,
           "line_start": null,
-          "reason": "Scraping or API collection was detected, but README/docs do not positively document: robots.txt, rate limits, data policy.",
+          "reason": "Scraping or API collection was detected, but README/docs do not positively document: platform terms, robots.txt, rate limits, data policy.",
           "snippet": null
         }
       ],
@@ -208,7 +208,7 @@
           "file_path": ".",
           "line_end": null,
           "line_start": null,
-          "reason": "Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy.",
+          "reason": "Dataset files or release language were detected, but the following data-governance context may need clarification: retention/deletion policy, provenance/access policy.",
           "snippet": null
         },
         {
@@ -243,42 +243,6 @@
     },
     {
       "advisor_or_irb_questions": [
-        "What license applies to the code?",
-        "What terms apply to collected or derived data?",
-        "Is redistribution permitted?"
-      ],
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "license_dataset_terms",
-          "confidence": "medium",
-          "evidence_id": "809a0f631f340819",
-          "evidence_type": "missing_context",
-          "file_path": ".",
-          "line_end": null,
-          "line_start": null,
-          "reason": "No code or dataset license documentation was detected.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "Code license, dataset source terms, and redistribution permissions."
-      ],
-      "recommended_mitigations": [
-        "Add a clear code license.",
-        "Document dataset source terms and redistribution limits.",
-        "Avoid redistributing data unless terms permit it.",
-        "Track third-party license obligations."
-      ],
-      "risk_id": "risk_fc19ee1aa0",
-      "severity": "low",
-      "status": "unknown",
-      "title": "License or dataset redistribution terms are unclear",
-      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
-    },
-    {
-      "advisor_or_irb_questions": [
         "What data is collected and why?",
         "What release limits apply?",
         "What mitigations are already in place but not documented?"
@@ -294,7 +258,7 @@
           "file_path": "README/docs",
           "line_end": null,
           "line_start": null,
-          "reason": "Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, collection method/dates, consent/reasonable expectation, data access controls, data card/datasheet, data retention/deletion, privacy, release policy, .... Missing context is not proof of wrongdoing.",
+          "reason": "Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, collection method/dates, consent/reasonable expectation, data access controls, data card/datasheet, data retention/deletion, platform terms, privacy, .... Missing context is not proof of wrongdoing.",
           "snippet": null
         }
       ],
@@ -317,30 +281,7 @@
   "global_missing_context": [
     "Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented."
   ],
-  "positive_controls": [
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "69feb587c5373408",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes platform terms.",
-      "snippet": "Collects Reddit posts for NLP classification. Platform terms, consent assumptions, data retention, and dataset release limits are not documented.\nMatched: Platform terms"
-    },
-    {
-      "category": "web_scraping_platform_governance",
-      "confidence": "medium",
-      "evidence_id": "633a78ad570f3977",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes platform terms guidance.",
-      "snippet": "Collects Reddit posts for NLP classification. Platform terms, consent assumptions, data retention, and dataset release limits are not documented.\nMatched: Platform terms"
-    }
-  ],
+  "positive_controls": [],
   "project_profile": {
     "detected_data_sources": [
       "Reddit"

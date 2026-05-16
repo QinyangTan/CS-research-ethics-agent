@@ -47,3 +47,7 @@ Direct Markdown scoring is section-aware. Reports with recognizable risk, eviden
 Scoring output includes `scoring_mode_counts` for each system so reviewers can see how many reports were scored as structured JSON, sectioned Markdown, or fallback Markdown.
 
 Use `python3 benchmarks/scripts/analyze_underperformance.py` to generate diagnostic underperformance files. The analysis should guide general scanner/report improvements, not case-specific benchmark rules.
+
+The underperformance analysis groups gaps into root-cause buckets such as missed expected category, lower groundedness, extra missing-context noise, extra positive-control noise, must-mention gap, actionability gap, false positive, and report-discipline issue. These buckets are meant to make review more focused; they are not permission to add benchmark case-specific scanner rules.
+
+Production scanner and report code should remain benchmark-independent. Regression tests check that production code does not reference benchmark case IDs, gold labels, results, fixtures, or direct baseline output directories.

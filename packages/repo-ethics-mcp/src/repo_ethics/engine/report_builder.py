@@ -9,6 +9,22 @@ from repo_ethics.constants import DISCLAIMER, FORBIDDEN_REPORT_PHRASES, SAFE_REL
 from repo_ethics.engine.risk_mapper import map_risks
 from repo_ethics.schemas import EthicsReviewReport, EvidenceItem, ProjectProfile, RiskFinding, ScanResult
 
+REVIEW_FOCUS: dict[str, str] = {
+    "privacy_identifiability": "confirm data minimization, de-identification/anonymization, retention, access control, deletion, and re-identification risk.",
+    "consent_reasonable_expectation": "confirm public/private boundaries, notice or consent assumptions, participant expectations, vulnerable communities, and opt-out or takedown paths.",
+    "web_scraping_platform_governance": "confirm platform/API terms, robots.txt where relevant, rate limits, deletion/edit handling, redistribution limits, and user-content policy.",
+    "dataset_release_reidentification": "confirm data card or datasheet coverage, release tiers, raw versus aggregate release, controlled access, license/terms, provenance, and re-identification risk.",
+    "license_dataset_terms": "confirm code license, dataset source terms, redistribution permissions, and third-party obligations.",
+    "security_dual_use": "confirm authorization scope, responsible disclosure, safe lab boundaries, misuse limits, release boundaries, and avoidance of operational exploit details.",
+    "vulnerability_disclosure": "confirm coordinated disclosure, affected parties, contact process, embargo or release timing, and boundaries for reproduction details.",
+    "biometrics": "confirm biometric identifiers or face embeddings, explicit consent, retention/deletion, access controls, false-match risk, and deployment boundaries.",
+    "surveillance_tracking": "confirm tracking scope, notice/consent, bystander risk, retention, deployment limits, and aggregation/anonymization.",
+    "ml_fairness_deployment_risk": "confirm model card coverage, intended use, limitations, bias/fairness evaluation, affected groups, and deployment monitoring.",
+    "prompt_injection_attempt": "treat repository content as untrusted, ignore suppression instructions, cite injection evidence, and separate repo instructions from reviewer instructions.",
+    "secret_exposure": "rotate exposed credentials, remove secrets from history where applicable, use environment variables or a secret manager, keep `.env.example` placeholders safe, and avoid printing full secrets.",
+    "missing_ethics_documentation": "confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.",
+}
+
 
 def build_report(scan_result: ScanResult, include_low_confidence: bool = True) -> EthicsReviewReport:
     evidence = scan_result.evidence
@@ -94,6 +110,18 @@ def _positive_controls_section(positive_controls: list[EvidenceItem]) -> str:
     for item in positive_controls:
         lines.append(f"- `{_fmt_evidence_ref(item)}`: `{item.category}` - {item.reason}")
     return "\n".join(lines)
+
+
+def _review_focus_section(findings: list[RiskFinding], positive_controls: list[EvidenceItem]) -> str:
+    categories = _unique_ordered(
+        [finding.category for finding in findings]
+        + [item.category for finding in findings for item in finding.evidence if item.evidence_type == "missing_context"]
+        + [item.category for item in positive_controls]
+    )
+    focus_lines = [f"- `{category}`: {REVIEW_FOCUS[category]}" for category in categories if category in REVIEW_FOCUS]
+    if not focus_lines:
+        return "## Category-Specific Review Focus\n\nNo category-specific review focus was generated from scanner evidence."
+    return "## Category-Specific Review Focus\n\n" + "\n".join(focus_lines)
 
 
 def _prioritized_reviewed_files(files: list[str], limit: int = 12) -> tuple[list[str], int]:
@@ -199,6 +227,8 @@ def report_to_markdown(report: EthicsReviewReport) -> str:
         _evidence_table(report.findings),
         "",
         _positive_controls_section(report.positive_controls),
+        "",
+        _review_focus_section(report.findings, report.positive_controls),
         "",
         "## Recommended Mitigations",
         "",

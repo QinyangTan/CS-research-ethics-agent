@@ -51,6 +51,33 @@ def _category_name(category: str) -> str:
     return str(taxonomy["categories"].get(category, {}).get("name", category.replace("_", " ").title()))
 
 
+def _has_concrete_support(
+    category: str,
+    items: list[EvidenceItem],
+    grouped: dict[str, list[EvidenceItem]],
+    project_profile: ProjectProfile,
+) -> bool:
+    if grouped.get(category):
+        return True
+    if category == "missing_ethics_documentation":
+        return bool(
+            project_profile.missing_docs
+            or grouped.get("privacy_identifiability")
+            or grouped.get("web_scraping_platform_governance")
+            or grouped.get("dataset_release_reidentification")
+            or grouped.get("security_dual_use")
+            or grouped.get("biometrics")
+            or grouped.get("surveillance_tracking")
+            or grouped.get("ml_fairness_deployment_risk")
+        )
+    reason_text = " ".join(item.reason.lower() for item in items)
+    if category == "license_dataset_terms":
+        return "mentioned as missing" in reason_text or "not documented" in reason_text
+    if category == "dataset_release_reidentification":
+        return "mentioned as absent" in reason_text or "release policy" in reason_text
+    return False
+
+
 def _finding(
     *,
     title: str,
@@ -238,6 +265,8 @@ def map_risks(project_profile: ProjectProfile, evidence: list[EvidenceItem]) -> 
     for category, items in sorted(missing_grouped.items()):
         unattached = [item for item in items if item.evidence_id not in attached_missing_ids]
         if not unattached:
+            continue
+        if not _has_concrete_support(category, unattached, grouped, project_profile):
             continue
         findings.append(
             _finding(

@@ -41,22 +41,13 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
+No findings in this section based on available repository evidence.
 
 ## Evidence Table
 
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
 | risk_64c82174a3 | `risk_signal` | `security_dual_use` | `src/main.py:1` | Describes vulnerability scanning. | # vulnerability scanner metadata only Matched: vulnerability scanner |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
 
 ## Positive Controls Detected
 
@@ -65,7 +56,11 @@ No findings in this section based on available repository evidence.
 - `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes safe release boundaries.
 - `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes authorization/scope.
 - `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes responsible disclosure.
-- `ethics.md`: `missing_ethics_documentation` - Repository includes dedicated ethics, privacy, data-card, or model-card documentation.
+
+## Category-Specific Review Focus
+
+- `security_dual_use`: confirm authorization scope, responsible disclosure, safe lab boundaries, misuse limits, release boundaries, and avoidance of operational exploit details.
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
 
 ## Recommended Mitigations
 
@@ -76,10 +71,6 @@ No findings in this section based on available repository evidence.
 - Remove hardcoded targets.
 - Include misuse limitations and safe release boundaries.
 - Consult advisor before public release.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
 
 ## Advisor / IRB Discussion Questions
 
@@ -87,9 +78,6 @@ No findings in this section based on available repository evidence.
 - What responsible disclosure plan exists?
 - Which release details could enable misuse?
 - What misuse limits and safe release boundaries are documented?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
 
 ## Safe Release Checklist

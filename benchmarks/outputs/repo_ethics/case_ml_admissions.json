@@ -97,42 +97,6 @@
     },
     {
       "advisor_or_irb_questions": [
-        "What license applies to the code?",
-        "What terms apply to collected or derived data?",
-        "Is redistribution permitted?"
-      ],
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "license_dataset_terms",
-          "confidence": "medium",
-          "evidence_id": "809a0f631f340819",
-          "evidence_type": "missing_context",
-          "file_path": ".",
-          "line_end": null,
-          "line_start": null,
-          "reason": "No code or dataset license documentation was detected.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "Code license, dataset source terms, and redistribution permissions."
-      ],
-      "recommended_mitigations": [
-        "Add a clear code license.",
-        "Document dataset source terms and redistribution limits.",
-        "Avoid redistributing data unless terms permit it.",
-        "Track third-party license obligations."
-      ],
-      "risk_id": "risk_fc19ee1aa0",
-      "severity": "low",
-      "status": "unknown",
-      "title": "License or dataset redistribution terms are unclear",
-      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
-    },
-    {
-      "advisor_or_irb_questions": [
         "What data is collected and why?",
         "What release limits apply?",
         "What mitigations are already in place but not documented?"

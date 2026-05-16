@@ -23,21 +23,27 @@ SIGNAL_PATTERNS: dict[str, list[re.Pattern[str]]] = {
         re.compile(r"\brequests\.(get|post)\s*\(|BeautifulSoup|bs4|scrapy|selenium|playwright|praw|tweepy|snscrape|instaloader|API collection|scrap", re.I)
     ],
     "pii": [
-        re.compile(r"\b(user_?names?|user_?id|email|location|face|biometric|student_?id|patient|demographic|profile_?url|timestamp)\b", re.I)
+        re.compile(r"\b(user_?names?|user_?id|email|location|gps|ip_?address|face|biometric|student_?id|patient|demographic|profile_?url)\b", re.I)
     ],
     "dataset": [
-        re.compile(r"\bpublic dataset|release dataset|dataset release|publish dataset|data release|data directory\b", re.I)
+        re.compile(r"\bpublic dataset|release\s+(?:the\s+)?dataset|dataset release|publish\s+(?:the\s+)?dataset|share\s+(?:the\s+)?dataset|data release|data directory\b", re.I)
     ],
     "security": [
         re.compile(r"\bexploit|CVE|vulnerability scanner|nmap|socket scanning|port scanning|socket\.(?:socket|connect_ex|connect)|fuzzing|malware|phishing|credential dumping\b", re.I)
     ],
     "biometrics": [
-        re.compile(r"\bface_recognition|cv2\.(?:CascadeClassifier|detectMultiScale)|deepface|face embedding|attendance tracking|surveillance\b", re.I)
+        re.compile(r"\bface_recognition|cv2\.(?:CascadeClassifier|detectMultiScale)|deepface|face embedding|attendance tracking|surveillance|multi-camera tracking|track_people|tracking people|people across cameras|person re-identification\b", re.I)
     ],
     "ml": [
         re.compile(r"\bsklearn|torch|tensorflow|transformers|classification of people|profiling|recommender system|toxicity|emotion detection\b", re.I)
     ],
 }
+SENSITIVE_ML_PATTERNS = [
+    re.compile(
+        r"\btoxicity|emotion detection|recommender system|profiling|engagement ranking|manipulation risks?|admissions?|hiring|credit risk|classification of people|user comments?\b",
+        re.I,
+    )
+]
 
 TOPIC_PATTERNS: dict[str, list[re.Pattern[str]]] = {
     "README/project purpose": [re.compile(r"\bpurpose|project|prototype|research|visuali[sz]es?\b", re.I)],
@@ -66,6 +72,20 @@ TOPIC_PATTERNS: dict[str, list[re.Pattern[str]]] = {
 
 def _has_signal(text: str, patterns: list[re.Pattern[str]]) -> bool:
     return any(find_positive_topic_mentions(text, [pattern]) for pattern in patterns)
+
+
+def _doc_has_concrete_control(rel_path: str, text: str) -> bool:
+    rel = rel_path.lower()
+    lower = text.lower()
+    if Path(rel).name == "security.md":
+        return any(term in lower for term in ["responsible disclosure", "authorization", "scope", "misuse", "safe release", "release boundaries"])
+    if any(token in rel for token in ["data_card", "datacard", "datasheet"]):
+        return any(term in lower for term in ["source", "provenance", "intended use", "retention", "deletion", "license", "release", "access"])
+    if any(token in rel for token in ["privacy", "ethics"]):
+        return any(term in lower for term in ["privacy", "consent", "retention", "access", "de-identification", "anonymization", "deletion"])
+    if any(token in rel for token in ["model_card", "modelcard"]):
+        return any(term in lower for term in ["intended use", "limitations", "fairness", "bias", "deployment"])
+    return False
 
 
 def _is_excluded_signal_path(rel_path: str) -> bool:
@@ -110,7 +130,7 @@ def _has_dataset_path(root_path: str | Path, max_file_size: int) -> bool:
     return False
 
 
-def _required_topics(signals: dict[str, bool]) -> list[str]:
+def _required_topics(signals: dict[str, bool], *, has_project_source: bool, has_readme: bool) -> list[str]:
     topics: list[str] = []
     if signals["scraping"]:
         topics.extend([
@@ -129,7 +149,7 @@ def _required_topics(signals: dict[str, bool]) -> list[str]:
             "data access controls",
             "consent/reasonable expectation",
         ])
-    if signals["dataset"]:
+    if signals["dataset"] and (signals["pii"] or signals["scraping"] or signals.get("dataset_release", False)):
         topics.extend([
             "data card/datasheet",
             "release policy",
@@ -152,9 +172,9 @@ def _required_topics(signals: dict[str, bool]) -> list[str]:
             "deployment limitations",
             "bias/performance limitations",
         ])
-    if signals["ml"] and signals["pii"]:
+    if signals["ml"] and (signals["pii"] or signals.get("sensitive_ml", False)):
         topics.extend(["model card or limitations", "fairness/bias evaluation", "deployment boundaries"])
-    if not any(signals.values()):
+    if not any(signals.values()) and has_project_source and not has_readme:
         topics.extend(["README/project purpose"])
     return sorted(set(topics))
 
@@ -166,19 +186,25 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
     fallback_docs: list[tuple[str, str]] = []
     docs_files: list[str] = []
     evidence: list[EvidenceItem] = []
+    has_project_source = False
+    has_readme = False
 
     for scanned in iter_repo_files(root_path, max_file_size=max_file_size):
         text = read_text_file(scanned.path)
         rel = scanned.rel_path.lower()
+        if classify_file(scanned.rel_path) == "project_description":
+            has_readme = True
         if _is_signal_source(scanned.rel_path):
             signal_text += "\n" + text
+            if classify_file(scanned.rel_path) in {"project_description", "source_code", "data_schema", "notebook"}:
+                has_project_source = True
         if _is_documentation_source(scanned.rel_path):
             docs_files.append(scanned.rel_path)
             docs.append((scanned.rel_path, text))
             docs_text += "\n" + text
             if _is_fallback_project_doc(scanned.rel_path):
                 fallback_docs.append((scanned.rel_path, text))
-            if "security.md" == Path(rel).name:
+            if "security.md" == Path(rel).name and _doc_has_concrete_control(scanned.rel_path, text):
                 evidence.append(
                     make_evidence(
                         category="missing_ethics_documentation",
@@ -189,7 +215,7 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                         include_snippets=include_snippets,
                     )
                 )
-            if any(token in rel for token in ["ethics", "privacy", "data_card", "datacard", "datasheet", "model_card", "modelcard"]):
+            if any(token in rel for token in ["ethics", "privacy", "data_card", "datacard", "datasheet", "model_card", "modelcard"]) and _doc_has_concrete_control(scanned.rel_path, text):
                 evidence.append(
                     make_evidence(
                         category="missing_ethics_documentation",
@@ -206,7 +232,9 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
 
     signals = {name: _has_signal(signal_text, patterns) for name, patterns in SIGNAL_PATTERNS.items()}
     signals["dataset"] = signals["dataset"] or _has_dataset_path(root_path, max_file_size)
-    required = _required_topics(signals)
+    signals["dataset_release"] = _has_signal(signal_text, SIGNAL_PATTERNS["dataset"])
+    signals["sensitive_ml"] = _has_signal(signal_text, SENSITIVE_ML_PATTERNS)
+    required = _required_topics(signals, has_project_source=has_project_source, has_readme=has_readme)
 
     covered_topics: list[str] = []
     missing_topics: list[str] = []
@@ -214,6 +242,8 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
         patterns = TOPIC_PATTERNS[topic]
         if topic_is_covered(docs_text, patterns):
             covered_topics.append(topic)
+            if topic == "README/project purpose":
+                continue
             for doc_path, doc_text in docs:
                 mentions = find_positive_topic_mentions(doc_text, patterns)
                 if not mentions:

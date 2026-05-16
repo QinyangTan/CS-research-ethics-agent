@@ -41,37 +41,21 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
-
-### Missing ethics, data handling, or release documentation
-- Risk ID: `risk_8877616584`
-- Category: `missing_ethics_documentation`
-- Status: `unknown`
-- Severity: `medium`
-- Confidence: `medium`
-- Why it matters: Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics.
-- Evidence: README/docs
-- Missing context: LICENSE; ethics/privacy/data handling documentation
+No findings in this section based on available repository evidence.
 
 ## Evidence Table
 
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
 | risk_76f50fb173 | `risk_signal` | `secret_exposure` | `.env` | .env-like file detected; these often contain credentials and should not be committed. |  |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
-| risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: README/project purpose. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
 
 No positive controls were detected from repository evidence.
+
+## Category-Specific Review Focus
+
+- `secret_exposure`: rotate exposed credentials, remove secrets from history where applicable, use environment variables or a secret manager, keep `.env.example` placeholders safe, and avoid printing full secrets.
 
 ## Recommended Mitigations
 
@@ -81,13 +65,6 @@ No positive controls were detected from repository evidence.
 - Commit only `.env.example` placeholders.
 - Use secret managers.
 - Avoid printing secret values in reports.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
-- Add an ethics, privacy, and data-handling section when relevant.
-- Document limitations, release boundaries, and misuse considerations.
-- Use a data card or model card for datasets or models.
 
 ## Advisor / IRB Discussion Questions
 
@@ -95,12 +72,6 @@ No positive controls were detected from repository evidence.
 - Have they been rotated?
 - How will secrets be stored going forward?
 - Should committed values be replaced with `.env.example` placeholders?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
-- What data is collected and why?
-- What release limits apply?
-- What mitigations are already in place but not documented?
 - Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
 
 ## Safe Release Checklist

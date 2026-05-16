@@ -10,7 +10,7 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 - Root path: `benchmarks/fixtures/case_recommender_manipulation`
 - Languages: Markdown, Python
 - Important files: README.md
-- Possible human data: True
+- Possible human data: False
 - Possible security-sensitive or dual-use material: False
 
 ## Project Evidence Summary
@@ -29,61 +29,45 @@ No findings in this section based on available repository evidence.
 
 ## Potential Risks
 
-### Fairness, profiling, or deployment harm risk
-- Risk ID: `risk_3b31fd16ac`
-- Category: `ml_fairness_deployment_risk`
-- Status: `potential`
-- Severity: `medium`
-- Confidence: `medium`
-- Why it matters: ML systems may classify, rank, profile, recommend to, or otherwise affect people.
-- Evidence: README.md:1
-- Missing context: Intended deployment context, evaluation by subgroup, and whether outputs affect people.
+No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
+### Missing ethics, data handling, or release documentation
+- Risk ID: `risk_8877616584`
+- Category: `missing_ethics_documentation`
 - Status: `unknown`
-- Severity: `low`
+- Severity: `medium`
 - Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
+- Why it matters: Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics.
+- Evidence: README/docs
+- Missing context: LICENSE; ethics/privacy/data handling documentation
 
 ## Evidence Table
 
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
-| risk_3b31fd16ac | `risk_signal` | `ml_fairness_deployment_risk` | `README.md:1` | References recommender systems. | A recommender system ranks content to maximize engagement. Deployment boundaries and manipulation risks are not documented. Matched: recommender system |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
+| risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: deployment boundaries, fairness/bias evaluation, model card or limitations. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
 
 No positive controls were detected from repository evidence.
 
+## Category-Specific Review Focus
+
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+
 ## Recommended Mitigations
 
-- Document intended use and non-use.
-- Create or update a model card.
-- Evaluate subgroup performance where appropriate.
-- Document fairness and bias evaluation methods.
-- Document uncertainty and failure modes.
-- Set deployment boundaries and human-review expectations.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
+- Add an ethics, privacy, and data-handling section when relevant.
+- Document limitations, release boundaries, and misuse considerations.
+- Use a data card or model card for datasets or models.
 
 ## Advisor / IRB Discussion Questions
 
-- Who is affected by model outputs?
-- Were subgroup errors evaluated?
-- What deployment constraints and human review steps exist?
-- Is there a model card documenting intended use, limitations, and fairness/bias evaluation?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
+- What data is collected and why?
+- What release limits apply?
+- What mitigations are already in place but not documented?
 - Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
 
 ## Safe Release Checklist

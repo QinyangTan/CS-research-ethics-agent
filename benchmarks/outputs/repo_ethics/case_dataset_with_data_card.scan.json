@@ -3,39 +3,6 @@
     {
       "category": "dataset_release_reidentification",
       "confidence": "medium",
-      "evidence_id": "c459552842037eb8",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "Dataset files or release language were detected, but the following context may need clarification: anonymization/de-identification policy.",
-      "snippet": null
-    },
-    {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "89dcf868f01f1b33",
-      "evidence_type": "missing_context",
-      "file_path": "README/docs",
-      "line_end": null,
-      "line_start": null,
-      "reason": "Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, release policy. Missing context is not proof of wrongdoing.",
-      "snippet": null
-    },
-    {
-      "category": "dataset_release_reidentification",
-      "confidence": "medium",
       "evidence_id": "07ab91a2eeaed08c",
       "evidence_type": "risk_signal",
       "file_path": "data/samples.csv",
@@ -87,28 +54,6 @@
       "line_start": 1,
       "reason": "Documentation includes retention/deletion policy.",
       "snippet": "Data card: synthetic source, intended use, retention, license, and deletion policy are documented.\nMatched: deletion policy"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "37b9a52b90d244f3",
-      "evidence_type": "positive_control",
-      "file_path": "docs/data_card.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes data card/datasheet.",
-      "snippet": "Data card: synthetic source, intended use, retention, license, and deletion policy are documented.\nMatched: Data card"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "5df4a13d08c7f63a",
-      "evidence_type": "positive_control",
-      "file_path": "docs/data_card.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes data retention/deletion.",
-      "snippet": "Data card: synthetic source, intended use, retention, license, and deletion policy are documented.\nMatched: retention"
     }
   ],
   "project_profile": {

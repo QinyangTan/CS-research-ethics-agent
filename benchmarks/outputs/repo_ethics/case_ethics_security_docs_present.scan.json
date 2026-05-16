@@ -1,17 +1,6 @@
 {
   "evidence": [
     {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
-    },
-    {
       "category": "missing_ethics_documentation",
       "confidence": "medium",
       "evidence_id": "c4ac169f7fa34cf0",
@@ -65,17 +54,6 @@
       "line_start": 1,
       "reason": "Documentation includes responsible disclosure.",
       "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: Responsible disclosure"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "a12a42a1173df765",
-      "evidence_type": "positive_control",
-      "file_path": "ethics.md",
-      "line_end": null,
-      "line_start": null,
-      "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
-      "snippet": null
     },
     {
       "category": "security_dual_use",

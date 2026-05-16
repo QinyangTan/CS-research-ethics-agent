@@ -41,16 +41,6 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
-
 ### Missing ethics, data handling, or release documentation
 - Risk ID: `risk_8877616584`
 - Category: `missing_ethics_documentation`
@@ -66,12 +56,16 @@ No findings in this section based on available repository evidence.
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
 | risk_e1fc61af82 | `risk_signal` | `surveillance_tracking` | `README.md:1` | References person re-identification or cross-camera tracking. | Tracks people across cameras for a multi-camera tracking demo. Consent and deployment limits are not documented. Matched: multi-camera tracking |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
-| risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: README/project purpose. Missing context is not proof of wrongdoing. |  |
+| risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: bias/performance limitations, consent/reasonable expectation, data access controls, data retention/deletion, deployment limitations, privacy. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
 
 No positive controls were detected from repository evidence.
+
+## Category-Specific Review Focus
+
+- `surveillance_tracking`: confirm tracking scope, notice/consent, bystander risk, retention, deployment limits, and aggregation/anonymization.
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
 
 ## Recommended Mitigations
 
@@ -80,10 +74,6 @@ No positive controls were detected from repository evidence.
 - Address bystander and non-participant risks.
 - Define deployment limits and prohibited uses.
 - Review deployment context with an advisor or appropriate review body.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
 - Add an ethics, privacy, and data-handling section when relevant.
 - Document limitations, release boundaries, and misuse considerations.
 - Use a data card or model card for datasets or models.
@@ -94,9 +84,6 @@ No positive controls were detected from repository evidence.
 - Can affected people opt out?
 - Who can access tracking records?
 - What bystander, non-participant, or deployment risks need review?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - What data is collected and why?
 - What release limits apply?
 - What mitigations are already in place but not documented?

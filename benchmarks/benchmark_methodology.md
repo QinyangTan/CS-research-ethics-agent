@@ -43,3 +43,20 @@ The scorer records `scoring_mode_counts` for each system:
 - `fallback_markdown`: unstructured Markdown scored with conservative local-window heuristics.
 
 Underperformance analysis is diagnostic. It should guide general scanner/report improvements, not case-specific rules.
+
+The analysis also records root-cause buckets for metric gaps:
+
+- missed expected category
+- lower groundedness
+- extra missing-context noise
+- extra positive-control noise
+- must-mention gap
+- actionability gap
+- false positive
+- report-discipline issue
+
+These buckets help reviewers choose a follow-up area such as scanner precision, report templates, taxonomy aliases, or mitigation/question knowledge base updates. They are not a semantic judge and should not be used to tune production code to individual benchmark case IDs.
+
+## Anti-Overfitting Guard
+
+Production repo-ethics code must not read benchmark gold labels, benchmark results, fixture paths, or direct baseline outputs. Tests scan production source files for benchmark-only identifiers so benchmark-driven work remains general rather than case-specific.

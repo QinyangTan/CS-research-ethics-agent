@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import importlib.util
 from pathlib import Path
 
 
@@ -675,6 +676,7 @@ def test_underperformance_analysis_script_runs_on_small_results(tmp_path: Path) 
                 "expected_risk_categories": ["privacy_identifiability"],
                 "risk_categories_found": [],
                 "expected_absent_false_positives": [],
+                "unexpected_missing_context_categories": ["license_dataset_terms"],
             },
             {
                 "system": "direct_codex_strong",
@@ -691,6 +693,7 @@ def test_underperformance_analysis_script_runs_on_small_results(tmp_path: Path) 
                 "expected_risk_categories": ["privacy_identifiability"],
                 "risk_categories_found": ["privacy_identifiability"],
                 "expected_absent_false_positives": ["security_dual_use"],
+                "unexpected_missing_context_categories": [],
             },
         ]
     }
@@ -717,4 +720,45 @@ def test_underperformance_analysis_script_runs_on_small_results(tmp_path: Path) 
     payload = json.loads(output_json.read_text(encoding="utf-8"))
     assert payload["comparisons"]["direct_codex_strong"]["metrics"]["category_recall"]["repo_ethics_worse"]
     assert payload["comparisons"]["direct_codex_strong"]["metrics"]["false_positive_count"]["repo_ethics_better"]
-    assert "diagnostic" in output_md.read_text(encoding="utf-8").lower()
+    assert payload["root_cause_buckets"]["missed_expected_category"]
+    assert payload["root_cause_buckets"]["extra_missing_context_noise"]
+    assert payload["repo_ethics_worse_by_metric"]["category_recall"]
+    assert payload["direct_worse_by_metric"]["false_positive_count"]
+    assert any(theme.get("category") == "privacy_identifiability" for theme in payload["improvement_themes"])
+    output_text = output_md.read_text(encoding="utf-8").lower()
+    assert "root-cause buckets" in output_text
+    assert "diagnostic" in output_text
+
+
+def test_repo_ethics_hardness_prioritizes_noise_and_violations() -> None:
+    spec = importlib.util.spec_from_file_location("score_reports", BENCH / "scripts" / "score_reports.py")
+    assert spec and spec.loader
+    score_reports = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(score_reports)
+
+    perfect = {
+        "category_recall": 1.0,
+        "evidence_groundedness": 1.0,
+        "missing_context_recall": 1.0,
+        "positive_control_recall": 1.0,
+        "false_positive_count": 0,
+        "unexpected_missing_context_count": 0,
+        "unexpected_positive_control_count": 0,
+        "must_mention_recall": 1.0,
+        "actionability": 1.0,
+        "forbidden_language_violations": 0,
+        "unsupported_conclusion_count": 0,
+        "secret_leakage_count": 0,
+    }
+    noisy = {
+        **perfect,
+        "unexpected_missing_context_count": 2,
+        "must_mention_recall": 0.5,
+    }
+    violation = {
+        **perfect,
+        "forbidden_language_violations": 1,
+    }
+    assert score_reports.repo_ethics_hardness(noisy) > score_reports.repo_ethics_hardness(perfect)
+    assert score_reports.repo_ethics_hardness(violation) > score_reports.repo_ethics_hardness(noisy)
+    assert "extra missing context" in score_reports.hardness_reason(noisy)

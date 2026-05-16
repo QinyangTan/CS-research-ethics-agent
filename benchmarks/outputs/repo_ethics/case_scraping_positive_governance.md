@@ -41,16 +41,6 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
-
 ### Missing ethics, data handling, or release documentation
 - Risk ID: `risk_8877616584`
 - Category: `missing_ethics_documentation`
@@ -66,7 +56,6 @@ No findings in this section based on available repository evidence.
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
 | risk_719682d322 | `risk_signal` | `web_scraping_platform_governance` | `src/main.py:2` | Uses Python requests for HTTP collection. | requests.get('https://example.test') Matched: requests.get( |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
 | risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: consent/reasonable expectation. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
@@ -83,6 +72,11 @@ No findings in this section based on available repository evidence.
 - `docs/governance.md:1`: `web_scraping_platform_governance` - Documentation includes rate limits guidance.
 - `docs/governance.md:1`: `web_scraping_platform_governance` - Documentation includes rate limits guidance.
 
+## Category-Specific Review Focus
+
+- `web_scraping_platform_governance`: confirm platform/API terms, robots.txt where relevant, rate limits, deletion/edit handling, redistribution limits, and user-content policy.
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+
 ## Recommended Mitigations
 
 - Check platform terms.
@@ -94,10 +88,6 @@ No findings in this section based on available repository evidence.
 - Avoid collecting sensitive communities without review.
 - Document collection method and dates.
 - Consider whether consent or notice is needed.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
 - Add an ethics, privacy, and data-handling section when relevant.
 - Document limitations, release boundaries, and misuse considerations.
 - Use a data card or model card for datasets or models.
@@ -109,9 +99,6 @@ No findings in this section based on available repository evidence.
 - Is any private or access-controlled data collected?
 - How are deleted, edited, or restricted platform records handled?
 - Can collected platform content or metadata be redistributed?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - What data is collected and why?
 - What release limits apply?
 - What mitigations are already in place but not documented?

@@ -41,16 +41,6 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
-
 ### Missing ethics, data handling, or release documentation
 - Risk ID: `risk_8877616584`
 - Category: `missing_ethics_documentation`
@@ -69,13 +59,17 @@ No findings in this section based on available repository evidence.
 | risk_33c2faca73 | `risk_signal` | `privacy_identifiability` | `data/schema.json:1` | References demographic or sensitive attributes. | {"participant_id": "string", "gender": "string", "income": "range"} Matched: income |
 | risk_33c2faca73 | `risk_signal` | `privacy_identifiability` | `data/schema.json:1` | References demographic or sensitive attributes. | {"participant_id": "string", "gender": "string", "income": "range"} Matched: gender |
 | risk_33c2faca73 | `risk_signal` | `dataset_release_reidentification` | `data/schema.json` | Repository contains a dataset-like file by extension; content was not read. Release, retention, and de-identification review may be needed if it contains research data. |  |
-| risk_33c2faca73 | `missing_context` | `dataset_release_reidentification` | `.` | Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy. |  |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
+| risk_33c2faca73 | `missing_context` | `dataset_release_reidentification` | `.` | Dataset files or release language were detected, but the following data-governance context may need clarification: retention/deletion policy, provenance/access policy. |  |
 | risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, consent/reasonable expectation, data access controls, data card/datasheet, data retention/deletion, privacy, release policy. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
 
 No positive controls were detected from repository evidence.
+
+## Category-Specific Review Focus
+
+- `dataset_release_reidentification`: confirm data card or datasheet coverage, release tiers, raw versus aggregate release, controlled access, license/terms, provenance, and re-identification risk.
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
 
 ## Recommended Mitigations
 
@@ -86,10 +80,6 @@ No positive controls were detected from repository evidence.
 - Aggregate, redact, or perturb fields that could identify people.
 - Define retention and deletion policy.
 - Document anonymization limits.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
 - Add an ethics, privacy, and data-handling section when relevant.
 - Document limitations, release boundaries, and misuse considerations.
 - Use a data card or model card for datasets or models.
@@ -100,9 +90,6 @@ No positive controls were detected from repository evidence.
 - What fields could enable re-identification?
 - Is there a data card or datasheet?
 - What release, retention, deletion, and access-control policy applies?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - What data is collected and why?
 - What release limits apply?
 - What mitigations are already in place but not documented?

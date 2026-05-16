@@ -11,7 +11,7 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 - Languages: Markdown, Python
 - Important files: README.md
 - Possible human data: False
-- Possible security-sensitive or dual-use material: True
+- Possible security-sensitive or dual-use material: False
 
 ## Project Evidence Summary
 
@@ -20,7 +20,7 @@ This is a local, evidence-grounded CS research ethics pre-review. It does not ma
 
 ## Detected Research Activities
 
-- Activities: vulnerability scanning
+- Activities: Not detected from repository text
 - Data sources: Not detected from repository text
 
 ## Confirmed Findings
@@ -33,56 +33,30 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
-
-### Missing ethics, data handling, or release documentation
-- Risk ID: `risk_8877616584`
-- Category: `missing_ethics_documentation`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics.
-- Evidence: README/docs
-- Missing context: LICENSE; ethics/privacy/data handling documentation
+No findings in this section based on available repository evidence.
 
 ## Evidence Table
 
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
-| risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: README/project purpose. Missing context is not proof of wrongdoing. |  |
+| None | none | none | none | No evidence rows were generated. | |
 
 ## Positive Controls Detected
 
 No positive controls were detected from repository evidence.
 
+## Category-Specific Review Focus
+
+No category-specific review focus was generated from scanner evidence.
+
 ## Recommended Mitigations
 
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
-- Add an ethics, privacy, and data-handling section when relevant.
-- Document limitations, release boundaries, and misuse considerations.
-- Use a data card or model card for datasets or models.
+- No specific mitigations were generated from scanner evidence.
 
 ## Advisor / IRB Discussion Questions
 
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
-- What data is collected and why?
-- What release limits apply?
-- What mitigations are already in place but not documented?
 - Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
+- The scanner found limited concrete ethics-risk evidence. A reviewer should still confirm the project description and data sources.
 
 ## Safe Release Checklist
 

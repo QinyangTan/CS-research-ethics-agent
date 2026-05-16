@@ -29,15 +29,7 @@ No findings in this section based on available repository evidence.
 
 ## Potential Risks
 
-### Dataset release and retention details need review
-- Risk ID: `risk_ee234ffc02`
-- Category: `dataset_release_reidentification`
-- Status: `potential`
-- Severity: `medium`
-- Confidence: `high`
-- Why it matters: The repository contains data or release signals that may require review for re-identification, retention, and sharing risk.
-- Evidence: README.md:1, .
-- Missing context: Dataset sharing scope, retention period, and anonymization limits.
+No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
@@ -45,7 +37,7 @@ No findings in this section based on available repository evidence.
 - Risk ID: `risk_8877616584`
 - Category: `missing_ethics_documentation`
 - Status: `unknown`
-- Severity: `medium`
+- Severity: `low`
 - Confidence: `medium`
 - Why it matters: Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics.
 - Evidence: README/docs
@@ -55,8 +47,6 @@ No findings in this section based on available repository evidence.
 
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
-| risk_ee234ffc02 | `risk_signal` | `dataset_release_reidentification` | `README.md:1` | Mentions public dataset release. | Uses a public dataset with documented redistribution terms. Matched: public dataset |
-| risk_ee234ffc02 | `missing_context` | `dataset_release_reidentification` | `.` | Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy. |  |
 | risk_8877616584 | `missing_context` | `missing_ethics_documentation` | `README/docs` | Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, data card/datasheet, data retention/deletion, release policy. Missing context is not proof of wrongdoing. |  |
 
 ## Positive Controls Detected
@@ -67,25 +57,19 @@ No findings in this section based on available repository evidence.
 - `docs/data_terms.md:1`: `license_dataset_terms` - Mentions dataset terms or redistribution limits.
 - `docs/data_terms.md:1`: `license_dataset_terms` - Mentions dataset terms or redistribution limits.
 
+## Category-Specific Review Focus
+
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `license_dataset_terms`: confirm code license, dataset source terms, redistribution permissions, and third-party obligations.
+
 ## Recommended Mitigations
 
-- Create a data card or datasheet.
-- State whether raw records, derived features, or only aggregate statistics will be released.
-- Define a release policy for public, restricted, or no-release data.
-- Avoid public release of raw identifiable records.
-- Aggregate, redact, or perturb fields that could identify people.
-- Define retention and deletion policy.
-- Document anonymization limits.
 - Add an ethics, privacy, and data-handling section when relevant.
 - Document limitations, release boundaries, and misuse considerations.
 - Use a data card or model card for datasets or models.
 
 ## Advisor / IRB Discussion Questions
 
-- Will raw data, derived data, or only aggregate statistics be released?
-- What fields could enable re-identification?
-- Is there a data card or datasheet?
-- What release, retention, deletion, and access-control policy applies?
 - What data is collected and why?
 - What release limits apply?
 - What mitigations are already in place but not documented?

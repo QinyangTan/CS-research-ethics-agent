@@ -49,3 +49,12 @@ def test_target_aware_use_and_perform_negation() -> None:
         "This project does not perform grading, but it performs attendance tracking.",
         attendance,
     )
+
+
+def test_target_aware_scrape_and_track_negation() -> None:
+    scrape = [re.compile(r"\bscrape\b", re.I)]
+    tracking = [re.compile(r"\btrack(?:ing|s)?\b", re.I)]
+    assert not find_positive_topic_mentions("This project does not scrape websites.", scrape)
+    assert find_positive_topic_mentions("This project does not scrape websites, but it does scrape local logs.", scrape)
+    assert not find_positive_topic_mentions("This project does not track people.", tracking)
+    assert find_positive_topic_mentions("This project does not track packages, but it tracks people.", tracking)

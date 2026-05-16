@@ -1,28 +1,5 @@
 {
-  "evidence": [
-    {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "5d83fda2dea221a4",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes README/project purpose.",
-      "snippet": "We do not use face_recognition. This project analyzes fruit images.\nMatched: project"
-    }
-  ],
+  "evidence": [],
   "project_profile": {
     "detected_data_sources": [],
     "detected_research_activities": [],

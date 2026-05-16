@@ -595,6 +595,53 @@ def _format_metric(value: Any) -> str:
     return str(value)
 
 
+def repo_ethics_hardness(row: dict[str, Any]) -> float:
+    return (
+        (1 - float(row.get("category_recall", 1))) * 4
+        + (1 - float(row.get("evidence_groundedness", 1))) * 2
+        + (1 - float(row.get("missing_context_recall", 1))) * 2
+        + (1 - float(row.get("positive_control_recall", 1))) * 1.5
+        + float(row.get("false_positive_count", 0)) * 3
+        + float(row.get("unexpected_missing_context_count", 0)) * 0.5
+        + float(row.get("unexpected_positive_control_count", 0)) * 0.5
+        + (1 - float(row.get("must_mention_recall", 1))) * 1
+        + (1 - float(row.get("actionability", 1))) * 1
+        + float(row.get("forbidden_language_violations", 0)) * 5
+        + float(row.get("unsupported_conclusion_count", 0)) * 5
+        + float(row.get("secret_leakage_count", 0)) * 10
+    )
+
+
+def hardness_reason(row: dict[str, Any]) -> str:
+    reasons: list[str] = []
+    if row.get("category_recall", 1) < 1:
+        reasons.append(f"category recall = {row.get('category_recall', 0):.2f}")
+    if row.get("evidence_groundedness", 1) < 1:
+        reasons.append(f"groundedness = {row.get('evidence_groundedness', 0):.2f}")
+    if row.get("missing_context_recall", 1) < 1:
+        reasons.append(f"missing-context recall = {row.get('missing_context_recall', 0):.2f}")
+    if row.get("positive_control_recall", 1) < 1:
+        reasons.append(f"positive-control recall = {row.get('positive_control_recall', 0):.2f}")
+    if row.get("false_positive_count", 0):
+        reasons.append(f"false positives = {row.get('false_positive_count', 0)}")
+    if row.get("unexpected_missing_context_count", 0):
+        reasons.append(f"extra missing context = {row.get('unexpected_missing_context_count', 0)}")
+    if row.get("unexpected_positive_control_count", 0):
+        reasons.append(f"extra positive controls = {row.get('unexpected_positive_control_count', 0)}")
+    if row.get("must_mention_recall", 1) < 1:
+        reasons.append(f"must-mention recall = {row.get('must_mention_recall', 0):.2f}")
+    if row.get("actionability", 1) < 1:
+        reasons.append(f"actionability = {row.get('actionability', 0):.2f}")
+    for key, label in [
+        ("forbidden_language_violations", "forbidden violations"),
+        ("unsupported_conclusion_count", "overclaims"),
+        ("secret_leakage_count", "secret leaks"),
+    ]:
+        if row.get(key, 0):
+            reasons.append(f"{label} = {row.get(key, 0)}")
+    return "; ".join(reasons[:4]) if reasons else "all tracked diagnostics were strong"
+
+
 def output_available_for_case(output_dir: Path, case_id: str) -> bool:
     return (output_dir / f"{case_id}.md").exists() or (output_dir / f"{case_id}.json").exists()
 
@@ -699,14 +746,18 @@ def write_summary(results: dict[str, Any], summary_path: Path) -> None:
         repo_rows = [row for row in rows if row["system"] == "repo_ethics"]
         hardest = sorted(
             repo_rows,
-            key=lambda row: (row["category_recall"], row["evidence_groundedness"], -row["false_positive_count"]),
+            key=repo_ethics_hardness,
+            reverse=True,
         )[:5]
         lines.extend(["", "## Hardest Repo-Ethics Cases", ""])
         if hardest:
             for row in hardest:
                 lines.append(
-                    f"- `{row['case_id']}`: recall {row['category_recall']:.2f}, "
-                    f"groundedness {row['evidence_groundedness']:.2f}, false positives {row['false_positive_count']}."
+                    f"- `{row['case_id']}`: hardness {repo_ethics_hardness(row):.2f}, "
+                    f"recall {row['category_recall']:.2f}, groundedness {row['evidence_groundedness']:.2f}, "
+                    f"false positives {row['false_positive_count']}, extra missing context {row['unexpected_missing_context_count']}, "
+                    f"extra positive controls {row['unexpected_positive_control_count']}, must-mention recall {row['must_mention_recall']:.2f}, "
+                    f"actionability {row['actionability']:.2f}. Reason: {hardness_reason(row)}."
                 )
         else:
             lines.append("- No repo-ethics case outputs were available.")

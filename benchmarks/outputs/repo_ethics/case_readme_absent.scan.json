@@ -1,17 +1,6 @@
 {
   "evidence": [
     {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
-    },
-    {
       "category": "missing_ethics_documentation",
       "confidence": "medium",
       "evidence_id": "07fa2a589b863317",

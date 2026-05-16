@@ -107,3 +107,62 @@ def test_source_socket_scanning_triggers_security_requirements(tmp_path: Path) -
     missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context")
     assert "responsible disclosure" in missing.lower()
     assert "authorization/scope" in missing.lower()
+
+
+def test_negated_readme_security_claim_does_not_create_doc_noise(tmp_path: Path) -> None:
+    (tmp_path / "README.md").write_text("This is not a vulnerability scanner.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context").lower()
+    assert "responsible disclosure" not in missing
+    assert "authorization/scope" not in missing
+    assert "readme/project purpose" not in missing
+
+
+def test_missing_readme_with_source_creates_project_purpose_gap(tmp_path: Path) -> None:
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "main.py").write_text("print('visualize sorting')\n", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context").lower()
+    assert "readme/project purpose" in missing
+
+
+def test_sensitive_ml_requires_model_context_but_harmless_ml_does_not(tmp_path: Path) -> None:
+    (tmp_path / "README.md").write_text("Builds a toxicity classifier for user comments.", encoding="utf-8")
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "model.py").write_text("from transformers import AutoModel\n", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context").lower()
+    assert "model card" in missing
+    assert "fairness/bias evaluation" in missing
+
+    harmless = tmp_path / "harmless"
+    harmless.mkdir()
+    (harmless / "README.md").write_text("Classifies iris flowers.", encoding="utf-8")
+    hsrc = harmless / "src"
+    hsrc.mkdir()
+    (hsrc / "model.py").write_text("from sklearn.linear_model import LogisticRegression\n", encoding="utf-8")
+    harmless_evidence = scan(harmless)
+    harmless_missing = " ".join(item.reason for item in harmless_evidence if item.evidence_type == "missing_context").lower()
+    assert "model card" not in harmless_missing
+
+
+def test_dataset_public_release_requires_docs_but_negated_release_does_not(tmp_path: Path) -> None:
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "users.jsonl").write_text('{"user_id": "u1"}\n', encoding="utf-8")
+    (tmp_path / "README.md").write_text("This project will release the dataset publicly.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    missing = " ".join(item.reason for item in evidence if item.evidence_type == "missing_context").lower()
+    assert "release policy" in missing
+
+    negated = tmp_path / "negated"
+    negated.mkdir()
+    ndata = negated / "data"
+    ndata.mkdir()
+    (ndata / "users.jsonl").write_text('{"count": 1}\n', encoding="utf-8")
+    (negated / "README.md").write_text("No public dataset will be released.", encoding="utf-8")
+    negated_evidence = scan(negated)
+    negated_missing = " ".join(item.reason for item in negated_evidence if item.evidence_type == "missing_context").lower()
+    assert "release policy" not in negated_missing

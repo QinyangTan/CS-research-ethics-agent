@@ -33,3 +33,7 @@ python3 benchmarks/scripts/write_direct_comparison_report.py
 Compare `repo_ethics`, `direct_codex_strong`, and `direct_codex_naive` by individual metrics and output availability. Avoid broad claims from partial direct-output coverage.
 
 Path-only sanitization is allowed for benchmark output artifacts to remove local absolute repository prefixes. Do not edit direct baseline risk claims, evidence descriptions, mitigations, or conclusions after generation.
+
+## Underperformance Analysis
+
+`underperformance_analysis.*` groups metric gaps into root-cause buckets and repeated improvement themes. Use these diagnostics to identify general follow-up areas such as scanner precision, report templates, taxonomy aliases, or mitigation/question knowledge-base coverage. Do not use them to create case-specific production rules for individual benchmark fixtures.

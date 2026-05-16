@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from repo_ethics.constants import LANGUAGE_BY_EXTENSION
 from repo_ethics.engine.evidence_engine import iter_repo_file_paths, iter_repo_files, read_text_file, resolve_root
-from repo_ethics.engine.text_signals import strip_negated_sentences
+from repo_ethics.engine.text_signals import find_positive_topic_mentions
 from repo_ethics.schemas import ProjectProfile
 from repo_ethics.scanners.file_classifier import classify_file
 
@@ -125,16 +126,30 @@ def _read_repo_text(root: Path, files: list[str], max_chars: int = 80_000) -> st
     return "\n".join(parts).lower()
 
 
+def _keyword_pattern(keyword: str) -> re.Pattern[str]:
+    if keyword == "scrap":
+        return re.compile(r"\bscrap(?:e|es|ed|ing|er|ers)?\b", re.I)
+    if keyword == "web scrape":
+        return re.compile(r"\bweb\s+scrap(?:e|es|ed|ing|er|ers)?\b", re.I)
+    if keyword == "api":
+        return re.compile(r"\bapi\b", re.I)
+    escaped = re.escape(keyword).replace(r"\ ", r"\s+")
+    return re.compile(rf"\b{escaped}\b", re.I)
+
+
+def _has_positive_keyword(text: str, keyword: str) -> bool:
+    return bool(find_positive_topic_mentions(text, [_keyword_pattern(keyword)]))
+
+
 def build_project_profile(root_path: str | Path, max_file_size: int = 524_288) -> ProjectProfile:
     root = resolve_root(root_path)
     scanned = list(iter_repo_files(root, max_file_size=max_file_size))
     paths = [item.rel_path for item in scanned]
     metadata_paths = [item.rel_path for item in iter_repo_file_paths(root, include_binary=True, max_file_size=None)]
     repo_text = _read_repo_text(root, paths)
-    signal_text = strip_negated_sentences(repo_text)
 
-    detected_sources = sorted({label for keyword, label in DATA_SOURCE_KEYWORDS.items() if keyword in signal_text})
-    detected_activities = sorted({label for keyword, label in ACTIVITY_KEYWORDS.items() if keyword in signal_text})
+    detected_sources = sorted({label for keyword, label in DATA_SOURCE_KEYWORDS.items() if _has_positive_keyword(repo_text, keyword)})
+    detected_activities = sorted({label for keyword, label in ACTIVITY_KEYWORDS.items() if _has_positive_keyword(repo_text, keyword)})
 
     lower_paths = {path.lower() for path in paths}
     missing_docs: list[str] = []
@@ -146,7 +161,7 @@ def build_project_profile(root_path: str | Path, max_file_size: int = 524_288) -
         missing_docs.append("ethics/privacy/data handling documentation")
 
     human_terms = ["user", "student", "participant", "patient", "email", "username", "face", "biometric", "demographic"]
-    security_terms = ["cve", "exploit", "vulnerability", "nmap", "metasploit", "scanner"]
+    security_terms = ["cve", "exploit", "vulnerability", "nmap", "metasploit", "vulnerability scanner", "port scanning"]
 
     return ProjectProfile(
         root_path=str(root),
@@ -156,9 +171,9 @@ def build_project_profile(root_path: str | Path, max_file_size: int = 524_288) -
         reviewed_files=representative_reviewed_files(metadata_paths),
         detected_research_activities=detected_activities,
         detected_data_sources=detected_sources,
-        possible_human_data=any(term in signal_text for term in human_terms),
-        possible_security_sensitive=any(term in signal_text for term in security_terms),
-        possible_dual_use=any(term in signal_text for term in security_terms),
+        possible_human_data=any(_has_positive_keyword(repo_text, term) for term in human_terms),
+        possible_security_sensitive=any(_has_positive_keyword(repo_text, term) for term in security_terms),
+        possible_dual_use=any(_has_positive_keyword(repo_text, term) for term in security_terms),
         missing_docs=missing_docs,
     )
 

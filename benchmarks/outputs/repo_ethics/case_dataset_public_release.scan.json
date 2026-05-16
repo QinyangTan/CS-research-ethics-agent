@@ -8,19 +8,19 @@
       "file_path": ".",
       "line_end": null,
       "line_start": null,
-      "reason": "Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy.",
+      "reason": "Dataset files or release language were detected, but the following data-governance context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy, provenance/access policy.",
       "snippet": null
     },
     {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
+      "category": "dataset_release_reidentification",
+      "confidence": "high",
+      "evidence_id": "b7b54bba503c1f42",
+      "evidence_type": "risk_signal",
+      "file_path": "README.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Mentions public dataset release.",
+      "snippet": "This project will release the dataset publicly for reproducibility. Anonymization and retention are not documented.\nMatched: will release the dataset publicly"
     },
     {
       "category": "missing_ethics_documentation",

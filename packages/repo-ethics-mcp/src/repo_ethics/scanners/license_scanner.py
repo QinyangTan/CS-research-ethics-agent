@@ -14,15 +14,28 @@ LICENSE_PATTERNS = [
     (re.compile(r"\b(MIT License|Apache License|BSD License|GPL|Creative Commons|CC-BY|ODC-BY)\b", re.I), "Mentions a code or dataset license."),
     (re.compile(r"\bdataset license|data license|redistribution|non-commercial|terms of use\b", re.I), "Mentions dataset terms or redistribution limits."),
 ]
+LICENSE_MISSING_PATTERN = re.compile(r"\blicen[cs]e\b", re.I)
+
+
+def _has_distribution_context(text: str) -> bool:
+    lower = text.lower()
+    return bool(
+        re.search(
+            r"\b(?:publish(?:ed|ing)?\s+(?:package|library|code)|redistribut(?:e|ion)|distribut(?:e|ion)\s+(?:package|library|code)|pip install|npm publish)\b",
+            lower,
+        )
+    )
 
 
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
     evidence: list[EvidenceItem] = []
     saw_license_file = False
     saw_license_mention = False
+    repo_text_parts: list[str] = []
     for scanned in iter_repo_files(root_path, max_file_size=max_file_size):
         name = Path(scanned.rel_path).name.lower()
         text = read_text_file(scanned.path)
+        repo_text_parts.append(text[:3000])
         if name == "license" or name.startswith("license."):
             saw_license_file = True
             evidence.append(
@@ -65,8 +78,22 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                         include_snippets=include_snippets,
                     )
                 )
+        for start, end, _ in find_negated_topic_mentions(text, [LICENSE_MISSING_PATTERN]):
+            evidence.append(
+                make_match_evidence(
+                    category="license_dataset_terms",
+                    file_path=scanned.rel_path,
+                    text=text,
+                    start=start,
+                    end=end,
+                    reason="License or dataset terms are mentioned as missing, unclear, or not documented.",
+                    confidence="medium",
+                    evidence_type="missing_context",
+                    include_snippets=include_snippets,
+                )
+            )
 
-    if not saw_license_file and not saw_license_mention:
+    if not saw_license_file and not saw_license_mention and _has_distribution_context("\n".join(repo_text_parts)):
         evidence.append(
             make_evidence(
                 category="license_dataset_terms",
@@ -78,4 +105,3 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
             )
         )
     return dedupe_evidence(evidence)
-

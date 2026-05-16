@@ -50,42 +50,6 @@
       "status": "potential",
       "title": "Fairness, profiling, or deployment harm risk",
       "why_it_matters": "ML systems may classify, rank, profile, recommend to, or otherwise affect people."
-    },
-    {
-      "advisor_or_irb_questions": [
-        "What license applies to the code?",
-        "What terms apply to collected or derived data?",
-        "Is redistribution permitted?"
-      ],
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "license_dataset_terms",
-          "confidence": "medium",
-          "evidence_id": "809a0f631f340819",
-          "evidence_type": "missing_context",
-          "file_path": ".",
-          "line_end": null,
-          "line_start": null,
-          "reason": "No code or dataset license documentation was detected.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "Code license, dataset source terms, and redistribution permissions."
-      ],
-      "recommended_mitigations": [
-        "Add a clear code license.",
-        "Document dataset source terms and redistribution limits.",
-        "Avoid redistributing data unless terms permit it.",
-        "Track third-party license obligations."
-      ],
-      "risk_id": "risk_fc19ee1aa0",
-      "severity": "low",
-      "status": "unknown",
-      "title": "License or dataset redistribution terms are unclear",
-      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
     }
   ],
   "global_missing_context": [
@@ -102,6 +66,39 @@
       "line_start": null,
       "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
       "snippet": null
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "25a4e577df8b9426",
+      "evidence_type": "positive_control",
+      "file_path": "docs/model_card.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes deployment boundaries.",
+      "snippet": "Model card documents intended use, limitations, fairness, and deployment boundaries.\nMatched: intended use"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "5cb4c24dc1627e3a",
+      "evidence_type": "positive_control",
+      "file_path": "docs/model_card.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes model card or limitations.",
+      "snippet": "Model card documents intended use, limitations, fairness, and deployment boundaries.\nMatched: Model card"
+    },
+    {
+      "category": "missing_ethics_documentation",
+      "confidence": "medium",
+      "evidence_id": "c63b3c7f488cb052",
+      "evidence_type": "positive_control",
+      "file_path": "docs/model_card.md",
+      "line_end": 1,
+      "line_start": 1,
+      "reason": "Documentation includes fairness/bias evaluation.",
+      "snippet": "Model card documents intended use, limitations, fairness, and deployment boundaries.\nMatched: fairness"
     }
   ],
   "project_profile": {

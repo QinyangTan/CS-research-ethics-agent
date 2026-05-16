@@ -34,7 +34,9 @@ def test_risk_mapper_combines_scraping_and_pii() -> None:
 
 
 def test_missing_documentation_alone_is_not_high(tmp_path: Path) -> None:
-    (tmp_path / "README.md").write_text("Simple sorting visualizer.", encoding="utf-8")
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "main.py").write_text("print('sorting visualizer')\n", encoding="utf-8")
     scan_result = run_scan(tmp_path)
     report = build_report(scan_result)
     missing = [finding for finding in report.findings if finding.category == "missing_ethics_documentation"]

@@ -241,6 +241,22 @@ def _improvement_lines(analysis: dict[str, Any] | None, key: str) -> list[str]:
     return lines
 
 
+def _theme_lines(analysis: dict[str, Any] | None) -> list[str]:
+    if not analysis:
+        return ["- Underperformance analysis was not available for this report run."]
+    themes = analysis.get("improvement_themes", [])[:5]
+    if not themes:
+        return ["- No repeated improvement themes were identified under the current scoring rubric."]
+    lines: list[str] = []
+    for theme in themes:
+        category = f" for `{theme['category']}`" if theme.get("category") else ""
+        lines.append(
+            f"- {theme.get('theme', 'diagnostic theme')}{category}: "
+            f"{theme.get('count', 0)} occurrence(s); follow-up area: {theme.get('likely_follow_up_area', 'manual review')}."
+        )
+    return lines
+
+
 def write_report(results: dict[str, Any], output_path: Path, timestamp: str, analysis: dict[str, Any] | None = None) -> None:
     status = _comparison_status(results)
     total_cases = int(results.get("case_count", 0))
@@ -405,6 +421,10 @@ def write_report(results: dict[str, Any], output_path: Path, timestamp: str, ana
         "## Improvement Opportunities",
         "",
         "These lists are diagnostic under this scoring rubric and require manual review before changing scanner logic.",
+        "",
+        "### Repeated Themes",
+        "",
+        *_theme_lines(analysis),
         "",
         "### Repo-Ethics Improvement Opportunities",
         "",

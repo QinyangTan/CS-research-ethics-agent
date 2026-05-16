@@ -13,13 +13,13 @@
         {
           "category": "license_dataset_terms",
           "confidence": "medium",
-          "evidence_id": "809a0f631f340819",
+          "evidence_id": "aa725c24e2ad5587",
           "evidence_type": "missing_context",
-          "file_path": ".",
-          "line_end": null,
-          "line_start": null,
-          "reason": "No code or dataset license documentation was detected.",
-          "snippet": null
+          "file_path": "README.md",
+          "line_end": 1,
+          "line_start": 1,
+          "reason": "License or dataset terms are mentioned as missing, unclear, or not documented.",
+          "snippet": "Simple command-line helper with no data collection. License is not documented.\nMatched: License"
         }
       ],
       "missing_context": [
@@ -36,42 +36,6 @@
       "status": "unknown",
       "title": "License or dataset redistribution terms are unclear",
       "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
-    },
-    {
-      "advisor_or_irb_questions": [
-        "What data is collected and why?",
-        "What release limits apply?",
-        "What mitigations are already in place but not documented?"
-      ],
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "missing_ethics_documentation",
-          "confidence": "medium",
-          "evidence_id": "89dcf868f01f1b33",
-          "evidence_type": "missing_context",
-          "file_path": "README/docs",
-          "line_end": null,
-          "line_start": null,
-          "reason": "Repository evidence suggests these documentation topics may need clarification: README/project purpose. Missing context is not proof of wrongdoing.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "LICENSE",
-        "ethics/privacy/data handling documentation"
-      ],
-      "recommended_mitigations": [
-        "Add an ethics, privacy, and data-handling section when relevant.",
-        "Document limitations, release boundaries, and misuse considerations.",
-        "Use a data card or model card for datasets or models."
-      ],
-      "risk_id": "risk_8877616584",
-      "severity": "low",
-      "status": "unknown",
-      "title": "Missing ethics, data handling, or release documentation",
-      "why_it_matters": "Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics."
     }
   ],
   "global_missing_context": [

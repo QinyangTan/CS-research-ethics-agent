@@ -1,28 +1,5 @@
 {
-  "evidence": [
-    {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence_id": "809a0f631f340819",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "No code or dataset license documentation was detected.",
-      "snippet": null
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "07fa2a589b863317",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "Repository evidence suggests these documentation topics may need clarification: README/project purpose. Missing context is not proof of wrongdoing.",
-      "snippet": null
-    }
-  ],
+  "evidence": [],
   "project_profile": {
     "detected_data_sources": [],
     "detected_research_activities": [],

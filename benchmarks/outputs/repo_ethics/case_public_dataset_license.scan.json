@@ -1,17 +1,6 @@
 {
   "evidence": [
     {
-      "category": "dataset_release_reidentification",
-      "confidence": "medium",
-      "evidence_id": "c459552842037eb8",
-      "evidence_type": "missing_context",
-      "file_path": ".",
-      "line_end": null,
-      "line_start": null,
-      "reason": "Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy.",
-      "snippet": null
-    },
-    {
       "category": "license_dataset_terms",
       "confidence": "high",
       "evidence_id": "a6017256fcdee93c",
@@ -43,17 +32,6 @@
       "line_start": 1,
       "reason": "Mentions dataset terms or redistribution limits.",
       "snippet": "Uses a public dataset with documented redistribution terms.\nMatched: redistribution"
-    },
-    {
-      "category": "dataset_release_reidentification",
-      "confidence": "high",
-      "evidence_id": "700b2b1006a91ce2",
-      "evidence_type": "risk_signal",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Mentions public dataset release.",
-      "snippet": "Uses a public dataset with documented redistribution terms.\nMatched: public dataset"
     },
     {
       "category": "missing_ethics_documentation",

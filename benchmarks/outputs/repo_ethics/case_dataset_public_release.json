@@ -9,7 +9,7 @@
         "What release, retention, deletion, and access-control policy applies?"
       ],
       "category": "dataset_release_reidentification",
-      "confidence": "medium",
+      "confidence": "high",
       "evidence": [
         {
           "category": "privacy_identifiability",
@@ -46,6 +46,17 @@
         },
         {
           "category": "dataset_release_reidentification",
+          "confidence": "high",
+          "evidence_id": "b7b54bba503c1f42",
+          "evidence_type": "risk_signal",
+          "file_path": "README.md",
+          "line_end": 1,
+          "line_start": 1,
+          "reason": "Mentions public dataset release.",
+          "snippet": "This project will release the dataset publicly for reproducibility. Anonymization and retention are not documented.\nMatched: will release the dataset publicly"
+        },
+        {
+          "category": "dataset_release_reidentification",
           "confidence": "medium",
           "evidence_id": "21fd5325d6f76f98",
           "evidence_type": "risk_signal",
@@ -63,7 +74,7 @@
           "file_path": ".",
           "line_end": null,
           "line_start": null,
-          "reason": "Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy.",
+          "reason": "Dataset files or release language were detected, but the following data-governance context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy, provenance/access policy.",
           "snippet": null
         }
       ],
@@ -84,42 +95,6 @@
       "status": "potential",
       "title": "Possible re-identification risk if dataset is released",
       "why_it_matters": "The repository contains data or release signals that may require review for re-identification, retention, and sharing risk."
-    },
-    {
-      "advisor_or_irb_questions": [
-        "What license applies to the code?",
-        "What terms apply to collected or derived data?",
-        "Is redistribution permitted?"
-      ],
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "license_dataset_terms",
-          "confidence": "medium",
-          "evidence_id": "809a0f631f340819",
-          "evidence_type": "missing_context",
-          "file_path": ".",
-          "line_end": null,
-          "line_start": null,
-          "reason": "No code or dataset license documentation was detected.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "Code license, dataset source terms, and redistribution permissions."
-      ],
-      "recommended_mitigations": [
-        "Add a clear code license.",
-        "Document dataset source terms and redistribution limits.",
-        "Avoid redistributing data unless terms permit it.",
-        "Track third-party license obligations."
-      ],
-      "risk_id": "risk_fc19ee1aa0",
-      "severity": "low",
-      "status": "unknown",
-      "title": "License or dataset redistribution terms are unclear",
-      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
     },
     {
       "advisor_or_irb_questions": [

@@ -52,7 +52,7 @@
           "file_path": ".",
           "line_end": null,
           "line_start": null,
-          "reason": "Dataset files or release language were detected, but the following context may need clarification: data card/datasheet, retention/deletion policy, anonymization/de-identification policy.",
+          "reason": "Dataset files or release language were detected, but the following data-governance context may need clarification: retention/deletion policy, provenance/access policy.",
           "snippet": null
         }
       ],
@@ -73,78 +73,6 @@
       "status": "potential",
       "title": "Possible re-identification risk if dataset is released",
       "why_it_matters": "The repository contains data or release signals that may require review for re-identification, retention, and sharing risk."
-    },
-    {
-      "advisor_or_irb_questions": [
-        "What license applies to the code?",
-        "What terms apply to collected or derived data?",
-        "Is redistribution permitted?"
-      ],
-      "category": "license_dataset_terms",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "license_dataset_terms",
-          "confidence": "medium",
-          "evidence_id": "809a0f631f340819",
-          "evidence_type": "missing_context",
-          "file_path": ".",
-          "line_end": null,
-          "line_start": null,
-          "reason": "No code or dataset license documentation was detected.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "Code license, dataset source terms, and redistribution permissions."
-      ],
-      "recommended_mitigations": [
-        "Add a clear code license.",
-        "Document dataset source terms and redistribution limits.",
-        "Avoid redistributing data unless terms permit it.",
-        "Track third-party license obligations."
-      ],
-      "risk_id": "risk_fc19ee1aa0",
-      "severity": "low",
-      "status": "unknown",
-      "title": "License or dataset redistribution terms are unclear",
-      "why_it_matters": "Repository evidence leaves code, data, or platform redistribution terms unclear."
-    },
-    {
-      "advisor_or_irb_questions": [
-        "What data is collected and why?",
-        "What release limits apply?",
-        "What mitigations are already in place but not documented?"
-      ],
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence": [
-        {
-          "category": "missing_ethics_documentation",
-          "confidence": "medium",
-          "evidence_id": "89dcf868f01f1b33",
-          "evidence_type": "missing_context",
-          "file_path": "README/docs",
-          "line_end": null,
-          "line_start": null,
-          "reason": "Repository evidence suggests these documentation topics may need clarification: anonymization/de-identification, consent/reasonable expectation, data access controls, data card/datasheet, data retention/deletion, privacy, release policy. Missing context is not proof of wrongdoing.",
-          "snippet": null
-        }
-      ],
-      "missing_context": [
-        "LICENSE",
-        "ethics/privacy/data handling documentation"
-      ],
-      "recommended_mitigations": [
-        "Add an ethics, privacy, and data-handling section when relevant.",
-        "Document limitations, release boundaries, and misuse considerations.",
-        "Use a data card or model card for datasets or models."
-      ],
-      "risk_id": "risk_8877616584",
-      "severity": "medium",
-      "status": "unknown",
-      "title": "Missing ethics, data handling, or release documentation",
-      "why_it_matters": "Documentation does not appear to explain key ethics, privacy, safety, release, or limitation topics."
     }
   ],
   "global_missing_context": [
@@ -153,7 +81,9 @@
   "positive_controls": [],
   "project_profile": {
     "detected_data_sources": [],
-    "detected_research_activities": [],
+    "detected_research_activities": [
+      "dataset construction"
+    ],
     "important_files": [
       "README.md",
       "data/schema.json"

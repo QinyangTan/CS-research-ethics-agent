@@ -41,15 +41,7 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
+No findings in this section based on available repository evidence.
 
 ## Evidence Table
 
@@ -57,11 +49,18 @@ No findings in this section based on available repository evidence.
 |---|---|---|---|---|---|
 | risk_3b31fd16ac | `risk_signal` | `ml_fairness_deployment_risk` | `README.md:1` | References toxicity or emotion classification. | Uses a toxicity detection model for user comments in moderation research. Matched: toxicity detection |
 | risk_3b31fd16ac | `risk_signal` | `ml_fairness_deployment_risk` | `src/model.py:1` | Uses machine learning libraries. | import torch Matched: torch |
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
 
 ## Positive Controls Detected
 
 - `docs/model_card.md`: `missing_ethics_documentation` - Repository includes dedicated ethics, privacy, data-card, or model-card documentation.
+- `docs/model_card.md:1`: `missing_ethics_documentation` - Documentation includes deployment boundaries.
+- `docs/model_card.md:1`: `missing_ethics_documentation` - Documentation includes model card or limitations.
+- `docs/model_card.md:1`: `missing_ethics_documentation` - Documentation includes fairness/bias evaluation.
+
+## Category-Specific Review Focus
+
+- `ml_fairness_deployment_risk`: confirm model card coverage, intended use, limitations, bias/fairness evaluation, affected groups, and deployment monitoring.
+- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
 
 ## Recommended Mitigations
 
@@ -71,10 +70,6 @@ No findings in this section based on available repository evidence.
 - Document fairness and bias evaluation methods.
 - Document uncertainty and failure modes.
 - Set deployment boundaries and human-review expectations.
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
 
 ## Advisor / IRB Discussion Questions
 
@@ -82,9 +77,6 @@ No findings in this section based on available repository evidence.
 - Were subgroup errors evaluated?
 - What deployment constraints and human review steps exist?
 - Is there a model card documenting intended use, limitations, and fairness/bias evaluation?
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
 
 ## Safe Release Checklist

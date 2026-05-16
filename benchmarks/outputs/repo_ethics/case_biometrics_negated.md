@@ -33,39 +33,30 @@ No findings in this section based on available repository evidence.
 
 ## Unknowns and Required Clarifications
 
-### License or dataset redistribution terms are unclear
-- Risk ID: `risk_fc19ee1aa0`
-- Category: `license_dataset_terms`
-- Status: `unknown`
-- Severity: `low`
-- Confidence: `medium`
-- Why it matters: Repository evidence leaves code, data, or platform redistribution terms unclear.
-- Evidence: .
-- Missing context: Code license, dataset source terms, and redistribution permissions.
+No findings in this section based on available repository evidence.
 
 ## Evidence Table
 
 | Finding | Evidence Type | Category | Evidence | Reason | Snippet |
 |---|---|---|---|---|---|
-| risk_fc19ee1aa0 | `missing_context` | `license_dataset_terms` | `.` | No code or dataset license documentation was detected. |  |
+| None | none | none | none | No evidence rows were generated. | |
 
 ## Positive Controls Detected
 
-- `README.md:1`: `missing_ethics_documentation` - Documentation includes README/project purpose.
+No positive controls were detected from repository evidence.
+
+## Category-Specific Review Focus
+
+No category-specific review focus was generated from scanner evidence.
 
 ## Recommended Mitigations
 
-- Add a clear code license.
-- Document dataset source terms and redistribution limits.
-- Avoid redistributing data unless terms permit it.
-- Track third-party license obligations.
+- No specific mitigations were generated from scanner evidence.
 
 ## Advisor / IRB Discussion Questions
 
-- What license applies to the code?
-- What terms apply to collected or derived data?
-- Is redistribution permitted?
 - Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented.
+- The scanner found limited concrete ethics-risk evidence. A reviewer should still confirm the project description and data sources.
 
 ## Safe Release Checklist
 
