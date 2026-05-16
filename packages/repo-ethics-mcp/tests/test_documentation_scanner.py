@@ -52,20 +52,78 @@ def test_positive_control_uses_first_doc_with_topic_not_later_doc(tmp_path: Path
     docs = tmp_path / "docs"
     docs.mkdir()
     first = docs / "01-privacy.md"
-    first.write_text("This privacy note documents consent for email data collection.", encoding="utf-8")
+    first.write_text(
+        "This privacy note documents personal data minimization, retention, deletion, and access controls.",
+        encoding="utf-8",
+    )
     later = docs / "99-unrelated.md"
     later.write_text("This unrelated note discusses project setup only.", encoding="utf-8")
     readme = tmp_path / "README.md"
     readme.write_text("This project stores email addresses.", encoding="utf-8")
 
     evidence = scan(tmp_path)
-    consent_controls = [
+    privacy_controls = [
         item
         for item in evidence
-        if item.evidence_type == "positive_control" and "consent/reasonable expectation" in item.reason
+        if item.evidence_type == "positive_control" and item.category == "privacy_identifiability"
     ]
-    assert consent_controls
-    assert {item.file_path for item in consent_controls} == {"docs/01-privacy.md"}
+    assert privacy_controls
+    assert {item.file_path for item in privacy_controls} == {"docs/01-privacy.md"}
+
+
+def test_generic_docs_do_not_create_missing_ethics_positive_control(tmp_path: Path) -> None:
+    (tmp_path / "README.md").write_text("Project purpose is documented. We care about ethics and responsible AI.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    assert not [
+        item
+        for item in evidence
+        if item.evidence_type == "positive_control" and item.category == "missing_ethics_documentation"
+    ]
+
+
+def test_concrete_ethics_checklist_creates_missing_ethics_positive_control(tmp_path: Path) -> None:
+    (tmp_path / "ethics.md").write_text(
+        "Ethics checklist: consent review, privacy review, data release review, and advisor review responsibility are documented.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    assert any(
+        item.evidence_type == "positive_control" and item.category == "missing_ethics_documentation"
+        for item in evidence
+    )
+
+
+def test_security_doc_maps_only_to_security_positive_control(tmp_path: Path) -> None:
+    (tmp_path / "SECURITY.md").write_text("Responsible disclosure and authorization scope are documented.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    positives = [item.category for item in evidence if item.evidence_type == "positive_control"]
+    assert "security_dual_use" in positives
+    assert "privacy_identifiability" not in positives
+    assert "dataset_release_reidentification" not in positives
+    assert "missing_ethics_documentation" not in positives
+
+
+def test_data_card_maps_to_dataset_not_generic_missing_docs(tmp_path: Path) -> None:
+    (tmp_path / "data_card.md").write_text(
+        "Data card documents provenance, intended use, retention, release limits, and controlled access.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    positives = [item.category for item in evidence if item.evidence_type == "positive_control"]
+    assert "dataset_release_reidentification" in positives
+    assert "missing_ethics_documentation" not in positives
+
+
+def test_privacy_doc_maps_to_privacy_only(tmp_path: Path) -> None:
+    (tmp_path / "privacy.md").write_text(
+        "Privacy policy documents personal data minimization, retention, deletion, and access controls.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    positives = [item.category for item in evidence if item.evidence_type == "positive_control"]
+    assert "privacy_identifiability" in positives
+    assert "dataset_release_reidentification" not in positives
+    assert "missing_ethics_documentation" not in positives
 
 
 def test_docs_tutorial_security_terms_do_not_trigger_security_requirements(tmp_path: Path) -> None:

@@ -52,15 +52,14 @@ No findings in this section based on available repository evidence.
 ## Positive Controls Detected
 
 - `LICENSE`: `license_dataset_terms` - Repository includes a license file.
-- `LICENSE:1`: `license_dataset_terms` - Mentions a code or dataset license.
 - `README.md:1`: `license_dataset_terms` - Mentions dataset terms or redistribution limits.
 - `docs/data_terms.md:1`: `license_dataset_terms` - Mentions dataset terms or redistribution limits.
 - `docs/data_terms.md:1`: `license_dataset_terms` - Mentions dataset terms or redistribution limits.
 
 ## Category-Specific Review Focus
 
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
-- `license_dataset_terms`: confirm code license, dataset source terms, redistribution permissions, and third-party obligations.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
+- `license_dataset_terms`: review code license, dataset source terms, redistribution permissions, and third-party data terms.
 
 ## Recommended Mitigations
 

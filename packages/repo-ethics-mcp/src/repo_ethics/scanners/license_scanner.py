@@ -36,7 +36,8 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
         name = Path(scanned.rel_path).name.lower()
         text = read_text_file(scanned.path)
         repo_text_parts.append(text[:3000])
-        if name == "license" or name.startswith("license."):
+        is_license_file = name == "license" or name.startswith("license.")
+        if is_license_file:
             saw_license_file = True
             evidence.append(
                 make_evidence(
@@ -48,6 +49,7 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                     include_snippets=include_snippets,
                 )
             )
+            continue
         for pattern, reason in LICENSE_PATTERNS:
             for start, end, _ in find_positive_topic_mentions(text, [pattern]):
                 saw_license_mention = True

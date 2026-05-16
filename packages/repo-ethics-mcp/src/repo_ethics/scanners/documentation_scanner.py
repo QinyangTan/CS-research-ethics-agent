@@ -10,7 +10,6 @@ from repo_ethics.engine.evidence_engine import (
     iter_repo_file_paths,
     iter_repo_files,
     make_evidence,
-    make_match_evidence,
     read_text_file,
 )
 from repo_ethics.engine.text_signals import find_positive_topic_mentions, topic_is_covered
@@ -68,24 +67,80 @@ TOPIC_PATTERNS: dict[str, list[re.Pattern[str]]] = {
     "deployment boundaries": [re.compile(r"\bdeployment boundaries|deployment limits?|intended use|non-use\b", re.I)],
     "limitations": [re.compile(r"\blimitations?|known limits\b", re.I)],
 }
+SECURITY_CONTROL_PATTERNS = [
+    re.compile(r"\bresponsible disclosure|vulnerability disclosure\b", re.I),
+    re.compile(r"\bauthori[sz]ation|authorized scope|scope\b", re.I),
+    re.compile(r"\bmisuse|abuse|dual[- ]use\b", re.I),
+    re.compile(r"\bsafe release|release boundaries|safe lab\b", re.I),
+]
+DATASET_CONTROL_PATTERNS = [
+    re.compile(r"\bdata card|datacard|datasheet\b", re.I),
+    re.compile(r"\bsource|provenance|data source\b", re.I),
+    re.compile(r"\bintended use|release limits?|release policy|raw data|aggregate statistics\b", re.I),
+    re.compile(r"\bretention|deletion|delete data\b", re.I),
+    re.compile(r"\baccess control|restricted access|controlled access\b", re.I),
+    re.compile(r"\banonymi[sz]ation|de-identification|identifiers removed\b", re.I),
+    re.compile(r"\blicen[cs]e|source terms\b", re.I),
+]
+PRIVACY_CONTROL_PATTERNS = [
+    re.compile(r"\bprivacy|personal data|direct identifiers?\b", re.I),
+    re.compile(r"\bdata minimization|minimi[sz]e\b", re.I),
+    re.compile(r"\bretention|deletion|delete data\b", re.I),
+    re.compile(r"\baccess control|restricted access|data access\b", re.I),
+    re.compile(r"\banonymi[sz]ation|de-identification|deidentified\b", re.I),
+]
+MODEL_CONTROL_PATTERNS = [
+    re.compile(r"\bmodel card|modelcard\b", re.I),
+    re.compile(r"\bintended use|limitations?|known limits\b", re.I),
+    re.compile(r"\bfairness|bias evaluation|subgroup performance\b", re.I),
+    re.compile(r"\bdeployment boundaries|deployment limits?|deployment monitoring\b", re.I),
+]
+ETHICS_REVIEW_PATTERNS = [
+    re.compile(r"\bconsent review|consent process|notice review\b", re.I),
+    re.compile(r"\bprivacy review|data handling review|personal data review\b", re.I),
+    re.compile(r"\bdata release review|release review|deployment review\b", re.I),
+    re.compile(r"\badvisor review|review[- ]body|review body|documentation owner|owner responsibility|review responsibility\b", re.I),
+]
 
 
 def _has_signal(text: str, patterns: list[re.Pattern[str]]) -> bool:
     return any(find_positive_topic_mentions(text, [pattern]) for pattern in patterns)
 
 
-def _doc_has_concrete_control(rel_path: str, text: str) -> bool:
+def _positive_control_count(text: str, patterns: list[re.Pattern[str]]) -> int:
+    return sum(1 for pattern in patterns if find_positive_topic_mentions(text, [pattern]))
+
+
+def positive_control_categories_for_doc(rel_path: str, text: str) -> list[tuple[str, str]]:
+    """Map concrete safeguards to specific positive-control categories."""
+
     rel = rel_path.lower()
-    lower = text.lower()
-    if Path(rel).name == "security.md":
-        return any(term in lower for term in ["responsible disclosure", "authorization", "scope", "misuse", "safe release", "release boundaries"])
-    if any(token in rel for token in ["data_card", "datacard", "datasheet"]):
-        return any(term in lower for term in ["source", "provenance", "intended use", "retention", "deletion", "license", "release", "access"])
-    if any(token in rel for token in ["privacy", "ethics"]):
-        return any(term in lower for term in ["privacy", "consent", "retention", "access", "de-identification", "anonymization", "deletion"])
-    if any(token in rel for token in ["model_card", "modelcard"]):
-        return any(term in lower for term in ["intended use", "limitations", "fairness", "bias", "deployment"])
-    return False
+    name = Path(rel).name
+    controls: list[tuple[str, str]] = []
+
+    security_count = _positive_control_count(text, SECURITY_CONTROL_PATTERNS)
+    if name == "security.md" and security_count:
+        controls.append(("security_dual_use", "Documentation includes security authorization, disclosure, or safe-release controls."))
+
+    dataset_count = _positive_control_count(text, DATASET_CONTROL_PATTERNS)
+    dataset_doc = any(token in rel for token in ["data_card", "datacard", "datasheet"])
+    if (dataset_doc and dataset_count >= 2) or dataset_count >= 4:
+        controls.append(("dataset_release_reidentification", "Documentation includes concrete dataset governance controls."))
+
+    privacy_count = _positive_control_count(text, PRIVACY_CONTROL_PATTERNS)
+    privacy_doc = "privacy" in rel
+    if (privacy_doc and privacy_count >= 2) or privacy_count >= 4:
+        controls.append(("privacy_identifiability", "Documentation includes concrete privacy, retention, deletion, or access controls."))
+
+    model_count = _positive_control_count(text, MODEL_CONTROL_PATTERNS)
+    model_doc = any(token in rel for token in ["model_card", "modelcard"])
+    if (model_doc and model_count >= 2) or model_count >= 4:
+        controls.append(("ml_fairness_deployment_risk", "Documentation includes concrete model-card, limitations, fairness, or deployment controls."))
+
+    if "ethics" in rel and _positive_control_count(text, ETHICS_REVIEW_PATTERNS) == len(ETHICS_REVIEW_PATTERNS):
+        controls.append(("missing_ethics_documentation", "Documentation includes a concrete ethics review workflow and review responsibility."))
+
+    return controls
 
 
 def _is_excluded_signal_path(rel_path: str) -> bool:
@@ -204,23 +259,12 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
             docs_text += "\n" + text
             if _is_fallback_project_doc(scanned.rel_path):
                 fallback_docs.append((scanned.rel_path, text))
-            if "security.md" == Path(rel).name and _doc_has_concrete_control(scanned.rel_path, text):
+            for category, reason in positive_control_categories_for_doc(scanned.rel_path, text):
                 evidence.append(
                     make_evidence(
-                        category="missing_ethics_documentation",
+                        category=category,
                         file_path=scanned.rel_path,
-                        reason="Repository includes a security policy document.",
-                        confidence="medium",
-                        evidence_type="positive_control",
-                        include_snippets=include_snippets,
-                    )
-                )
-            if any(token in rel for token in ["ethics", "privacy", "data_card", "datacard", "datasheet", "model_card", "modelcard"]) and _doc_has_concrete_control(scanned.rel_path, text):
-                evidence.append(
-                    make_evidence(
-                        category="missing_ethics_documentation",
-                        file_path=scanned.rel_path,
-                        reason="Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
+                        reason=reason,
                         confidence="medium",
                         evidence_type="positive_control",
                         include_snippets=include_snippets,
@@ -236,34 +280,10 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
     signals["sensitive_ml"] = _has_signal(signal_text, SENSITIVE_ML_PATTERNS)
     required = _required_topics(signals, has_project_source=has_project_source, has_readme=has_readme)
 
-    covered_topics: list[str] = []
     missing_topics: list[str] = []
     for topic in required:
         patterns = TOPIC_PATTERNS[topic]
-        if topic_is_covered(docs_text, patterns):
-            covered_topics.append(topic)
-            if topic == "README/project purpose":
-                continue
-            for doc_path, doc_text in docs:
-                mentions = find_positive_topic_mentions(doc_text, patterns)
-                if not mentions:
-                    continue
-                start, end, _ = mentions[0]
-                evidence.append(
-                    make_match_evidence(
-                        category="missing_ethics_documentation",
-                        file_path=doc_path,
-                        text=doc_text,
-                        start=start,
-                        end=end,
-                        reason=f"Documentation includes {topic}.",
-                        confidence="medium",
-                        evidence_type="positive_control",
-                        include_snippets=include_snippets,
-                    )
-                )
-                break
-        else:
+        if not topic_is_covered(docs_text, patterns):
             missing_topics.append(topic)
 
     if missing_topics:

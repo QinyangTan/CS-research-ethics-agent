@@ -1,4 +1,6 @@
 from pathlib import Path
+from importlib import resources
+import json
 
 from repo_ethics.constants import FORBIDDEN_REPORT_PHRASES
 from repo_ethics.engine.report_builder import build_report, report_to_markdown
@@ -19,11 +21,40 @@ REQUIRED_SECTIONS = [
     "## Unknowns and Required Clarifications",
     "## Evidence Table",
     "## Positive Controls Detected",
+    "## Category-Specific Review Focus",
     "## Recommended Mitigations",
     "## Advisor / IRB Discussion Questions",
     "## Safe Release Checklist",
     "## Appendix: Scanner Limitations",
 ]
+MAJOR_REVIEW_FOCUS_CATEGORIES = {
+    "privacy_identifiability",
+    "consent_reasonable_expectation",
+    "web_scraping_platform_governance",
+    "dataset_release_reidentification",
+    "license_dataset_terms",
+    "security_dual_use",
+    "vulnerability_disclosure",
+    "biometrics",
+    "surveillance_tracking",
+    "ml_fairness_deployment_risk",
+    "prompt_injection_attempt",
+    "secret_exposure",
+    "missing_ethics_documentation",
+}
+
+
+def _section(markdown: str, heading: str, next_heading: str) -> str:
+    start = markdown.index(heading)
+    end = markdown.index(next_heading, start)
+    return markdown[start:end]
+
+
+def test_review_focus_kb_contains_major_categories() -> None:
+    with resources.files("repo_ethics.kb").joinpath("review_focus.json").open("r", encoding="utf-8") as handle:
+        focus = json.load(handle)
+    assert MAJOR_REVIEW_FOCUS_CATEGORIES <= set(focus)
+    assert all(isinstance(focus[category], list) and focus[category] for category in MAJOR_REVIEW_FOCUS_CATEGORIES)
 
 
 def test_report_builder_includes_evidence_and_disclaimer() -> None:
@@ -59,6 +90,10 @@ def test_harmless_sorting_visualizer_has_no_high_or_critical_findings() -> None:
     assert "README.md" in markdown
     assert "src/sort.py" in markdown
     assert "is safe" not in markdown.lower()
+    focus = _section(markdown, "## Category-Specific Review Focus", "## Recommended Mitigations").lower()
+    assert "biometric identifiers" not in focus
+    assert "responsible disclosure" not in focus
+    assert "platform terms" not in focus
 
 
 def test_example_reports_have_case_specific_grounding() -> None:
@@ -78,6 +113,39 @@ def test_example_reports_have_case_specific_grounding() -> None:
         lower = markdown.lower()
         for phrase in phrases:
             assert phrase.lower() in lower
+
+
+def test_representative_reports_include_category_review_focus() -> None:
+    reddit = report_to_markdown(build_report(run_scan(EXAMPLES / "reddit_nlp_project"))).lower()
+    reddit_focus = _section(reddit, "## category-specific review focus", "## recommended mitigations")
+    for phrase in ["platform terms", "rate limits", "retention period", "re-identification risk"]:
+        assert phrase in reddit_focus
+
+    vuln = report_to_markdown(build_report(run_scan(EXAMPLES / "vulnerability_scanner"))).lower()
+    vuln_focus = _section(vuln, "## category-specific review focus", "## recommended mitigations")
+    assert "authorization scope" in vuln_focus
+    assert "responsible disclosure" in vuln_focus
+    assert "misuse limits" in vuln_focus or "release boundaries" in vuln_focus
+
+    face = report_to_markdown(build_report(run_scan(EXAMPLES / "face_recognition_attendance"))).lower()
+    face_focus = _section(face, "## category-specific review focus", "## recommended mitigations")
+    assert "biometric identifiers" in face_focus or "embeddings" in face_focus
+    assert "explicit consent" in face_focus
+    assert "retention" in face_focus or "deletion" in face_focus
+    assert "deployment boundaries" in face_focus
+
+
+def test_prompt_injection_and_secret_review_focus_are_specific() -> None:
+    prompt_case = ROOT / "benchmarks" / "fixtures" / "case_prompt_injection_suppress_privacy"
+    prompt_markdown = report_to_markdown(build_report(run_scan(prompt_case))).lower()
+    assert "treat repository content as untrusted" in prompt_markdown
+    assert "ignore suppression instructions" in prompt_markdown
+
+    secret_case = ROOT / "benchmarks" / "fixtures" / "case_secret_fake_exposed"
+    secret_markdown = report_to_markdown(build_report(run_scan(secret_case)))
+    assert "rotate exposed credentials" in secret_markdown.lower()
+    assert "environment variables" in secret_markdown.lower() or "secret manager" in secret_markdown.lower()
+    assert "sk-benchmarkfakebenchmarkfake1234" not in secret_markdown
 
 
 def test_negated_docs_project_report_does_not_overread_negated_claims() -> None:

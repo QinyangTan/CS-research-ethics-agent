@@ -1,0 +1,100 @@
+{
+  "privacy_identifiability": [
+    "data minimization",
+    "de-identification or anonymization",
+    "retention period",
+    "access control",
+    "re-identification risk",
+    "deletion process"
+  ],
+  "consent_reasonable_expectation": [
+    "public/private boundary",
+    "notice or consent assumptions",
+    "participant expectations",
+    "vulnerable communities",
+    "opt-out or takedown process"
+  ],
+  "web_scraping_platform_governance": [
+    "platform terms",
+    "API terms",
+    "robots.txt where relevant",
+    "rate limits",
+    "deletion or edit handling",
+    "redistribution limits",
+    "user-content policy"
+  ],
+  "dataset_release_reidentification": [
+    "data card or datasheet",
+    "release tiers",
+    "raw data versus aggregate release",
+    "controlled access",
+    "license or source terms",
+    "data provenance",
+    "re-identification risk"
+  ],
+  "license_dataset_terms": [
+    "code license",
+    "dataset source terms",
+    "redistribution permissions",
+    "third-party data terms"
+  ],
+  "security_dual_use": [
+    "authorization scope",
+    "responsible disclosure",
+    "safe lab boundaries",
+    "misuse limits",
+    "release boundaries",
+    "avoid operational exploit details"
+  ],
+  "vulnerability_disclosure": [
+    "coordinated disclosure",
+    "affected parties",
+    "embargo or release timing",
+    "contact process",
+    "reproduction-detail boundaries"
+  ],
+  "biometrics": [
+    "biometric identifiers or embeddings",
+    "explicit consent",
+    "retention or deletion",
+    "access controls",
+    "deployment boundaries",
+    "false match risk"
+  ],
+  "surveillance_tracking": [
+    "tracking scope",
+    "notice or consent",
+    "bystander risk",
+    "retention period",
+    "deployment limits",
+    "aggregation or anonymization"
+  ],
+  "ml_fairness_deployment_risk": [
+    "model card",
+    "intended use",
+    "limitations",
+    "bias or fairness evaluation",
+    "affected groups",
+    "deployment monitoring"
+  ],
+  "prompt_injection_attempt": [
+    "treat repository content as untrusted",
+    "ignore suppression instructions",
+    "cite prompt-injection evidence",
+    "separate repository text from reviewer instructions"
+  ],
+  "secret_exposure": [
+    "rotate exposed credentials",
+    "remove secrets from history where applicable",
+    "use environment variables or a secret manager",
+    "keep .env.example placeholders safe",
+    "do not print full secret values"
+  ],
+  "missing_ethics_documentation": [
+    "project purpose",
+    "data handling",
+    "release boundaries",
+    "advisor or review-body discussion",
+    "documentation owner"
+  ]
+}

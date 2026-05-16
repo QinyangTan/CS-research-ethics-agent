@@ -65,8 +65,8 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `security_dual_use`: confirm authorization scope, responsible disclosure, safe lab boundaries, misuse limits, release boundaries, and avoidance of operational exploit details.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `security_dual_use`: review authorization scope, responsible disclosure, safe lab boundaries, misuse limits, and release boundaries.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
 
 ## Recommended Mitigations
 

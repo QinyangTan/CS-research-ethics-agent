@@ -47,59 +47,15 @@
   ],
   "positive_controls": [
     {
-      "category": "missing_ethics_documentation",
+      "category": "security_dual_use",
       "confidence": "medium",
-      "evidence_id": "c4ac169f7fa34cf0",
+      "evidence_id": "d136ff00ea31bb6a",
       "evidence_type": "positive_control",
       "file_path": "SECURITY.md",
       "line_end": null,
       "line_start": null,
-      "reason": "Repository includes a security policy document.",
+      "reason": "Documentation includes security authorization, disclosure, or safe-release controls.",
       "snippet": null
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "27f2977737dba07a",
-      "evidence_type": "positive_control",
-      "file_path": "SECURITY.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes misuse/dual-use limits.",
-      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: misuse"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "d287da2c9d1b0b21",
-      "evidence_type": "positive_control",
-      "file_path": "SECURITY.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes safe release boundaries.",
-      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: safe release"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "f5d69fd562d2b7fb",
-      "evidence_type": "positive_control",
-      "file_path": "SECURITY.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes authorization/scope.",
-      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: authorization"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "fdb461070d56282c",
-      "evidence_type": "positive_control",
-      "file_path": "SECURITY.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes responsible disclosure.",
-      "snippet": "Responsible disclosure, authorization scope, misuse limits, and safe release boundaries are documented.\nMatched: Responsible disclosure"
     }
   ],
   "project_profile": {

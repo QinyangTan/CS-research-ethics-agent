@@ -51,16 +51,11 @@ No findings in this section based on available repository evidence.
 
 ## Positive Controls Detected
 
-- `SECURITY.md`: `missing_ethics_documentation` - Repository includes a security policy document.
-- `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes misuse/dual-use limits.
-- `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes safe release boundaries.
-- `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes authorization/scope.
-- `SECURITY.md:1`: `missing_ethics_documentation` - Documentation includes responsible disclosure.
+- `SECURITY.md`: `security_dual_use` - Documentation includes security authorization, disclosure, or safe-release controls.
 
 ## Category-Specific Review Focus
 
-- `security_dual_use`: confirm authorization scope, responsible disclosure, safe lab boundaries, misuse limits, release boundaries, and avoidance of operational exploit details.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `security_dual_use`: review authorization scope, responsible disclosure, safe lab boundaries, misuse limits, and release boundaries.
 
 ## Recommended Mitigations
 

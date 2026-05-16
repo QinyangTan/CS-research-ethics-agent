@@ -55,7 +55,7 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
 
 ## Recommended Mitigations
 

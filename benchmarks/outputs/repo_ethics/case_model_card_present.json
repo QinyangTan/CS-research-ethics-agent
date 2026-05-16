@@ -57,48 +57,15 @@
   ],
   "positive_controls": [
     {
-      "category": "missing_ethics_documentation",
+      "category": "ml_fairness_deployment_risk",
       "confidence": "medium",
-      "evidence_id": "4cb93ccb2c0ded13",
+      "evidence_id": "2e998c9996b78576",
       "evidence_type": "positive_control",
       "file_path": "docs/model_card.md",
       "line_end": null,
       "line_start": null,
-      "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
+      "reason": "Documentation includes concrete model-card, limitations, fairness, or deployment controls.",
       "snippet": null
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "25a4e577df8b9426",
-      "evidence_type": "positive_control",
-      "file_path": "docs/model_card.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes deployment boundaries.",
-      "snippet": "Model card documents intended use, limitations, fairness, and deployment boundaries.\nMatched: intended use"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "5cb4c24dc1627e3a",
-      "evidence_type": "positive_control",
-      "file_path": "docs/model_card.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes model card or limitations.",
-      "snippet": "Model card documents intended use, limitations, fairness, and deployment boundaries.\nMatched: Model card"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "c63b3c7f488cb052",
-      "evidence_type": "positive_control",
-      "file_path": "docs/model_card.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes fairness/bias evaluation.",
-      "snippet": "Model card documents intended use, limitations, fairness, and deployment boundaries.\nMatched: fairness"
     }
   ],
   "project_profile": {

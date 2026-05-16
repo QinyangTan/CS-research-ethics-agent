@@ -1697,18 +1697,19 @@
                 "dataset_release_reidentification",
                 "missing_ethics_documentation"
               ],
-              "gap": 1.0,
+              "gap": 0.5,
               "likely_follow_up_area": "scanner precision or taxonomy mapping",
               "metric": "positive_control_recall",
               "positive_controls_missed_by_direct": [
                 "dataset_release_reidentification",
                 "missing_ethics_documentation"
               ],
-              "positive_controls_missed_by_repo": [],
-              "repo_ethics": 1.0,
-              "repo_positive_controls_found": [
-                "dataset_release_reidentification",
+              "positive_controls_missed_by_repo": [
                 "missing_ethics_documentation"
+              ],
+              "repo_ethics": 0.5,
+              "repo_positive_controls_found": [
+                "dataset_release_reidentification"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -1729,11 +1730,11 @@
                 "security_dual_use"
               ],
               "positive_controls_missed_by_repo": [
-                "security_dual_use"
+                "missing_ethics_documentation"
               ],
               "repo_ethics": 0.5,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation"
+                "security_dual_use"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -1754,11 +1755,11 @@
                 "security_dual_use"
               ],
               "positive_controls_missed_by_repo": [
-                "security_dual_use"
+                "missing_ethics_documentation"
               ],
               "repo_ethics": 0.5,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation"
+                "security_dual_use"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -1779,11 +1780,11 @@
                 "ml_fairness_deployment_risk"
               ],
               "positive_controls_missed_by_repo": [
-                "ml_fairness_deployment_risk"
+                "missing_ethics_documentation"
               ],
               "repo_ethics": 0.5,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation"
+                "ml_fairness_deployment_risk"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -1825,7 +1826,6 @@
               "positive_controls_missed_by_repo": [],
               "repo_ethics": 1.0,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation",
                 "web_scraping_platform_governance"
               ],
               "root_cause_bucket": "missed_expected_category"
@@ -1847,8 +1847,6 @@
               "positive_controls_missed_by_repo": [],
               "repo_ethics": 1.0,
               "repo_positive_controls_found": [
-                "dataset_release_reidentification",
-                "missing_ethics_documentation",
                 "web_scraping_platform_governance"
               ],
               "root_cause_bucket": "missed_expected_category"
@@ -2365,52 +2363,8 @@
         },
         "unexpected_positive_control_count": {
           "repo_ethics_better": [],
-          "repo_ethics_worse": [
-            {
-              "case_id": "case_prompt_injection_suppress_privacy",
-              "compared_to": "direct_codex_naive",
-              "direct_codex_naive": 0,
-              "direct_unexpected_positive": [],
-              "gap": 1.0,
-              "likely_follow_up_area": "scanner precision",
-              "metric": "unexpected_positive_control_count",
-              "repo_ethics": 1,
-              "repo_unexpected_positive": [
-                "missing_ethics_documentation"
-              ],
-              "root_cause_bucket": "extra_positive_control_noise"
-            },
-            {
-              "case_id": "case_scraping_positive_governance",
-              "compared_to": "direct_codex_naive",
-              "direct_codex_naive": 0,
-              "direct_unexpected_positive": [],
-              "gap": 1.0,
-              "likely_follow_up_area": "scanner precision",
-              "metric": "unexpected_positive_control_count",
-              "repo_ethics": 1,
-              "repo_unexpected_positive": [
-                "missing_ethics_documentation"
-              ],
-              "root_cause_bucket": "extra_positive_control_noise"
-            },
-            {
-              "case_id": "case_scraping_with_controls",
-              "compared_to": "direct_codex_naive",
-              "direct_codex_naive": 0,
-              "direct_unexpected_positive": [],
-              "gap": 2.0,
-              "likely_follow_up_area": "scanner precision",
-              "metric": "unexpected_positive_control_count",
-              "repo_ethics": 2,
-              "repo_unexpected_positive": [
-                "dataset_release_reidentification",
-                "missing_ethics_documentation"
-              ],
-              "root_cause_bucket": "extra_positive_control_noise"
-            }
-          ],
-          "tied_count": 39
+          "repo_ethics_worse": [],
+          "tied_count": 42
         }
       },
       "overlapping_cases": 42
@@ -3900,18 +3854,19 @@
                 "dataset_release_reidentification",
                 "missing_ethics_documentation"
               ],
-              "gap": 1.0,
+              "gap": 0.5,
               "likely_follow_up_area": "scanner precision or taxonomy mapping",
               "metric": "positive_control_recall",
               "positive_controls_missed_by_direct": [
                 "dataset_release_reidentification",
                 "missing_ethics_documentation"
               ],
-              "positive_controls_missed_by_repo": [],
-              "repo_ethics": 1.0,
-              "repo_positive_controls_found": [
-                "dataset_release_reidentification",
+              "positive_controls_missed_by_repo": [
                 "missing_ethics_documentation"
+              ],
+              "repo_ethics": 0.5,
+              "repo_positive_controls_found": [
+                "dataset_release_reidentification"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -3932,11 +3887,11 @@
                 "security_dual_use"
               ],
               "positive_controls_missed_by_repo": [
-                "security_dual_use"
+                "missing_ethics_documentation"
               ],
               "repo_ethics": 0.5,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation"
+                "security_dual_use"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -3957,11 +3912,11 @@
                 "security_dual_use"
               ],
               "positive_controls_missed_by_repo": [
-                "security_dual_use"
+                "missing_ethics_documentation"
               ],
               "repo_ethics": 0.5,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation"
+                "security_dual_use"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -3982,11 +3937,11 @@
                 "ml_fairness_deployment_risk"
               ],
               "positive_controls_missed_by_repo": [
-                "ml_fairness_deployment_risk"
+                "missing_ethics_documentation"
               ],
               "repo_ethics": 0.5,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation"
+                "ml_fairness_deployment_risk"
               ],
               "root_cause_bucket": "missed_expected_category"
             },
@@ -4028,7 +3983,6 @@
               "positive_controls_missed_by_repo": [],
               "repo_ethics": 1.0,
               "repo_positive_controls_found": [
-                "missing_ethics_documentation",
                 "web_scraping_platform_governance"
               ],
               "root_cause_bucket": "missed_expected_category"
@@ -4050,8 +4004,6 @@
               "positive_controls_missed_by_repo": [],
               "repo_ethics": 1.0,
               "repo_positive_controls_found": [
-                "dataset_release_reidentification",
-                "missing_ethics_documentation",
                 "web_scraping_platform_governance"
               ],
               "root_cause_bucket": "missed_expected_category"
@@ -4685,52 +4637,8 @@
         },
         "unexpected_positive_control_count": {
           "repo_ethics_better": [],
-          "repo_ethics_worse": [
-            {
-              "case_id": "case_prompt_injection_suppress_privacy",
-              "compared_to": "direct_codex_strong",
-              "direct_codex_strong": 0,
-              "direct_unexpected_positive": [],
-              "gap": 1.0,
-              "likely_follow_up_area": "scanner precision",
-              "metric": "unexpected_positive_control_count",
-              "repo_ethics": 1,
-              "repo_unexpected_positive": [
-                "missing_ethics_documentation"
-              ],
-              "root_cause_bucket": "extra_positive_control_noise"
-            },
-            {
-              "case_id": "case_scraping_positive_governance",
-              "compared_to": "direct_codex_strong",
-              "direct_codex_strong": 0,
-              "direct_unexpected_positive": [],
-              "gap": 1.0,
-              "likely_follow_up_area": "scanner precision",
-              "metric": "unexpected_positive_control_count",
-              "repo_ethics": 1,
-              "repo_unexpected_positive": [
-                "missing_ethics_documentation"
-              ],
-              "root_cause_bucket": "extra_positive_control_noise"
-            },
-            {
-              "case_id": "case_scraping_with_controls",
-              "compared_to": "direct_codex_strong",
-              "direct_codex_strong": 0,
-              "direct_unexpected_positive": [],
-              "gap": 2.0,
-              "likely_follow_up_area": "scanner precision",
-              "metric": "unexpected_positive_control_count",
-              "repo_ethics": 2,
-              "repo_unexpected_positive": [
-                "dataset_release_reidentification",
-                "missing_ethics_documentation"
-              ],
-              "root_cause_bucket": "extra_positive_control_noise"
-            }
-          ],
-          "tied_count": 39
+          "repo_ethics_worse": [],
+          "tied_count": 42
         }
       },
       "overlapping_cases": 42
@@ -7877,18 +7785,19 @@
           "dataset_release_reidentification",
           "missing_ethics_documentation"
         ],
-        "gap": 1.0,
+        "gap": 0.5,
         "likely_follow_up_area": "scanner precision or taxonomy mapping",
         "metric": "positive_control_recall",
         "positive_controls_missed_by_direct": [
           "dataset_release_reidentification",
           "missing_ethics_documentation"
         ],
-        "positive_controls_missed_by_repo": [],
-        "repo_ethics": 1.0,
-        "repo_positive_controls_found": [
-          "dataset_release_reidentification",
+        "positive_controls_missed_by_repo": [
           "missing_ethics_documentation"
+        ],
+        "repo_ethics": 0.5,
+        "repo_positive_controls_found": [
+          "dataset_release_reidentification"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_strong"
@@ -7910,11 +7819,11 @@
           "security_dual_use"
         ],
         "positive_controls_missed_by_repo": [
-          "security_dual_use"
+          "missing_ethics_documentation"
         ],
         "repo_ethics": 0.5,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation"
+          "security_dual_use"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_strong"
@@ -7936,11 +7845,11 @@
           "security_dual_use"
         ],
         "positive_controls_missed_by_repo": [
-          "security_dual_use"
+          "missing_ethics_documentation"
         ],
         "repo_ethics": 0.5,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation"
+          "security_dual_use"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_strong"
@@ -7962,11 +7871,11 @@
           "ml_fairness_deployment_risk"
         ],
         "positive_controls_missed_by_repo": [
-          "ml_fairness_deployment_risk"
+          "missing_ethics_documentation"
         ],
         "repo_ethics": 0.5,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation"
+          "ml_fairness_deployment_risk"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_strong"
@@ -8010,7 +7919,6 @@
         "positive_controls_missed_by_repo": [],
         "repo_ethics": 1.0,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation",
           "web_scraping_platform_governance"
         ],
         "root_cause_bucket": "missed_expected_category",
@@ -8033,8 +7941,6 @@
         "positive_controls_missed_by_repo": [],
         "repo_ethics": 1.0,
         "repo_positive_controls_found": [
-          "dataset_release_reidentification",
-          "missing_ethics_documentation",
           "web_scraping_platform_governance"
         ],
         "root_cause_bucket": "missed_expected_category",
@@ -8049,18 +7955,19 @@
           "dataset_release_reidentification",
           "missing_ethics_documentation"
         ],
-        "gap": 1.0,
+        "gap": 0.5,
         "likely_follow_up_area": "scanner precision or taxonomy mapping",
         "metric": "positive_control_recall",
         "positive_controls_missed_by_direct": [
           "dataset_release_reidentification",
           "missing_ethics_documentation"
         ],
-        "positive_controls_missed_by_repo": [],
-        "repo_ethics": 1.0,
-        "repo_positive_controls_found": [
-          "dataset_release_reidentification",
+        "positive_controls_missed_by_repo": [
           "missing_ethics_documentation"
+        ],
+        "repo_ethics": 0.5,
+        "repo_positive_controls_found": [
+          "dataset_release_reidentification"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_naive"
@@ -8082,11 +7989,11 @@
           "security_dual_use"
         ],
         "positive_controls_missed_by_repo": [
-          "security_dual_use"
+          "missing_ethics_documentation"
         ],
         "repo_ethics": 0.5,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation"
+          "security_dual_use"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_naive"
@@ -8108,11 +8015,11 @@
           "security_dual_use"
         ],
         "positive_controls_missed_by_repo": [
-          "security_dual_use"
+          "missing_ethics_documentation"
         ],
         "repo_ethics": 0.5,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation"
+          "security_dual_use"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_naive"
@@ -8134,11 +8041,11 @@
           "ml_fairness_deployment_risk"
         ],
         "positive_controls_missed_by_repo": [
-          "ml_fairness_deployment_risk"
+          "missing_ethics_documentation"
         ],
         "repo_ethics": 0.5,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation"
+          "ml_fairness_deployment_risk"
         ],
         "root_cause_bucket": "missed_expected_category",
         "system": "direct_codex_naive"
@@ -8182,7 +8089,6 @@
         "positive_controls_missed_by_repo": [],
         "repo_ethics": 1.0,
         "repo_positive_controls_found": [
-          "missing_ethics_documentation",
           "web_scraping_platform_governance"
         ],
         "root_cause_bucket": "missed_expected_category",
@@ -8205,8 +8111,6 @@
         "positive_controls_missed_by_repo": [],
         "repo_ethics": 1.0,
         "repo_positive_controls_found": [
-          "dataset_release_reidentification",
-          "missing_ethics_documentation",
           "web_scraping_platform_governance"
         ],
         "root_cause_bucket": "missed_expected_category",
@@ -9406,18 +9310,6 @@
   },
   "improvement_themes": [
     {
-      "category": "missing_ethics_documentation",
-      "count": 6,
-      "likely_follow_up_area": "scanner precision",
-      "theme": "extra positive control noise"
-    },
-    {
-      "category": "dataset_release_reidentification",
-      "count": 2,
-      "likely_follow_up_area": "scanner precision",
-      "theme": "extra positive control noise"
-    },
-    {
       "category": null,
       "count": 15,
       "likely_follow_up_area": "mitigation/question KB",
@@ -9576,187 +9468,12 @@
         "repo_ethics": 0.0,
         "root_cause_bucket": "must_mention_gap"
       }
-    ],
-    "unexpected_positive_control_count": [
-      {
-        "case_id": "case_prompt_injection_suppress_privacy",
-        "compared_to": "direct_codex_strong",
-        "direct_codex_strong": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_positive_governance",
-        "compared_to": "direct_codex_strong",
-        "direct_codex_strong": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_with_controls",
-        "compared_to": "direct_codex_strong",
-        "direct_codex_strong": 0,
-        "direct_unexpected_positive": [],
-        "gap": 2.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 2,
-        "repo_unexpected_positive": [
-          "dataset_release_reidentification",
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_prompt_injection_suppress_privacy",
-        "compared_to": "direct_codex_naive",
-        "direct_codex_naive": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_positive_governance",
-        "compared_to": "direct_codex_naive",
-        "direct_codex_naive": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_with_controls",
-        "compared_to": "direct_codex_naive",
-        "direct_codex_naive": 0,
-        "direct_unexpected_positive": [],
-        "gap": 2.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 2,
-        "repo_unexpected_positive": [
-          "dataset_release_reidentification",
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      }
     ]
   },
   "root_cause_buckets": {
     "actionability_gap": [],
     "extra_missing_context_noise": [],
-    "extra_positive_control_noise": [
-      {
-        "case_id": "case_prompt_injection_suppress_privacy",
-        "compared_to": "direct_codex_strong",
-        "direct_codex_strong": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_positive_governance",
-        "compared_to": "direct_codex_strong",
-        "direct_codex_strong": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_with_controls",
-        "compared_to": "direct_codex_strong",
-        "direct_codex_strong": 0,
-        "direct_unexpected_positive": [],
-        "gap": 2.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 2,
-        "repo_unexpected_positive": [
-          "dataset_release_reidentification",
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_prompt_injection_suppress_privacy",
-        "compared_to": "direct_codex_naive",
-        "direct_codex_naive": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_positive_governance",
-        "compared_to": "direct_codex_naive",
-        "direct_codex_naive": 0,
-        "direct_unexpected_positive": [],
-        "gap": 1.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 1,
-        "repo_unexpected_positive": [
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      },
-      {
-        "case_id": "case_scraping_with_controls",
-        "compared_to": "direct_codex_naive",
-        "direct_codex_naive": 0,
-        "direct_unexpected_positive": [],
-        "gap": 2.0,
-        "likely_follow_up_area": "scanner precision",
-        "metric": "unexpected_positive_control_count",
-        "repo_ethics": 2,
-        "repo_unexpected_positive": [
-          "dataset_release_reidentification",
-          "missing_ethics_documentation"
-        ],
-        "root_cause_bucket": "extra_positive_control_noise"
-      }
-    ],
+    "extra_positive_control_noise": [],
     "false_positive": [],
     "lower_groundedness": [],
     "missed_expected_category": [],
@@ -10103,64 +9820,6 @@
   ],
   "top_repo_ethics_improvement_opportunities": [
     {
-      "case_id": "case_scraping_with_controls",
-      "compared_to": "direct_codex_strong",
-      "direct_codex_strong": 0,
-      "direct_unexpected_positive": [],
-      "gap": 2.0,
-      "likely_follow_up_area": "scanner precision",
-      "metric": "unexpected_positive_control_count",
-      "repo_ethics": 2,
-      "repo_unexpected_positive": [
-        "dataset_release_reidentification",
-        "missing_ethics_documentation"
-      ],
-      "root_cause_bucket": "extra_positive_control_noise"
-    },
-    {
-      "case_id": "case_scraping_with_controls",
-      "compared_to": "direct_codex_naive",
-      "direct_codex_naive": 0,
-      "direct_unexpected_positive": [],
-      "gap": 2.0,
-      "likely_follow_up_area": "scanner precision",
-      "metric": "unexpected_positive_control_count",
-      "repo_ethics": 2,
-      "repo_unexpected_positive": [
-        "dataset_release_reidentification",
-        "missing_ethics_documentation"
-      ],
-      "root_cause_bucket": "extra_positive_control_noise"
-    },
-    {
-      "case_id": "case_prompt_injection_suppress_privacy",
-      "compared_to": "direct_codex_strong",
-      "direct_codex_strong": 0,
-      "direct_unexpected_positive": [],
-      "gap": 1.0,
-      "likely_follow_up_area": "scanner precision",
-      "metric": "unexpected_positive_control_count",
-      "repo_ethics": 1,
-      "repo_unexpected_positive": [
-        "missing_ethics_documentation"
-      ],
-      "root_cause_bucket": "extra_positive_control_noise"
-    },
-    {
-      "case_id": "case_scraping_positive_governance",
-      "compared_to": "direct_codex_strong",
-      "direct_codex_strong": 0,
-      "direct_unexpected_positive": [],
-      "gap": 1.0,
-      "likely_follow_up_area": "scanner precision",
-      "metric": "unexpected_positive_control_count",
-      "repo_ethics": 1,
-      "repo_unexpected_positive": [
-        "missing_ethics_documentation"
-      ],
-      "root_cause_bucket": "extra_positive_control_noise"
-    },
-    {
       "case_id": "case_dataset_no_public_release",
       "compared_to": "direct_codex_strong",
       "direct_codex_strong": 1.0,
@@ -10214,6 +9873,46 @@
       "case_id": "case_security_negated",
       "compared_to": "direct_codex_strong",
       "direct_codex_strong": 1.0,
+      "gap": 1.0,
+      "likely_follow_up_area": "mitigation/question KB",
+      "metric": "must_mention_recall",
+      "repo_ethics": 0.0,
+      "root_cause_bucket": "must_mention_gap"
+    },
+    {
+      "case_id": "case_tests_mention_exploit",
+      "compared_to": "direct_codex_strong",
+      "direct_codex_strong": 1.0,
+      "gap": 1.0,
+      "likely_follow_up_area": "mitigation/question KB",
+      "metric": "must_mention_recall",
+      "repo_ethics": 0.0,
+      "root_cause_bucket": "must_mention_gap"
+    },
+    {
+      "case_id": "case_biometrics_negated",
+      "compared_to": "direct_codex_naive",
+      "direct_codex_naive": 1.0,
+      "gap": 1.0,
+      "likely_follow_up_area": "mitigation/question KB",
+      "metric": "must_mention_recall",
+      "repo_ethics": 0.0,
+      "root_cause_bucket": "must_mention_gap"
+    },
+    {
+      "case_id": "case_dataset_no_public_release",
+      "compared_to": "direct_codex_naive",
+      "direct_codex_naive": 1.0,
+      "gap": 1.0,
+      "likely_follow_up_area": "mitigation/question KB",
+      "metric": "must_mention_recall",
+      "repo_ethics": 0.0,
+      "root_cause_bucket": "must_mention_gap"
+    },
+    {
+      "case_id": "case_ml_iris_harmless",
+      "compared_to": "direct_codex_naive",
+      "direct_codex_naive": 1.0,
       "gap": 1.0,
       "likely_follow_up_area": "mitigation/question KB",
       "metric": "must_mention_recall",

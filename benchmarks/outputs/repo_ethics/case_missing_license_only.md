@@ -55,7 +55,7 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `license_dataset_terms`: confirm code license, dataset source terms, redistribution permissions, and third-party obligations.
+- `license_dataset_terms`: review code license, dataset source terms, redistribution permissions, and third-party data terms.
 
 ## Recommended Mitigations
 

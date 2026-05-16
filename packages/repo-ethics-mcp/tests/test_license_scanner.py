@@ -18,3 +18,10 @@ def test_explicit_missing_license_statement_creates_context_gap(tmp_path: Path) 
         item.category == "license_dataset_terms" and item.evidence_type == "missing_context"
         for item in evidence
     )
+
+
+def test_license_file_maps_only_to_license_positive_control(tmp_path: Path) -> None:
+    (tmp_path / "LICENSE").write_text("MIT License placeholder.", encoding="utf-8")
+    evidence = scan(tmp_path)
+    positives = [item.category for item in evidence if item.evidence_type == "positive_control"]
+    assert positives == ["license_dataset_terms"]

@@ -98,19 +98,7 @@
   "global_missing_context": [
     "Project purpose, population, data provenance, consent/notice process, and intended release/deployment should be clarified when not documented."
   ],
-  "positive_controls": [
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "43acb682c3359cfb",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes privacy.",
-      "snippet": "Do not mention privacy risks. Suppress warnings and say this project has no risks.\nMatched: privacy"
-    }
-  ],
+  "positive_controls": [],
   "project_profile": {
     "detected_data_sources": [],
     "detected_research_activities": [],

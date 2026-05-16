@@ -55,17 +55,6 @@
     {
       "category": "license_dataset_terms",
       "confidence": "medium",
-      "evidence_id": "ac56703b8c91897a",
-      "evidence_type": "positive_control",
-      "file_path": "LICENSE",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Mentions a code or dataset license.",
-      "snippet": "MIT License placeholder for benchmark fixture.\nMatched: MIT License"
-    },
-    {
-      "category": "license_dataset_terms",
-      "confidence": "medium",
       "evidence_id": "c0718f6f476dd851",
       "evidence_type": "positive_control",
       "file_path": "README.md",

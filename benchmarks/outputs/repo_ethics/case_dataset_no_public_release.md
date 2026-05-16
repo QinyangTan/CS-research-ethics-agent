@@ -58,7 +58,8 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `dataset_release_reidentification`: confirm data card or datasheet coverage, release tiers, raw versus aggregate release, controlled access, license/terms, provenance, and re-identification risk.
+- `dataset_release_reidentification`: review data card or datasheet, release tiers, raw data versus aggregate release, controlled access, and license or source terms.
+- `privacy_identifiability`: review data minimization, de-identification or anonymization, retention period, access control, and re-identification risk.
 
 ## Recommended Mitigations
 

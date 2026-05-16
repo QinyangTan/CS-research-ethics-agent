@@ -52,15 +52,11 @@ No findings in this section based on available repository evidence.
 
 ## Positive Controls Detected
 
-- `docs/model_card.md`: `missing_ethics_documentation` - Repository includes dedicated ethics, privacy, data-card, or model-card documentation.
-- `docs/model_card.md:1`: `missing_ethics_documentation` - Documentation includes deployment boundaries.
-- `docs/model_card.md:1`: `missing_ethics_documentation` - Documentation includes model card or limitations.
-- `docs/model_card.md:1`: `missing_ethics_documentation` - Documentation includes fairness/bias evaluation.
+- `docs/model_card.md`: `ml_fairness_deployment_risk` - Documentation includes concrete model-card, limitations, fairness, or deployment controls.
 
 ## Category-Specific Review Focus
 
-- `ml_fairness_deployment_risk`: confirm model card coverage, intended use, limitations, bias/fairness evaluation, affected groups, and deployment monitoring.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `ml_fairness_deployment_risk`: review model card, intended use, limitations, bias or fairness evaluation, and affected groups.
 
 ## Recommended Mitigations
 

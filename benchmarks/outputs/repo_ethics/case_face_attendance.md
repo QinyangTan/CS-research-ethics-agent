@@ -80,9 +80,11 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `dataset_release_reidentification`: confirm data card or datasheet coverage, release tiers, raw versus aggregate release, controlled access, license/terms, provenance, and re-identification risk.
-- `biometrics`: confirm biometric identifiers or face embeddings, explicit consent, retention/deletion, access controls, false-match risk, and deployment boundaries.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `dataset_release_reidentification`: review data card or datasheet, release tiers, raw data versus aggregate release, controlled access, and license or source terms.
+- `biometrics`: review biometric identifiers or embeddings, explicit consent, retention or deletion, access controls, and deployment boundaries.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
+- `privacy_identifiability`: review data minimization, de-identification or anonymization, retention period, access control, and re-identification risk.
+- `surveillance_tracking`: review tracking scope, notice or consent, bystander risk, retention period, and deployment limits.
 
 ## Recommended Mitigations
 

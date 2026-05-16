@@ -51,15 +51,14 @@ No findings in this section based on available repository evidence.
 
 ## Positive Controls Detected
 
-- `docs/data_card.md`: `missing_ethics_documentation` - Repository includes dedicated ethics, privacy, data-card, or model-card documentation.
+- `docs/data_card.md`: `dataset_release_reidentification` - Documentation includes concrete dataset governance controls.
 - `docs/data_card.md:1`: `dataset_release_reidentification` - Documentation includes retention/deletion policy.
 - `docs/data_card.md:1`: `dataset_release_reidentification` - Documentation includes data card/datasheet.
 - `docs/data_card.md:1`: `dataset_release_reidentification` - Documentation includes retention/deletion policy.
 
 ## Category-Specific Review Focus
 
-- `dataset_release_reidentification`: confirm data card or datasheet coverage, release tiers, raw versus aggregate release, controlled access, license/terms, provenance, and re-identification risk.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `dataset_release_reidentification`: review data card or datasheet, release tiers, raw data versus aggregate release, controlled access, and license or source terms.
 
 ## Recommended Mitigations
 

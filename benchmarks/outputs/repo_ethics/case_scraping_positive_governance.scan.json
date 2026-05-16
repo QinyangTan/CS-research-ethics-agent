@@ -1,39 +1,6 @@
 {
   "evidence": [
     {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "1d756e3249d9b500",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes platform terms.",
-      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: Platform terms"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "206b697480479860",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes robots.txt or rate limiting.",
-      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: robots.txt"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "93626c77a33be215",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes collection method/dates.",
-      "snippet": "Collects pages with requests.get for research. Platform terms, robots.txt, rate limits, data policy, and collection dates are documented.\nMatched: collection dates"
-    },
-    {
       "category": "web_scraping_platform_governance",
       "confidence": "medium",
       "evidence_id": "1885953c8c2c842a",

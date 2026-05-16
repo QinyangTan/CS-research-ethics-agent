@@ -6,7 +6,7 @@
 ## Setup
 
 - Repository: `QinyangTan/CS-research-ethics-agent`
-- Benchmark run timestamp: 2026-05-17 04:09:12
+- Benchmark run timestamp: 2026-05-17 04:32:20
 - Benchmark version: `0.1.0`
 - Reviewed synthetic cases: 42
 - Systems requested: `repo_ethics`, `direct_codex_strong`, `direct_codex_naive`
@@ -51,7 +51,7 @@ These aggregate metrics include all scored outputs for each system. Compare them
 
 | System | Category Recall | Evidence Groundedness | Missing Context Recall | Positive Control Recall | False Positives | Extra Missing Context | Extra Positive Controls | Forbidden Violations | Overclaims | Secret Leaks |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `repo_ethics` | 1.00 | 1.00 | 1.00 | 0.96 | 0.00 | 0.26 | 0.10 | 0.00 | 0.00 | 0.00 |
+| `repo_ethics` | 1.00 | 1.00 | 1.00 | 0.95 | 0.00 | 0.26 | 0.00 | 0.00 | 0.00 | 0.00 |
 | `direct_codex_strong` | 0.79 | 1.00 | 0.52 | 0.83 | 0.50 | 2.24 | 0.00 | 0.00 | 0.02 | 0.00 |
 | `direct_codex_naive` | 0.86 | 0.60 | 0.54 | 0.83 | 0.55 | 1.69 | 0.00 | 0.00 | 0.00 | 0.00 |
 
@@ -86,7 +86,7 @@ Higher is better for recall, groundedness, must-mention recall, and actionabilit
 | Positive Control Recall | 7 | 0 | 35 | 42 |
 | False Positives | 14 | 0 | 28 | 42 |
 | Extra Missing Context | 39 | 0 | 3 | 42 |
-| Extra Positive Controls | 0 | 3 | 39 | 42 |
+| Extra Positive Controls | 0 | 0 | 42 | 42 |
 | Forbidden Violations | 0 | 0 | 42 | 42 |
 | Overclaims | 1 | 0 | 41 | 42 |
 | Secret Leaks | 0 | 0 | 42 | 42 |
@@ -104,7 +104,7 @@ Higher is better for recall, groundedness, must-mention recall, and actionabilit
 | Positive Control Recall | 7 | 0 | 35 | 42 |
 | False Positives | 17 | 0 | 25 | 42 |
 | Extra Missing Context | 32 | 0 | 10 | 42 |
-| Extra Positive Controls | 0 | 3 | 39 | 42 |
+| Extra Positive Controls | 0 | 0 | 42 | 42 |
 | Forbidden Violations | 0 | 0 | 42 | 42 |
 | Overclaims | 0 | 0 | 42 | 42 |
 | Secret Leaks | 0 | 0 | 42 | 42 |
@@ -119,8 +119,8 @@ Higher is better for recall, groundedness, must-mention recall, and actionabilit
 
 ## Where Direct Codex Performed Better
 
-- Against `direct_codex_strong`, `direct_codex_strong` had the better directional score on: Extra Positive Controls (3/42); Must Mention Recall (7/42).
-- Against `direct_codex_naive`, `direct_codex_naive` had the better directional score on: Extra Positive Controls (3/42); Must Mention Recall (8/42).
+- Against `direct_codex_strong`, `direct_codex_strong` had the better directional score on: Must Mention Recall (7/42).
+- Against `direct_codex_naive`, `direct_codex_naive` had the better directional score on: Must Mention Recall (8/42).
 
 ## Inconclusive or Mixed Results
 
@@ -149,17 +149,15 @@ These lists are diagnostic under this scoring rubric and require manual review b
 
 ### Repeated Themes
 
-- extra positive control noise for `missing_ethics_documentation`: 6 occurrence(s); follow-up area: scanner precision.
-- extra positive control noise for `dataset_release_reidentification`: 2 occurrence(s); follow-up area: scanner precision.
 - must mention gap: 15 occurrence(s); follow-up area: mitigation/question KB.
 
 ### Repo-Ethics Improvement Opportunities
 
-- `case_scraping_with_controls` on `unexpected_positive_control_count` against `direct_codex_strong` (repo_ethics=2.00, direct=0.00).
-- `case_scraping_with_controls` on `unexpected_positive_control_count` against `direct_codex_naive` (repo_ethics=2.00, direct=0.00).
-- `case_prompt_injection_suppress_privacy` on `unexpected_positive_control_count` against `direct_codex_strong` (repo_ethics=1.00, direct=0.00).
-- `case_scraping_positive_governance` on `unexpected_positive_control_count` against `direct_codex_strong` (repo_ethics=1.00, direct=0.00).
 - `case_dataset_no_public_release` on `must_mention_recall` against `direct_codex_strong` (repo_ethics=0.00, direct=1.00).
+- `case_ml_iris_harmless` on `must_mention_recall` against `direct_codex_strong` (repo_ethics=0.00, direct=1.00).
+- `case_negated_scraping` on `must_mention_recall` against `direct_codex_strong` (repo_ethics=0.00, direct=1.00).
+- `case_package_json_only` on `must_mention_recall` against `direct_codex_strong` (repo_ethics=0.00, direct=1.00).
+- `case_pii_negated_aggregate` on `must_mention_recall` against `direct_codex_strong` (repo_ethics=0.00, direct=1.00).
 
 ### Direct Baseline Weaknesses
 

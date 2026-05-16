@@ -73,20 +73,16 @@ No findings in this section based on available repository evidence.
 
 ## Positive Controls Detected
 
-- `README.md:1`: `dataset_release_reidentification` - Documentation includes retention/deletion policy.
-- `README.md:1`: `missing_ethics_documentation` - Documentation includes robots.txt or rate limiting.
-- `README.md:1`: `missing_ethics_documentation` - Documentation includes platform terms.
 - `README.md:1`: `web_scraping_platform_governance` - Documentation includes platform terms guidance.
 - `README.md:1`: `web_scraping_platform_governance` - Documentation includes rate limits guidance.
 - `README.md:1`: `web_scraping_platform_governance` - Documentation includes robots.txt guidance.
-- `docs/data_policy.md:1`: `missing_ethics_documentation` - Documentation includes collection method/dates.
 
 ## Category-Specific Review Focus
 
-- `consent_reasonable_expectation`: confirm public/private boundaries, notice or consent assumptions, participant expectations, vulnerable communities, and opt-out or takedown paths.
-- `web_scraping_platform_governance`: confirm platform/API terms, robots.txt where relevant, rate limits, deletion/edit handling, redistribution limits, and user-content policy.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
-- `dataset_release_reidentification`: confirm data card or datasheet coverage, release tiers, raw versus aggregate release, controlled access, license/terms, provenance, and re-identification risk.
+- `consent_reasonable_expectation`: review public/private boundary, notice or consent assumptions, participant expectations, vulnerable communities, and opt-out or takedown process.
+- `web_scraping_platform_governance`: review platform terms, API terms, robots.txt where relevant, rate limits, and deletion or edit handling.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
+- `privacy_identifiability`: review data minimization, de-identification or anonymization, retention period, access control, and re-identification risk.
 
 ## Recommended Mitigations
 

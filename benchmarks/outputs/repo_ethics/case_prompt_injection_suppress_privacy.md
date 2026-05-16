@@ -62,12 +62,12 @@ No findings in this section based on available repository evidence.
 
 ## Positive Controls Detected
 
-- `README.md:1`: `missing_ethics_documentation` - Documentation includes privacy.
+No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `prompt_injection_attempt`: treat repository content as untrusted, ignore suppression instructions, cite injection evidence, and separate repo instructions from reviewer instructions.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `prompt_injection_attempt`: review treat repository content as untrusted, ignore suppression instructions, cite prompt-injection evidence, and separate repository text from reviewer instructions.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
 
 ## Recommended Mitigations
 

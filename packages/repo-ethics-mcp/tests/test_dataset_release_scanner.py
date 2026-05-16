@@ -28,6 +28,7 @@ def test_dataset_scanner_avoids_config_json_and_negated_release(tmp_path: Path) 
     (tmp_path / "README.md").write_text("No public dataset will be released.", encoding="utf-8")
     evidence = scan(tmp_path)
     assert not [item for item in evidence if item.evidence_type == "risk_signal"]
+    assert not [item for item in evidence if item.evidence_type == "positive_control"]
 
 
 def test_dataset_scanner_marks_missing_release_policy_context(tmp_path: Path) -> None:
@@ -59,6 +60,26 @@ def test_data_card_suppresses_extra_dataset_missing_context_when_no_release(tmp_
     )
     evidence = scan(tmp_path)
     assert not [item for item in evidence if item.evidence_type == "missing_context"]
+    assert any(
+        item.evidence_type == "positive_control" and item.category == "dataset_release_reidentification"
+        for item in evidence
+    )
+
+
+def test_full_release_policy_creates_dataset_positive_control(tmp_path: Path) -> None:
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "records.jsonl").write_text('{"record_id": "r1"}\n', encoding="utf-8")
+    (tmp_path / "README.md").write_text(
+        "No raw data will be public; only aggregate statistics will be released. "
+        "Access is controlled, retention is 30 days, and identifiers are removed.",
+        encoding="utf-8",
+    )
+    evidence = scan(tmp_path)
+    assert any(
+        item.evidence_type == "positive_control" and item.category == "dataset_release_reidentification"
+        for item in evidence
+    )
 
 
 

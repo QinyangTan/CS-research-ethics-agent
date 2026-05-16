@@ -55,7 +55,7 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `secret_exposure`: rotate exposed credentials, remove secrets from history where applicable, use environment variables or a secret manager, keep `.env.example` placeholders safe, and avoid printing full secrets.
+- `secret_exposure`: review rotate exposed credentials, remove secrets from history where applicable, use environment variables or a secret manager, keep .env.example placeholders safe, and do not print full secret values.
 
 ## Recommended Mitigations
 

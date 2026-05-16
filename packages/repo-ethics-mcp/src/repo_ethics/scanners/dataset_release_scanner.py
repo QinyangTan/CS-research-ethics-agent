@@ -39,6 +39,10 @@ DATA_CARD_CONTROL_PATTERNS = [
     re.compile(r"\bdata card|datacard|datasheet\b", re.I),
     re.compile(r"\bsource|provenance|intended use|retention|deletion|license|release limits?|access\b", re.I),
 ]
+DATASET_CONTEXT_PATTERN = re.compile(
+    r"\bdataset|data card|datacard|datasheet|raw data|aggregate statistics|records?|samples?|data source|provenance\b",
+    re.I,
+)
 
 
 def _is_missing_context_clause(clause: str) -> bool:
@@ -98,12 +102,32 @@ def _has_concrete_data_card(text: str) -> bool:
     ) >= 1
 
 
+def _has_dataset_context(rel_path: str, text: str) -> bool:
+    rel = rel_path.lower()
+    return any(token in rel for token in ["data_card", "datacard", "datasheet", "data/", "dataset"]) or bool(
+        find_positive_topic_mentions(text, [DATASET_CONTEXT_PATTERN])
+    )
+
+
+def _is_concrete_policy_control(topic: str, rel_path: str, text: str) -> bool:
+    if topic == "data card/datasheet":
+        return _has_concrete_data_card(text) or any(token in rel_path.lower() for token in ["data_card", "datacard", "datasheet"])
+    if not _has_dataset_context(rel_path, text):
+        return False
+    return topic in {
+        "retention/deletion policy",
+        "anonymization/de-identification policy",
+        "provenance/access policy",
+    }
+
+
 def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: bool = True) -> list[EvidenceItem]:
     evidence: list[EvidenceItem] = []
     saw_data = False
     saw_release = False
     has_data_card_control = False
     repo_text_parts: list[str] = []
+    positive_policy_evidence: list[EvidenceItem] = []
 
     for scanned in iter_repo_file_paths(root_path, include_binary=True, max_file_size=None):
         if _is_data_like_path(scanned.rel_path):
@@ -160,7 +184,9 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
 
         for topic, patterns in POLICY_PATTERNS.items():
             for start, end, _ in find_positive_topic_mentions(text, patterns):
-                evidence.append(
+                if not _is_concrete_policy_control(topic, scanned.rel_path, text):
+                    continue
+                positive_policy_evidence.append(
                     make_match_evidence(
                         category="dataset_release_reidentification",
                         file_path=scanned.rel_path,
@@ -173,6 +199,9 @@ def scan(root_path: str | Path, max_file_size: int = 524_288, include_snippets: 
                         include_snippets=include_snippets,
                     )
                 )
+
+    if saw_data or saw_release or has_data_card_control:
+        evidence.extend(positive_policy_evidence)
 
     repo_text = "\n".join(repo_text_parts)
     missing_policy_topics = [topic for topic, patterns in POLICY_PATTERNS.items() if not topic_is_covered(repo_text, patterns)]

@@ -64,8 +64,8 @@ No positive controls were detected from repository evidence.
 
 ## Category-Specific Review Focus
 
-- `surveillance_tracking`: confirm tracking scope, notice/consent, bystander risk, retention, deployment limits, and aggregation/anonymization.
-- `missing_ethics_documentation`: confirm project purpose, data provenance, consent or notice assumptions, intended release/deployment, limitations, and documented controls.
+- `surveillance_tracking`: review tracking scope, notice or consent, bystander risk, retention period, and deployment limits.
+- `missing_ethics_documentation`: review project purpose, data handling, release boundaries, advisor or review-body discussion, and documentation owner.
 
 ## Recommended Mitigations
 

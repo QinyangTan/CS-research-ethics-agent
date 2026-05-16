@@ -12,14 +12,14 @@
       "snippet": null
     },
     {
-      "category": "missing_ethics_documentation",
+      "category": "dataset_release_reidentification",
       "confidence": "medium",
-      "evidence_id": "520f779b810c8710",
+      "evidence_id": "e45fe27e61f5e9d3",
       "evidence_type": "positive_control",
       "file_path": "docs/data_card.md",
       "line_end": null,
       "line_start": null,
-      "reason": "Repository includes dedicated ethics, privacy, data-card, or model-card documentation.",
+      "reason": "Documentation includes concrete dataset governance controls.",
       "snippet": null
     },
     {

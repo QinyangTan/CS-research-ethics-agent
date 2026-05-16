@@ -1,39 +1,6 @@
 {
   "evidence": [
     {
-      "category": "dataset_release_reidentification",
-      "confidence": "medium",
-      "evidence_id": "82d53c4a6e048176",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes retention/deletion policy.",
-      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: retention"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "30603f38037c4aad",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes robots.txt or rate limiting.",
-      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: rate limit"
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "de43f8199c2c9b8e",
-      "evidence_type": "positive_control",
-      "file_path": "README.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes platform terms.",
-      "snippet": "Collects public forum posts with rate limits, robots.txt review where applicable, platform terms review, and no private groups. Data retention is 30 days.\nMatched: platform terms"
-    },
-    {
       "category": "web_scraping_platform_governance",
       "confidence": "medium",
       "evidence_id": "a47ddfb58eb225da",
@@ -87,17 +54,6 @@
       "line_start": null,
       "reason": "Scraping or API collection was detected, but README/docs do not positively document: data policy.",
       "snippet": null
-    },
-    {
-      "category": "missing_ethics_documentation",
-      "confidence": "medium",
-      "evidence_id": "75c13c7bcb371cc2",
-      "evidence_type": "positive_control",
-      "file_path": "docs/data_policy.md",
-      "line_end": 1,
-      "line_start": 1,
-      "reason": "Documentation includes collection method/dates.",
-      "snippet": "Collection dates are documented. Raw usernames are removed before analysis.\nMatched: Collection dates"
     },
     {
       "category": "privacy_identifiability",

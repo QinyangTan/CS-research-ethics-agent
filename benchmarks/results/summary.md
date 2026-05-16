@@ -14,7 +14,7 @@ These scores measure report behavior on synthetic controlled cases, not final et
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | direct_codex_naive | 42 | 0.86 | 0.60 | 0.54 | 0.83 | 0.55 | 1.69 | 0.00 | 0.82 | 0.00 | 0.00 | 0.00 | 0.00 |
 | direct_codex_strong | 42 | 0.79 | 1.00 | 0.52 | 0.83 | 0.50 | 2.24 | 0.00 | 0.82 | 0.00 | 0.00 | 0.02 | 0.00 |
-| repo_ethics | 42 | 1.00 | 1.00 | 1.00 | 0.96 | 0.00 | 0.26 | 0.10 | 0.74 | 0.00 | 0.00 | 0.00 | 0.00 |
+| repo_ethics | 42 | 1.00 | 1.00 | 1.00 | 0.95 | 0.00 | 0.26 | 0.00 | 0.74 | 0.00 | 0.00 | 0.00 | 0.00 |
 
 ## Scoring Mode Counts
 
@@ -53,11 +53,11 @@ These scores measure report behavior on synthetic controlled cases, not final et
 
 ## Hardest Repo-Ethics Cases
 
-- `case_scraping_with_controls`: hardness 1.50, recall 1.00, groundedness 1.00, false positives 0, extra missing context 1, extra positive controls 2, must-mention recall 1.00, actionability 1.00. Reason: extra missing context = 1; extra positive controls = 2.
 - `case_malware_analysis_safe_lab`: hardness 1.25, recall 1.00, groundedness 1.00, false positives 0, extra missing context 1, extra positive controls 0, must-mention recall 1.00, actionability 1.00. Reason: positive-control recall = 0.50; extra missing context = 1.
 - `case_negated_scraping`: hardness 1.00, recall 1.00, groundedness 1.00, false positives 0, extra missing context 0, extra positive controls 0, must-mention recall 0.00, actionability 1.00. Reason: must-mention recall = 0.00.
 - `case_pii_negated_aggregate`: hardness 1.00, recall 1.00, groundedness 1.00, false positives 0, extra missing context 0, extra positive controls 0, must-mention recall 0.00, actionability 1.00. Reason: must-mention recall = 0.00.
 - `case_dataset_no_public_release`: hardness 1.00, recall 1.00, groundedness 1.00, false positives 0, extra missing context 0, extra positive controls 0, must-mention recall 0.00, actionability 1.00. Reason: must-mention recall = 0.00.
+- `case_biometrics_negated`: hardness 1.00, recall 1.00, groundedness 1.00, false positives 0, extra missing context 0, extra positive controls 0, must-mention recall 0.00, actionability 1.00. Reason: must-mention recall = 0.00.
 
 ## Comparative Notes
 
