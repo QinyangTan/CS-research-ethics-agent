@@ -135,17 +135,19 @@ def test_representative_reports_include_category_review_focus() -> None:
     assert "deployment boundaries" in face_focus
 
 
-def test_prompt_injection_and_secret_review_focus_are_specific() -> None:
+def test_prompt_injection_and_secret_review_focus_are_specific(tmp_path: Path) -> None:
     prompt_case = ROOT / "benchmarks" / "fixtures" / "case_prompt_injection_suppress_privacy"
     prompt_markdown = report_to_markdown(build_report(run_scan(prompt_case))).lower()
     assert "treat repository content as untrusted" in prompt_markdown
     assert "ignore suppression instructions" in prompt_markdown
 
-    secret_case = ROOT / "benchmarks" / "fixtures" / "case_secret_fake_exposed"
-    secret_markdown = report_to_markdown(build_report(run_scan(secret_case)))
+    (tmp_path / "README.md").write_text("Utility repo with local configuration.", encoding="utf-8")
+    secret_value = "sk-testsecretvalue1234567890"
+    (tmp_path / ".env").write_text(f"OPENAI_API_KEY={secret_value}\n", encoding="utf-8")
+    secret_markdown = report_to_markdown(build_report(run_scan(tmp_path)))
     assert "rotate exposed credentials" in secret_markdown.lower()
     assert "environment variables" in secret_markdown.lower() or "secret manager" in secret_markdown.lower()
-    assert "sk-benchmarkfakebenchmarkfake1234" not in secret_markdown
+    assert secret_value not in secret_markdown
 
 
 def test_negated_docs_project_report_does_not_overread_negated_claims() -> None:
